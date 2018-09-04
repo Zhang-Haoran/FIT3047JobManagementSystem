@@ -33,7 +33,7 @@
                 <th scope="col"><?= $this->Paginator->sort('job_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('booked_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('price') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('deposite') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('deposit') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('e_arrival_time') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('e_setup_time') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('e_pickup_time') ?></th>
@@ -54,7 +54,7 @@
                 <td><?= h($job->job_date) ?></td>
                 <td><?= h($job->booked_date) ?></td>
                 <td><?= $this->Number->format($job->price) ?></td>
-                <td><?= $this->Number->format($job->deposite) ?></td>
+                <td><?= $this->Number->format($job->deposit) ?></td>
                 <td><?= h($job->e_arrival_time) ?></td>
                 <td><?= h($job->e_setup_time) ?></td>
                 <td><?= h($job->e_pickup_time) ?></td>

@@ -32,7 +32,7 @@
             echo $this->Form->control('job_date');
             echo $this->Form->control('booked_date');
             echo $this->Form->control('price');
-            echo $this->Form->control('deposite');
+            echo $this->Form->control('deposit');
             echo $this->Form->control('order_detail');
             echo $this->Form->control('e_arrival_time', ['empty' => true]);
             echo $this->Form->control('e_setup_time', ['empty' => true]);

@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenDate $job_date
  * @property \Cake\I18n\FrozenDate $booked_date
  * @property float $price
- * @property float $deposite
+ * @property float $deposit
  * @property string $order_detail
  * @property \Cake\I18n\FrozenTime $e_arrival_time
  * @property \Cake\I18n\FrozenTime $e_setup_time
@@ -49,7 +49,7 @@ class Job extends Entity
         'job_date' => true,
         'booked_date' => true,
         'price' => true,
-        'deposite' => true,
+        'deposit' => true,
         'order_detail' => true,
         'e_arrival_time' => true,
         'e_setup_time' => true,

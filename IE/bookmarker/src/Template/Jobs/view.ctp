@@ -61,8 +61,8 @@
             <td><?= $this->Number->format($job->price) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Deposite') ?></th>
-            <td><?= $this->Number->format($job->deposite) ?></td>
+            <th scope="row"><?= __('Deposit') ?></th>
+            <td><?= $this->Number->format($job->deposit) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Job Date') ?></th>

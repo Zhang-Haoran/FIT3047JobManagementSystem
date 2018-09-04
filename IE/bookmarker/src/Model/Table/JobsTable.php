@@ -110,9 +110,9 @@ class JobsTable extends Table
             ->allowEmpty('price');
 
         $validator
-            ->numeric('deposite')
-            ->greaterThanOrEqual('deposite', 0)
-            ->allowEmpty('deposite');
+            ->numeric('deposit')
+            ->greaterThanOrEqual('deposit', 0)
+            ->allowEmpty('deposit');
 
         $validator
             ->scalar('order_detail')

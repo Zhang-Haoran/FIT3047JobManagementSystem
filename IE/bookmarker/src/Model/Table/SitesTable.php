@@ -68,7 +68,7 @@ class SitesTable extends Table
 
         $validator
             ->scalar('site_postcode')
-            ->maxLength('site_postcode', 45)
+            ->maxLength('site_postcode', 5)
             ->requirePresence('site_postcode', 'create')
             ->notEmpty('site_postcode');
 

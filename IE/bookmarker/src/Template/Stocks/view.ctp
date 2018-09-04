@@ -52,7 +52,7 @@
                 <th scope="col"><?= __('Job Date') ?></th>
                 <th scope="col"><?= __('Booked Date') ?></th>
                 <th scope="col"><?= __('Price') ?></th>
-                <th scope="col"><?= __('Deposite') ?></th>
+                <th scope="col"><?= __('Deposit') ?></th>
                 <th scope="col"><?= __('Order Detail') ?></th>
                 <th scope="col"><?= __('E Arrival Time') ?></th>
                 <th scope="col"><?= __('E Setup Time') ?></th>
@@ -73,7 +73,7 @@
                 <td><?= h($jobs->job_date) ?></td>
                 <td><?= h($jobs->booked_date) ?></td>
                 <td><?= h($jobs->price) ?></td>
-                <td><?= h($jobs->deposite) ?></td>
+                <td><?= h($jobs->deposit) ?></td>
                 <td><?= h($jobs->order_detail) ?></td>
                 <td><?= h($jobs->e_arrival_time) ?></td>
                 <td><?= h($jobs->e_setup_time) ?></td>

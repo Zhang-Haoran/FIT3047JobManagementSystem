@@ -21,7 +21,7 @@ class SitesFixture extends TestFixture
         'site_name' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'site_address' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'site_suburb' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'site_postcode' => ['type' => 'string', 'length' => 45, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'site_postcode' => ['type' => 'string', 'length' => 5, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'site_melways' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'site_contact' => ['type' => 'string', 'length' => 255, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'site_mobile' => ['type' => 'string', 'length' => 15, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
@@ -48,7 +48,7 @@ class SitesFixture extends TestFixture
                 'site_name' => 'Lorem ipsum dolor sit amet',
                 'site_address' => 'Lorem ipsum dolor sit amet',
                 'site_suburb' => 'Lorem ipsum dolor sit amet',
-                'site_postcode' => 'Lorem ipsum dolor sit amet',
+                'site_postcode' => 'Lor',
                 'site_melways' => 'Lorem ipsum dolor sit amet',
                 'site_contact' => 'Lorem ipsum dolor sit amet',
                 'site_mobile' => 'Lorem ipsum d'
