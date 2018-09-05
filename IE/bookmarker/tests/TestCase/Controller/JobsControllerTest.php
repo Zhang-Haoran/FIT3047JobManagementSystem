@@ -20,11 +20,7 @@ class JobsControllerTest extends IntegrationTestCase
         'app.sites',
         'app.event_types',
         'app.customers',
-        'app.employees',
-        'app.materials',
-        'app.stocks',
-        'app.jobs_materials',
-        'app.jobs_stocks'
+        'app.employees'
     ];
 
     /**

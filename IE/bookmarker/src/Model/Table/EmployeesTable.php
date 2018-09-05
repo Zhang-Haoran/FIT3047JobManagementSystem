@@ -34,8 +34,8 @@ class EmployeesTable extends Table
         parent::initialize($config);
 
         $this->setTable('employees');
-        $this->setDisplayField('emp_id');
-        $this->setPrimaryKey('emp_id');
+        $this->setDisplayField('employee_id');
+        $this->setPrimaryKey('employee_id');
 
         $this->belongsToMany('Funcs', [
             'foreignKey' => 'employee_id',
@@ -53,14 +53,20 @@ class EmployeesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('emp_id')
-            ->allowEmpty('emp_id', 'create');
+            ->integer('employee_id')
+            ->allowEmpty('employee_id', 'create');
 
         $validator
-            ->scalar('emp_name')
-            ->maxLength('emp_name', 255)
-            ->requirePresence('emp_name', 'create')
-            ->notEmpty('emp_name');
+            ->scalar('emp_fname')
+            ->maxLength('emp_fname', 255)
+            ->requirePresence('emp_fname', 'create')
+            ->notEmpty('emp_fname');
+
+        $validator
+            ->scalar('emp_lname')
+            ->maxLength('emp_lname', 255)
+            ->requirePresence('emp_lname', 'create')
+            ->notEmpty('emp_lname');
 
         $validator
             ->scalar('emp_username')

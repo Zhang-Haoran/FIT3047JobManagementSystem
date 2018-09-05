@@ -21,15 +21,13 @@ use Cake\ORM\Entity;
  * @property string $additional_note
  * @property int $site_id
  * @property int $event_type_id
- * @property int $cust_id
- * @property int $emp_id
+ * @property int $customer_id
+ * @property int $employee_id
  *
  * @property \App\Model\Entity\Site $site
  * @property \App\Model\Entity\EventType $event_type
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Employee $employee
- * @property \App\Model\Entity\Material[] $materials
- * @property \App\Model\Entity\Stock[] $stocks
  */
 class Job extends Entity
 {
@@ -58,13 +56,11 @@ class Job extends Entity
         'additional_note' => true,
         'site_id' => true,
         'event_type_id' => true,
-        'cust_id' => true,
-        'emp_id' => true,
+        'customer_id' => true,
+        'employee_id' => true,
         'site' => true,
         'event_type' => true,
         'customer' => true,
-        'employee' => true,
-        'materials' => true,
-        'stocks' => true
+        'employee' => true
     ];
 }

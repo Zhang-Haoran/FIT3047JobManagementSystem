@@ -24,8 +24,7 @@ class MaterialsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.materials',
-        'app.jobs'
+        'app.materials'
     ];
 
     /**

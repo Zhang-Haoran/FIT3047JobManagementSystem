@@ -10,7 +10,6 @@ use Cake\Validation\Validator;
  * Stocks Model
  *
  * @property \App\Model\Table\MaterialsTable|\Cake\ORM\Association\BelongsTo $Materials
- * @property \App\Model\Table\JobsTable|\Cake\ORM\Association\BelongsToMany $Jobs
  *
  * @method \App\Model\Entity\Stock get($primaryKey, $options = [])
  * @method \App\Model\Entity\Stock newEntity($data = null, array $options = [])
@@ -39,12 +38,7 @@ class StocksTable extends Table
         $this->setPrimaryKey('stock_id');
 
         $this->belongsTo('Materials', [
-            'foreignKey' => 'mat_id'
-        ]);
-        $this->belongsToMany('Jobs', [
-            'foreignKey' => 'stock_id',
-            'targetForeignKey' => 'job_id',
-            'joinTable' => 'jobs_stocks'
+            'foreignKey' => 'material_id'
         ]);
     }
 
@@ -87,7 +81,7 @@ class StocksTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['mat_id'], 'Materials'));
+        $rules->add($rules->existsIn(['material_id'], 'Materials'));
 
         return $rules;
     }

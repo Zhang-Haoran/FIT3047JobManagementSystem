@@ -17,8 +17,9 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('cust_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('cust_name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('customer_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('cust_fname') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('cust_lname') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('cust_contact') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('cust_phone') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('cust_mobile') ?></th>
@@ -30,17 +31,18 @@
         <tbody>
             <?php foreach ($customers as $customer): ?>
             <tr>
-                <td><?= $this->Number->format($customer->cust_id) ?></td>
-                <td><?= h($customer->cust_name) ?></td>
+                <td><?= $this->Number->format($customer->customer_id) ?></td>
+                <td><?= h($customer->cust_fname) ?></td>
+                <td><?= h($customer->cust_lname) ?></td>
                 <td><?= h($customer->cust_contact) ?></td>
                 <td><?= h($customer->cust_phone) ?></td>
                 <td><?= h($customer->cust_mobile) ?></td>
                 <td><?= h($customer->cust_email) ?></td>
                 <td><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->cust_type_id, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->cust_type_id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $customer->cust_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->cust_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->cust_id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->cust_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $customer->customer_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->customer_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->customer_id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->customer_id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -6,10 +6,8 @@ use Cake\ORM\Entity;
 /**
  * Material Entity
  *
- * @property int $mat_id
+ * @property int $material_id
  * @property string $mat_name
- *
- * @property \App\Model\Entity\Job[] $jobs
  */
 class Material extends Entity
 {
@@ -24,7 +22,6 @@ class Material extends Entity
      * @var array
      */
     protected $_accessible = [
-        'mat_name' => true,
-        'jobs' => true
+        'mat_name' => true
     ];
 }

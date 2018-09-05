@@ -10,8 +10,6 @@
         <li><?= $this->Html->link(__('New Stock'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Materials'), ['controller' => 'Materials', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Material'), ['controller' => 'Materials', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="stocks index large-9 medium-8 columns content">
@@ -23,7 +21,7 @@
                 <th scope="col"><?= $this->Paginator->sort('stock_name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('rent_value') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('min_material') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('mat_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('material_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -34,7 +32,7 @@
                 <td><?= h($stock->stock_name) ?></td>
                 <td><?= $this->Number->format($stock->rent_value) ?></td>
                 <td><?= $this->Number->format($stock->min_material) ?></td>
-                <td><?= $stock->has('material') ? $this->Html->link($stock->material->mat_id, ['controller' => 'Materials', 'action' => 'view', $stock->material->mat_id]) : '' ?></td>
+                <td><?= $stock->has('material') ? $this->Html->link($stock->material->material_id, ['controller' => 'Materials', 'action' => 'view', $stock->material->material_id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $stock->stock_id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $stock->stock_id]) ?>

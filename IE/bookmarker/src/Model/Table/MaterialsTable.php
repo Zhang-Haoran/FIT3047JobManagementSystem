@@ -9,8 +9,6 @@ use Cake\Validation\Validator;
 /**
  * Materials Model
  *
- * @property \App\Model\Table\JobsTable|\Cake\ORM\Association\BelongsToMany $Jobs
- *
  * @method \App\Model\Entity\Material get($primaryKey, $options = [])
  * @method \App\Model\Entity\Material newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Material[] newEntities(array $data, array $options = [])
@@ -34,14 +32,8 @@ class MaterialsTable extends Table
         parent::initialize($config);
 
         $this->setTable('materials');
-        $this->setDisplayField('mat_id');
-        $this->setPrimaryKey('mat_id');
-
-        $this->belongsToMany('Jobs', [
-            'foreignKey' => 'material_id',
-            'targetForeignKey' => 'job_id',
-            'joinTable' => 'jobs_materials'
-        ]);
+        $this->setDisplayField('material_id');
+        $this->setPrimaryKey('material_id');
     }
 
     /**
@@ -53,8 +45,8 @@ class MaterialsTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('mat_id')
-            ->allowEmpty('mat_id', 'create');
+            ->integer('material_id')
+            ->allowEmpty('material_id', 'create');
 
         $validator
             ->scalar('mat_name')

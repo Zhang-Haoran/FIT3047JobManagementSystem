@@ -6,8 +6,9 @@ use Cake\ORM\Entity;
 /**
  * Employee Entity
  *
- * @property int $emp_id
- * @property string $emp_name
+ * @property int $employee_id
+ * @property string $emp_fname
+ * @property string $emp_lname
  * @property string $emp_username
  * @property string $emp_password
  * @property string $emp_phone
@@ -28,7 +29,8 @@ class Employee extends Entity
      * @var array
      */
     protected $_accessible = [
-        'emp_name' => true,
+        'emp_fname' => true,
+        'emp_lname' => true,
         'emp_username' => true,
         'emp_password' => true,
         'emp_phone' => true,

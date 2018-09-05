@@ -17,8 +17,9 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('emp_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('emp_name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('employee_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('emp_fname') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('emp_lname') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('emp_username') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('emp_password') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('emp_phone') ?></th>
@@ -29,16 +30,17 @@
         <tbody>
             <?php foreach ($employees as $employee): ?>
             <tr>
-                <td><?= $this->Number->format($employee->emp_id) ?></td>
-                <td><?= h($employee->emp_name) ?></td>
+                <td><?= $this->Number->format($employee->employee_id) ?></td>
+                <td><?= h($employee->emp_fname) ?></td>
+                <td><?= h($employee->emp_lname) ?></td>
                 <td><?= h($employee->emp_username) ?></td>
                 <td><?= h($employee->emp_password) ?></td>
                 <td><?= h($employee->emp_phone) ?></td>
                 <td><?= h($employee->emp_email) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $employee->emp_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $employee->emp_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $employee->emp_id], ['confirm' => __('Are you sure you want to delete # {0}?', $employee->emp_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $employee->employee_id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $employee->employee_id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $employee->employee_id], ['confirm' => __('Are you sure you want to delete # {0}?', $employee->employee_id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

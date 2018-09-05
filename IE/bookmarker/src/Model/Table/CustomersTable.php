@@ -34,8 +34,8 @@ class CustomersTable extends Table
         parent::initialize($config);
 
         $this->setTable('customers');
-        $this->setDisplayField('cust_id');
-        $this->setPrimaryKey('cust_id');
+        $this->setDisplayField('customer_id');
+        $this->setPrimaryKey('customer_id');
 
         $this->belongsTo('CustTypes', [
             'foreignKey' => 'cust_type_id',
@@ -52,14 +52,20 @@ class CustomersTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('cust_id')
-            ->allowEmpty('cust_id', 'create');
+            ->integer('customer_id')
+            ->allowEmpty('customer_id', 'create');
 
         $validator
-            ->scalar('cust_name')
-            ->maxLength('cust_name', 255)
-            ->requirePresence('cust_name', 'create')
-            ->notEmpty('cust_name');
+            ->scalar('cust_fname')
+            ->maxLength('cust_fname', 255)
+            ->requirePresence('cust_fname', 'create')
+            ->notEmpty('cust_fname');
+
+        $validator
+            ->scalar('cust_lname')
+            ->maxLength('cust_lname', 255)
+            ->requirePresence('cust_lname', 'create')
+            ->notEmpty('cust_lname');
 
         $validator
             ->scalar('cust_contact')

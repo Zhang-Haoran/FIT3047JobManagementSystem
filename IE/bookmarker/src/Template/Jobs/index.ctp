@@ -16,10 +16,6 @@
         <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Materials'), ['controller' => 'Materials', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Material'), ['controller' => 'Materials', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Stocks'), ['controller' => 'Stocks', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Stock'), ['controller' => 'Stocks', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="jobs index large-9 medium-8 columns content">
@@ -40,8 +36,8 @@
                 <th scope="col"><?= $this->Paginator->sort('e_pickup_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('site_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('event_type_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('cust_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('emp_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('customer_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('employee_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -61,8 +57,8 @@
                 <td><?= h($job->e_pickup_date) ?></td>
                 <td><?= $job->has('site') ? $this->Html->link($job->site->site_id, ['controller' => 'Sites', 'action' => 'view', $job->site->site_id]) : '' ?></td>
                 <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->event_type_id, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->event_type_id]) : '' ?></td>
-                <td><?= $job->has('customer') ? $this->Html->link($job->customer->cust_id, ['controller' => 'Customers', 'action' => 'view', $job->customer->cust_id]) : '' ?></td>
-                <td><?= $job->has('employee') ? $this->Html->link($job->employee->emp_id, ['controller' => 'Employees', 'action' => 'view', $job->employee->emp_id]) : '' ?></td>
+                <td><?= $job->has('customer') ? $this->Html->link($job->customer->customer_id, ['controller' => 'Customers', 'action' => 'view', $job->customer->customer_id]) : '' ?></td>
+                <td><?= $job->has('employee') ? $this->Html->link($job->employee->employee_id, ['controller' => 'Employees', 'action' => 'view', $job->employee->employee_id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $job->job_id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->job_id]) ?>

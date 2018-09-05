@@ -9,8 +9,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $employee->emp_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $employee->emp_id)]
+                ['action' => 'delete', $employee->employee_id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $employee->employee_id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Employees'), ['action' => 'index']) ?></li>
@@ -23,7 +23,8 @@
     <fieldset>
         <legend><?= __('Edit Employee') ?></legend>
         <?php
-            echo $this->Form->control('emp_name');
+            echo $this->Form->control('emp_fname');
+            echo $this->Form->control('emp_lname');
             echo $this->Form->control('emp_username');
             echo $this->Form->control('emp_password');
             echo $this->Form->control('emp_phone');

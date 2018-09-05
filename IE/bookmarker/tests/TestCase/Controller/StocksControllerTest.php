@@ -17,9 +17,7 @@ class StocksControllerTest extends IntegrationTestCase
      */
     public $fixtures = [
         'app.stocks',
-        'app.materials',
-        'app.jobs',
-        'app.jobs_stocks'
+        'app.materials'
     ];
 
     /**

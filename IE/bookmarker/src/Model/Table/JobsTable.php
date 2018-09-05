@@ -13,8 +13,6 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\EventTypesTable|\Cake\ORM\Association\BelongsTo $EventTypes
  * @property \App\Model\Table\CustomersTable|\Cake\ORM\Association\BelongsTo $Customers
  * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\BelongsTo $Employees
- * @property \App\Model\Table\MaterialsTable|\Cake\ORM\Association\BelongsToMany $Materials
- * @property \App\Model\Table\StocksTable|\Cake\ORM\Association\BelongsToMany $Stocks
  *
  * @method \App\Model\Entity\Job get($primaryKey, $options = [])
  * @method \App\Model\Entity\Job newEntity($data = null, array $options = [])
@@ -51,22 +49,12 @@ class JobsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'cust_id',
+            'foreignKey' => 'customer_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Employees', [
-            'foreignKey' => 'emp_id',
+            'foreignKey' => 'employee_id',
             'joinType' => 'INNER'
-        ]);
-        $this->belongsToMany('Materials', [
-            'foreignKey' => 'job_id',
-            'targetForeignKey' => 'material_id',
-            'joinTable' => 'jobs_materials'
-        ]);
-        $this->belongsToMany('Stocks', [
-            'foreignKey' => 'job_id',
-            'targetForeignKey' => 'stock_id',
-            'joinTable' => 'jobs_stocks'
         ]);
     }
 
@@ -152,8 +140,8 @@ class JobsTable extends Table
     {
         $rules->add($rules->existsIn(['site_id'], 'Sites'));
         $rules->add($rules->existsIn(['event_type_id'], 'EventTypes'));
-        $rules->add($rules->existsIn(['cust_id'], 'Customers'));
-        $rules->add($rules->existsIn(['emp_id'], 'Employees'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
+        $rules->add($rules->existsIn(['employee_id'], 'Employees'));
 
         return $rules;
     }

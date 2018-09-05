@@ -10,10 +10,9 @@ use Cake\ORM\Entity;
  * @property string $stock_name
  * @property float $rent_value
  * @property int $min_material
- * @property int $mat_id
+ * @property int $material_id
  *
  * @property \App\Model\Entity\Material $material
- * @property \App\Model\Entity\Job[] $jobs
  */
 class Stock extends Entity
 {
@@ -31,8 +30,7 @@ class Stock extends Entity
         'stock_name' => true,
         'rent_value' => true,
         'min_material' => true,
-        'mat_id' => true,
-        'material' => true,
-        'jobs' => true
+        'material_id' => true,
+        'material' => true
     ];
 }

@@ -38,7 +38,7 @@ class StocksController extends AppController
     public function view($id = null)
     {
         $stock = $this->Stocks->get($id, [
-            'contain' => ['Materials', 'Jobs']
+            'contain' => ['Materials']
         ]);
 
         $this->set('stock', $stock);
@@ -62,8 +62,7 @@ class StocksController extends AppController
             $this->Flash->error(__('The stock could not be saved. Please, try again.'));
         }
         $materials = $this->Stocks->Materials->find('list', ['limit' => 200]);
-        $jobs = $this->Stocks->Jobs->find('list', ['limit' => 200]);
-        $this->set(compact('stock', 'materials', 'jobs'));
+        $this->set(compact('stock', 'materials'));
     }
 
     /**
@@ -76,7 +75,7 @@ class StocksController extends AppController
     public function edit($id = null)
     {
         $stock = $this->Stocks->get($id, [
-            'contain' => ['Jobs']
+            'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $stock = $this->Stocks->patchEntity($stock, $this->request->getData());
@@ -88,8 +87,7 @@ class StocksController extends AppController
             $this->Flash->error(__('The stock could not be saved. Please, try again.'));
         }
         $materials = $this->Stocks->Materials->find('list', ['limit' => 200]);
-        $jobs = $this->Stocks->Jobs->find('list', ['limit' => 200]);
-        $this->set(compact('stock', 'materials', 'jobs'));
+        $this->set(compact('stock', 'materials'));
     }
 
     /**

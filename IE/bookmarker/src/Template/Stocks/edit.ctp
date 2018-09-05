@@ -16,8 +16,6 @@
         <li><?= $this->Html->link(__('List Stocks'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Materials'), ['controller' => 'Materials', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Material'), ['controller' => 'Materials', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="stocks form large-9 medium-8 columns content">
@@ -28,8 +26,7 @@
             echo $this->Form->control('stock_name');
             echo $this->Form->control('rent_value');
             echo $this->Form->control('min_material');
-            echo $this->Form->control('mat_id', ['options' => $materials, 'empty' => true]);
-            echo $this->Form->control('jobs._ids', ['options' => $jobs]);
+            echo $this->Form->control('material_id', ['options' => $materials, 'empty' => true]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

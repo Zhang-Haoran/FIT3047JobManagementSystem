@@ -35,7 +35,7 @@ class MaterialsController extends AppController
     public function view($id = null)
     {
         $material = $this->Materials->get($id, [
-            'contain' => ['Jobs']
+            'contain' => []
         ]);
 
         $this->set('material', $material);
@@ -58,8 +58,7 @@ class MaterialsController extends AppController
             }
             $this->Flash->error(__('The material could not be saved. Please, try again.'));
         }
-        $jobs = $this->Materials->Jobs->find('list', ['limit' => 200]);
-        $this->set(compact('material', 'jobs'));
+        $this->set(compact('material'));
     }
 
     /**
@@ -72,7 +71,7 @@ class MaterialsController extends AppController
     public function edit($id = null)
     {
         $material = $this->Materials->get($id, [
-            'contain' => ['Jobs']
+            'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $material = $this->Materials->patchEntity($material, $this->request->getData());
@@ -83,8 +82,7 @@ class MaterialsController extends AppController
             }
             $this->Flash->error(__('The material could not be saved. Please, try again.'));
         }
-        $jobs = $this->Materials->Jobs->find('list', ['limit' => 200]);
-        $this->set(compact('material', 'jobs'));
+        $this->set(compact('material'));
     }
 
     /**

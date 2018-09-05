@@ -16,9 +16,7 @@ class MaterialsControllerTest extends IntegrationTestCase
      * @var array
      */
     public $fixtures = [
-        'app.materials',
-        'app.jobs',
-        'app.jobs_materials'
+        'app.materials'
     ];
 
     /**

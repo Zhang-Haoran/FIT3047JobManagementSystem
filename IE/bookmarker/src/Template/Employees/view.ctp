@@ -7,8 +7,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Employee'), ['action' => 'edit', $employee->emp_id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Employee'), ['action' => 'delete', $employee->emp_id], ['confirm' => __('Are you sure you want to delete # {0}?', $employee->emp_id)]) ?> </li>
+        <li><?= $this->Html->link(__('Edit Employee'), ['action' => 'edit', $employee->employee_id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Employee'), ['action' => 'delete', $employee->employee_id], ['confirm' => __('Are you sure you want to delete # {0}?', $employee->employee_id)]) ?> </li>
         <li><?= $this->Html->link(__('List Employees'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Employee'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Funcs'), ['controller' => 'Funcs', 'action' => 'index']) ?> </li>
@@ -16,11 +16,15 @@
     </ul>
 </nav>
 <div class="employees view large-9 medium-8 columns content">
-    <h3><?= h($employee->emp_id) ?></h3>
+    <h3><?= h($employee->employee_id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Emp Name') ?></th>
-            <td><?= h($employee->emp_name) ?></td>
+            <th scope="row"><?= __('Emp Fname') ?></th>
+            <td><?= h($employee->emp_fname) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Emp Lname') ?></th>
+            <td><?= h($employee->emp_lname) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Emp Username') ?></th>
@@ -39,8 +43,8 @@
             <td><?= h($employee->emp_email) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Emp Id') ?></th>
-            <td><?= $this->Number->format($employee->emp_id) ?></td>
+            <th scope="row"><?= __('Employee Id') ?></th>
+            <td><?= $this->Number->format($employee->employee_id) ?></td>
         </tr>
     </table>
     <div class="related">

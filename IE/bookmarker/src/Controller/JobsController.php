@@ -38,7 +38,7 @@ class JobsController extends AppController
     public function view($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Materials', 'Stocks']
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees']
         ]);
 
         $this->set('job', $job);
@@ -65,9 +65,7 @@ class JobsController extends AppController
         $eventTypes = $this->Jobs->EventTypes->find('list', ['limit' => 200]);
         $customers = $this->Jobs->Customers->find('list', ['limit' => 200]);
         $employees = $this->Jobs->Employees->find('list', ['limit' => 200]);
-        $materials = $this->Jobs->Materials->find('list', ['limit' => 200]);
-        $stocks = $this->Jobs->Stocks->find('list', ['limit' => 200]);
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'materials', 'stocks'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees'));
     }
 
     /**
@@ -80,7 +78,7 @@ class JobsController extends AppController
     public function edit($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['Materials', 'Stocks']
+            'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $job = $this->Jobs->patchEntity($job, $this->request->getData());
@@ -95,9 +93,7 @@ class JobsController extends AppController
         $eventTypes = $this->Jobs->EventTypes->find('list', ['limit' => 200]);
         $customers = $this->Jobs->Customers->find('list', ['limit' => 200]);
         $employees = $this->Jobs->Employees->find('list', ['limit' => 200]);
-        $materials = $this->Jobs->Materials->find('list', ['limit' => 200]);
-        $stocks = $this->Jobs->Stocks->find('list', ['limit' => 200]);
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'materials', 'stocks'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees'));
     }
 
     /**

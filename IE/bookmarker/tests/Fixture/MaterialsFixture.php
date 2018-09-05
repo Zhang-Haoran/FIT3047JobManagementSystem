@@ -17,10 +17,10 @@ class MaterialsFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'mat_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'material_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'mat_name' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['mat_id'], 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['material_id'], 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -38,7 +38,7 @@ class MaterialsFixture extends TestFixture
     {
         $this->records = [
             [
-                'mat_id' => 1,
+                'material_id' => 1,
                 'mat_name' => 'Lorem ipsum dolor sit amet'
             ],
         ];

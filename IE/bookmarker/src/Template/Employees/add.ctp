@@ -17,7 +17,8 @@
     <fieldset>
         <legend><?= __('Add Employee') ?></legend>
         <?php
-            echo $this->Form->control('emp_name');
+            echo $this->Form->control('emp_fname');
+            echo $this->Form->control('emp_lname');
             echo $this->Form->control('emp_username');
             echo $this->Form->control('emp_password');
             echo $this->Form->control('emp_phone');

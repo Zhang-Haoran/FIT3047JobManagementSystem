@@ -17,7 +17,8 @@
     <fieldset>
         <legend><?= __('Add Customer') ?></legend>
         <?php
-            echo $this->Form->control('cust_name');
+            echo $this->Form->control('cust_fname');
+            echo $this->Form->control('cust_lname');
             echo $this->Form->control('cust_contact');
             echo $this->Form->control('cust_phone');
             echo $this->Form->control('cust_mobile');

@@ -22,10 +22,6 @@
         <li><?= $this->Html->link(__('New Customer'), ['controller' => 'Customers', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Employees'), ['controller' => 'Employees', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Employee'), ['controller' => 'Employees', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Materials'), ['controller' => 'Materials', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Material'), ['controller' => 'Materials', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Stocks'), ['controller' => 'Stocks', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Stock'), ['controller' => 'Stocks', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="jobs form large-9 medium-8 columns content">
@@ -47,10 +43,8 @@
             echo $this->Form->control('additional_note');
             echo $this->Form->control('site_id', ['options' => $sites]);
             echo $this->Form->control('event_type_id', ['options' => $eventTypes]);
-            echo $this->Form->control('cust_id', ['options' => $customers]);
-            echo $this->Form->control('emp_id', ['options' => $employees]);
-            echo $this->Form->control('materials._ids', ['options' => $materials]);
-            echo $this->Form->control('stocks._ids', ['options' => $stocks]);
+            echo $this->Form->control('customer_id', ['options' => $customers]);
+            echo $this->Form->control('employee_id', ['options' => $employees]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
