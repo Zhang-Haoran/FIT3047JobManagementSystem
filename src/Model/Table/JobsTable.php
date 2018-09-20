@@ -86,13 +86,18 @@ class JobsTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmpty('name')
+            ->alphaNumeric('name','Job name must be alphanumeric.');
 
         $validator
             ->scalar('status')
             ->maxLength('status', 45)
             ->requirePresence('status', 'create')
-            ->notEmpty('status');
+            ->notEmpty('status')
+            ->add('status','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z]*$/'),
+                'message' => 'Job_status should contain character only'
+            ]);
 
         $validator
             ->dateTime('job_date')
@@ -107,12 +112,14 @@ class JobsTable extends Table
         $validator
             ->numeric('price')
             ->greaterThanOrEqual('price', 0)
-            ->allowEmpty('price');
+            ->allowEmpty('price')
+            ->numeric('price');
 
         $validator
             ->numeric('deposit')
             ->greaterThanOrEqual('deposit', 0)
-            ->allowEmpty('deposit');
+            ->allowEmpty('deposit')
+            ->numeric('deposit');
 
         $validator
             ->scalar('order_detail')
