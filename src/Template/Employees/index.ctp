@@ -6,7 +6,7 @@
 ?>
 <div class="employees index columns content">
     <h3><?= __('Employees') ?></h3>
-    <table cellpadding="0" cellspacing="0" id="datatables" class="display" style="width:100%"z>
+    <table cellpadding="0" cellspacing="0" id="datatables" class="display" style="width:100%">
         <thead>
             <tr>
                 <th scope="col"><?= __('Name') ?></th>
