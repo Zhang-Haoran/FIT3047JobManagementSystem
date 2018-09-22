@@ -13,35 +13,24 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 ?>
+<?= $this->Html->css('/css/sb-admin.css') ?>
+
+<?= $this->Html->css('/css/formStyle.css') ?>
+
+ <img src="img/image_02.jpg" style="margin-left: auto;
+         margin-right: auto;
+         display: block; margin-top: 15px">
+
 <!DOCTYPE html>
 <html>
+
 <head>
-    <?= $this->Html->charset() ?>
-    <title>
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    <title>Error page</title>
 </head>
-<body>
-    <div id="container">
-        <div id="header">
-            <h1><?= __('Error') ?></h1>
-        </div>
-        <div id="content">
-            <?= $this->Flash->render() ?>
 
-            <?= $this->fetch('content') ?>
-        </div>
-        <div id="footer">
-            <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
-        </div>
-    </div>
+<body>
+<h1 style= "font-size:60px";><center>This page cannot be found</h1>
+    <center><h2>The page may have moved, or no longer exists.</h2></center>
+    <center><h3>Click here to <?= $this->Html->link(__('Home page'), ['controller' => 'Jobs']) ?> <h3></center>
 </body>
 </html>

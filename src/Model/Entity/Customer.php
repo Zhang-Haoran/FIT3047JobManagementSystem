@@ -43,4 +43,8 @@ class Customer extends Entity
         'cust_type' => true,
         'jobs' => true
     ];
+    protected function _getFullName()
+    {
+    return $this->fname . ' ' . $this->lname;
+    }
 }

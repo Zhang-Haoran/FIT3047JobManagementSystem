@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Entity;
 
+use Cake\Auth\DefaultPasswordHasher;
 use Cake\ORM\Entity;
 
 /**
@@ -44,6 +45,22 @@ class Employee extends Entity
         'jobs' => true
     ];
 
+    protected function _getFullName()
+{
+    return $this->fname . ' ' . $this->lname;
+}
+
+protected function _setPassword($value)
+{
+  if (strlen($value)) {
+      $hasher = new DefaultPasswordHasher();
+
+      return $hasher->hash($value);
+  }
+}
+
+
+
     /**
      * Fields that are excluded from JSON versions of the entity.
      *
@@ -53,4 +70,7 @@ class Employee extends Entity
         'password',
         'token'
     ];
+
+
+
 }

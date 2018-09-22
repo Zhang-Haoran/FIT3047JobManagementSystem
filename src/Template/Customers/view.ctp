@@ -4,57 +4,37 @@
  * @var \App\Model\Entity\Customer $customer
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Customer'), ['action' => 'edit', $customer->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Customer'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete # {0}?', $customer->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Customers'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Customer'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Cust Types'), ['controller' => 'CustTypes', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Cust Type'), ['controller' => 'CustTypes', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="customers view large-9 medium-8 columns content">
+
+<div class="customers view columns content">
     <h3><?= h($customer->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Fname') ?></th>
+            <th scope="row"><?= __('First name') ?></th>
             <td><?= h($customer->fname) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Lname') ?></th>
+            <th scope="row"><?= __('Last name') ?></th>
             <td><?= h($customer->lname) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Contact') ?></th>
+            <th scope="row"><?= __('Contact name') ?></th>
             <td><?= h($customer->contact) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Phone') ?></th>
+            <th scope="row"><?= __('Phone number') ?></th>
             <td><?= h($customer->phone) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Mobile') ?></th>
+            <th scope="row"><?= __('Mobile number') ?></th>
             <td><?= h($customer->mobile) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Email') ?></th>
+            <th scope="row"><?= __('Email address') ?></th>
             <td><?= h($customer->email) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Cust Type') ?></th>
+            <th scope="row"><?= __('Type') ?></th>
             <td><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($customer->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Is Deleted') ?></th>
-            <td><?= $customer->is_deleted ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
     <div class="related">

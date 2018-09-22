@@ -4,26 +4,15 @@
  * @var \App\Model\Entity\Employee $employee
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Employee'), ['action' => 'edit', $employee->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Employee'), ['action' => 'delete', $employee->id], ['confirm' => __('Are you sure you want to delete # {0}?', $employee->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Employees'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Employee'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="employees view large-9 medium-8 columns content">
+<div class="employees view columns content">
     <h3><?= h($employee->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Fname') ?></th>
+            <th scope="row"><?= __('First Name') ?></th>
             <td><?= h($employee->fname) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Lname') ?></th>
+            <th scope="row"><?= __('Last Name') ?></th>
             <td><?= h($employee->lname) ?></td>
         </tr>
         <tr>
@@ -31,7 +20,7 @@
             <td><?= h($employee->password) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Phone') ?></th>
+            <th scope="row"><?= __('Phone Number') ?></th>
             <td><?= h($employee->phone) ?></td>
         </tr>
         <tr>
@@ -39,24 +28,8 @@
             <td><?= h($employee->email) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Token') ?></th>
-            <td><?= h($employee->token) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($employee->id) ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('Access Level') ?></th>
             <td><?= $this->Number->format($employee->access_level) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Timeout') ?></th>
-            <td><?= h($employee->timeout) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Is Deleted') ?></th>
-            <td><?= $employee->is_deleted ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
     <div class="related">
@@ -64,7 +37,6 @@
         <?php if (!empty($employee->jobs)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
-                <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
                 <th scope="col"><?= __('Status') ?></th>
                 <th scope="col"><?= __('Job Date') ?></th>

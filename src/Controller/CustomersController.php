@@ -20,10 +20,7 @@ class CustomersController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['CustTypes']
-        ];
-        $customers = $this->paginate($this->Customers);
+        $customers = $this->Customers->find('all');
 
         $this->set(compact('customers'));
     }

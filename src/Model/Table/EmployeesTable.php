@@ -56,31 +56,68 @@ class EmployeesTable extends Table
 
         $validator
             ->scalar('fname')
-            ->maxLength('fname', 255)
+            ->maxLength('fname', 255,'First name can not be too long')
             ->requirePresence('fname', 'create')
-            ->notEmpty('fname');
+            ->notEmpty('fname','First name can not be empty')
+            ->add('fname','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z]*$/'),
+                'message' => 'Your name should contain character only'
+            ]);
 
         $validator
             ->scalar('lname')
-            ->maxLength('lname', 255)
+            ->maxLength('lname', 255,'Last name can not be too long')
             ->requirePresence('lname', 'create')
-            ->notEmpty('lname');
+            ->notEmpty('lname','Last name can not be empty')
+            ->add('lname','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z]*$/'),
+                'message' => 'Your name should contain character only'
+            ]);
 
         $validator
             ->scalar('password')
-            ->maxLength('password', 255)
+            ->maxLength('password', 255,'Password can not be too long')
             ->requirePresence('password', 'create')
-            ->notEmpty('password');
+            ->notEmpty('password','Password can not be empty')
+            ->add('password','minLength',[
+                'rule' => ['minLength', 6],
+                'message' => 'Your password should have at least 6 characters'
+            ]);
+
+            //add password match feature, to make sure user don't type unexpected password.
+            $validator
+                ->sameAs('confirmed_password','password','Password match failed');
+
 
         $validator
             ->scalar('phone')
-            ->maxLength('phone', 15)
+            ->maxLength('phone', 15,'Phone number cannot be longer than 15 numbers long')
             ->allowEmpty('phone');
+            $australianMobile = '/^(0|\+61)4\d{8}$/';
+            $validator
+            ->add('emp_phone', 'custom', [
+                'rule' => function ($value, $context) use ($australianMobile) {
+                // remove spaces to make the regex simpler
+                $check = preg_replace('/\s/', '', $value);
+
+                // checks for either of these styles
+                // +61412 345 678 or 0412 345 678
+                $found = preg_match($australianMobile, $check);
+                return boolval($found);
+            },
+            'message' => 'Your phone format is not valid'
+        ]);
+
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email');
+            ->maxLength('email', 255,'Email address can not be too long')
+            ->allowEmpty('email')
+            ->add('email','validEmail',[
+                'rule' => 'email',
+                'message' => 'Your e-mail format is not valid'
+            ]);
+
 
         $validator
             ->integer('access_level')
@@ -91,7 +128,7 @@ class EmployeesTable extends Table
             ->scalar('token')
             ->maxLength('token', 13)
             ->requirePresence('token', 'create')
-            ->notEmpty('token');
+            ->allowEmpty('token');
 
         $validator
             ->dateTime('timeout')

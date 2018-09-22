@@ -52,12 +52,14 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-    $routes->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+     $routes->connect('/', ['controller' => 'Jobs']);
 
-    /**
-     * ...and connect the rest of 'Pages' controller's URLs.
-     */
-    $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
+     //redirects /login to the login page
+      $routes->connect('/login', ['controller' => 'Employees', 'action' => 'login']);
+
+      //redirects /logout to logout pages
+      $routes->connect('/logout', ['controller' => 'Employees', 'action' => 'logout']);
+
 
     /**
      * Connect catchall routes for all controllers.
