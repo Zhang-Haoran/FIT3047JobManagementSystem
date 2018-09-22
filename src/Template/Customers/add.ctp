@@ -4,29 +4,20 @@
  * @var \App\Model\Entity\Customer $customer
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Customers'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Cust Types'), ['controller' => 'CustTypes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Cust Type'), ['controller' => 'CustTypes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="customers form large-9 medium-8 columns content">
+
+<div class="customers form columns content">
     <?= $this->Form->create($customer) ?>
     <fieldset>
         <legend><?= __('Add Customer') ?></legend>
         <?php
-            echo $this->Form->control('fname');
-            echo $this->Form->control('lname');
-            echo $this->Form->control('contact');
-            echo $this->Form->control('phone');
-            echo $this->Form->control('mobile');
-            echo $this->Form->control('email');
-            echo $this->Form->control('cust_type_id', ['options' => $custTypes]);
-            echo $this->Form->control('is_deleted');
+            echo $this->Form->control('fname', ['label' => 'First name']);
+            echo $this->Form->control('lname', ['label' => 'Last name']);
+            echo $this->Form->control('contact', ['label' => 'Contact name']);
+            echo $this->Form->control('phone', ['label' => 'Phone number']);
+            echo $this->Form->control('mobile', ['label' => 'Mobile number']);
+            echo $this->Form->control('email', ['label' => 'Email address']);
+            echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type']);
+            echo $this->Form->hidden('is_deleted');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

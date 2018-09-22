@@ -20,10 +20,7 @@ class JobsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees']
-        ];
-        $jobs = $this->paginate($this->Jobs);
+        $jobs = $this->Jobs->find('all')->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
 
         $this->set(compact('jobs'));
     }
