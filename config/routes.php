@@ -62,8 +62,6 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     //redirects to forgot password page
     $routes->connect('/password', ['controller' => 'Employees', 'action' => 'password']);
-
-    $routes->connect('/reset', ['controller' => 'Employees', 'action' => 'reset']);
     /**
      * Connect catchall routes for all controllers.
      *
