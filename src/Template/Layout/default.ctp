@@ -25,21 +25,21 @@
     <?= $this->Html->meta('icon') ?>
 
 
-    <?= $this->Html->css('/SB/vendor/bootstrap/css/bootstrap.min.css') ?>
+    <?= $this->Html->css('/vendor/bootstrap/css/bootstrap.min.css') ?>
 
-    <?= $this->Html->css('/SB/vendor/metisMenu/metisMenu.min.css') ?>
+    <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
 
     <!-- DataTables CSS -->
-    <?= $this->Html->css('/SB/vendor/datatables-plugins/dataTables.bootstrap.css') ?>
+    <?= $this->Html->css('/vendor/datatables-plugins/dataTables.bootstrap.css') ?>
 
     <!-- DataTables Responsive CSS -->
-    <?= $this->Html->css('/SB//vendor/datatables-responsive/dataTables.responsive.css') ?>
+    <?= $this->Html->css('/vendor/datatables-responsive/dataTables.responsive.css') ?>
 
-    <?= $this->Html->css('/SB/dist/css/sb-admin-2.css') ?>
+    <?= $this->Html->css('/dist/css/sb-admin-2.css') ?>
 
-    <?= $this->Html->css('/SB/vendor/morrisjs/morris.css') ?>
+    <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
 
-    <?= $this->Html->css('/SB/vendor/font-awesome/css/font-awesome.min.css') ?>
+    <?= $this->Html->css('/vendor/font-awesome/css/font-awesome.min.css') ?>
 
 
     <?= $this->fetch('meta') ?>
@@ -401,35 +401,35 @@
 <!-- /#wrapper -->
 
 <!-- jQuery -->
-<?= $this->Html->script('/SB/vendor/jquery/jquery.min.js') ?>
+<?= $this->Html->script('/vendor/jquery/jquery.min.js') ?>
 
 <!-- Bootstrap Core JavaScript -->
-<?= $this->Html->script('/SB/vendor/bootstrap/js/bootstrap.min.js') ?>
+<?= $this->Html->script('/vendor/bootstrap/js/bootstrap.min.js') ?>
 
 <!-- Metis Menu Plugin JavaScript -->
-<?= $this->Html->script('/SB/vendor/metisMenu/metisMenu.min.js') ?>
+<?= $this->Html->script('/vendor/metisMenu/metisMenu.min.js') ?>
 
 
 <!-- Morris Charts JavaScript -->
-<?= $this->Html->script('/SB/vendor/raphael/raphael.min.js') ?>
+<?= $this->Html->script('/vendor/raphael/raphael.min.js') ?>
 
-<?= $this->Html->script('/SB/vendor/morrisjs/morris.min.js') ?>
+<?= $this->Html->script('/vendor/morrisjs/morris.min.js') ?>
 
-<?= $this->Html->script('/SB/data/morris-data.js') ?>
+<?= $this->Html->script('/data/morris-data.js') ?>
 
 
 <!-- DataTables JavaScript -->
-<?= $this->Html->script('/SB/vendor/datatables/js/jquery.dataTables.min.js') ?>
+<?= $this->Html->script('/vendor/datatables/js/jquery.dataTables.min.js') ?>
 
-<?= $this->Html->script('/SB/vendor/datatables-plugins/dataTables.bootstrap.min.js') ?>
+<?= $this->Html->script('/vendor/datatables-plugins/dataTables.bootstrap.min.js') ?>
 
-<?= $this->Html->script('/SB/vendor/datatables-responsive/dataTables.responsive.js') ?>
+<?= $this->Html->script('/vendor/datatables-responsive/dataTables.responsive.js') ?>
 
 <!-- Custom Theme JavaScript -->
-<?= $this->Html->script('/SB/dist/js/sb-admin-2.js') ?>
+<?= $this->Html->script('/dist/js/sb-admin-2.js') ?>
 
 <!-- Moment.js -->
-<?= $this->Html->script('/SB/vendor/momentjs/moment.js') ?>
+<?= $this->Html->script('/vendor/momentjs/moment.js') ?>
 
 <script>
     $(document).ready(function() {
