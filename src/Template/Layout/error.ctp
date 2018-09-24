@@ -31,6 +31,6 @@
 <body>
 <h1 style= "font-size:60px";><center>This page cannot be found</h1>
     <center><h2>The page may have moved, or no longer exists.</h2></center>
-    <center><h3>Click here to <?= $this->Html->link(__('Home page'), ['controller' => 'Jobs']) ?> <h3></center>
+    <center><h3>Click here to <?= $this->Html->link(__('Home page'), ['controller' => 'Jobs', 'action'=>'index']) ?> <h3></center>
 </body>
 </html>
