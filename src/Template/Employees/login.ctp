@@ -56,17 +56,17 @@ $cakeDescription = 'Instant Marquees';
                 </div>
                 <div class="panel-body">
                     <?= $this->Flash->render() ?>
-                    <?= $this->Form->create() ?>
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
+                                <?= $this->Form->create() ?>
                                 <?= $this->Form->control('email', ['class' => 'form-control', 'placeholder' => 'E-mail', 'autofocus']) ?>
                             </div>
                             <div class="form-group">
                                 <?= $this->Form->control('password', ['class' => 'form-control', 'placeholder' => 'Password']) ?>
                             </div>
                             <div class="nav-link">
-                                <?= $this->Html->link(__('forgot password'), ['controller' => 'Employees', 'action' => 'password'], ['class' => 'd-block small']) ?>
+                                <?= $this->Html->link(__('Forgot Password'), ['controller' => 'Employees', 'action' => 'password'], ['class' => 'btn btn-link']) ?>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
                             <?= $this->Form->button('Login', ['class' => 'btn btn-lg btn-success btn-block']) ?>
@@ -78,7 +78,7 @@ $cakeDescription = 'Instant Marquees';
             </div>
         </div>
     </div>
-    <footer class="modal-footer">
+    <footer>
         <div class="row">
             <div class="col-lg-12">
                 <div class="container">
