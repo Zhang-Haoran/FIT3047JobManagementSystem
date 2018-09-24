@@ -22,7 +22,8 @@ class EmployeesController extends AppController
     parent::initialize();
     $this->Auth->allow([
       'logout',
-        'password'
+        'password',
+        'reset'
     /*  'add'  */
 
   ]);
@@ -157,7 +158,7 @@ class EmployeesController extends AppController
                 $this->Flash->error('Email address does not exist. Please try again');
             } else {
                 $token = uniqid();
-                $url = Router::Url(['controller' => 'employees', 'action' => 'reset'], true) . '/' . $token;
+                $url = Router::Url(['controller' => 'Employees', 'action' => 'reset'], true) . '/' . $token;
                 $timeout = time() + DAY;
                 if ($this->Employees->updateAll(['token' => $token, 'timeout' => $timeout], ['id' => $employee->id])){
                     $this->sendResetEmail($url, $employee);
@@ -195,8 +196,8 @@ class EmployeesController extends AppController
             if ($employee) {
                 if (!empty($this->request->data)) {
                     // Clear token and timeout
-                    $this->request->data['token'] = null;
-                    $this->request->data['timeout'] = null;
+                    $this->request->data['token'] = '';
+                    $this->request->data['timeout'] = '';
                     $employee = $this->Employees->patchEntity($employee, $this->request->data);
                     if ($this->Employees->save($employee)) {
                         $this->Flash->set(__('Your password has been updated.'));

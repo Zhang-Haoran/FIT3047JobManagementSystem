@@ -12,7 +12,7 @@
 
                 <a class="login100-form-title p-b-49">Reset Password</a>
 
-                <?= $this->Form->create($user) ?>
+                <?= $this->Form->create($employee) ?>
 
                 <div class="wrap-input100 m-b-23">
 
