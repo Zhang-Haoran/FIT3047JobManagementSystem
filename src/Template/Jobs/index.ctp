@@ -4,62 +4,54 @@
  * @var \App\Model\Entity\Job[]|\Cake\Collection\CollectionInterface $jobs
  */
 ?>
-<div class="jobs index columns content">
-    <h3><?= __('Jobs') ?></h3>
-    <table cellpadding="0" cellspacing="0" id="datatables" class="display" style="width:100%">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header"><?= __('Jobs') ?></h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel-body">
+    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
             <tr>
-                <th scope="col"><?= __('id') ?></th>
-                <th scope="col"><?= __('name') ?></th>
-                <th scope="col"><?= __('status') ?></th>
-                <th scope="col"><?= __('job_date') ?></th>
-                <th scope="col"><?= __('booked_date') ?></th>
-                <th scope="col"><?= __('price') ?></th>
-                <th scope="col"><?= __('deposit') ?></th>
-                <th scope="col"><?= __('e_arrival_time') ?></th>
-                <th scope="col"><?= __('e_setup_time') ?></th>
-                <th scope="col"><?= __('e_pickup_time') ?></th>
-                <th scope="col"><?= __('site_id') ?></th>
-                <th scope="col"><?= __('event_type_id') ?></th>
-                <th scope="col"><?= __('customer_id') ?></th>
-                <th scope="col"><?= __('employee_id') ?></th>
-                <th scope="col"><?= __('edited_by') ?></th>
-                <th scope="col"><?= __('last_changed') ?></th>
-                <th scope="col"><?= __('Invoice') ?></th>
-                <th scope="col"><?= __('order') ?></th>
-                <th scope="col"><?= __('quote') ?></th>
-                <th scope="col"><?= __('token') ?></th>
-                <th scope="col"><?= __('timeout') ?></th>
-                <th scope="col"><?= __('is_deleted') ?></th>
+                <th scope="col"><?= __('Name') ?></th>
+                <th scope="col"><?= __('Status') ?></th>
+                <th scope="col"><?= __('Job Date') ?></th>
+                <th scope="col"><?= __('Booked Date') ?></th>
+                <th scope="col"><?= __('Price') ?></th>
+                <th scope="col"><?= __('Deposit') ?></th>
+                <th scope="col"><?= __('Expected arrival time') ?></th>
+                <th scope="col"><?= __('Expected setup time') ?></th>
+                <th scope="col"><?= __('Expected pickup time') ?></th>
+                <th scope="col"><?= __('Site') ?></th>
+                <th scope="col"><?= __('Event type') ?></th>
+                <th scope="col"><?= __('Customer') ?></th>
+                <th scope="col"><?= __('Created by') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($jobs as $job): ?>
             <tr>
-                <td><?= $this->Number->format($job->id) ?></td>
                 <td><?= h($job->name) ?></td>
                 <td><?= h($job->status) ?></td>
                 <td><?= h($job->job_date) ?></td>
-                <td><?= h($job->booked_date) ?></td>
-                <td><?= $this->Number->format($job->price) ?></td>
-                <td><?= $this->Number->format($job->deposit) ?></td>
-                <td><?= h($job->e_arrival_time) ?></td>
-                <td><?= h($job->e_setup_time) ?></td>
-                <td><?= h($job->e_pickup_time) ?></td>
+                <td class="center"><?= h($job->booked_date) ?></td>
+                <td class="center"><?= $this->Number->format($job->price) ?></td>
+                <td class="center"><?= $this->Number->format($job->deposit) ?></td>
+                <td class="center"><?= h($job->e_arrival_time) ?></td>
+                <td class="center"><?= h($job->e_setup_time) ?></td>
+                <td class="center"><?= h($job->e_pickup_time) ?></td>
                 <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?></td>
                 <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]) : '' ?></td>
-                <td><?= $job->has('customer') ? $this->Html->link($job->customer->id, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
-                <td><?= $job->has('employee') ? $this->Html->link($job->employee->id, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
-                <td><?= h($job->edited_by) ?></td>
-                <td><?= h($job->last_changed) ?></td>
-                <td><?= h($job->Invoice) ?></td>
-                <td><?= h($job->order) ?></td>
-                <td><?= h($job->quote) ?></td>
-                <td><?= h($job->token) ?></td>
-                <td><?= h($job->timeout) ?></td>
-                <td><?= h($job->is_deleted) ?></td>
+                <td><?= $job->has('customer') ? $this->Html->link($job->customer->full_name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
+                <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
+        </div>
