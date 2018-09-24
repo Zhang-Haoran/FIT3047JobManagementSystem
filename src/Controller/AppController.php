@@ -14,6 +14,7 @@
  */
 namespace App\Controller;
 
+use Cake\Controller\Component\AuthComponent;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
@@ -46,10 +47,51 @@ class AppController extends Controller
         ]);
         $this->loadComponent('Flash');
 
+        //Login function
+        $this->loadComponent('Auth', [
+            'authenticate' => [
+                'Form' => [
+                    'controller' => 'Employees',
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            //As there is no access without autherisation you don't need this
+            'authError' => 'You are not authorised to access this page',
+            'loginAction' => [
+                'controller' => 'Employees',
+                'action' => 'login'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Employees',
+                'action' => 'login'
+            ]
+
+            //use isAuthorized in Controllers
+//            'authorize' => ['Controller'],
+            // If unauthorized, return them to page they were just on
+//           'unauthorizedRedirect' => [/]
+          ]);
+
         /*
          * Enable the following component for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
     }
+
+    public function beforeFilter(Event $event)
+    {
+        // Pass settings in using 'all'
+        $this->Auth->config('authenticate', [
+            'Form' => [
+                'userModel' => 'Employees',
+                'fields' => ['username' => 'email', 'password' => 'password']
+            ]
+        ]);
+
+    }
+
 }

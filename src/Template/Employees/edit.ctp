@@ -4,34 +4,23 @@
  * @var \App\Model\Entity\Employee $employee
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $employee->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $employee->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Employees'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="employees form large-9 medium-8 columns content">
+<div class="employees form columns content">
     <?= $this->Form->create($employee) ?>
     <fieldset>
         <legend><?= __('Edit Employee') ?></legend>
         <?php
-            echo $this->Form->control('fname');
-            echo $this->Form->control('lname');
-            echo $this->Form->control('password');
-            echo $this->Form->control('phone');
-            echo $this->Form->control('email');
-            echo $this->Form->control('access_level');
-            echo $this->Form->control('token');
-            echo $this->Form->control('timeout');
-            echo $this->Form->control('is_deleted');
+        echo $this->Form->control('fname',  ['label' => 'First Name']);
+        echo $this->Form->control('lname',  ['label' => 'Last Name']);
+        echo $this->Form->control('password',  ['label' => 'Password']);
+        //password type should be password
+        echo $this->Form->control('confirmed_password',['type' => 'password']);
+        //add password match feature, to make sure user don't type unexpected password.
+        echo $this->Form->control('phone',  ['label' => 'Phone Number']);
+        echo $this->Form->control('email',  ['label' => 'Email']);
+        echo $this->Form->control('access_level',  ['label' => 'Access Level']);
+        echo $this->Form->hidden('token');
+        echo $this->Form->hidden('timeout');
+        echo $this->Form->hidden('is_deleted');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
