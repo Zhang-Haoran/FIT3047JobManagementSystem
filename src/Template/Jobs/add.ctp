@@ -25,23 +25,12 @@
                     <div class="col-lg-6">
 
                         <div class="form-group"><?= $this->Form->control('name',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('status', array('type'=>'select','options'=>$statusOptions),['class'=>'form-control'])?></div>
+                        <div class="form-group"><?= $this->Form->control('job_status', array('type'=>'select','options'=>$statusOptions),['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('job_date',['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('price',['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('deposit',['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('order_detail',['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('e_arrival_time',['class'=>'form-control','empty' => true])?></div>
-
-
-                        <label for="dtp_input1" class="col-md-2 control-label">DateTime Picking</label>
-                        <div class="input-group date form_datetime col-md-5" data-date="1979-09-16T05:25:07Z" data-date-format="dd MM yyyy - HH:ii p" data-link-field="dtp_input1">
-                            <input class="form-control" size="16" type="text" value="" readonly>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                        </div>
-                        <input type="hidden" id="dtp_input1" value="" /><br/>
-
-
                         <div class="form-group"><?= $this->Form->control('e_setup_time',['class'=>'form-control','empty' => true])?></div>
                         <div class="form-group"><?= $this->Form->control('e_pickup_time',['class'=>'form-control','empty' => true])?></div>
                         <div class="form-group"><?= $this->Form->control('additional_note',['class'=>'form-control'])?></div>
@@ -52,7 +41,7 @@
             <?= $this->Form->control('edited_by')?>
             <?= $this->Form->control('last_changed', ['empty' => true])?>
             <?= $this->Form->control('Invoice')?>
-            <?= $this->Form->control('order')?>
+            <?= $this->Form->control('job_order')?>
             <?= $this->Form->control('quote')?>
             <?= $this->Form->hidden('token')?>
             <?= $this->Form->hidden('timeout')?>

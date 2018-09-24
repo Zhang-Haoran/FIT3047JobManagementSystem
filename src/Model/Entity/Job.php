@@ -8,7 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $name
- * @property string $status
+ * @property string $job_status
  * @property \Cake\I18n\FrozenTime $job_date
  * @property \Cake\I18n\FrozenTime $booked_date
  * @property float $price
@@ -25,7 +25,7 @@ use Cake\ORM\Entity;
  * @property string $edited_by
  * @property \Cake\I18n\FrozenTime $last_changed
  * @property string $Invoice
- * @property string $order
+ * @property string $job_order
  * @property string $quote
  * @property string $token
  * @property \Cake\I18n\FrozenTime $timeout
@@ -53,7 +53,7 @@ class Job extends Entity
      */
     protected $_accessible = [
         'name' => true,
-        'status' => true,
+        'job_status' => true,
         'job_date' => true,
         'booked_date' => true,
         'price' => true,
@@ -70,7 +70,7 @@ class Job extends Entity
         'edited_by' => true,
         'last_changed' => true,
         'Invoice' => true,
-        'order' => true,
+        'job_order' => true,
         'quote' => true,
         'token' => true,
         'timeout' => true,

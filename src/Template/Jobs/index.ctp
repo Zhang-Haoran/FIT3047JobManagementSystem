@@ -37,7 +37,7 @@
             <?php foreach ($jobs as $job): ?>
             <tr>
                 <td><?= h($job->name) ?></td>
-                <td><?= h($job->status) ?></td>
+                <td><?= h($job->job_status) ?></td>
                 <td><?= h($job->job_date) ?></td>
                 <td class="center"><?= h($job->booked_date) ?></td>
                 <td class="center"><?= $this->Number->format($job->price) ?></td>
