@@ -25,7 +25,7 @@
                     <div class="col-lg-6">
 
                         <div class="form-group"><?= $this->Form->control('name',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('status',['class'=>'form-control'])?></div>
+                        <div class="form-group"><?= $this->Form->control('status', array('type'=>'select','options'=>$statusOptions),['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('job_date',['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('price',['class'=>'form-control'])?></div>
                         <div class="form-group"><?= $this->Form->control('deposit',['class'=>'form-control'])?></div>
