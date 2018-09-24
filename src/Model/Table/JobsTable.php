@@ -90,14 +90,10 @@ class JobsTable extends Table
             ->alphaNumeric('name','Job name must be alphanumeric.');
 
         $validator
-            ->scalar('status')
-            ->maxLength('status', 45)
-            ->requirePresence('status', 'create')
-            ->notEmpty('status')
-            ->add('status','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z]*$/'),
-                'message' => 'Job_status should contain character only'
-            ]);
+            ->scalar('job_status')
+            ->maxLength('job_status', 45)
+            ->requirePresence('job_status', 'create')
+            ->notEmpty('job_status');
 
         $validator
             ->dateTime('job_date')
@@ -106,8 +102,7 @@ class JobsTable extends Table
 
         $validator
             ->dateTime('booked_date')
-            ->requirePresence('booked_date', 'create')
-            ->notEmpty('booked_date');
+            ->allowEmpty('booked_date');
 
         $validator
             ->numeric('price')
@@ -156,9 +151,9 @@ class JobsTable extends Table
             ->allowEmpty('Invoice');
 
         $validator
-            ->scalar('order')
-            ->maxLength('order', 45)
-            ->allowEmpty('order');
+            ->scalar('job_order')
+            ->maxLength('job_order', 45)
+            ->allowEmpty('job_order');
 
         $validator
             ->scalar('quote')
