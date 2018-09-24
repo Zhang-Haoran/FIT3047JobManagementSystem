@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="text-center" style="line-height: 50px">
-                        <a class="d-block small" href="">Forgot Password?</a>
+                        <?= $this->Html->link(__('forgot password'), ['controller' => 'Employees', 'action' =>'password'], ['class' => 'd-block small'])?>
                     </div>
 
                     <?= $this->Form->button('Login', ['class' => 'btn btn-primary btn-block']) ?>

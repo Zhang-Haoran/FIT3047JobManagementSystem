@@ -5,6 +5,9 @@ use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\ORM\Query;
 
+use Cake\Routing\Router;
+use Cake\Mailer\Email;
+
 /**
  * Employees Controller
  *
@@ -19,6 +22,7 @@ class EmployeesController extends AppController
     parent::initialize();
     $this->Auth->allow([
       'logout',
+        'password'
     /*  'add'  */
 
   ]);
@@ -144,7 +148,7 @@ class EmployeesController extends AppController
     /**
      * Foget Password method
      */
-    public function forgotpassword()
+    public function password()
     {
         if ($this->request->is('post')) {
             $query = $this->Employees->findByEmail($this->request->data['email']);
@@ -152,14 +156,14 @@ class EmployeesController extends AppController
             if (is_null($employee)) {
                 $this->Flash->error('Email address does not exist. Please try again');
             } else {
-                $passkey = uniqid();
-                $url = Router::Url(['controller' => 'employees', 'action' => 'resetpassword'], true) . '/' . $passkey;
+                $token = uniqid();
+                $url = Router::Url(['controller' => 'employees', 'action' => 'reset'], true) . '/' . $token;
                 $timeout = time() + DAY;
-                if ($this->Employees->updateAll(['token' => $passkey, 'timeout' => $timeout], ['employee_id' => $employee->employee_id])){
+                if ($this->Employees->updateAll(['token' => $token, 'timeout' => $timeout], ['id' => $employee->id])){
                     $this->sendResetEmail($url, $employee);
                     return $this->redirect(['action' => 'login']);
                 } else {
-                    $this->Flash->error('Error saving reset passkey/timeout');
+                    $this->Flash->error('Error saving reset token/timeout');
                 }
             }
         }
@@ -171,10 +175,10 @@ class EmployeesController extends AppController
         $email = new Email();
         $email->template('resetpw');
         $email->emailFormat('both');
-        $email->from('no-reply@instantshade.com.au');
+        $email->from('noreplyinstantmarquees@gmail.com');
         $email->to($employee->email);
         $email->subject('Reset your password');
-        $email->viewVars(['url' => $url, 'emp_username' => $employee->emp_username]);
+        $email->viewVars(['url' => $url, 'fname' => $employee->fname]);
         if ($email->send()) {
             $this->Flash->success(__('Check your email for your reset password link'));
         } else {
@@ -184,14 +188,14 @@ class EmployeesController extends AppController
     /**
      * Reseting the password method
      */
-    public function resetpassword($passkey = null) {
-        if ($passkey) {
-            $query = $this->Employees->find('all', ['conditions' => ['passkey' => $passkey, 'timeout >' => time()]]);
+    public function reset($token = null) {
+        if ($token) {
+            $query = $this->Employees->find('all', ['conditions' => ['token' => $token, 'timeout >' => time()]]);
             $employee = $query->first();
             if ($employee) {
                 if (!empty($this->request->data)) {
-                    // Clear passkey and timeout
-                    $this->request->data['passkey'] = null;
+                    // Clear token and timeout
+                    $this->request->data['token'] = null;
                     $this->request->data['timeout'] = null;
                     $employee = $this->Employees->patchEntity($employee, $this->request->data);
                     if ($this->Employees->save($employee)) {
@@ -202,8 +206,8 @@ class EmployeesController extends AppController
                     }
                 }
             } else {
-                $this->Flash->error('Invalid or expired passkey. Please check your email or try again');
-                $this->redirect(['action' => 'forgotpassword']);
+                $this->Flash->error('Invalid or expired token. Please check your email or try again');
+                $this->redirect(['action' => 'password']);
             }
             unset($employee->password);
             $this->set(compact('employee'));
