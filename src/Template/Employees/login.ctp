@@ -45,9 +45,7 @@ $cakeDescription = 'Instant Marquees';
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <div style="
-    padding-top: 25px;
-">
+            <div style="padding-top: 25px;">
                 <?= $this->Html->image('image_02.gif', ['alt' => 'Logo', 'class' => 'img-responsive center-block']) ?>
             </div>
             <div class="login-panel panel panel-default">
@@ -73,6 +71,9 @@ $cakeDescription = 'Instant Marquees';
                             <?= $this->Form->end() ?>
                         </fieldset>
                     </form>
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Instant Marquees 2018</span>
+                    </div>
                 </div>
 
             </div>
@@ -82,9 +83,7 @@ $cakeDescription = 'Instant Marquees';
         <div class="row">
             <div class="col-lg-12">
                 <div class="container">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © Instant Marquees 2018</span>
-                    </div>
+
                 </div>
             </div>
         </div>

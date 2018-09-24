@@ -45,6 +45,7 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
         ]);
+
         $this->loadComponent('Flash');
 
         //Login function
@@ -58,7 +59,7 @@ class AppController extends Controller
                     ]
                 ]
             ],
-            //As there is no access without autherisation you don't need this
+            //As there is no access without authorisation you don't need this
             'authError' => 'You are not authorised to access this page',
             'loginAction' => [
                 'controller' => 'Employees',

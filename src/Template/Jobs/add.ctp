@@ -34,18 +34,18 @@
                         <div class="form-group"><?= $this->Form->control('e_setup_time',['class'=>'form-control','empty' => true])?></div>
                         <div class="form-group"><?= $this->Form->control('e_pickup_time',['class'=>'form-control','empty' => true])?></div>
                         <div class="form-group"><?= $this->Form->control('additional_note',['class'=>'form-control'])?></div>
-            <?= $this->Form->control('site_id', ['options' => $sites])?>
-            <?= $this->Form->control('event_type_id', ['options' => $eventTypes])?>
-            <?= $this->Form->control('customer_id', ['options' => $customers])?>
-            <?= $this->Form->control('employee_id', ['options' => $employees])?>
-            <?= $this->Form->control('edited_by')?>
-            <?= $this->Form->control('last_changed', ['empty' => true])?>
-            <?= $this->Form->control('Invoice')?>
-            <?= $this->Form->control('job_order')?>
-            <?= $this->Form->control('quote')?>
-            <?= $this->Form->hidden('token')?>
-            <?= $this->Form->hidden('timeout')?>
-            <?= $this->Form->hidden('is_deleted')?>
+                        <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites])?></div>
+                        <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes])?></div>
+                        <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers])?></div>
+                        <div class="form-group"><?= $this->Form->control('employee_id', ['options' => $employees])?></div>
+                        <div class="form-group"><?= $this->Form->control('edited_by')?></div>
+                        <div class="form-group"><?= $this->Form->control('last_changed', ['empty' => true])?></div>
+                        <div class="form-group"><?= $this->Form->control('Invoice')?></div>
+                        <div class="form-group"><?= $this->Form->control('job_order')?></div>
+                        <div class="form-group"><?= $this->Form->control('quote')?></div>
+                        <div class="form-group"><?= $this->Form->hidden('token')?></div>
+                        <div class="form-group"><?= $this->Form->hidden('timeout')?></div>
+                        <div class="form-group"><?= $this->Form->hidden('is_deleted')?></div>
 
     <?= $this->Form->button(__('Submit'),['class'=>'btn btn-default']) ?>
     <?= $this->Form->end() ?>
