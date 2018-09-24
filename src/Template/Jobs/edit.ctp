@@ -10,7 +10,7 @@
         <legend><?= __('Edit Job') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('status');
+            echo $this->Form->control('job_status', array('type'=>'select','options'=>$statusOptions));
             echo $this->Form->control('job_date');
             echo $this->Form->control('booked_date');
             echo $this->Form->control('price');
@@ -27,7 +27,7 @@
             echo $this->Form->control('edited_by');
             echo $this->Form->control('last_changed', ['empty' => true]);
             echo $this->Form->control('Invoice');
-            echo $this->Form->control('order');
+            echo $this->Form->control('job_order');
             echo $this->Form->control('quote');
             echo $this->Form->hidden('token');
             echo $this->Form->hidden('timeout');
