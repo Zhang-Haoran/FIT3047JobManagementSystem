@@ -66,7 +66,7 @@ $cakeDescription = 'Instant Marquees';
                                 <?= $this->Form->control('password', ['class' => 'form-control', 'placeholder' => 'Password']) ?>
                             </div>
                             <div class="nav-link">
-                                <?= $this->Html->link(__('Forgot Password'), ['controller' => 'Employees', 'action' => 'forgotpassword']) ?>
+                                <?= $this->Html->link(__('forgot password'), ['controller' => 'Employees', 'action' => 'password'], ['class' => 'd-block small']) ?>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
                             <?= $this->Form->button('Login', ['class' => 'btn btn-lg btn-success btn-block']) ?>

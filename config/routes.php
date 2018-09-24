@@ -60,7 +60,8 @@ Router::scope('/', function (RouteBuilder $routes) {
       //redirects /logout to logout pages
       $routes->connect('/logout', ['controller' => 'Employees', 'action' => 'logout']);
 
-
+    //redirects to forgot password page
+    $routes->connect('/password', ['controller' => 'Employees', 'action' => 'password']);
     /**
      * Connect catchall routes for all controllers.
      *
