@@ -10,7 +10,7 @@
         <legend><?= __('Edit Job') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('status');
+            echo $this->Form->control('status', array('type'=>'select','options'=>$statusOptions));
             echo $this->Form->control('job_date');
             echo $this->Form->control('booked_date');
             echo $this->Form->control('price');
