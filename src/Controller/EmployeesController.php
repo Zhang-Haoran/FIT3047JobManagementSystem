@@ -134,7 +134,6 @@ class EmployeesController extends AppController
             $employee = $this->Auth->identify();
             if ($employee) {
                 $this->Auth->setUser($employee);
-                $this->Flash->success('Successful login');
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Flash->error('Your username or password is incorrect.');
