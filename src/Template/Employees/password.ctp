@@ -27,7 +27,7 @@ $cakeDescription = 'Instant Marquees';
 
     <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
 
-    <?= $this->Html->css('/dist/css/sb-admin-2.css') ?>
+    <?= $this->Html->css('/css/style.css') ?>
 
     <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
 

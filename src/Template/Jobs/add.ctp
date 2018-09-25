@@ -24,35 +24,31 @@
                 <div class="row">
                     <div class="col-lg-6">
 
-                        <div class="form-group"><?= $this->Form->control('name',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('job_status', array('type'=>'select','options'=>$statusOptions),['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('job_date',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('price',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('deposit',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('order_detail',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('e_arrival_time',['class'=>'form-control','empty' => true])?></div>
-                        <div class="form-group"><?= $this->Form->control('e_setup_time',['class'=>'form-control','empty' => true])?></div>
-                        <div class="form-group"><?= $this->Form->control('e_pickup_time',['class'=>'form-control','empty' => true])?></div>
-                        <div class="form-group"><?= $this->Form->control('additional_note',['class'=>'form-control'])?></div>
-                        <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites])?></div>
-                        <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes])?></div>
-                        <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers])?></div>
-                        <div class="form-group"><?= $this->Form->control('employee_id', ['options' => $employees])?></div>
-                        <div class="form-group"><?= $this->Form->control('edited_by')?></div>
-                        <div class="form-group"><?= $this->Form->control('last_changed', ['empty' => true])?></div>
-                        <div class="form-group"><?= $this->Form->control('Invoice')?></div>
-                        <div class="form-group"><?= $this->Form->control('job_order')?></div>
-                        <div class="form-group"><?= $this->Form->control('quote')?></div>
-                        <div class="form-group"><?= $this->Form->hidden('token')?></div>
-                        <div class="form-group"><?= $this->Form->hidden('timeout')?></div>
-                        <div class="form-group"><?= $this->Form->hidden('is_deleted')?></div>
+                        <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('job_status', array('type' => 'select', 'options' => $statusOptions), ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('job_date', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('price', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('deposit', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('e_arrival_time', ['class' => 'form-control', 'empty' => true]) ?></div>
+                        <div class="form-group"><?= $this->Form->control('e_setup_time', ['class' => 'form-control', 'empty' => true]) ?></div>
+                        <div class="form-group"><?= $this->Form->control('e_pickup_time', ['class' => 'form-control', 'empty' => true]) ?></div>
+                        <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('employee_id', ['options' => $employees, 'class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('edited_by', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('last_changed', ['empty' => true]) ?></div>
+                        <div class="form-group"><?= $this->Form->control('Invoice', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('quote', ['class' => 'form-control']) ?></div>
 
-    <?= $this->Form->button(__('Submit'),['class'=>'btn btn-default']) ?>
-    <?= $this->Form->end() ?>
+                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-default']) ?>
+                        <?= $this->Form->end() ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

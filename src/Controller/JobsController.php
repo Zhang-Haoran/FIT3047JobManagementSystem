@@ -21,7 +21,6 @@ class JobsController extends AppController
     public function index()
     {
         $jobs = $this->Jobs->find('all')->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
-
         $this->set(compact('jobs'));
     }
 
@@ -63,7 +62,7 @@ class JobsController extends AppController
         $customers = $this->Jobs->Customers->find('list', ['limit' => 200]);
         $employees = $this->Jobs->Employees->find('list', ['limit' => 200]);
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees'));
-        $this->set('statusOptions', array('opt1' => '', 'opt2' => 'confirmed', 'opt3' => 'quote', 'opt4' => 'completed'));
+        $this->set('statusOptions', array('Started' => 'Started', 'Confirmed' => 'Confirmed', 'Quote' => 'Quote', 'Completed' => 'Completed'));
     }
 
     /**
@@ -92,6 +91,7 @@ class JobsController extends AppController
         $customers = $this->Jobs->Customers->find('list', ['limit' => 200]);
         $employees = $this->Jobs->Employees->find('list', ['limit' => 200]);
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees'));
+        $this->set('statusOptions', array('Started' => 'Started', 'Confirmed' => 'Confirmed', 'Quote' => 'Quote', 'Completed' => 'Completed'));
     }
 
     /**

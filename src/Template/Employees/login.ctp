@@ -29,7 +29,7 @@ $cakeDescription = 'Instant Marquees';
 
     <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
 
-    <?= $this->Html->css('/dist/css/sb-admin-2.css') ?>
+    <?= $this->Html->css('/css/style.css') ?>
 
     <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
 
@@ -100,7 +100,7 @@ $cakeDescription = 'Instant Marquees';
 <?= $this->Html->script('/vendor/metisMenu/metisMenu.min.js') ?>
 
 <!-- Custom Theme JavaScript -->
-<?= $this->Html->script('/dist/js/sb-admin-2.js') ?>
+<?= $this->Html->script('/js/script.js') ?>
 
 <!-- Moment.js -->
 <?= $this->Html->script('/vendor/momentjs/moment.js') ?>
