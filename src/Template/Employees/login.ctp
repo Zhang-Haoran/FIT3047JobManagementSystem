@@ -54,10 +54,10 @@ $cakeDescription = 'Instant Marquees';
                 </div>
                 <div class="panel-body">
                     <?= $this->Flash->render() ?>
+                    <?= $this->Form->create() ?>
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <?= $this->Form->create() ?>
                                 <?= $this->Form->control('email', ['class' => 'form-control', 'placeholder' => 'E-mail', 'autofocus']) ?>
                             </div>
                             <div class="form-group">
@@ -67,15 +67,14 @@ $cakeDescription = 'Instant Marquees';
                                 <?= $this->Html->link(__('Forgot Password'), ['controller' => 'Employees', 'action' => 'password'], ['class' => 'btn btn-link']) ?>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <?= $this->Form->button('Login', ['class' => 'btn btn-lg btn-success btn-block']) ?>
-                            <?= $this->Form->end() ?>
+                            <?= $this->Form->button(__('Login'), ['class' => 'btn btn-lg btn-success btn-block']) ?>
                         </fieldset>
                     </form>
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © Instant Marquees 2018</span>
-                    </div>
+                    <?= $this->Form->end() ?>
                 </div>
-
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Instant Marquees 2018</span>
+                </div>
             </div>
         </div>
     </div>

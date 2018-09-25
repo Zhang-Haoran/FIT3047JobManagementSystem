@@ -1,3 +1,39 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\Employee[]|\Cake\Collection\CollectionInterface $employees
+ */
+
+
+$this->layout = false;
+$cakeDescription = 'Instant Marquees';
+?>
+<html lang="en">
+
+
+<head>
+
+    <?= $this->Html->charset() ?>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>
+        <?= $this->fetch('title') ?>
+    </title>
+
+    <?= $this->Html->css('/vendor/bootstrap/css/bootstrap.min.css') ?>
+
+    <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
+
+    <?= $this->Html->css('/dist/css/sb-admin-2.css') ?>
+
+    <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
+
+    <?= $this->Html->css('/vendor/font-awesome/css/font-awesome.min.css') ?>
+
+</head>
 <body>
 
 <?php $this->assign('title', 'Reset Password'); ?>
@@ -43,3 +79,4 @@
 </div>
 
 </body>
+</html>
