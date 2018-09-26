@@ -3,7 +3,27 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+.pad-20{
+    padding: 20px 0;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.footer {
+    margin-top: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
 body {
+  margin-bottom: 60px;
   background-color: #f8f8f8;
 }
 #wrapper {

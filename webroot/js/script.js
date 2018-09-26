@@ -1,14 +1,6 @@
-/*!
- * Start Bootstrap - SB Admin 2 v3.3.7+1 (http://startbootstrap.com/template-overviews/sb-admin-2)
- * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
- */
-$(document).ready(function() {
-    $('#dataTables').DataTable({
-        responsive: true
-    });
+$(function() {
+    $('#side-menu').metisMenu();
 });
-
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
@@ -48,3 +40,15 @@ $(function() {
         }
     }
 });
+
+
+$(document).ready(function() {
+    var table = $('#dataTables').DataTable({
+        responsive: true
+    });
+
+    $('#dataTables tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+        alert( 'You clicked on '+data[]+'\'s row' );
+    } );
+} );
