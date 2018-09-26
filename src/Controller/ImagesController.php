@@ -20,10 +20,7 @@ class ImagesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Jobs']
-        ];
-        $images = $this->paginate($this->Images);
+        $images = $this->Images->find('all')->contain(['Jobs']);
 
         $this->set(compact('images'));
     }

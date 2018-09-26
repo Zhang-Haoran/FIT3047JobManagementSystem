@@ -20,7 +20,7 @@ class AccessoriesController extends AppController
      */
     public function index()
     {
-        $accessories = $this->paginate($this->Accessories);
+        $accessories = $this->Accessories->find('all');
 
         $this->set(compact('accessories'));
     }

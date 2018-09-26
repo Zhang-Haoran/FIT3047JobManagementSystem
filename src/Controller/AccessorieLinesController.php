@@ -20,10 +20,7 @@ class AccessorieLinesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Accessories', 'Jobs']
-        ];
-        $accessorieLines = $this->paginate($this->AccessorieLines);
+        $accessorieLines = $this->AccessorieLines->find('all')->contain(['Accessories', 'Jobs']);
 
         $this->set(compact('accessorieLines'));
     }

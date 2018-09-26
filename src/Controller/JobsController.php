@@ -21,8 +21,10 @@ class JobsController extends AppController
     public function index()
     {
         $jobs = $this->Jobs->find('all')->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
+        
         $this->set(compact('jobs'));
     }
+
 
     /**
      * View method
