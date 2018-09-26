@@ -7,9 +7,12 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
 }
 ?>
-<div class="alert alert-info alert-dismissable">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-    <strong>
-        <?= $message ?>
-    </strong>
-</div>
+<script>
+        $.notify({
+// options
+            message: '<?= $message ?>'
+        }, {
+// settings
+            type: 'info'
+        });
+</script>

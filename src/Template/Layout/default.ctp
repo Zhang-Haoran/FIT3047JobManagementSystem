@@ -22,24 +22,16 @@
     <title>
         <?= $this->fetch('title') ?>
     </title>
+    <!-- CSS -->
     <?= $this->Html->meta('icon') ?>
-
-
     <?= $this->Html->css('/vendor/bootstrap/css/bootstrap.min.css') ?>
-
     <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
-
-    <!-- DataTables CSS -->
     <?= $this->Html->css('/vendor/datatables-plugins/dataTables.bootstrap.css') ?>
-
-    <!-- DataTables Responsive CSS -->
     <?= $this->Html->css('/vendor/datatables-responsive/dataTables.responsive.css') ?>
-
     <?= $this->Html->css('/css/style.css') ?>
-
     <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
-
     <?= $this->Html->css('/vendor/font-awesome/css/font-awesome.min.css') ?>
+    <?= $this->Html->css('/css/animate.css') ?>
 
 
     <?= $this->fetch('meta') ?>
@@ -100,6 +92,11 @@
                     <li>
                         <a href="#"><i class=""></i> Jobs<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
+                            <li >
+                                <?php
+                                echo $this->Html->link('Index',['controller'=>'jobs','action'=>'index'],['escape' => false])
+                                ?>
+                            </li>
                             <li>
                                 <?php
                                 echo $this->Html->link('Add',['controller'=>'jobs','action'=>'add'])
@@ -240,12 +237,6 @@
 
 
     <div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h3><?= $this->Flash->render()?></h3>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
 
         <div class="container-fluid">
             <?= $this->fetch('content') ?>
@@ -264,44 +255,21 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
+<!-- javascript -->
 <?= $this->Html->script('/vendor/jquery/jquery.min.js') ?>
-
-<!-- Bootstrap Core JavaScript -->
 <?= $this->Html->script('/vendor/bootstrap/js/bootstrap.min.js') ?>
-
-<!-- Metis Menu Plugin JavaScript -->
 <?= $this->Html->script('/vendor/metisMenu/metisMenu.min.js') ?>
-
-
-<!-- Morris Charts JavaScript -->
 <?= $this->Html->script('/vendor/raphael/raphael.min.js') ?>
-
 <?= $this->Html->script('/vendor/morrisjs/morris.min.js') ?>
-
 <?= $this->Html->script('/data/morris-data.js') ?>
-
-
-<!-- DataTables JavaScript -->
 <?= $this->Html->script('/vendor/datatables/js/jquery.dataTables.min.js') ?>
-
 <?= $this->Html->script('/vendor/datatables-plugins/dataTables.bootstrap.min.js') ?>
-
 <?= $this->Html->script('/vendor/datatables-responsive/dataTables.responsive.js') ?>
-
-<!-- Custom Theme JavaScript -->
 <?= $this->Html->script('/js/script.js') ?>
-
-<!-- Moment.js -->
 <?= $this->Html->script('/vendor/momentjs/moment.js') ?>
+<?= $this->Html->script('/js/bootstrap-notify.js') ?>
 
-<script>
-    $(document).ready(function() {
-        $('#dataTables').DataTable({
-            responsive: true
-        });
-    });
-</script>
+<?= $this->Flash->render()?>
 
 </body>
 </html>
