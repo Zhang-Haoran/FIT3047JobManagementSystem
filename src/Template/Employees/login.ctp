@@ -5,8 +5,8 @@
  */
 
 
- $this->layout = false;
- $cakeDescription = 'Instant Marquees';
+$this->layout = false;
+$cakeDescription = 'Instant Marquees';
 ?>
 
 
@@ -22,98 +22,89 @@
     <meta name="author" content="">
 
     <title>
-        <?= $this->fetch('title')?>
+        <?= $this->fetch('title') ?>
     </title>
 
-    <?= $this->Html->css('base.css') ?>
     <?= $this->Html->css('/vendor/bootstrap/css/bootstrap.min.css') ?>
-    <?= $this->Html->css('/vendor/fontawesome-free/css/all.min.css') ?>
-    <?= $this->Html->css('/vendor/datatables/dataTables.bootstrap4.css') ?>
-    <?= $this->Html->css('/css/sb-admin.css') ?>
-    <?= $this->Html->css('/DataTables/datatables.min.css') ?>
-    <?= $this->Html->css('/css/formStyle.css') ?>
+
+    <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
+
+    <?= $this->Html->css('/css/style.css') ?>
+
+    <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
+
+    <?= $this->Html->css('/vendor/font-awesome/css/font-awesome.min.css') ?>
 
 </head>
 <body>
 
-<div>
+
+<!-- Sticky Footer -->
 
 
-    <img src="img/image_02.jpg" style="
-         margin: auto;
-         display: block;
-         padding: 15px;
-         ">
-
-         <div id="content-wrapper">
-
-                 <div class="container-fluid">
-    <div class="container" style="background: white; margin-bottom: 100px">
-        <div class="card card-login mx-auto mt-5">
-            <div class="card-header">Login</div>
-            <div class="card-body">
-                <div class="users form"  style="padding: 10px">
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div style="padding-top: 25px;">
+                <?= $this->Html->image('image_02.gif', ['alt' => 'Logo', 'class' => 'img-responsive center-block']) ?>
+            </div>
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please Sign In</h3>
+                </div>
+                <div class="panel-body">
                     <?= $this->Flash->render() ?>
-
                     <?= $this->Form->create() ?>
-                    <div class="form-label-group">
-                        <?= $this->Form->control('email') ?>
-                    </div>
-                    <div class="form-label-group">
-                        <?= $this->Form->control('password') ?>
-                    </div>
-
-                    <div class="text-center" style="line-height: 50px">
-                        <?= $this->Html->link(__('forgot password'), ['controller' => 'Employees', 'action' =>'password'], ['class' => 'd-block small'])?>
-                    </div>
-
-                    <?= $this->Form->button('Login', ['class' => 'btn btn-primary btn-block']) ?>
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <?= $this->Form->control('email', ['class' => 'form-control', 'placeholder' => 'E-mail', 'autofocus']) ?>
+                            </div>
+                            <div class="form-group">
+                                <?= $this->Form->control('password', ['class' => 'form-control', 'placeholder' => 'Password']) ?>
+                            </div>
+                            <div class="nav-link">
+                                <?= $this->Html->link(__('Forgot Password'), ['controller' => 'Employees', 'action' => 'password'], ['class' => 'btn btn-link']) ?>
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <?= $this->Form->button(__('Login'), ['class' => 'btn btn-lg btn-success btn-block']) ?>
+                        </fieldset>
+                    </form>
                     <?= $this->Form->end() ?>
+                </div>
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Instant Marquees 2018</span>
                 </div>
             </div>
         </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="container">
 
-        <!-- Sticky Footer -->
-
-
-
-    <footer class="sticky-footer" style="width: 100%; position: fixed">
-        <div class="container my-auto" style="width: 100%">
-            <div class="copyright text-center my-auto">
-                <span>Copyright © Instant Marquees 2018</span>
+                </div>
             </div>
         </div>
     </footer>
-        </div>
+</div>
 
 
-
+<!-- jQuery -->
 <?= $this->Html->script('/vendor/jquery/jquery.min.js') ?>
 
-<?= $this->Html->script('/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>
+<!-- Bootstrap Core JavaScript -->
+<?= $this->Html->script('/vendor/bootstrap/js/bootstrap.min.js') ?>
 
-    <!-- Core plugin JavaScript-->
+<!-- Metis Menu Plugin JavaScript -->
+<?= $this->Html->script('/vendor/metisMenu/metisMenu.min.js') ?>
 
-<?= $this->Html->script('/vendor/jquery-easing/jquery.easing.min.js') ?>
+<!-- Custom Theme JavaScript -->
+<?= $this->Html->script('/js/script.js') ?>
 
-    <!-- Page level plugin JavaScript-->
+<!-- Moment.js -->
+<?= $this->Html->script('/vendor/momentjs/moment.js') ?>
 
-<?= $this->Html->script('/vendor/chart.js/Chart.min.js') ?>
-
-<?= $this->Html->script('/vendor/datatables/jquery.dataTables.js') ?>
-
-<?= $this->Html->script('/vendor/datatables/dataTables.bootstrap4.js') ?>
-
-    <!-- Custom scripts for all pages-->
-
-<?= $this->Html->script('/js/sb-admin.min.js') ?>
-
-    <!-- Demo scripts for this page-->
-
-<?= $this->Html->script('/js/demo/datatables-demo.js') ?>
-
-<?= $this->Html->script('/js/demo/chart-area-demo.js') ?>
 
 </body>
 

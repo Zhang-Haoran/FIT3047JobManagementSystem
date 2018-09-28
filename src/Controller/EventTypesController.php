@@ -20,7 +20,7 @@ class EventTypesController extends AppController
      */
     public function index()
     {
-        $eventTypes = $this->paginate($this->EventTypes);
+        $eventTypes = $this->EventTypes->find('all');
 
         $this->set(compact('eventTypes'));
     }
