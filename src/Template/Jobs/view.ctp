@@ -32,7 +32,7 @@
             <td><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Edited By') ?></th>
+            <th scope="row"><?= __('Last edited By') ?></th>
             <td><?= h($job->edited_by) ?></td>
         </tr>
         <tr>
