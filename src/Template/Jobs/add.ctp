@@ -37,9 +37,9 @@
                         <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control']) ?></div>
                         <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control']) ?></div>
                         <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control']) ?></div>
-                        <div class="form-group"><?= $this->Form->control('employee_id', ['options' => $employees, 'class' => 'form-control']) ?></div>
-                        <div class="form-group"><?= $this->Form->control('edited_by', ['class' => 'form-control']) ?></div>
-                        <div class="form-group"><?= $this->Form->control('last_changed', ['empty' => true]) ?></div>
+                        <div class="form-group"><?= $this->Form->hidden('employee_id', ['options' => $employees, 'class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->hidden('edited_by', ['class' => 'form-control']) ?></div>
+                        <div class="form-group"><?= $this->Form->hidden('last_changed', ['empty' => true]) ?></div>
                         <div class="form-group"><?= $this->Form->control('Invoice', ['class' => 'form-control']) ?></div>
                         <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control']) ?></div>
                         <div class="form-group"><?= $this->Form->control('quote', ['class' => 'form-control']) ?></div>
