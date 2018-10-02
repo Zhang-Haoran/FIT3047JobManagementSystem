@@ -51,9 +51,20 @@
             <?= $this->Form->control('employee_id', ['options' => $employees])?>
             <?= $this->Form->control('edited_by')?>
             <?= $this->Form->control('last_changed', ['empty' => true])?>
-            <?= $this->Form->control('Invoice')?>
-            <?= $this->Form->control('order')?>
-            <?= $this->Form->control('quote')?>
+
+                        <form action="/JobsController.php" method="get">
+                            <input type="checkbox" name="sent" value="Invoice"> <br>             <?= $this->Form->control('Invoices')?>
+                            <div class="form-group"><?= $this->Form->control('Invoice date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+                            <input type="checkbox" name="sent" value="order"> <br>                 <?= $this->Form->control('order')?>
+                            <div class="form-group"><?= $this->Form->control('order date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+                            <input type="checkbox" name="sent" value="quote"> <br>               <?= $this->Form->control('quote')?>
+                            <div class="form-group"><?= $this->Form->control('quote date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+
+                        </form>
+
+
+
+
             <?= $this->Form->hidden('token')?>
             <?= $this->Form->hidden('timeout')?>
             <?= $this->Form->hidden('is_deleted')?>
@@ -66,4 +77,7 @@
         </div>
     </div>
 </div>
+
+
+
 
