@@ -20,10 +20,7 @@ class StockLinesController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Stocks', 'Jobs']
-        ];
-        $stockLines = $this->paginate($this->StockLines);
+        $stockLines = $this->StockLines->find('all')->contain(['Stocks', 'Jobs']);
 
         $this->set(compact('stockLines'));
     }

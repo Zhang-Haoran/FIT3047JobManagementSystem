@@ -22,9 +22,10 @@ class EmployeesController extends AppController
     parent::initialize();
     $this->Auth->allow([
       'logout',
-        'password',
-        'reset'
-    /*  'add'  */
+      'password',
+      'reset',
+      //'add',
+      //'index'
 
   ]);
 }
