@@ -20,7 +20,7 @@ class CustTypesController extends AppController
      */
     public function index()
     {
-        $custTypes = $this->paginate($this->CustTypes);
+        $custTypes = $this->CustTypes->find('all');
 
         $this->set(compact('custTypes'));
     }

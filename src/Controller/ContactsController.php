@@ -20,10 +20,7 @@ class ContactsController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Jobs']
-        ];
-        $contacts = $this->paginate($this->Contacts);
+        $contacts = $this->Contacts->find('all');
 
         $this->set(compact('contacts'));
     }

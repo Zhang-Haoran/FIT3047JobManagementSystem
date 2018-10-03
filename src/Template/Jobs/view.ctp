@@ -13,7 +13,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Status') ?></th>
-            <td><?= h($job->status) ?></td>
+            <td><?= h($job->job_status) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Site') ?></th>
@@ -25,14 +25,14 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Customer') ?></th>
-            <td><?= $job->has('customer') ? $this->Html->link($job->customer->id, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
+            <td><?= $job->has('customer') ? $this->Html->link($job->customer->full_name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Employee') ?></th>
-            <td><?= $job->has('employee') ? $this->Html->link($job->employee->id, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
+            <td><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Edited By') ?></th>
+            <th scope="row"><?= __('Last edited By') ?></th>
             <td><?= h($job->edited_by) ?></td>
         </tr>
         <tr>
@@ -41,7 +41,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Order') ?></th>
-            <td><?= h($job->order) ?></td>
+            <td><?= h($job->job_order) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Quote') ?></th>

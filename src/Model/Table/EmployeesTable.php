@@ -34,7 +34,7 @@ class EmployeesTable extends Table
         parent::initialize($config);
 
         $this->setTable('employees');
-        $this->setDisplayField('id');
+        $this->setDisplayField('fname');
         $this->setPrimaryKey('id');
 
         $this->hasMany('Jobs', [
@@ -95,7 +95,7 @@ class EmployeesTable extends Table
             ->allowEmpty('phone');
             $australianMobile = '/^(0|\+61)4\d{8}$/';
             $validator
-            ->add('emp_phone', 'custom', [
+            ->add('phone', 'custom', [
                 'rule' => function ($value, $context) use ($australianMobile) {
                 // remove spaces to make the regex simpler
                 $check = preg_replace('/\s/', '', $value);
@@ -122,7 +122,8 @@ class EmployeesTable extends Table
         $validator
             ->integer('access_level')
             ->requirePresence('access_level', 'create')
-            ->notEmpty('access_level');
+            ->notEmpty('access_level')
+            ->numeric('access_level');
 
         $validator
             ->scalar('token')
