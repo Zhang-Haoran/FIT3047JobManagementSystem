@@ -4,24 +4,21 @@
  * @var \App\Model\Entity\Image $image
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Images'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="images form large-9 medium-8 columns content">
+<div class="row">
     <?= $this->Form->create($image) ?>
-    <fieldset>
-        <legend><?= __('Add Image') ?></legend>
-        <?php
-            echo $this->Form->control('path');
-            echo $this->Form->control('description');
-            echo $this->Form->control('job_id', ['options' => $jobs]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+    <div class="col col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Images
+                </div>
+                <div class="panel-body">
+                    <div class="form-group"><?= $this->Form->control('path', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('description', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('job name', ['options' => $jobs], ['class' => 'form-control']) ?></div>
+                </div>
+            </div>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
+        <?= $this->Form->end() ?>
+    </div>
+
 </div>
