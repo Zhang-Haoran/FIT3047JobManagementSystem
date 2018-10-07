@@ -26,13 +26,7 @@ $cakeDescription = 'Instant Marquees';
     </title>
 
     <?= $this->Html->css('/vendor/bootstrap/css/bootstrap.min.css') ?>
-
-    <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
-
     <?= $this->Html->css('/css/style.css') ?>
-
-    <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
-
     <?= $this->Html->css('/vendor/font-awesome/css/font-awesome.min.css') ?>
 
 </head>
@@ -42,7 +36,7 @@ $cakeDescription = 'Instant Marquees';
 <!-- Sticky Footer -->
 
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div style="padding-top: 25px;">
@@ -53,7 +47,7 @@ $cakeDescription = 'Instant Marquees';
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
-                    <?= $this->Flash->render() ?>
+
                     <?= $this->Form->create() ?>
                     <form role="form">
                         <fieldset>
@@ -72,39 +66,22 @@ $cakeDescription = 'Instant Marquees';
                     </form>
                     <?= $this->Form->end() ?>
                 </div>
-                <div class="copyright text-center my-auto">
-                    <span>Copyright © Instant Marquees 2018</span>
-                </div>
             </div>
         </div>
     </div>
-    <footer>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="container">
-
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted text-center pad-20">Copyright © Instant Marquees 2018</p>
+    </div>
+</footer>
 
-
-<!-- jQuery -->
+<!-- javascript -->
 <?= $this->Html->script('/vendor/jquery/jquery.min.js') ?>
-
-<!-- Bootstrap Core JavaScript -->
 <?= $this->Html->script('/vendor/bootstrap/js/bootstrap.min.js') ?>
+<?= $this->Html->script('/js/bootstrap-notify.js') ?>
 
-<!-- Metis Menu Plugin JavaScript -->
-<?= $this->Html->script('/vendor/metisMenu/metisMenu.min.js') ?>
-
-<!-- Custom Theme JavaScript -->
-<?= $this->Html->script('/js/script.js') ?>
-
-<!-- Moment.js -->
-<?= $this->Html->script('/vendor/momentjs/moment.js') ?>
-
+<?= $this->Flash->render() ?>
 
 </body>
 
