@@ -456,3 +456,14 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+.tab-pane.fade{
+  display: none;
+  visibility: hidden;
+}
+.tab-pane.fade.in.active{
+  display: block;
+  visibility: visible;
+}
+
+
+
