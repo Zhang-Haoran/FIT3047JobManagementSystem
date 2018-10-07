@@ -4,9 +4,19 @@
  * @var \App\Model\Entity\Job $job
  */
 ?>
+<style>
+    #map{
+        height: 500px;
+        width: 80%;
+        margin-top: 2%;
+    }
+</style>
+
+<div id="map"></div>
+
 <div class="jobs view columns content">
     <h3><?= h($job->name) ?></h3>
-    <table class="vertical-table">
+    <table class="vertical-table" id="table">
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($job->name) ?></td>
@@ -18,6 +28,8 @@
         <tr>
             <th scope="row"><?= __('Site') ?></th>
             <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?></td>
+            <td><b>Address: </b></td>
+            <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Event Type') ?></th>
@@ -150,3 +162,37 @@
         <?php endif; ?>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    var geocoder;
+    var map;
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(-34.397, 150.644);
+        var mapOptions = {
+            zoom: 15,
+            center: latlng
+        }
+        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        codeAddress();
+    }
+
+    function codeAddress() {
+        var address = document.getElementById('table').rows[2].cells[3].textContent;
+        console.log(address);
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status == 'OK') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+
+</script>

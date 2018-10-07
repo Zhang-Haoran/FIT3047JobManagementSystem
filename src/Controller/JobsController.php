@@ -48,6 +48,10 @@ class JobsController extends AppController
             'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'AccessorieLines', 'Images', 'StockLines']
         ]);
 
+        $this->loadModel('Sites');
+        $site = $this->Sites->get($job->site_id);
+
+        $this->set('site', $site);
         $this->set('job', $job);
     }
 

@@ -41,7 +41,7 @@
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
-<body>
+<body onload="initialize()">
 <div class="container-fluid">
     <div id="wrapper">
         <!-- Navigation -->
@@ -268,10 +268,12 @@
 <?= $this->Html->script('/vendor/momentjs/moment.js') ?>
 <?= $this->Html->script('/js/bootstrap-notify.js') ?>
 <?= $this->Html->script('/js/script.js') ?>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap"
+        async defer></script>
 
 
 <?= $this->Flash->render() ?>
+
 
 </body>
 </html>
