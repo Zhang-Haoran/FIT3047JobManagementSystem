@@ -65,14 +65,17 @@
                             <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
-                        <?= $this->Form->end() ?>
+
                     </div>
                 </div>
 
                 </div>
             </div>
         </div>
+    </div>
+    <div class="submitButton" style="width:500px;height:500px;text-align:right">
+    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
+    <?= $this->Form->end() ?>
     </div>
 </div>
 
