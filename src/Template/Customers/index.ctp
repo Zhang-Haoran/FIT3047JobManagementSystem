@@ -4,31 +4,44 @@
  * @var \App\Model\Entity\Customer[]|\Cake\Collection\CollectionInterface $customers
  */
 ?>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?= __('Customers') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 
-<div class="customers index content columns">
-    <h3><?= __('Customers') ?></h3>
-    <table cellpadding="0" cellspacing="0" id="datatables" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Contact name') ?></th>
-                <th scope="col"><?= __('Phone number') ?></th>
-                <th scope="col"><?= __('Mobile number') ?></th>
-                <th scope="col"><?= __('Email address') ?></th>
-                <th scope="col"><?= __('Type') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($customers as $customer): ?>
-            <tr>
-                <td><?= h($customer->full_name) ?></td>
-                <td><?= h($customer->contact) ?></td>
-                <td><?= h($customer->phone) ?></td>
-                <td><?= h($customer->mobile) ?></td>
-                <td><?= h($customer->email) ?></td>
-                <td><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel-body">
+            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                    <tr>
+                        <th scope="col"><?= __('Name') ?></th>
+                        <th scope="col"><?= __('Contact name') ?></th>
+                        <th scope="col"><?= __('Phone number') ?></th>
+                        <th scope="col"><?= __('Mobile number') ?></th>
+                        <th scope="col"><?= __('Email address') ?></th>
+                        <th scope="col"><?= __('Type') ?></th>
+                        <th scope="col"><?= __('Action') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($customers as $customer): ?>
+                    <tr>
+                        <td class="center"><?= h($customer->full_name) ?></td>
+                        <td class="center"><?= h($customer->contact) ?></td>
+                        <td class="center"><?= h($customer->phone) ?></td>
+                        <td class="center"><?= h($customer->mobile) ?></td>
+                        <td class="center"><?= h($customer->email) ?></td>
+                        <td class="center"><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
+                        <td><?= $this->Html->link(__('View'), ['action' => 'view', $customer->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->id]) ?>
+                            <?= $this->Html->link(__('Delete'), ['action' => 'delete', $customer->id]) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

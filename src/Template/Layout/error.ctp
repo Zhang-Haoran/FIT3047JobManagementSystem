@@ -14,22 +14,24 @@
  * @var \App\View\AppView $this
  */
 ?>
-<?= $this->Html->css('/css/sb-admin.css') ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Error page</title>
 
-<?= $this->Html->css('/css/formStyle.css') ?>
+    <?= $this->Html->css('/css/sb-admin.css') ?>
+
+    <?= $this->Html->css('/css/formStyle.css') ?>
+</head>
+<body>
+
 
  <img src="img/image_02.jpg" style="margin-left: auto;
          margin-right: auto;
          display: block; margin-top: 15px">
 
-<!DOCTYPE html>
-<html>
 
-<head>
-    <title>Error page</title>
-</head>
 
-<body>
 <h1 style= "font-size:60px";><center>This page cannot be found</h1>
     <center><h2>The page may have moved, or no longer exists.</h2></center>
     <center><h3>Click here to <?= $this->Html->link(__('Home page'), ['controller' => 'Jobs', 'action'=>'index']) ?> <h3></center>

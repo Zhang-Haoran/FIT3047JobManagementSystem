@@ -44,6 +44,10 @@ class JobsController extends AppController
             'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'AccessorieLines', 'Images', 'StockLines']
         ]);
 
+        $this->loadModel('Sites');
+        $site = $this->Sites->get($job->site_id);
+
+        $this->set('site', $site);
         $this->set('job', $job);
     }
 
@@ -121,7 +125,7 @@ class JobsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'delete']);
         $job = $this->Jobs->get($id);
         if ($this->Jobs->delete($job)) {
             $this->Flash->success(__('The job has been deleted.'));
@@ -131,4 +135,7 @@ class JobsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+
 }
+

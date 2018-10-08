@@ -94,7 +94,7 @@ class SitesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'delete']);
         $site = $this->Sites->get($id);
         if ($this->Sites->delete($site)) {
             $this->Flash->success(__('The site has been deleted.'));
