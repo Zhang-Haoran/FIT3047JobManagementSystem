@@ -46,7 +46,7 @@
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control', 'style' => 'margin-bottom:20px']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions, 'style' => 'margin-bottom:20px')) ?></div>
                             <?php echo $this->Form->input('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Job Date",'type' => 'text','empty'=>'true','id' => 'job_datetime', 'style' => 'margin-bottom:20px'));?>
-                            <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','style' => 'margin-bottom:20px']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','style' => 'margin-bottom:20px','id'=> 'type_html_id']) ?></div>
                             <div class="form-group"><?= $this->Form->hidden('employee_id', ['options' => $employees, 'class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->hidden('edited_by', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->hidden('last_changed', ['empty' => true]) ?></div>
@@ -109,6 +109,9 @@
        defaultDate: new Date(),
        step:1
        });
+    $(document).ready(function() {
+        $("#type_html_id").chosen();
+    });
 </script>
 
 
