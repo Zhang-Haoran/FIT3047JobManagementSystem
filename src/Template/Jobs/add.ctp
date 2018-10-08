@@ -5,6 +5,10 @@
  */
 ?>
 
+<?= $this->html->css('jquery.datetimepicker.min.css')?>
+<?= $this->html->script('jquery.js')?>
+<?= $this->html->script('jquery.datetimepicker.full.js')?>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Add Job') ?></h1>
@@ -40,7 +44,10 @@
                         <div class="tab-pane fade in active" id="job">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('type' => 'select', 'options' => $statusOptions), ['class' => 'form-control']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', ['class' => 'form-control']) ?></div><div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control']) ?></div><div class="form-group"><?= $this->Form->hidden('employee_id', ['options' => $employees, 'class' => 'form-control']) ?></div><div class="form-group"><?= $this->Form->hidden('edited_by', ['class' => 'form-control']) ?></div>
+                            <?php echo $this->Form->input('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Job Date",'type' => 'text','empty'=>'true','id' => 'job_datetime', 'style' => 'margin-bottom:20px'));?>
+                            <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control']) ?></div>
+                            <div class="form-group"><?= $this->Form->hidden('employee_id', ['options' => $employees, 'class' => 'form-control']) ?></div>
+                            <div class="form-group"><?= $this->Form->hidden('edited_by', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->hidden('last_changed', ['empty' => true]) ?></div>
                         </div>
                         <div class="tab-pane fade" id="customer">
@@ -79,6 +86,15 @@
     </div>
 </div>
 
+<script>
+    $("#datetime").datetimepicker();
+     $("#job_datetime").datetimepicker({
+     defaultDate: new Date(),
+     step:1
+     });
+    $("#start_datetime").datetimepicker({defaultDate: new Date()});
+    $("#end_datetime").datetimepicker({defaultDate: new Date()});
+</script>
 
 
 
