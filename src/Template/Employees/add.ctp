@@ -8,6 +8,7 @@
     <?= $this->Form->create($employee) ?>
     <fieldset>
         <legend><?= __('Add Employee') ?></legend>
+        
         <?php
             echo $this->Form->control('fname',  ['label' => 'First Name']);
             echo $this->Form->control('lname',  ['label' => 'Last Name']);
