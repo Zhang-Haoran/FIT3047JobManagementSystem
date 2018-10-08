@@ -28,7 +28,6 @@ use Cake\Event\Event;
  */
 class AppController extends Controller
 {
-
     /**
      * Initialization hook method.
      *
@@ -40,7 +39,7 @@ class AppController extends Controller
      */
     public function initialize()
     {
-        parent::initialize();
+        parent::initialize(); 
 
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,
@@ -49,6 +48,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 
         //Login function
+
         $this->loadComponent('Auth', [
             'authenticate' => [
                 'Form' => [
@@ -71,9 +71,15 @@ class AppController extends Controller
             ]
 
             //use isAuthorized in Controllers
-//            'authorize' => ['Controller'],
+            //            'authorize' => ['Controller'],
             // If unauthorized, return them to page they were just on
-//           'unauthorizedRedirect' => [/]
+            //           'unauthorizedRedirect' => [/]
+          ]);
+          $this->Auth->config('authenticate', [
+              'Form' => [
+                  'userModel' => 'Employees',
+                  'fields' => ['username' => 'email', 'password' => 'password']
+              ]
           ]);
 
         /*
@@ -86,13 +92,6 @@ class AppController extends Controller
     public function beforeFilter(Event $event)
     {
         // Pass settings in using 'all'
-        $this->Auth->config('authenticate', [
-            'Form' => [
-                'userModel' => 'Employees',
-                'fields' => ['username' => 'email', 'password' => 'password']
-            ]
-        ]);
-
     }
 
 }
