@@ -11,6 +11,7 @@
  * @link          https://cakephp.org CakePHP(tm) Project
  * @since         0.10.0
  * @license       https://opensource.org/licenses/mit-license.php MIT License
+ * @var \App\View\AppView $this
  */
 
 ?>
@@ -26,12 +27,14 @@
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('/vendor/bootstrap/css/bootstrap.min.css') ?>
     <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
-    <?= $this->Html->css('/vendor/datatables-plugins/dataTables.bootstrap.css') ?>
+    <?= $this->Html->css('https://cdn.datatables.net/v/bs/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-html5-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.css') ?>
     <?= $this->Html->css('/vendor/datatables-responsive/dataTables.responsive.css') ?>
     <?= $this->Html->css('/css/style.css') ?>
     <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
-    <?= $this->Html->css('/vendor/font-awesome/css/font-awesome.min.css') ?>
+    <?= $this->Html->css('https://use.fontawesome.com/releases/v5.3.1/css/all.css') ?>
+
     <?= $this->Html->css('/css/animate.css') ?>
+
 
 
     <?= $this->fetch('meta') ?>
@@ -39,7 +42,7 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div id="wrapper">
         <!-- Navigation -->
         <!-- Navigation -->
@@ -66,7 +69,7 @@
                         <li>
                             <a href="#"></a>
                             <?php
-                            echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit', '1'], ['escape' => false])
+                            echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit','1'], ['escape' => false])
                             ?>
                         </li>
                         <li>
@@ -245,12 +248,13 @@
 
         </div>
     </div>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
+        </div>
+    </footer>
 </div>
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted text-center pad-20">Copyright © Instant Marquees 2018</p>
-    </div>
-</footer>
+
 <!-- /#wrapper -->
 
 <!-- javascript -->
@@ -260,12 +264,12 @@
 <?= $this->Html->script('/vendor/raphael/raphael.min.js') ?>
 <?= $this->Html->script('/vendor/morrisjs/morris.min.js') ?>
 <?= $this->Html->script('/data/morris-data.js') ?>
-<?= $this->Html->script('/vendor/datatables/js/jquery.dataTables.min.js') ?>
-<?= $this->Html->script('/vendor/datatables-plugins/dataTables.bootstrap.min.js') ?>
-<?= $this->Html->script('/vendor/datatables-responsive/dataTables.responsive.js') ?>
-<?= $this->Html->script('/js/script.js') ?>
+<?= $this->Html->script('https://cdn.datatables.net/v/bs/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-html5-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.js') ?>
 <?= $this->Html->script('/vendor/momentjs/moment.js') ?>
 <?= $this->Html->script('/js/bootstrap-notify.js') ?>
+<?= $this->Html->script('/js/script.js') ?>
+
+
 
 <?= $this->Flash->render() ?>
 

@@ -11,6 +11,7 @@ $(function() {
         var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');
+            $
             topOffset = 100; // 2-row-menu
         } else {
             $('div.navbar-collapse').removeClass('collapse');
@@ -44,11 +45,10 @@ $(function() {
 
 $(document).ready(function() {
     var table = $('#dataTables').DataTable({
-        responsive: true
+        responsive: true,
+        colReorder: true,
+        buttons: [
+            'csvHtml5'
+            ]
     });
-
-    $('#dataTables tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-        alert( 'You clicked on '+data[]+'\'s row' );
-    } );
 } );
