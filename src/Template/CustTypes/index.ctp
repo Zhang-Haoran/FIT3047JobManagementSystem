@@ -19,12 +19,18 @@
                 <thead>
                     <tr>
                         <th scope="col"><?=__('Types') ?></th>
+                        <th scope="col"><?= __('Action') ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($custTypes as $custType): ?>
                     <tr>
                         <td class="center"><?= h($custType->name) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['action' => 'view', $custType->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $custType->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $custType->id], ['confirm' => __('Are you sure you want to delete # {0}?', $custType->id)]) ?>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
