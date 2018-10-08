@@ -53,11 +53,11 @@
                         </div>
                         <div class="tab-pane fade" id="customer">
                             <div class="form-group"></div>
-                            <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
                         </div>
                         <div class="tab-pane fade" id="site">
                             <div class="form-group"></div>
-                            <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
                         </div>
                         <div class="tab-pane fade" id="priceInfo">
                             <div class="form-group"></div>
@@ -111,6 +111,8 @@
        });
     $(document).ready(function() {
         $("#type_html_id").chosen();
+        $("#cust_html_id").chosen();
+        $("#site_html_id").chosen();
     });
 </script>
 
