@@ -21,6 +21,7 @@
                 <th scope="col"><?= __('address') ?></th>
                 <th scope="col"><?= __('suburb') ?></th>
                 <th scope="col"><?= __('postcode') ?></th>
+                <th scope="col"><?= __('Action') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,9 @@
                 <td><?= h($site->address) ?></td>
                 <td><?= h($site->suburb) ?></td>
                 <td><?= h($site->postcode) ?></td>
+                <td><?= $this->Html->link(__('View'), ['action' => 'view', $site->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $site->id]) ?>
+                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $site->id]) ?></td>
 
             </tr>
             <?php endforeach; ?>

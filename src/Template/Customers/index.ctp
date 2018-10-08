@@ -23,6 +23,7 @@
                         <th scope="col"><?= __('Mobile number') ?></th>
                         <th scope="col"><?= __('Email address') ?></th>
                         <th scope="col"><?= __('Type') ?></th>
+                        <th scope="col"><?= __('Action') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,9 @@
                         <td class="center"><?= h($customer->mobile) ?></td>
                         <td class="center"><?= h($customer->email) ?></td>
                         <td class="center"><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
+                        <td><?= $this->Html->link(__('View'), ['action' => 'view', $customer->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->id]) ?>
+                            <?= $this->Html->link(__('Delete'), ['action' => 'delete', $customer->id]) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
