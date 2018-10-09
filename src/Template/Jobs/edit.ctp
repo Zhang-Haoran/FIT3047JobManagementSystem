@@ -5,39 +5,211 @@
  */
 ?>
 
-    <?= $this->Form->create($job) ?>
+<?= $this->html->css('jquery.datetimepicker.min.css')?>
+<?= $this->html->script('jquery.js')?>
+<?= $this->html->script('jquery.datetimepicker.full.js')?>
 
-        <legend><?= __('Edit Job') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('job_status', array('type'=>'select','options'=>$statusOptions));
-            echo $this->Form->control('job_date');
-            echo $this->Form->control('booked_date');
-            echo $this->Form->control('price');
-            echo $this->Form->control('deposit');
-            echo $this->Form->control('order_detail');
-            echo $this->Form->control('e_arrival_time', ['empty' => true]);
-            echo $this->Form->control('e_setup_time', ['empty' => true]);
-            echo $this->Form->control('e_pickup_time', ['empty' => true]);
-            echo $this->Form->control('additional_note');
-            echo $this->Form->control('site_id', ['options' => $sites]);
-            echo $this->Form->control('event_type_id', ['options' => $eventTypes]);
-            echo $this->Form->control('customer_id', ['options' => $customers]);
-            echo $this->Form->hidden('employee_id', ['options' => $employees]);
-            echo $this->Form->hidden('edited_by');
-            echo $this->Form->hidden('last_changed', ['empty' => true]);
-            echo $this->Form->control('job_order');
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?= __('Edit Job') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 
-?>
+<?= $this->Form->create($job) ?>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Basic details
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#job" data-toggle="tab">Job</a>
+                    </li>
+                    <li><a href="#customer" data-toggle="tab">Customer</a>
+                    </li>
+                    <li><a href="#site" data-toggle="tab">Site</a>
+                    </li>
+                    <li><a href="#priceInfo" data-toggle="tab">Price Info</a>
+                    </li>
+                    <li><a href="#setupDetail" data-toggle="tab">Setup & Pickup Detail</a>
+                    </li>
+                    <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="tab-pane fade in active" id="job">
+                                <div class="form-group"></div>
+                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control', 'style' => 'margin-bottom:20px']) ?></div>
+                                <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions, 'style' => 'margin-bottom:20px')) ?></div>
+                                <?php echo $this->Form->input('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Job Date",'type' => 'text','empty'=>'true','id' => 'job_datetime', 'style' => 'margin-bottom:20px'));?>
+                                <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','style' => 'margin-bottom:20px','id'=> 'type_html_id']) ?></div>
+                                <div class="form-group"><?= $this->Form->hidden('employee_id', ['options' => $employees, 'class' => 'form-control']) ?></div>
+                                <div class="form-group"><?= $this->Form->hidden('edited_by', ['class' => 'form-control']) ?></div>
+                                <div class="form-group"><?= $this->Form->hidden('last_changed', ['empty' => true]) ?></div>
+                            </div>
+
+                            <div class="tab-pane fade" id="customer">
+
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing customer</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
+                                    </div>
+                                </div>
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Create new customer</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse">
+                                    <button type="button" class="btn-default" data-toggle="modal" data-target = "#myModal">new</button>
+
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="site"><div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Select existing site</a>
+                                </h4>
+                            </div>
+                                <div id="collapseThree" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
+                                    </div>
+                                </div>
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Create new site</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseFour" class="panel-collapse collapse">
+                                    <button type="button" class="btn-default" data-toggle="modal" data-target = "#myModal2">new</button>
+                                </div>
+
+
+                            </div>
+                            <div class="tab-pane fade" id="priceInfo">
+                                <input type="checkbox" name="sent" value="Invoice"> <br>             <?= $this->Form->control('Invoices')?>
+                                <div class="form-group"><?= $this->Form->control('Invoice date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+                                <input type="checkbox" name="sent" value="order"> <br>                 <?= $this->Form->control('order')?>
+                                <div class="form-group"><?= $this->Form->control('order date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+                                <input type="checkbox" name="sent" value="quote"> <br>               <?= $this->Form->control('quote')?>
+                                <div class="form-group"><?= $this->Form->control('quote date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+                                <div class="form-group"><?= $this->Form->control('price', ['class' => 'form-control','style' => 'margin-bottom:20px']) ?></div>
+                                <div class="form-group"><?= $this->Form->control('deposit', ['class' => 'form-control','style' => 'margin-bottom:20px']) ?></div>
+                            </div>
+                            <div class="tab-pane fade" id="setupDetail">
+                                <div class="form-group"></div>
+                                <?php echo $this->Form->input('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => "Expected arrival time",'type' => 'text','empty'=>'true','id' => 'e_arrival_datetime', 'style' => 'margin-bottom:20px'));?>
+                                <?php echo $this->Form->input('e_setup_time', array('class' => 'form-control','placeholder'=>'Please select expected setup time','label' => "Expected setup time",'type' => 'text','empty'=>'true','id' => 'e_setup_datetime', 'style' => 'margin-bottom:20px'));?>
+                                <?php echo $this->Form->input('e_pickup_time', array('class' => 'form-control','placeholder'=>'Please select expected pickup time','label' => "Expected pickup time",'type' => 'text','empty'=>'true','id' => 'e_pickup_datetime', 'style' => 'margin-bottom:20px'));?>
+                            </div>
+                            <div class="tab-pane fade" id="stock">
+                                <div class="form-group"></div>
+                                <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control','style' => 'margin-bottom:20px']) ?></div>
+                                <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control','style' => 'margin-bottom:20px']) ?></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="submitButton" style="width:500px;height:500px;text-align:right">
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
+        <?= $this->Form->end() ?>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-mismiss="modal">&times;</button>
+                        <h4 class="modal-title">New customer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                        <fieldset>
+                            <?php
+                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control']);
+                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control']);
+                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control']);
+                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control']);
+                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control']);
+                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control']);
+                            echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                            ?>
+                        </fieldset>
+                        <?= $this->Form->button(__('Submit')) ?>
+                        <?= $this->Form->end() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="myModal2" role="dialog">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-mismiss="modal">&times;</button>
+                        <h4 class="modal-title">New customer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd']]) ?>
+                        <fieldset>
+                            <?php
+                            echo $this->Form->control('name', ['class' => 'form-control']);
+                            echo $this->Form->control('address', ['class' => 'form-control']);
+                            echo $this->Form->control('suburb', ['class' => 'form-control']);
+                            echo $this->Form->control('postcode', ['class' => 'form-control']);
+                            ?>
+                        </fieldset>
+                        <?= $this->Form->button(__('Submit')) ?>
+                        <?= $this->Form->end() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $("#job_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:1
+    });
+    $("#e_arrival_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:1
+    });
+    $("#e_setup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:1
+    });
+    $("#e_pickup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:1
+    });
+    $(document).ready(function() {
+        $("#type_html_id").chosen();
+        $("#cust_html_id").chosen();
+        $("#site_html_id").chosen();
+    });
+</script>
 
 
 <form action="/JobsController.php" method="get">
-    <input type="checkbox" name="sent" value="Invoice"> <br>             <?= $this->Form->control('Invoices')?>
-    <div class="form-group"><?= $this->Form->control('Invoice date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
-    <input type="checkbox" name="sent" value="order"> <br>                 <?= $this->Form->control('order')?>
-    <div class="form-group"><?= $this->Form->control('order date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
-    <input type="checkbox" name="sent" value="quote"> <br>               <?= $this->Form->control('quote')?>
-    <div class="form-group"><?= $this->Form->control('quote date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+    <!--quote/order/invoice goes here-->
 
 </form>
 
@@ -52,6 +224,6 @@
             echo $this->Form->hidden('is_deleted');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <!--?= $this->Form->button(__('Submit')) ?-->
     <?= $this->Form->end() ?>
 </div>
