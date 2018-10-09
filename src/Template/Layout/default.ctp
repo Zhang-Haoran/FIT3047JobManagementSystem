@@ -34,7 +34,10 @@
     <?= $this->Html->css('https://use.fontawesome.com/releases/v5.3.1/css/all.css') ?>
 
     <?= $this->Html->css('/css/animate.css') ?>
-
+    <?= $this->Html->css('bootstrap-multiselect.css') ?>
+    <?= $this->Html->css('chosen.min.css') ?>
+    <?= $this->Html->css('select2.min.css') ?>
+    <?= $this->Html->css('chosen_bootstrap.css') ?>
 
 
     <?= $this->fetch('meta') ?>
@@ -270,9 +273,11 @@
 <?= $this->Html->script('/vendor/momentjs/moment.js') ?>
 <?= $this->Html->script('/js/bootstrap-notify.js') ?>
 <?= $this->Html->script('/js/script.js') ?>
+<?= $this->Html->script('chosen.jquery.js') ?>
+<?= $this->Html->script('select2.min.js') ?>
+<?= $this->Html->script('bootstrap-multiselect.js') ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap"
         async defer></script>
-
 
 <?= $this->Flash->render() ?>
 

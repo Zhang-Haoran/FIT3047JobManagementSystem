@@ -110,7 +110,7 @@ class EmployeesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['get', 'delete']);
         $employee = $this->Employees->get($id);
         if ($this->Employees->delete($employee)) {
             $this->Flash->success(__('The employee has been deleted.'));

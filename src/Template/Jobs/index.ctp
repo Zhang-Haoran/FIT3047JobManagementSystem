@@ -31,6 +31,9 @@
                 <th scope="col"><?= __('Event type') ?></th>
                 <th scope="col"><?= __('Customer') ?></th>
                 <th scope="col"><?= __('Created by') ?></th>
+                <th scope="col"><?= __('Action') ?></th>
+
+
             </tr>
         </thead>
         <tbody>
@@ -49,6 +52,10 @@
                 <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]) : '' ?></td>
                 <td><?= $job->has('customer') ? $this->Html->link($job->customer->full_name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
+                <td><?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
+                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
+                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id]) ?></td>
+
             </tr>
             <?php endforeach; ?>
         </tbody>

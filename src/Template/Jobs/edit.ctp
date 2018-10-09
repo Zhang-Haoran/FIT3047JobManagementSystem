@@ -4,9 +4,9 @@
  * @var \App\Model\Entity\Job $job
  */
 ?>
-<div class="jobs form columns content">
+
     <?= $this->Form->create($job) ?>
-    <fieldset>
+
         <legend><?= __('Edit Job') ?></legend>
         <?php
             echo $this->Form->control('name');
@@ -26,9 +26,27 @@
             echo $this->Form->hidden('employee_id', ['options' => $employees]);
             echo $this->Form->hidden('edited_by');
             echo $this->Form->hidden('last_changed', ['empty' => true]);
-            echo $this->Form->control('Invoice');
             echo $this->Form->control('job_order');
-            echo $this->Form->control('quote');
+
+?>
+
+
+<form action="/JobsController.php" method="get">
+    <input type="checkbox" name="sent" value="Invoice"> <br>             <?= $this->Form->control('Invoices')?>
+    <div class="form-group"><?= $this->Form->control('Invoice date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+    <input type="checkbox" name="sent" value="order"> <br>                 <?= $this->Form->control('order')?>
+    <div class="form-group"><?= $this->Form->control('order date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+    <input type="checkbox" name="sent" value="quote"> <br>               <?= $this->Form->control('quote')?>
+    <div class="form-group"><?= $this->Form->control('quote date',['class'=>'form-control','type' => 'date','empty' => true])?></div>
+
+</form>
+
+
+
+
+
+
+<?php
             echo $this->Form->hidden('token');
             echo $this->Form->hidden('timeout');
             echo $this->Form->hidden('is_deleted');
