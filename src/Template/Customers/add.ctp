@@ -32,7 +32,7 @@
                 <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('mobile', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('email',  ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type'], ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type', 'class' => 'form-control']) ?></div>
                 <?php
                 echo $this->Form->hidden('is_deleted');
                 ?>
