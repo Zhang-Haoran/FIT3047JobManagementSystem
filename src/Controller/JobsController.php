@@ -73,7 +73,6 @@ class JobsController extends AppController
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
 
-
         }
         $sites = $this->Jobs->Sites->find('list');
         $eventTypes = $this->Jobs->EventTypes->find('list');
