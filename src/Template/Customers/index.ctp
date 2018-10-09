@@ -37,7 +37,8 @@
                         <td class="center"><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
                         <td><?= $this->Html->link(__('View'), ['action' => 'view', $customer->id]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->id]) ?>
-                            <?= $this->Html->link(__('Delete'), ['action' => 'delete', $customer->id]) ?></td>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete Customer: {0}?', $customer->full_name)]) ?>
+                        </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

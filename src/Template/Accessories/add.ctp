@@ -4,13 +4,14 @@
  * @var \App\Model\Entity\Accessory $accessory
  */
 ?>
-<div class="accessories form columns content">
+
+<div class="accessories form large-9 medium-8 columns content">
     <?= $this->Form->create($accessory) ?>
     <fieldset>
         <legend><?= __('Add Accessory') ?></legend>
         <?php
             echo $this->Form->control('name');
-            echo $this->Form->control('is_deleted');
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
