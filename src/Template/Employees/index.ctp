@@ -35,7 +35,8 @@
                 <td class="center"><?= $this->Number->format($employee->access_level) ?></td>
                 <td><?= $this->Html->link(__('View'), ['action' => 'view', $employee->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $employee->id]) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $employee->id]) ?></td>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $employee->id], ['confirm' => __('Are you sure you want to delete Employee: {0}?', $employee->full_name)]) ?>
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
