@@ -33,7 +33,8 @@
                 <td><?= h($site->postcode) ?></td>
                 <td><?= $this->Html->link(__('View'), ['action' => 'view', $site->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $site->id]) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $site->id]) ?></td>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $site->id], ['confirm' => __('Are you sure you want to delete Site: {0}?', $site->name)]) ?>
+                </td>
 
             </tr>
             <?php endforeach; ?>
