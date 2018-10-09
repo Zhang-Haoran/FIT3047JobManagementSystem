@@ -14,7 +14,7 @@
                 Adding Customer Type
             </div>
             <div class="panel-body">
-                <div class="form-group"><?= $this->Form->control('name', ['label' => 'Customer Type'],['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('name',['class' => 'form-control']) ?></div>
                 <?php
                 echo $this->Form->hidden('is_deleted')
                 ?>

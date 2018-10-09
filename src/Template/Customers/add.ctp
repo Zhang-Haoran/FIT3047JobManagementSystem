@@ -28,10 +28,10 @@
             </div>
             <div class="panel-body">
 
-                <div class="form-group"><?= $this->Form->control('contact', ['Contact name'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('phone', ['label' => 'Phone Number'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('mobile', ['label' => 'Mobile Number'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('email', ['label' => 'Email Address'], ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('contact',  ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('mobile', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('email',  ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type'], ['class' => 'form-control']) ?></div>
                 <?php
                 echo $this->Form->hidden('is_deleted');

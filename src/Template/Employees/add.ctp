@@ -26,11 +26,11 @@
             </div>
             <div class="panel-body">
 
-                <div class="form-group"><?= $this->Form->control('password', ['label' => 'Password'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('confirmed_password', ['type' => 'password'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('phone', ['label' => 'Phone Number'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('email', ['label' => 'Email'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('access_level', ['label' => 'Access Level'], ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('password',  ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('confirmed_password', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('access_level', ['class' => 'form-control']) ?></div>
                 <?php
                 echo $this->Form->hidden('token');
                 echo $this->Form->hidden('timeout');
