@@ -62,6 +62,22 @@ class CustomersController extends AppController
         $this->set(compact('customer', 'custTypes'));
     }
 
+    public function jobAdd()
+    {
+        $customer = $this->Customers->newEntity();
+        if ($this->request->is('post')) {
+            $customer = $this->Customers->patchEntity($customer, $this->request->getData());
+            if ($this->Customers->save($customer)) {
+                $this->Flash->success(__('The customer has been saved.'));
+
+                return $this->redirect($this->referer());
+            }
+            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
+        }
+        $custTypes = $this->Customers->CustTypes->find('list');
+        $this->set(compact('customer', 'custTypes'));
+    }
+
     /**
      * Edit method
      *
