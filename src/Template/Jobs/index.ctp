@@ -54,7 +54,7 @@
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
                 <td><?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
                 <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
-                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id]) ?></td>
+                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?></td>
 
             </tr>
             <?php endforeach; ?>
