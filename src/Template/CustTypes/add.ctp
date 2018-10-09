@@ -4,15 +4,23 @@
  * @var \App\Model\Entity\CustType $custType
  */
 ?>
-<div class="custTypes form content">
+
+
+<div class="row">
     <?= $this->Form->create($custType) ?>
-    <fieldset>
-        <legend><?= __('Add Customer Type') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->hidden('is_deleted');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+    <div class="col col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Adding Customer Type
+            </div>
+            <div class="panel-body">
+                <div class="form-group"><?= $this->Form->control('name',['class' => 'form-control']) ?></div>
+                <?php
+                echo $this->Form->hidden('is_deleted')
+                ?>
+            </div>
+        </div>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
+    </div>
+
 </div>
