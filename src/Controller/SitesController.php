@@ -61,6 +61,21 @@ class SitesController extends AppController
         $this->set(compact('site'));
     }
 
+    public function siteAdd()
+    {
+        $site = $this->Sites->newEntity();
+        if ($this->request->is('post')) {
+            $site = $this->Sites->patchEntity($site, $this->request->getData());
+            if ($this->Sites->save($site)) {
+                $this->Flash->success(__('The site has been saved.'));
+
+                return $this->redirect($this->referer());
+            }
+            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
+        }
+        $this->set(compact('site'));
+    }
+
     /**
      * Edit method
      *
