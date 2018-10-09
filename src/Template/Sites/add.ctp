@@ -13,7 +13,7 @@
                     Basic details
                 </div>
                 <div class="panel-body">
-        <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
+                       <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
                 </div>
             </div>
     </div>
