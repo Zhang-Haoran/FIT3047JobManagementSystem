@@ -10,6 +10,8 @@
         "cakephp/migrations": "^2.0.0",
         "cakephp/plugin-installer": "^1.0",
         "harvesthq/chosen": "^1.8",
+        "dereuromark/cakephp-ide-helper": "0.12.6",
+        "dereuromark/cakephp-tinyauth": "^1.9",
         "josegonzalez/dotenv": "3.*",
         "mobiledetect/mobiledetectlib": "2.*"
     },
