@@ -4,26 +4,42 @@
  * @var \App\Model\Entity\Employee $employee
  */
 ?>
-<div class="employees form content">
+<div class="row">
     <?= $this->Form->create($employee) ?>
-    <fieldset>
-        <legend><?= __('Add Employee') ?></legend>
-        
-        <?php
-            echo $this->Form->control('fname',  ['label' => 'First Name']);
-            echo $this->Form->control('lname',  ['label' => 'Last Name']);
-            echo $this->Form->control('password',  ['label' => 'Password']);
-            //password type should be password
-            echo $this->Form->control('confirmed_password',['type' => 'password']);
-            //add password match feature, to make sure user don't type unexpected password.
-            echo $this->Form->control('phone',  ['label' => 'Phone Number']);
-            echo $this->Form->control('email',  ['label' => 'Email']);
-            echo $this->Form->control('access_level',  ['label' => 'Access Level']);
-            echo $this->Form->hidden('token');
-            echo $this->Form->hidden('timeout');
-            echo $this->Form->hidden('is_deleted');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+    <div class="col col-lg-6">
+        <div class="panel panel-default ">
+            <div class="panel-heading">
+                Employee Name
+            </div>
+            <div class="panel-body">
+                <div class="form-group"><?= $this->Form->control('fname', ['label' => 'First Name'], ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('lname', ['label' => 'Last Name'], ['class' => 'form-control']) ?></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Employee Details
+            </div>
+            <div class="panel-body">
+
+                <div class="form-group"><?= $this->Form->control('password',  ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('confirmed_password', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('access_level', ['class' => 'form-control']) ?></div>
+                <?php
+                echo $this->Form->hidden('token');
+                echo $this->Form->hidden('timeout');
+                echo $this->Form->hidden('is_deleted');
+                ?>
+
+            </div>
+        </div>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
+    </div>
+
 </div>

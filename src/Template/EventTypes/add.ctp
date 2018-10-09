@@ -5,15 +5,24 @@
  */
 ?>
 
-<div class="eventTypes form large-9 medium-8 columns content">
-    <?= $this->Form->create($eventType) ?>
-    <fieldset>
-        <legend><?= __('Add Event Type') ?></legend>
-        <?php
-            echo $this->Form->control('name');
 
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+
+<div class="row">
+    <?= $this->Form->create($eventType) ?>
+    <div class="col col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Adding Event Type
+            </div>
+            <div class="panel-body">
+                <div class="form-group"><?= $this->Form->control('name',['class' => 'form-control']) ?></div>
+                <?php
+                echo $this->Form->hidden('is_deleted')
+                ?>
+            </div>
+        </div>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
+    </div>
+
 </div>
