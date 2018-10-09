@@ -71,7 +71,15 @@
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    <?php
+                                    echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control']);
+                                    echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control']);
+                                    echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control']);
+                                    echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control']);
+                                    echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control']);
+                                    echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control']);
+                                    echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +96,7 @@
                             </div>
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Collapsible Group Item #3</a>
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Create new site</a>
                                     </h4>
                                 </div>
                                 <div id="collapseFour" class="panel-collapse collapse">
