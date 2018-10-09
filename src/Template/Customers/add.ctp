@@ -15,8 +15,8 @@
                 Customer Name
             </div>
             <div class="panel-body">
-                <div class="form-group"><?= $this->Form->control('fname', ['label' => 'First Name'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('lname', ['label' => 'Last Name'], ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('fname', ['class' => 'form-control','label' => 'First Name']) ?></div>
+                <div class="form-group"><?= $this->Form->control('lname', ['class' => 'form-control','label' => 'Last Name']) ?></div>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                 <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('mobile', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('email',  ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type'], ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type', 'class' => 'form-control']) ?></div>
                 <?php
                 echo $this->Form->hidden('is_deleted');
                 ?>

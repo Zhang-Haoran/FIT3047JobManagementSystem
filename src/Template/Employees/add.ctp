@@ -13,8 +13,8 @@
                 Employee Name
             </div>
             <div class="panel-body">
-                <div class="form-group"><?= $this->Form->control('fname', ['label' => 'First Name'], ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('lname', ['label' => 'Last Name'], ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('fname', ['class' => 'form-control','label' => 'First Name']) ?></div>
+                <div class="form-group"><?= $this->Form->control('lname',  ['class' => 'form-control','label' => 'Last Name']) ?></div>
             </div>
         </div>
     </div>
