@@ -67,12 +67,8 @@
                             </div>
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Create new customer</a>
+                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
                                 </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
-                                <button type="button" class="btn-default" data-toggle="modal" data-target = "#custAdd">new</button>
-
                             </div>
                         </div>
                       </div>
@@ -94,13 +90,8 @@
                             </div>
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Create new site</a>
+                                        <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#siteAdd" >Create new site</a>
                                     </h4>
-                                </div>
-                                <div id="collapseFour" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                      <button type="button" class="btn-default" data-toggle="modal" data-target = "#siteAdd">new</button>
-                                      </div>
                                 </div>
                               </div>
                             </div>
