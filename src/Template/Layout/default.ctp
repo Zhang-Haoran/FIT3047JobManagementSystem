@@ -46,10 +46,8 @@
 
 
 </head>
-<body onload="initialize()">
-<div class="container-fluid">
+<body>
     <div id="wrapper">
-        <!-- Navigation -->
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -242,7 +240,7 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-
+        <!-- Navigation -->
 
         <div id="page-wrapper">
 
@@ -253,12 +251,11 @@
 
         </div>
     </div>
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
-        </div>
-    </footer>
-</div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
+    </div>
+</footer>
 
 <!-- /#wrapper -->
 
