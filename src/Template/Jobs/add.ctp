@@ -67,13 +67,10 @@
                             </div>
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Create new customer</a>
+                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#myModal" >Create new customer</a>
                                 </h4>
                             </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
-                                <button type="button" class="btn-default" data-toggle="modal" data-target = "#myModal">new</button>
 
-                            </div>
                         </div>
                       </div>
                     </div>
