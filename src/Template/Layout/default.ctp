@@ -277,6 +277,8 @@
 <?= $this->Html->script('/js/script.js') ?>
 
 <?= $this->Flash->render() ?>
+<?= $this->fetch('script'); ?>
+
 
 
 </body>
