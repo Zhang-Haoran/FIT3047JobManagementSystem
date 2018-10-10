@@ -51,4 +51,5 @@ $(document).ready(function() {
             'csvHtml5'
             ]
     });
+    initialize();
 } );
