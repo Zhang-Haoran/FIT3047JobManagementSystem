@@ -5,18 +5,38 @@
  */
 ?>
 
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?= __('Edit Site') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
 <div class="sites form large-9 medium-8 columns content">
     <?= $this->Form->create($site) ?>
-    <fieldset>
-        <legend><?= __('Edit Site') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('address');
-            echo $this->Form->control('suburb');
-            echo $this->Form->control('postcode');
-            //echo $this->Form->control('is_deleted');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Basic details
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->hidden('is_deleted', ['class' => 'form-control']); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
     <?= $this->Form->end() ?>
 </div>

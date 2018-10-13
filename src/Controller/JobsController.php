@@ -60,7 +60,11 @@ class JobsController extends AppController
     {
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
-            $job = $this->Jobs->patchEntity($job, $this->request->getData());
+            $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
+                'associated' => [
+                    'customers'
+                ]
+            ]);
             $job->last_changed = Time::now();
             $this->loadModel('Employees');
             $staff = $this->Employees->get($this->Auth->user('id'));
@@ -72,7 +76,6 @@ class JobsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
-
 
         }
         $sites = $this->Jobs->Sites->find('list');
@@ -113,7 +116,8 @@ class JobsController extends AppController
         $eventTypes = $this->Jobs->EventTypes->find('list');
         $customers = $this->Jobs->Customers->find('list');
         $employees = $this->Jobs->Employees->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees'));
+        $custTypes = $this->Jobs->CustTypes->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
         $this->set('statusOptions', array('Started' => 'Started', 'Confirmed' => 'Confirmed', 'Quote' => 'Quote', 'Completed' => 'Completed'));
     }
 

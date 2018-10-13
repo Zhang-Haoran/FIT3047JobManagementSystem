@@ -70,17 +70,8 @@
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <?php
-                                    echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control']);
-                                    echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control']);
-                                    echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control']);
-                                    echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control']);
-                                    echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control']);
-                                    echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control']);
-                                    echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
-                                    ?>
-                                </div>
+                                <button type="button" class="btn-default" data-toggle="modal" data-target = "#myModal">new</button>
+
                             </div>
                         </div>
 
@@ -137,7 +128,35 @@
     <div class="submitButton" style="width:500px;height:500px;text-align:right">
     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
     <?= $this->Form->end() ?>
+
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-mismiss="modal">&times;</button>
+                        <h4 class="modal-title">New customer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                        <fieldset>
+                            <?php
+                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control']);
+                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control']);
+                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control']);
+                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control']);
+                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control']);
+                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control']);
+                            echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                            ?>
+                        </fieldset>
+                        <?= $this->Form->button(__('Submit')) ?>
+                        <?= $this->Form->end() ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 <script>
