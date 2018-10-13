@@ -162,7 +162,11 @@
         <?php endif; ?>
     </div>
 </div>
-
+<?php $this->Html->scriptBlock('
+$(document).ready(function() {
+initialize();
+} );
+', ['block' => true]); ?>
 <script type="text/javascript">
 
     var geocoder;
