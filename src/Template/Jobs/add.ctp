@@ -66,12 +66,8 @@
                             </div>
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Create new customer</a>
+                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
                                 </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
-                                <button type="button" class="btn-default" data-toggle="modal" data-target = "#myModal">new</button>
-
                             </div>
                         </div>
 
@@ -87,14 +83,12 @@
                             </div>
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Create new site</a>
+                                        <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#siteAdd" >Create new site</a>
                                     </h4>
                                 </div>
-                                <div id="collapseFour" class="panel-collapse collapse">
-                                    <div class="panel-body">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    </div>
-                                </div>
+                              </div>
+                            </div>
+                        </div>
 
 
                         </div>
@@ -129,11 +123,11 @@
     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
     <?= $this->Form->end() ?>
 
-        <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal fade" id="custAdd" role="dialog">
             <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-mismiss="modal">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">New customer</h4>
                     </div>
                     <div class="modal-body">
@@ -149,7 +143,7 @@
                             echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
                             ?>
                         </fieldset>
-                        <?= $this->Form->button(__('Submit')) ?>
+                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
                         <?= $this->Form->end() ?>
                     </div>
                 </div>
@@ -158,6 +152,30 @@
     </div>
 
 </div>
+
+<div class="modal fade" id="siteAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New customer</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                <fieldset>
+                    <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 
 <script>
     $("#job_datetime").datetimepicker({

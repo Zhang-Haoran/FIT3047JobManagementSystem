@@ -272,14 +272,16 @@
 <?= $this->Html->script('https://cdn.datatables.net/v/bs/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-html5-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.js') ?>
 <?= $this->Html->script('/vendor/momentjs/moment.js') ?>
 <?= $this->Html->script('/js/bootstrap-notify.js') ?>
-<?= $this->Html->script('/js/script.js') ?>
 <?= $this->Html->script('chosen.jquery.js') ?>
 <?= $this->Html->script('select2.min.js') ?>
 <?= $this->Html->script('bootstrap-multiselect.js') ?>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap"
         async defer></script>
+<?= $this->Html->script('/js/script.js') ?>
 
 <?= $this->Flash->render() ?>
+<?= $this->fetch('script'); ?>
+
 
 
 </body>
