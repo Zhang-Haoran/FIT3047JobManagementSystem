@@ -37,6 +37,8 @@
             <td><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
         </tr>
     </table>
+
+
     <div class="related">
         <h4><?= __('Related Jobs') ?></h4>
         <?php if (!empty($customer->jobs)): ?>
@@ -105,3 +107,12 @@
         <?php endif; ?>
     </div>
 </div>
+
+
+
+
+
+
+
+
+
