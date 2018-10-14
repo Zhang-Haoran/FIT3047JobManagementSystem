@@ -36,6 +36,14 @@ class EmployeesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        elseif ($this->Auth->user('access_level')=='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $employees = $this->Employees->find('all');
 
         $this->set(compact('employees'));
@@ -50,6 +58,14 @@ class EmployeesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        elseif ($this->Auth->user('access_level')=='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $employee = $this->Employees->get($id, [
             'contain' => ['Jobs']
         ]);
@@ -64,6 +80,14 @@ class EmployeesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+        $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        elseif ($this->Auth->user('access_level')=='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $employee = $this->Employees->newEntity();
         if ($this->request->is('post')) {
             $employee = $this->Employees->patchEntity($employee, $this->request->getData());
@@ -86,6 +110,14 @@ class EmployeesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        elseif ($this->Auth->user('access_level')=='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $employee = $this->Employees->get($id, [
             'contain' => []
         ]);
@@ -110,6 +142,14 @@ class EmployeesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        elseif ($this->Auth->user('access_level')=='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $this->request->allowMethod(['get', 'delete']);
         $employee = $this->Employees->get($id);
         if ($this->Employees->delete($employee)) {
@@ -125,16 +165,24 @@ class EmployeesController extends AppController
      */
     public function login()
     {   //check if a user is logged in
-        if($this->Auth->user('id')){
-            $this->Flash->error('You are already logged in');
-            return $this->redirect(['controller'=> 'jobs']);
-        }
 
         if ($this->request->is('post')) {
             $employee = $this->Auth->identify();
             if ($employee) {
                 $this->Auth->setUser($employee);
-                return $this->redirect($this->Auth->redirectUrl());
+//                return $this->redirect($this->Auth->redirectUrl());
+                if($this->Auth->user('access_level')== '1'){
+                    $this->Flash->success('You have logged in as admin');
+                    return $this->redirect(['controller' => 'jobs','action' => 'index']);
+                }
+                elseif ($this->Auth->user('access_level')=='2'){
+                    $this->Flash->success('You have logged in as office staff');
+                    return $this->redirect(['controller' => 'jobs','action' => 'index']);
+                }
+                elseif ($this->Auth->user('access_level')=='3'){
+                    $this->Flash->success('You have logged in as field staff');
+                    return $this->redirect(['controller' => 'jobs','action' => 'index']);
+                }
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
@@ -148,7 +196,7 @@ class EmployeesController extends AppController
         return $this->redirect($this->Auth->logout());
     }
     /**
-     * Foget Password method
+     * Forget Password method
      */
     public function password()
     {

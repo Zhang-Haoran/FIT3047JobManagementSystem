@@ -20,6 +20,11 @@ class SitesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $sites = $this->Sites->find('all');
 
         $this->set(compact('sites'));
@@ -34,6 +39,11 @@ class SitesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $site = $this->Sites->get($id, [
             'contain' => ['Jobs']
         ]);
@@ -48,6 +58,11 @@ class SitesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $site = $this->Sites->newEntity();
         if ($this->request->is('post')) {
             $site = $this->Sites->patchEntity($site, $this->request->getData());
@@ -63,6 +78,11 @@ class SitesController extends AppController
 
     public function siteAdd()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $site = $this->Sites->newEntity();
         if ($this->request->is('post')) {
             $site = $this->Sites->patchEntity($site, $this->request->getData());
@@ -85,6 +105,11 @@ class SitesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $site = $this->Sites->get($id, [
             'contain' => []
         ]);
@@ -109,6 +134,11 @@ class SitesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $this->request->allowMethod(['get', 'delete']);
         $site = $this->Sites->get($id);
         if ($this->Sites->delete($site)) {

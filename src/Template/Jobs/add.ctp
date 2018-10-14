@@ -40,111 +40,109 @@
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
                             <div class="form-group"><?= $this->Form->input('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Job Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
-                          </div>
-                          <div class="col-lg-6">
+                        </div>
+                        <div class="col-lg-6">
                             <div class="form-group"><?php echo $this->Form->input('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => "Expected arrival time",'type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
                             <div class="form-group"><?php echo $this->Form->input('e_setup_time', array('class' => 'form-control','placeholder'=>'Please select expected setup time','label' => "Expected setup time",'type' => 'text','empty'=>'true','id' => 'e_setup_datetime'));?></div>
                             <div class="form-group"><?php echo $this->Form->input('e_pickup_time', array('class' => 'form-control','placeholder'=>'Please select expected pickup time','label' => "Expected pickup time",'type' => 'text','empty'=>'true','id' => 'e_pickup_datetime'));?></div>
-                          </div>
-                          </div>
-                          </div>
 
-                      </div>
+            </div>
 
-                        <div class="tab-pane fade" id="customer">
-                          <div class="panel-group" id="accordion">
-                                <div class="panel panel-default">
+            <div class="tab-pane fade" id="customer">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
 
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing customer</a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
-                                </div>
-                            </div>
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
-                                </h4>
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing customer</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
                             </div>
                         </div>
-                      </div>
-                    </div>
-
-                        <div class="tab-pane fade" id="site">
-
-                          <div class="panel-group" id="accordion">
-                                <div class="panel panel-default">
-                                  <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Select existing site</a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
-                                </div>
-                            </div>
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#siteAdd" >Create new site</a>
-                                    </h4>
-                                </div>
-                              </div>
-                            </div>
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
+                            </h4>
                         </div>
-
-                        <div class="tab-pane fade" id="priceInfo">
-                            <div class="form-group"><?= $this->Form->control('Invoice', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('quote', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('price', ['class' => 'form-control', 'min'=>'0',  'value'=>'0', 'step'=>'1']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('deposit', ['class' => 'form-control', 'min'=>'0', 'value'=>'0', 'step'=>'1']) ?></div>
-                        </div>
-
-
-                        <div class="tab-pane fade" id="stock">
-                            <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
-                        </div>
-                      </div>
-                    </div>
-    <div class ="col-lg-12">
-      <div class="submitButton">
-      <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
-      <?= $this->Form->end() ?>
-    </div>
-    </div>
-    </div>
-
-        <div class="modal fade" id="custAdd" role="dialog">
-            <div class="modal-dialog" >
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">New customer</h4>
-                    </div>
-                    <div class="modal-body">
-                        <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
-                        <fieldset>
-                            <?php
-                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control']);
-                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control']);
-                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control']);
-                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control']);
-                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control']);
-                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control']);
-                            echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
-                            ?>
-                        </fieldset>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
-                        <?= $this->Form->end() ?>
                     </div>
                 </div>
             </div>
+
+            <div class="tab-pane fade" id="site">
+
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Select existing site</a>
+                            </h4>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
+                            </div>
+                        </div>
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#siteAdd" >Create new site</a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="priceInfo">
+                <div class="form-group"><?= $this->Form->control('Invoice', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
+                <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
+                <div class="form-group"><?= $this->Form->control('quote', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
+                <div class="form-group"><?= $this->Form->control('price', ['class' => 'form-control', 'min'=>'0',  'value'=>'0', 'step'=>'1']) ?></div>
+                <div class="form-group"><?= $this->Form->control('deposit', ['class' => 'form-control', 'min'=>'0', 'value'=>'0', 'step'=>'1']) ?></div>
+            </div>
+
+
+            <div class="tab-pane fade" id="stock">
+                <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
+            </div>
+        </div>
+    </div>
+    <div class ="col-lg-12">
+        <div class="submitButton">
+            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+            <?= $this->Form->end() ?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="custAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New customer</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                <fieldset>
+                    <?php
+                    echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control']);
+                    echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control']);
+                    echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control']);
+                    echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control']);
+                    echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control']);
+                    echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control']);
+                    echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
 
 </div>
 
@@ -174,25 +172,28 @@
 
 <script>
     $("#job_datetime").datetimepicker({
-     defaultDate: new Date(),
-     assumeNearbyYear: true,
-     step:1
-     });
+        defaultDate: new Date(),
+        assumeNearbyYear: true,
+        step:1
+    });
     $("#e_arrival_datetime").datetimepicker({
-     defaultDate: new Date(),
-     step:1
-     });
-     $("#e_setup_datetime").datetimepicker({
-      defaultDate: new Date(),
-      step:1
-      });
-      $("#e_pickup_datetime").datetimepicker({
-       defaultDate: new Date(),
-       step:1
-       });
+        defaultDate: new Date(),
+        step:1
+    });
+    $("#e_setup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:1
+    });
+    $("#e_pickup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:1
+    });
     $(document).ready(function() {
         $("#type_html_id").chosen();
         $("#cust_html_id").chosen();
         $("#site_html_id").chosen();
     });
 </script>
+
+
+

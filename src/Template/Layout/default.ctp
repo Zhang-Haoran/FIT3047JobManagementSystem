@@ -46,8 +46,9 @@
 
 
 </head>
-<body>
+
     <div id="wrapper">
+        <!-- Navigation -->
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
@@ -234,13 +235,30 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+
+                        <li>
+                            <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <?php
+                                    echo $this->Html->link('Index', ['controller' => 'contacts', 'action' => 'index'])
+                                    ?>
+                                </li>
+                                <li>
+                                    <?php
+                                    echo $this->Html->link('Add', ['controller' => 'contacts', 'action' => 'add'])
+                                    ?>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        <!-- Navigation -->
+
 
         <div id="page-wrapper">
 
@@ -251,11 +269,11 @@
 
         </div>
     </div>
-<footer class="footer">
-    <div class="container">
-        <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
-    </div>
-</footer>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
+        </div>
+    </footer>
 
 <!-- /#wrapper -->
 
@@ -281,5 +299,4 @@
 
 
 
-</body>
 </html>
