@@ -120,7 +120,7 @@ class ContactsController extends AppController
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
-        
+
         $this->request->allowMethod(['post', 'delete']);
         $contact = $this->Contacts->get($id);
         if ($this->Contacts->delete($contact)) {
