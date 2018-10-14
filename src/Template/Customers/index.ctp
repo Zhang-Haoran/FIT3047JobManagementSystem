@@ -18,10 +18,6 @@
                 <thead>
                     <tr>
                         <th scope="col"><?= __('Name') ?></th>
-                        <th scope="col"><?= __('Contact name') ?></th>
-                        <th scope="col"><?= __('Phone number') ?></th>
-                        <th scope="col"><?= __('Mobile number') ?></th>
-                        <th scope="col"><?= __('Email address') ?></th>
                         <th scope="col"><?= __('Type') ?></th>
                         <th scope="col"><?= __('Action') ?></th>
                     </tr>
@@ -29,15 +25,11 @@
                 <tbody>
                     <?php foreach ($customers as $customer): ?>
                     <tr>
-                        <td class="center"><?= h($customer->full_name) ?></td>
-                        <td class="center"><?= h($customer->contact) ?></td>
-                        <td class="center"><?= h($customer->phone) ?></td>
-                        <td class="center"><?= h($customer->mobile) ?></td>
-                        <td class="center"><?= h($customer->email) ?></td>
+                        <td class="center"><?= h($customer->name) ?></td>
                         <td class="center"><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
                         <td><?= $this->Html->link(__('View'), ['action' => 'view', $customer->id]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $customer->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete Customer: {0}?', $customer->full_name)]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $customer->id], ['confirm' => __('Are you sure you want to delete Customer: {0}?', $customer->name)]) ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
