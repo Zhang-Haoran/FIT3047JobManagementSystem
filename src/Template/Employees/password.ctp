@@ -36,37 +36,49 @@ $cakeDescription = 'Instant Marquees';
 </head>
 <body>
 
-<div class="limiter">
-
-    <div class="container-login100">
-
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-
-            <div class="users-form">
-
-                <a class="login100-form-title p-b-49">Reset Password</a>
-
-                <?= $this->Form->create(); ?>
-
-                <div class="wrap-input100 m-b-23">
-
-                    <?= $this->Form->control('email', ['autofocus' => true, 'required' => true]);?>
-
-                </div>
-
-                <?= $this->Form->button('Request reset email', ['class' => 'login100-form-btn']); ?>
-
-                <?= $this->Form->end();?>
-
-                　
-
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div style="padding-top: 25px;">
+                <?= $this->Html->image('image_02.gif', ['alt' => 'Logo', 'class' => 'img-responsive center-block']) ?>
             </div>
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Reset Password</h3>
+                </div>
+                <div class="panel-body">
 
+                    <?= $this->Form->create() ?>
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <?= $this->Form->control('email', ['class' => 'form-control', 'placeholder' => 'E-mail', 'autofocus', 'required']) ?>
+                            </div>
+                            <div class="nav-link">
+                                <?= $this->Html->link(__('Back'), ['controller' => 'Employees', 'action' => 'login'], ['class' => 'btn btn-link']) ?>
+                            </div>
+                            <!-- Change this to a button or input when using this as a form -->
+                            <?= $this->Form->button(__('Send reset email'), ['class' => 'btn btn-lg btn-success btn-block']) ?>
+                        </fieldset>
+                    </form>
+                    <?= $this->Form->end() ?>
+                </div>
+            </div>
         </div>
-
     </div>
-
 </div>
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted text-center pad-20">Copyright © Instant Marquees 2018</p>
+    </div>
+</footer>
+
+<!-- javascript -->
+<?= $this->Html->script('/vendor/jquery/jquery.min.js') ?>
+<?= $this->Html->script('/vendor/bootstrap/js/bootstrap.min.js') ?>
+<?= $this->Html->script('/js/bootstrap-notify.js') ?>
+
+<?= $this->Flash->render() ?>
 
 </body>
 </html>
