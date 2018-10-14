@@ -12,8 +12,13 @@ use Cake\ORM\Entity;
  * @property string $email
  * @property string $role
  * @property int $jobs_id
+ * @property int $sites_id
+ * @property int $customers_id
+ * @property bool $is_deleted
  *
  * @property \App\Model\Entity\Job $job
+ * @property \App\Model\Entity\Site $site
+ * @property \App\Model\Entity\Customer $customer
  */
 class Contact extends Entity
 {
@@ -33,6 +38,11 @@ class Contact extends Entity
         'email' => true,
         'role' => true,
         'jobs_id' => true,
-        'job' => true
+        'sites_id' => true,
+        'customers_id' => true,
+        'is_deleted' => true,
+        'job' => true,
+        'site' => true,
+        'customer' => true
     ];
 }

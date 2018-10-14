@@ -7,12 +7,7 @@ use Cake\ORM\Entity;
  * Customer Entity
  *
  * @property int $id
- * @property string $fname
- * @property string $lname
- * @property string $contact
- * @property string $phone
- * @property string $mobile
- * @property string $email
+ * @property string $name
  * @property int $cust_type_id
  * @property bool $is_deleted
  *
@@ -32,19 +27,10 @@ class Customer extends Entity
      * @var array
      */
     protected $_accessible = [
-        'fname' => true,
-        'lname' => true,
-        'contact' => true,
-        'phone' => true,
-        'mobile' => true,
-        'email' => true,
+        'name' => true,
         'cust_type_id' => true,
         'is_deleted' => true,
         'cust_type' => true,
         'jobs' => true
     ];
-    protected function _getFullName()
-    {
-    return $this->fname . ' ' . $this->lname;
-    }
 }
