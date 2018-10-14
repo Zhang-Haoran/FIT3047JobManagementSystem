@@ -58,7 +58,7 @@ class ImagesController extends AppController
      */
     public function add()
     {
-        if($this->Auth->user('access_level')=='3'){
+        if ($this->Auth->user('access_level') == '3') {
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
@@ -66,17 +66,34 @@ class ImagesController extends AppController
         $image = $this->Images->newEntity();
         if ($this->request->is('post')) {
             $image = $this->Images->patchEntity($image, $this->request->getData());
+            if (!empty($this->data['images']['path']['description'])) {
+
+                $file = $this->data['images']['path'];
+                $image['description'] = $file['name'];
+                $dir = WWW_ROOT . 'img' . DS;
+
+
+                if (move_uploaded_file($file['tmp_name'], $dir . $file['name'])) {
+                    $this->Flash->error(__('Image could not be saved. Please, try again.'));
+                    return $this->redirect(['action' => 'index']);
+
+                }
+
+
+            }
+
+
             if ($this->Images->save($image)) {
                 $this->Flash->success(__('The image has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The image could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The image could not be saved. Please, try again.'));
         }
         $jobs = $this->Images->Jobs->find('list', ['limit' => 200]);
         $this->set(compact('image', 'jobs'));
     }
-
     /**
      * Edit method
      *

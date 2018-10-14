@@ -4,26 +4,39 @@
  * @var \App\Model\Entity\Contact $contact
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Contacts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="contacts form large-9 medium-8 columns content">
+<div class="row">
     <?= $this->Form->create($contact) ?>
-    <fieldset>
-        <legend><?= __('Add Contact') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('phone');
-            echo $this->Form->control('email');
-            echo $this->Form->control('role');
-            echo $this->Form->control('jobs_id', ['options' => $jobs]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+    <div class="col col-lg-6">
+        <div class="panel panel-default ">
+            <div class="panel-heading">
+                Contact Name
+            </div>
+            <div class="panel-body">
+                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','label' => 'Name']) ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Contact Details
+            </div>
+            <div class="panel-body">
+
+                <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('role',  ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('jobs_id', ['options' => $jobs, 'label' => 'Type', 'class' => 'form-control']) ?></div>
+                <?php
+                echo $this->Form->hidden('is_deleted');
+                ?>
+
+            </div>
+        </div>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
+    </div>
+
 </div>
