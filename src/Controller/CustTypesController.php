@@ -20,6 +20,11 @@ class CustTypesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $custTypes = $this->CustTypes->find('all');
 
         $this->set(compact('custTypes'));
@@ -34,6 +39,11 @@ class CustTypesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $custType = $this->CustTypes->get($id, [
             'contain' => ['Customers']
         ]);
@@ -48,6 +58,11 @@ class CustTypesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $custType = $this->CustTypes->newEntity();
         if ($this->request->is('post')) {
             $custType = $this->CustTypes->patchEntity($custType, $this->request->getData());
@@ -70,6 +85,11 @@ class CustTypesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $custType = $this->CustTypes->get($id, [
             'contain' => []
         ]);
@@ -94,6 +114,11 @@ class CustTypesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $custType = $this->CustTypes->get($id);
         if ($this->CustTypes->delete($custType)) {

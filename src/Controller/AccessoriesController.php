@@ -20,6 +20,11 @@ class AccessoriesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $accessories = $this->Accessories->find('all');
 
         $this->set(compact('accessories'));
@@ -34,6 +39,11 @@ class AccessoriesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $accessory = $this->Accessories->get($id, [
             'contain' => []
         ]);
@@ -48,6 +58,11 @@ class AccessoriesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $accessory = $this->Accessories->newEntity();
         if ($this->request->is('post')) {
             $accessory = $this->Accessories->patchEntity($accessory, $this->request->getData());
@@ -70,6 +85,11 @@ class AccessoriesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $accessory = $this->Accessories->get($id, [
             'contain' => []
         ]);
@@ -94,6 +114,11 @@ class AccessoriesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $accessory = $this->Accessories->get($id);
         if ($this->Accessories->delete($accessory)) {

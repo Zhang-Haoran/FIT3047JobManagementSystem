@@ -20,6 +20,11 @@ class ImagesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $images = $this->Images->find('all')->contain(['Jobs']);
 
         $this->set(compact('images'));
@@ -34,6 +39,11 @@ class ImagesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $image = $this->Images->get($id, [
             'contain' => ['Jobs']
         ]);
@@ -48,6 +58,11 @@ class ImagesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $image = $this->Images->newEntity();
         if ($this->request->is('post')) {
             $image = $this->Images->patchEntity($image, $this->request->getData());
@@ -71,6 +86,11 @@ class ImagesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $image = $this->Images->get($id, [
             'contain' => []
         ]);
@@ -96,6 +116,11 @@ class ImagesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $image = $this->Images->get($id);
         if ($this->Images->delete($image)) {
