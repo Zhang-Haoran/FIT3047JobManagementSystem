@@ -20,6 +20,10 @@ class StockLinesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $stockLines = $this->StockLines->find('all')->contain(['Stocks', 'Jobs']);
 
         $this->set(compact('stockLines'));
@@ -34,6 +38,10 @@ class StockLinesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $stockLine = $this->StockLines->get($id, [
             'contain' => ['Stocks', 'Jobs']
         ]);
@@ -48,6 +56,10 @@ class StockLinesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $stockLine = $this->StockLines->newEntity();
         if ($this->request->is('post')) {
             $stockLine = $this->StockLines->patchEntity($stockLine, $this->request->getData());
@@ -72,6 +84,10 @@ class StockLinesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $stockLine = $this->StockLines->get($id, [
             'contain' => []
         ]);
@@ -98,6 +114,10 @@ class StockLinesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $this->request->allowMethod(['post', 'delete']);
         $stockLine = $this->StockLines->get($id);
         if ($this->StockLines->delete($stockLine)) {
