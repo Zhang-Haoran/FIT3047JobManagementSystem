@@ -25,7 +25,7 @@ class CustomersController extends AppController
             return $this->redirect($this->Auth->redirectUrl());
         }
 
-        $customers = $this->Customers->find('all');
+        $customers = $this->Customers->find('all')->contain(['CustTypes']);
 
         $this->set(compact('customers'));
     }

@@ -19,32 +19,32 @@
 <?= $this->Form->create($job) ?>
 <div class="row">
     <div class="col-lg-12">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#job" data-toggle="tab">Job</a>
-            </li>
-            <li><a href="#customer" data-toggle="tab">Customer</a>
-            </li>
-            <li><a href="#site" data-toggle="tab">Site</a>
-            </li>
-            <li><a href="#priceInfo" data-toggle="tab">Price Info</a>
-            </li>
-            <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
-            </li>
-        </ul>
-        <div class="panel-body">
-            <div class="tab-pane fade in active" id="job">
-                <div class="tab-content">
-                    <div class="row">
-                        <div class="col-lg-6">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#job" data-toggle="tab">Job</a>
+                    </li>
+                    <li><a href="#customer" data-toggle="tab">Customer</a>
+                    </li>
+                    <li><a href="#site" data-toggle="tab">Site</a>
+                    </li>
+                    <li><a href="#priceInfo" data-toggle="tab">Billing Info</a>
+                    </li>
+                    <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
+                    </li>
+                </ul>
+                <div class="panel-body">
+                        <div class="tab-pane fade in active" id="job">
+                          <div class="tab-content">
+                            <div class="row">
+                            <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder'=>'Name']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                            <div class="form-group"><?= $this->Form->input('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Job Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>
+                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Job Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="form-group"><?php echo $this->Form->input('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => "Expected arrival time",'type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
-                            <div class="form-group"><?php echo $this->Form->input('e_setup_time', array('class' => 'form-control','placeholder'=>'Please select expected setup time','label' => "Expected setup time",'type' => 'text','empty'=>'true','id' => 'e_setup_datetime'));?></div>
-                            <div class="form-group"><?php echo $this->Form->input('e_pickup_time', array('class' => 'form-control','placeholder'=>'Please select expected pickup time','label' => "Expected pickup time",'type' => 'text','empty'=>'true','id' => 'e_pickup_datetime'));?></div>
+                            <div class="form-group"><?= $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => "Expected arrival time",'type' => 'text','empty'=>'true','id' => 'e_arrival_datetime')) ?></div>
+                            <div class="form-group"><?= $this->Form->control('e_setup_time', array('class' => 'form-control','placeholder'=>'Please select expected setup time','label' => "Expected setup time",'type' => 'text','empty'=>'true','id' => 'e_setup_datetime')) ?></div>
+                            <div class="form-group"><?= $this->Form->control('e_pickup_time', array('class' => 'form-control','placeholder'=>'Please select expected pickup time','label' => "Expected pickup time",'type' => 'text','empty'=>'true','id' => 'e_pickup_datetime')) ?></div>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">New customer</h4>
+                <h4 class="modal-title">New Customer</h4>
             </div>
             <div class="modal-body">
                 <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
@@ -154,10 +154,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">New customer</h4>
+                <h4 class="modal-title">New Site</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd']]) ?>
                 <fieldset>
                     <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
                     <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']) ?></div>
@@ -197,6 +197,3 @@
         $("#site_html_id").chosen();
     });
 </script>
-
-
-

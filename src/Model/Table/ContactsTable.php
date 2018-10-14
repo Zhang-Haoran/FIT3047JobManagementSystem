@@ -10,6 +10,8 @@ use Cake\Validation\Validator;
  * Contacts Model
  *
  * @property \App\Model\Table\JobsTable|\Cake\ORM\Association\BelongsTo $Jobs
+ * @property \App\Model\Table\SitesTable|\Cake\ORM\Association\BelongsTo $Sites
+ * @property \App\Model\Table\CustomersTable|\Cake\ORM\Association\BelongsTo $Customers
  *
  * @method \App\Model\Entity\Contact get($primaryKey, $options = [])
  * @method \App\Model\Entity\Contact newEntity($data = null, array $options = [])
@@ -38,8 +40,13 @@ class ContactsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Jobs', [
-            'foreignKey' => 'jobs_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'jobs_id'
+        ]);
+        $this->belongsTo('Sites', [
+            'foreignKey' => 'sites_id'
+        ]);
+        $this->belongsTo('Customers', [
+            'foreignKey' => 'customers_id'
         ]);
     }
 
@@ -75,6 +82,10 @@ class ContactsTable extends Table
             ->maxLength('role', 255)
             ->allowEmpty('role');
 
+        $validator
+            ->boolean('is_deleted')
+            ->allowEmpty('is_deleted');
+
         return $validator;
     }
 
@@ -89,6 +100,8 @@ class ContactsTable extends Table
     {
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['jobs_id'], 'Jobs'));
+        $rules->add($rules->existsIn(['sites_id'], 'Sites'));
+        $rules->add($rules->existsIn(['customers_id'], 'Customers'));
 
         return $rules;
     }

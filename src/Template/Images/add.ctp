@@ -5,14 +5,14 @@
  */
 ?>
 <div class="row">
-    <?= $this->Form->create($image) ?>
+    <?= $this->Form->create($image,['type'=> 'file']) ?>
     <div class="col col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Upload Images
                 </div>
                 <div class="panel-body">
-                    <div class="form-group"><?= $this->Form->control('path', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('path', ['type' => 'file','label' =>__('Select Image')]) ?></div>
                 </div>
                 <div class="panel-heading">
                     Images Information

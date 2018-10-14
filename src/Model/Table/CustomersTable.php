@@ -35,7 +35,7 @@ class CustomersTable extends Table
         parent::initialize($config);
 
         $this->setTable('customers');
-        $this->setDisplayField('fname');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('CustTypes', [
@@ -60,36 +60,10 @@ class CustomersTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('fname')
-            ->maxLength('fname', 255)
-            ->requirePresence('fname', 'create')
-            ->notEmpty('fname');
-
-        $validator
-            ->scalar('lname')
-            ->maxLength('lname', 255)
-            ->requirePresence('lname', 'create')
-            ->notEmpty('lname');
-
-        $validator
-            ->scalar('contact')
-            ->maxLength('contact', 255)
-            ->allowEmpty('contact');
-
-        $validator
-            ->scalar('phone')
-            ->maxLength('phone', 15)
-            ->allowEmpty('phone');
-
-        $validator
-            ->scalar('mobile')
-            ->maxLength('mobile', 15)
-            ->allowEmpty('mobile');
-
-        $validator
-            ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email');
+            ->scalar('name')
+            ->maxLength('name', 255)
+            ->requirePresence('name', 'create')
+            ->notEmpty('name');
 
         $validator
             ->boolean('is_deleted')
@@ -107,7 +81,6 @@ class CustomersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['cust_type_id'], 'CustTypes'));
 
         return $rules;

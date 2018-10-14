@@ -37,7 +37,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Customer') ?></th>
-            <td><?= $job->has('customer') ? $this->Html->link($job->customer->full_name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
+            <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Employee') ?></th>
@@ -76,15 +76,15 @@
             <td><?= h($job->booked_date) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('E Arrival Time') ?></th>
+            <th scope="row"><?= __('Expected Arrival Time') ?></th>
             <td><?= h($job->e_arrival_time) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('E Setup Time') ?></th>
+            <th scope="row"><?= __('Expected Setup Time') ?></th>
             <td><?= h($job->e_setup_time) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('E Pickup Time') ?></th>
+            <th scope="row"><?= __('Expected Pickup Time') ?></th>
             <td><?= h($job->e_pickup_time) ?></td>
         </tr>
         <tr>
@@ -167,6 +167,8 @@ $(document).ready(function() {
 initialize();
 } );
 ', ['block' => true]); ?>
+
+
 <script type="text/javascript">
 
     var geocoder;
