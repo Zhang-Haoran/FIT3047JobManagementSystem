@@ -58,6 +58,14 @@ class EmployeesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        elseif ($this->Auth->user('access_level')=='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $employee = $this->Employees->get($id, [
             'contain' => ['Jobs']
         ]);
@@ -102,7 +110,14 @@ class EmployeesController extends AppController
      */
     public function edit($id = null)
     {
-
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        elseif ($this->Auth->user('access_level')=='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $employee = $this->Employees->get($id, [
             'contain' => []
         ]);

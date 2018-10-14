@@ -46,8 +46,7 @@
 
 
 </head>
-<body onload="initialize()">
-<div class="container-fluid">
+
     <div id="wrapper">
         <!-- Navigation -->
         <!-- Navigation -->
@@ -275,7 +274,6 @@
             <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
         </div>
     </footer>
-</div>
 
 <!-- /#wrapper -->
 
@@ -301,5 +299,4 @@
 
 
 
-</body>
 </html>
