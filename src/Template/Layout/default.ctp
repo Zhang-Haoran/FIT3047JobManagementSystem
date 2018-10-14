@@ -275,7 +275,7 @@
         </div>
     </footer>
   </div>
-<body>
+</body>
 <!-- /#wrapper -->
 
 <!-- javascript -->
