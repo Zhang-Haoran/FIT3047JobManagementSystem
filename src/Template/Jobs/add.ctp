@@ -126,7 +126,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">New customer</h4>
+                <h4 class="modal-title">New Customer</h4>
             </div>
             <div class="modal-body">
                 <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
@@ -154,10 +154,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">New customer</h4>
+                <h4 class="modal-title">New Site</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd']]) ?>
                 <fieldset>
                     <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
                     <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']) ?></div>
