@@ -97,6 +97,7 @@
                             </div>
                         </div>
 
+
                         <div class="tab-pane fade" id="priceInfo">
                             <div class="form-group"><?= $this->Form->control('Invoice', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
