@@ -19,23 +19,23 @@
 <?= $this->Form->create($job) ?>
 <div class="row">
     <div class="col-lg-12">
-        <ul class="nav nav-tabs">
-            <li class="active"><a href="#job" data-toggle="tab">Job</a>
-            </li>
-            <li><a href="#customer" data-toggle="tab">Customer</a>
-            </li>
-            <li><a href="#site" data-toggle="tab">Site</a>
-            </li>
-            <li><a href="#priceInfo" data-toggle="tab">Price Info</a>
-            </li>
-            <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
-            </li>
-        </ul>
-        <div class="panel-body">
-            <div class="tab-pane fade in active" id="job">
-                <div class="tab-content">
-                    <div class="row">
-                        <div class="col-lg-6">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#job" data-toggle="tab">Job</a>
+                    </li>
+                    <li><a href="#customer" data-toggle="tab">Customer</a>
+                    </li>
+                    <li><a href="#site" data-toggle="tab">Site</a>
+                    </li>
+                    <li><a href="#priceInfo" data-toggle="tab">Billing Info</a>
+                    </li>
+                    <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
+                    </li>
+                </ul>
+                <div class="panel-body">
+                        <div class="tab-pane fade in active" id="job">
+                          <div class="tab-content">
+                            <div class="row">
+                            <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder'=>'Name']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Job Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>

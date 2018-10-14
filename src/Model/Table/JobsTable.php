@@ -68,7 +68,6 @@ class JobsTable extends Table
         $this->hasMany('StockLines', [
             'foreignKey' => 'job_id'
         ]);
-        $this->belongsTo('CustTypes');
     }
 
     /**

@@ -173,7 +173,7 @@ class EmployeesController extends AppController
 //                return $this->redirect($this->Auth->redirectUrl());
                 if($this->Auth->user('access_level')== '1'){
                     $this->Flash->success('You have logged in as admin');
-                    return $this->redirect(['controller' => 'employees','action' => 'index']);
+                    return $this->redirect(['controller' => 'jobs','action' => 'index']);
                 }
                 elseif ($this->Auth->user('access_level')=='2'){
                     $this->Flash->success('You have logged in as office staff');

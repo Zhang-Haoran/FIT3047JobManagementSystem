@@ -75,7 +75,7 @@ class AppController extends Controller
             // If unauthorized, return them to page they were just on
             //           'unauthorizedRedirect' => [/]
           ]);
-          $this->Auth->config('authenticate', [
+          $this->Auth->setConfig('authenticate', [
               'Form' => [
                   'userModel' => 'Employees',
                   'fields' => ['username' => 'email', 'password' => 'password']
