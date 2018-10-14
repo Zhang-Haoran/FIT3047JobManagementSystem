@@ -42,11 +42,11 @@
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
 
 
 </head>
-
+<body>
+  <div class="contianer-fluid">
     <div id="wrapper">
         <!-- Navigation -->
         <!-- Navigation -->
@@ -274,7 +274,8 @@
             <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
         </div>
     </footer>
-
+  </div>
+<body>
 <!-- /#wrapper -->
 
 <!-- javascript -->
