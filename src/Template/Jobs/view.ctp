@@ -76,15 +76,15 @@
             <td><?= h($job->booked_date) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('E Arrival Time') ?></th>
+            <th scope="row"><?= __('Expected Arrival Time') ?></th>
             <td><?= h($job->e_arrival_time) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('E Setup Time') ?></th>
+            <th scope="row"><?= __('Expected Setup Time') ?></th>
             <td><?= h($job->e_setup_time) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('E Pickup Time') ?></th>
+            <th scope="row"><?= __('Expected Pickup Time') ?></th>
             <td><?= h($job->e_pickup_time) ?></td>
         </tr>
         <tr>

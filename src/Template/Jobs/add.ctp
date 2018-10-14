@@ -26,7 +26,7 @@
                     </li>
                     <li><a href="#site" data-toggle="tab">Site</a>
                     </li>
-                    <li><a href="#priceInfo" data-toggle="tab">Price Info</a>
+                    <li><a href="#priceInfo" data-toggle="tab">Billing Info</a>
                     </li>
                     <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
                     </li>
