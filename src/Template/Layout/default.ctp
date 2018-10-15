@@ -47,7 +47,7 @@
 </head>
 <body>
   <div class="contianer-fluid">
-    <div id="wrapper">
+    <div id="wrapper"  >
         <!-- Navigation -->
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -278,7 +278,7 @@
 </body>
 <!-- /#wrapper -->
 
-<!-- javascript -->
+<!-- calling all the java scripts dependencies -->
 <?= $this->Html->script('/vendor/jquery/jquery.min.js') ?>
 <?= $this->Html->script('/vendor/bootstrap/js/bootstrap.min.js') ?>
 <?= $this->Html->script('/vendor/metisMenu/metisMenu.min.js') ?>
@@ -291,13 +291,14 @@
 <?= $this->Html->script('chosen.jquery.js') ?>
 <?= $this->Html->script('select2.min.js') ?>
 <?= $this->Html->script('bootstrap-multiselect.js') ?>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap"
-        async defer></script>
+<?= $this->fetch('scriptBottom'); ?>
+
+<!--calling script.js-->
 <?= $this->Html->script('/js/script.js') ?>
 
+<!--Call for code from script render and from the buffered block-->
 <?= $this->Flash->render() ?>
 <?= $this->fetch('script'); ?>
-
 
 
 </html>

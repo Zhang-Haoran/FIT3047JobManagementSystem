@@ -4,8 +4,6 @@
  * @var \App\Model\Entity\Job $job
  */
 ?>
-
-
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('View Job') ?></h1>
@@ -13,17 +11,14 @@
     <!-- /.col-lg-12 -->
 </div>
 
+<?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
 
+<div class="row">
+    <div class="col-lg-12">
+        <div id="map"></div>
+    </div>
+</div>
 
-<style>
-    #map{
-        height: 500px;
-        width: 80%;
-        margin-top: 2%;
-    }
-</style>
-
-<div id="map"></div>
 
 
 <div class="col-lg-6">
@@ -125,45 +120,10 @@
 
     </table>
     </div>
-<?php $this->Html->scriptBlock('
-$(document).ready(function() {
-initialize();
-} );
-', ['block' => true]); ?>
 
 
-<script type="text/javascript">
 
-    var geocoder;
-    var map;
-    function initialize() {
-        geocoder = new google.maps.Geocoder();
-        var latlng = new google.maps.LatLng(-34.397, 150.644);
-        var mapOptions = {
-            zoom: 15,
-            center: latlng
-        }
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-        codeAddress();
-    }
-
-    function codeAddress() {
-        var address = document.getElementById('table').rows[2].cells[3].textContent;
-        console.log(address);
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
-        });
-    }
-</script>
 </tbody>
     </table>
 </div>
@@ -209,51 +169,6 @@ initialize();
 </div>
 </div>
 
-
-
-
-
-<div class="col-lg-6">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <th><?=h($job->name) ?> Related Images</th>
-        </div>
-
-
-
-        <table class="panel-body">
-            <tr class="table-responsive">
-                <?php if (!empty($job->images)): ?>
-                    <table id="table" class="table table-striped table-bordered table-hover">
-
-
-
-                        <tr>
-                            <th scope="col"><?= __('Image Id') ?></th>
-                            <th scope="col"><?= __('Path') ?></th>
-                            <th scope="col"><?= __('Description') ?></th>
-                            <th scope="col"><?= __('Job Id') ?></th>
-                        </tr>
-                        <?php foreach ($job->images as $images): ?>
-                            <tr>
-                                <td><?= h($images->id) ?></td>
-                                <td><?= h($images->path) ?></td>
-                                <td><?= h($images->description) ?></td>
-                                <td><?= h($images->job_id) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </table>
-                <?php endif; ?>
-            </tr>
-        </table>
-    </div>
-</div>
-
-
-
-
-
-
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -288,20 +203,41 @@ initialize();
 </div>
 
 
+<?php
+$this->Html->scriptBlock('
+    var geocoder;
+    var map;
+    function initialize() {
+        geocoder = new google.maps.Geocoder();
+        var latlng = new google.maps.LatLng(-34.397, 150.644);
+        var mapOptions = {
+            zoom: 15,
+            center: latlng
+        }
+        map = new google.maps.Map(document.getElementById(\'map\'), mapOptions);
+
+        codeAddress();
+    }
+
+    function codeAddress() {
+        var address = document.getElementById(\'table\').rows[2].cells[3].textContent;
+        console.log(address);
+        geocoder.geocode( { \'address\': address}, function(results, status) {
+            if (status == \'OK\') {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert(\'Geocode was not successful for the following reason: \' + status);
+            }
+        });
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        $(document).ready(function() {
+        initialize();
+        } );
+    ', ['block' => true]);
+    ?>
