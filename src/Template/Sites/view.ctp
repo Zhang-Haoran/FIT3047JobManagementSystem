@@ -70,11 +70,11 @@
 
 
             <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Status') ?></th>
-                <th scope="col"><?= __('Job Date') ?></th>
-                <th scope="col"><?= __('Booked Date') ?></th>
+                <th scope="row"><?= __('Id') ?></th>
+                <th scope="row"><?= __('Name') ?></th>
+                <th scope="row"><?= __('Status') ?></th>
+                <th scope="row"><?= __('Job Date') ?></th>
+                <th scope="row"><?= __('Booked Date') ?></th>
 
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
