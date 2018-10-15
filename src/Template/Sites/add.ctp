@@ -28,7 +28,7 @@
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
                 </div>
             </div>
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
     </div>
 
 </div>

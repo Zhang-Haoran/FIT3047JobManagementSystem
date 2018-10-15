@@ -4,22 +4,33 @@
  * @var \App\Model\Entity\Stock $stock
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Stock'), ['action' => 'edit', $stock->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Stock'), ['action' => 'delete', $stock->id], ['confirm' => __('Are you sure you want to delete # {0}?', $stock->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Stocks'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Stock'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Accessories'), ['controller' => 'Accessories', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Accessory'), ['controller' => 'Accessories', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Stock Lines'), ['controller' => 'StockLines', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Stock Line'), ['controller' => 'StockLines', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="stocks view large-9 medium-8 columns content">
-    <h3><?= h($stock->name) ?></h3>
-    <table class="vertical-table">
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?= __('View Stock') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+
+
+
+
+
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <th>Stock Name: <?=h($stock->name) ?></th>
+        </div>
+
+
+
+        <table class="panel-body">
+            <tr class="table-responsive">
+                <table id="table" class="table table-striped table-bordered table-hover">
+
+
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($stock->name) ?></td>
@@ -45,29 +56,53 @@
             <td><?= $stock->is_deleted ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-    <div class="related">
-        <h4><?= __('Related Stock Lines') ?></h4>
-        <?php if (!empty($stock->stock_lines)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Stock Id') ?></th>
-                <th scope="col"><?= __('Job Id') ?></th>
-                <th scope="col"><?= __('Stock Num') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($stock->stock_lines as $stockLines): ?>
-            <tr>
-                <td><?= h($stockLines->stock_id) ?></td>
-                <td><?= h($stockLines->job_id) ?></td>
-                <td><?= h($stockLines->stock_num) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'StockLines', 'action' => 'view', $stockLines->stock_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'StockLines', 'action' => 'edit', $stockLines->stock_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'StockLines', 'action' => 'delete', $stockLines->stock_id], ['confirm' => __('Are you sure you want to delete # {0}?', $stockLines->stock_id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
         </table>
+    </div>
+
+</div>
+
+
+
+
+
+
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <th>Related Stock Lines</th>
+        </div>
+
+
+
+        <table class="panel-body">
+            <tr class="table-responsive">
+                <?php if (!empty($stock->stock_lines)): ?>
+                <table id="table" class="table table-striped table-bordered table-hover">
+
+
+
+                <tr>
+                    <th scope="col"><?= __('Stock Id') ?></th>
+                    <th scope="col"><?= __('Job Id') ?></th>
+                    <th scope="col"><?= __('Stock Num') ?></th>
+                    <th scope="col" class="actions"><?= __('Actions') ?></th>
+                </tr>
+                <?php foreach ($stock->stock_lines as $stockLines): ?>
+                    <tr>
+                        <td><?= h($stockLines->stock_id) ?></td>
+                        <td><?= h($stockLines->job_id) ?></td>
+                        <td><?= h($stockLines->stock_num) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['controller' => 'StockLines', 'action' => 'view', $stockLines->stock_id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['controller' => 'StockLines', 'action' => 'edit', $stockLines->stock_id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'StockLines', 'action' => 'delete', $stockLines->stock_id], ['confirm' => __('Are you sure you want to delete # {0}?', $stockLines->stock_id)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
         <?php endif; ?>
+            </tr>
+        </table>
     </div>
 </div>
