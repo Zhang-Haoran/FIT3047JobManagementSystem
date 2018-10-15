@@ -20,6 +20,10 @@ class AccessorieLinesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $accessorieLines = $this->AccessorieLines->find('all')->contain(['Accessories', 'Jobs']);
 
         $this->set(compact('accessorieLines'));
@@ -34,6 +38,10 @@ class AccessorieLinesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $accessorieLine = $this->AccessorieLines->get($id, [
             'contain' => ['Accessories', 'Jobs']
         ]);
@@ -48,6 +56,10 @@ class AccessorieLinesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $accessorieLine = $this->AccessorieLines->newEntity();
         if ($this->request->is('post')) {
             $accessorieLine = $this->AccessorieLines->patchEntity($accessorieLine, $this->request->getData());
@@ -72,6 +84,10 @@ class AccessorieLinesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $accessorieLine = $this->AccessorieLines->get($id, [
             'contain' => []
         ]);
@@ -98,6 +114,10 @@ class AccessorieLinesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
         $this->request->allowMethod(['post', 'delete']);
         $accessorieLine = $this->AccessorieLines->get($id);
         if ($this->AccessorieLines->delete($accessorieLine)) {

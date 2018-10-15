@@ -114,7 +114,7 @@
                     </div>
     <div class ="col-lg-12">
       <div class="submitButton">
-      <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%'] ) ?>
+      <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
       <?= $this->Form->end() ?>
     </div>
     </div>

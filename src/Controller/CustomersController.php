@@ -20,7 +20,12 @@ class CustomersController extends AppController
      */
     public function index()
     {
-        $customers = $this->Customers->find('all');
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
+        $customers = $this->Customers->find('all')->contain(['CustTypes']);
 
         $this->set(compact('customers'));
     }
@@ -34,6 +39,11 @@ class CustomersController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $customer = $this->Customers->get($id, [
             'contain' => ['CustTypes', 'Jobs']
         ]);
@@ -48,6 +58,11 @@ class CustomersController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $customer = $this->Customers->newEntity();
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
@@ -64,6 +79,11 @@ class CustomersController extends AppController
 
     public function jobAdd()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $customer = $this->Customers->newEntity();
         if ($this->request->is('post')) {
             $customer = $this->Customers->patchEntity($customer, $this->request->getData());
@@ -87,6 +107,11 @@ class CustomersController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $customer = $this->Customers->get($id, [
             'contain' => []
         ]);
@@ -112,6 +137,11 @@ class CustomersController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $this->request->allowMethod(['get', 'delete']);
         $customer = $this->Customers->get($id);
         if ($this->Customers->delete($customer)) {

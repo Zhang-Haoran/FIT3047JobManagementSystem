@@ -57,7 +57,11 @@ class JobsController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
-    {
+    {   if($this->Auth->user('access_level')=='3'){
+        $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+        return $this->redirect($this->Auth->redirectUrl());
+    }
+
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
             $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
@@ -82,7 +86,8 @@ class JobsController extends AppController
         $eventTypes = $this->Jobs->EventTypes->find('list');
         $customers = $this->Jobs->Customers->find('list');
         $employees = $this->Jobs->Employees->find('list');
-        $custTypes = $this->Jobs->CustTypes->find('list');
+        $this->loadModel('CustTypes');
+        $custTypes = $this->CustTypes->find('list');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes'));
         $this->set('statusOptions', array('Started' => 'Started', 'Confirmed' => 'Confirmed', 'Quote' => 'Quote', 'Completed' => 'Completed'));
     }
@@ -95,7 +100,11 @@ class JobsController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
-    {
+    {   if($this->Auth->user('access_level')=='3'){
+        $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+        return $this->redirect($this->Auth->redirectUrl());
+    }
+
         $job = $this->Jobs->get($id, [
             'contain' => []
         ]);
@@ -116,7 +125,8 @@ class JobsController extends AppController
         $eventTypes = $this->Jobs->EventTypes->find('list');
         $customers = $this->Jobs->Customers->find('list');
         $employees = $this->Jobs->Employees->find('list');
-        $custTypes = $this->Jobs->CustTypes->find('list');
+        $this->loadModel('CustTypes');
+        $custTypes = $this->CustTypes->find('list');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
         $this->set('statusOptions', array('Started' => 'Started', 'Confirmed' => 'Confirmed', 'Quote' => 'Quote', 'Completed' => 'Completed'));
     }
@@ -130,6 +140,11 @@ class JobsController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $this->request->allowMethod(['get', 'delete']);
         $job = $this->Jobs->get($id);
         if ($this->Jobs->delete($job)) {

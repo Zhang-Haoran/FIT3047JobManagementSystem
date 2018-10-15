@@ -20,6 +20,11 @@ class EventTypesController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $eventTypes = $this->EventTypes->find('all');
 
         $this->set(compact('eventTypes'));
@@ -34,6 +39,11 @@ class EventTypesController extends AppController
      */
     public function view($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $eventType = $this->EventTypes->get($id, [
             'contain' => ['Jobs']
         ]);
@@ -48,6 +58,11 @@ class EventTypesController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $eventType = $this->EventTypes->newEntity();
         if ($this->request->is('post')) {
             $eventType = $this->EventTypes->patchEntity($eventType, $this->request->getData());
@@ -70,6 +85,11 @@ class EventTypesController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $eventType = $this->EventTypes->get($id, [
             'contain' => []
         ]);
@@ -94,6 +114,11 @@ class EventTypesController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
         $this->request->allowMethod(['post', 'delete']);
         $eventType = $this->EventTypes->get($id);
         if ($this->EventTypes->delete($eventType)) {

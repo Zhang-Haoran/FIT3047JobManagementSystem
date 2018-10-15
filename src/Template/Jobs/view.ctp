@@ -60,7 +60,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Customer') ?></th>
-            <td><?= $job->has('customer') ? $this->Html->link($job->customer->full_name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
+            <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Employee') ?></th>
@@ -201,6 +201,8 @@ $(document).ready(function() {
 initialize();
 } );
 ', ['block' => true]); ?>
+
+
 <script type="text/javascript">
 
     var geocoder;
