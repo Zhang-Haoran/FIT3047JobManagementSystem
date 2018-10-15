@@ -4,15 +4,15 @@
  * @var \App\Model\Entity\Job $job
  */
 ?>
-<style>
-    #map{
-        height: 500px;
-        width: 80%;
-        margin-top: 2%;
-    }
-</style>
 
-<div id="map"></div>
+<?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div id="map"></div>
+    </div>
+</div>
+
 
 <div class="jobs view columns content">
     <h3><?= h($job->name) ?></h3>
@@ -162,15 +162,11 @@
         <?php endif; ?>
     </div>
 </div>
-<?php $this->Html->scriptBlock('
-$(document).ready(function() {
-initialize();
-} );
-', ['block' => true]); ?>
 
 
-<script type="text/javascript">
 
+<?php
+$this->Html->scriptBlock('
     var geocoder;
     var map;
     function initialize() {
@@ -180,25 +176,29 @@ initialize();
             zoom: 15,
             center: latlng
         }
-        map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        map = new google.maps.Map(document.getElementById(\'map\'), mapOptions);
 
         codeAddress();
     }
 
     function codeAddress() {
-        var address = document.getElementById('table').rows[2].cells[3].textContent;
+        var address = document.getElementById(\'table\').rows[2].cells[3].textContent;
         console.log(address);
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status == 'OK') {
+        geocoder.geocode( { \'address\': address}, function(results, status) {
+            if (status == \'OK\') {
                 map.setCenter(results[0].geometry.location);
                 var marker = new google.maps.Marker({
                     map: map,
                     position: results[0].geometry.location
                 });
             } else {
-                alert('Geocode was not successful for the following reason: ' + status);
+                alert(\'Geocode was not successful for the following reason: \' + status);
             }
         });
     }
 
-</script>
+    $(document).ready(function() {
+    initialize();
+    } );
+', ['block' => true]);
+?>
