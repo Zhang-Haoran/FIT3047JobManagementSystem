@@ -21,7 +21,7 @@
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Customer ID: <?=h($accessory->name) ?></th>
+            <th>Accessory details</th>
         </div>
 
 
@@ -33,14 +33,6 @@
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($accessory->name) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($accessory->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Is Deleted') ?></th>
-            <td><?= $accessory->is_deleted ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
             </tr>
