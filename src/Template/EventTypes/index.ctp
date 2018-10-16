@@ -16,7 +16,6 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                 <thead>
                     <tr>
-                        <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('name') ?></th>
 
                         <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -25,7 +24,6 @@
                 <tbody>
                     <?php foreach ($eventTypes as $eventType): ?>
                     <tr>
-                        <td class="center"><?= $this->Number->format($eventType->id) ?></td>
                         <td class="center"><?= h($eventType->name) ?></td>
 
                         <td class="actions">

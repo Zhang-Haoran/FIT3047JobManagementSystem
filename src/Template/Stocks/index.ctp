@@ -17,24 +17,20 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                 <thead>
                     <tr>
-                        <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('rent_value') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('min_accs') ?></th>
                         <th scope="col"><?= $this->Paginator->sort('accessorie_id') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('is_deleted') ?></th>
                         <th scope="col" class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($stocks as $stock): ?>
                     <tr>
-                        <td class="center"><?= $this->Number->format($stock->id) ?></td>
                         <td class="center"><?= h($stock->name) ?></td>
                         <td class="center"><?= $this->Number->format($stock->rent_value) ?></td>
                         <td class="center"><?= $this->Number->format($stock->min_accs) ?></td>
                         <td class="center"><?= $stock->has('accessory') ? $this->Html->link($stock->accessory->name, ['controller' => 'Accessories', 'action' => 'view', $stock->accessory->id]) : '' ?></td>
-                        <td class="center"><?= h($stock->is_deleted) ?></td>
                         <td class="actions">
                             <?= $this->Html->link(__('View'), ['action' => 'view', $stock->id]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $stock->id]) ?>

@@ -35,38 +35,42 @@ $cakeDescription = 'Instant Marquees';
 
 </head>
 <body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div style="padding-top: 25px;">
+<div class="panel-body">
 
-<div class="limiter">
 
-    <div class="container-login100">
-
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-
-            <div class="users-form">
-
-                <a class="login100-form-title p-b-49">Reset Password</a>
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Reset password</h3>
+                    </div>
 
                 <?= $this->Form->create(); ?>
 
-                <div class="wrap-input100 m-b-23">
+                    <div class="form-group">
+                    <?= $this->Form->control('email', ['autofocus' => true, 'required' => true,'class' => 'form-control']);?>
 
-                    <?= $this->Form->control('email', ['autofocus' => true, 'required' => true]);?>
+                    </div>
+                    </br>
 
-                </div>
 
-                <?= $this->Form->button('Request reset email', ['class' => 'login100-form-btn']); ?>
+                <?= $this->Form->button('Request reset email', ['class' => 'btn btn-lg btn-success btn-block']); ?>
 
                 <?= $this->Form->end();?>
 
                 　
-
+</div>
             </div>
 
         </div>
-
+        </div>
     </div>
-
 </div>
+
+
+
 
 </body>
 </html>

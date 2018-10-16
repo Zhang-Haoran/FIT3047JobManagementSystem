@@ -28,7 +28,10 @@
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
                 </div>
             </div>
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
     </div>
-
 </div>
+    <div class="row justify-content-end">
+        <div class="col-lg-3">
+            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-block', 'id' => 'btnSubmit', 'id' => 'btnSubmit']) ?>
+        </div>
+    </div>

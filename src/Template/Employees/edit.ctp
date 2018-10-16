@@ -27,9 +27,9 @@
 
                                 <div class="form-group"><?= $this->Form->control('fname',  ['label' => 'First Name', 'class' => 'form-control']); ?></div>
                                 <div class="form-group"><?= $this->Form->control('lname',  ['label' => 'Last Name', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('password',  ['label' => 'Password', 'class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('password',  ['label' => 'Password','type' => 'password','value' => '', 'class' => 'form-control']); ?></div>
                                 <!--password type should be password-->
-                                <div class="form-group"><?= $this->Form->control('confirmed_password',['type' => 'password', 'class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('confirmed_password',['type' => 'password','value' => '', 'class' => 'form-control']); ?></div>
                                 <!--add password match feature, to make sure user don't type unexpected password.-->
                                 <div class="form-group"><?= $this->Form->control('phone',  ['label' => 'Phone Number', 'class' => 'form-control']); ?></div>
                                 <div class="form-group"><?= $this->Form->control('email',  ['label' => 'Email', 'class' => 'form-control']); ?></div>
