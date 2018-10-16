@@ -19,7 +19,7 @@
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Customer Type: <?= h($custType->name) ?></th>
+            <th>Customer type details</th>
         </div>
 
         <table class="panel-body">
