@@ -30,6 +30,6 @@
             echo $this->Form->control('jobs_id', ['options' => $jobs]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit'),['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -99,6 +99,7 @@ class EmployeesController extends AppController
             $this->Flash->error(__('The employee could not be saved. Please, try again.'));
         }
         $this->set(compact('employee'));
+        $this->set('acLOptions', array('3' => 'Field Employee', '2' => 'Office Staff', '1' => 'Administrator'));
     }
 
     /**
@@ -217,6 +218,9 @@ class EmployeesController extends AppController
                 }
             }
         }
+
+
+
     }
     /**
      * Sending the reset password link method

@@ -173,7 +173,7 @@
                             echo $this->Form->control('postcode', ['class' => 'form-control']);
                             ?>
                         </fieldset>
-                        <?= $this->Form->button(__('Submit')) ?>
+                        <?= $this->Form->button(__('Submit'),['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
                         <?= $this->Form->end() ?>
                     </div>
                 </div>

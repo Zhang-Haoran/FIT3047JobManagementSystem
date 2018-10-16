@@ -30,7 +30,7 @@
                 <div class="form-group"><?= $this->Form->control('confirmed_password', ['type' => 'password','class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('access_level', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('access_level', array('class' => 'form-control', 'type' => 'select', 'options' => $acLOptions)) ?></div>
                 <?php
                 echo $this->Form->hidden('token');
                 echo $this->Form->hidden('timeout');
@@ -39,7 +39,7 @@
 
             </div>
         </div>
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%', 'id' => 'btnSubmit']) ?>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
     </div>
 
 </div>
