@@ -32,6 +32,6 @@
 </div>
     <div class="row justify-content-end">
         <div class="col-lg-3">
-            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-block', 'id' => 'btnSubmit', 'id' => 'btnSubmit']) ?>
+            <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
         </div>
     </div>

@@ -18,18 +18,12 @@
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Employee ID:<?= h($employee->id) ?></th>
+            <th> Employee details</th>
         </div>
-
-        <div class="panel-body">
             <div class="table-responsive">
                 <table id="quotation_comps" class="table table-striped table-bordered table-hover">
 
                     <tbody>
-                    <tr>
-                        <th>ID:</th>
-                        <th><?= h($employee->id) ?></th>
-                    </tr>
                     <tr>
                         <th>First Name:</th>
                         <th><?= h($employee->fname) ?></th>
@@ -38,8 +32,6 @@
                         <th>Last Name:</th>
                         <td><?= h($employee->lname) ?></td>
                     </tr>
-
-
 
 
                     <tr>
@@ -62,24 +54,14 @@
 
                 <!--                            -->
             </div>
-        </div>
     </div>
 </div>
-
-
-
-
-
-
-
 
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Employee ID: <?=h($employee->id) ?> Related to jobs</th>
+            <th> Jobs created by employee</th>
         </div>
-
-
 
 
         <table class="panel-body">
@@ -89,7 +71,6 @@
 
 
                         <tr>
-                            <th scope="row"><?= __('Id') ?></th>
                             <th scope="row"><?= __('Name') ?></th>
                             <th scope="row"><?= __('Status') ?></th>
                             <th scope="row"><?= __('Job Date') ?></th>
@@ -99,7 +80,6 @@
                         </tr>
                         <?php foreach ($employee->jobs as $jobs): ?>
                             <tr>
-                                <td><?= h($jobs->id) ?></td>
                                 <td><?= h($jobs->name) ?></td>
                                 <td><?= h($jobs->status) ?></td>
                                 <td><?= h($jobs->job_date) ?></td>
