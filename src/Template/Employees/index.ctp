@@ -32,7 +32,15 @@
                 <td><?= h($employee->phone) ?></td>
                 <td><?= h($employee->email) ?></td>
 
-                <td class="center"><?= $this->Number->format($employee->access_level) ?></td>
+                    <?php
+                    if( $employee->access_level == 1)
+                        echo "<td class='text-warning'>Administrator</td>";
+                    elseif ($employee->access_level == 2)
+                        echo "<td>Office Staff</td>";
+                    elseif($employee->access_level == 3)
+                        echo "<td>Field Employee</td>";
+                    ?>
+
                 <td><?= $this->Html->link(__('View'), ['action' => 'view', $employee->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $employee->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $employee->id], ['confirm' => __('Are you sure you want to delete Employee: {0}?', $employee->full_name)]) ?>

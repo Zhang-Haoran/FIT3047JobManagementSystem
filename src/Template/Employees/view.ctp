@@ -26,7 +26,7 @@
                     <tbody>
                     <tr>
                         <th>First Name:</th>
-                        <th><?= h($employee->fname) ?></th>
+                        <td><?= h($employee->fname) ?></td>
                     </tr>
                     <tr>
                         <th>Last Name:</th>
@@ -36,17 +36,24 @@
 
                     <tr>
                         <th>Phone Number:</th>
-                        <th><?= h($employee->phone) ?></th>
+                        <td><?= h($employee->phone) ?></td>
                     </tr>
                     <tr>
                         <th>Email:</th>
-                        <th><?= h($employee->email) ?></th>
+                        <td><?= h($employee->email) ?></td>
                     </tr>
                     <tr>
                         <th>Access Level:</th>
-                        <th><?= h($employee->access_level) ?></th>
-                    </tr>
+                        <?php
+                        if( $employee->access_level == 1)
+                        echo "<td>Administrator</td>";
+                        elseif ($employee->access_level == 2)
+                        echo "<td>Office Staff</td>";
+                        elseif($employee->access_level == 3)
+                        echo "<td>Field Employee</td>";
+                        ?>
 
+                    </tr>
 
 
                     </tbody>
@@ -81,7 +88,7 @@
                         <?php foreach ($employee->jobs as $jobs): ?>
                             <tr>
                                 <td><?= h($jobs->name) ?></td>
-                                <td><?= h($jobs->status) ?></td>
+                                <td><?= h($jobs->job_status) ?></td>
                                 <td><?= h($jobs->job_date) ?></td>
                                 <td><?= h($jobs->booked_date) ?></td>
 
