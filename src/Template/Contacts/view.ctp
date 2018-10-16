@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('View Customer Type') ?></h1>
+        <h1 class="page-header"><?= __('View Contacts') ?></h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -45,10 +45,6 @@
         <tr>
             <th scope="row"><?= __('Job') ?></th>
             <td><?= $contact->has('job') ? $this->Html->link($contact->job->name, ['controller' => 'Jobs', 'action' => 'view', $contact->job->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($contact->id) ?></td>
         </tr>
     </table>
             </tr>

@@ -97,7 +97,7 @@
         </div>
     </div>
     <div class="submitButton" style="width:500px;height:500px;text-align:right">
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
         <?= $this->Form->end() ?>
 
         <div class="modal fade" id="myModal" role="dialog">
