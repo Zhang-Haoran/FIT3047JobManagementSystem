@@ -123,7 +123,12 @@ class EmployeesTable extends Table
             ->integer('access_level')
             ->requirePresence('access_level', 'create')
             ->notEmpty('access_level')
-            ->numeric('access_level');
+            ->numeric('access_level')
+            ->add('access_level','1-3',[
+                'rule' => array('custom','/^[1-3]*$/'),
+                'message' => 'Your name should be 1-3 '
+            ]);
+
 
         $validator
             ->scalar('token')
