@@ -148,17 +148,20 @@ class JobsTable extends Table
         $validator
             ->scalar('Invoice')
             ->maxLength('Invoice', 45)
-            ->allowEmpty('Invoice');
+            ->allowEmpty('Invoice')
+            ->numeric('Invoice');
 
         $validator
             ->scalar('job_order')
             ->maxLength('job_order', 45)
-            ->allowEmpty('job_order');
+            ->allowEmpty('job_order')
+            ->numeric('job_order');
 
         $validator
             ->scalar('quote')
             ->maxLength('quote', 45)
-            ->allowEmpty('quote');
+            ->allowEmpty('quote')
+            ->numeric('quote');
 
         $validator
             ->scalar('token')
