@@ -38,36 +38,37 @@ $cakeDescription = 'Instant Marquees';
 <body>
 
 <?php $this->assign('title', 'Reset Password'); ?>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div style="padding-top: 25px;">
+                <div class="panel-body">
 
-<div class="limiter">
 
-    <div class="container-login100">
-
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-
-            <div class="users-form">
-
-                <a class="login100-form-title p-b-49">Reset Password</a>
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Reset password</h3>
+                        </div>
 
                 <?= $this->Form->create($employee) ?>
 
-                <div class="wrap-input100 m-b-23">
+                        <div class="form-group">
 
-                    <?= $this->Form->input('password', ['required' => true, 'autofocus' => true]); ?>
+                    <?= $this->Form->input('password', ['required' => true, 'autofocus' => true,'class' => 'form-control']); ?>
 
                 </div>
 
                 <p class="helper">Passwords must be at least 8 characters</p>
 
-                <div class="wrap-input100 m-b-23">
+                        <div class="form-group">
 
-                    <?= $this->Form->input('confirm_password', ['type' => 'password', 'required' => true]); ?>
+                    <?= $this->Form->input('confirm_password', ['type' => 'password', 'required' => true,'class' => 'form-control']); ?>
 
                 </div>
 
                 　
 
-                <?= $this->Form->button('Submit', ['class' => 'login100-form-btn']); ?>
+                <?= $this->Form->button('Submit', ['class' => 'btn btn-lg btn-success btn-block']); ?>
 
                 <?= $this->Form->end(); ?>
 

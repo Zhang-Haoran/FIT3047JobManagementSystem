@@ -17,7 +17,6 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
             <tr>
-                <th scope="col"><?= __('id') ?></th>
                 <th scope="col"><?= __('name') ?></th>
                 <th scope="col"><?= __('phone') ?></th>
                 <th scope="col"><?= __('email') ?></th>
@@ -31,7 +30,6 @@
         <tbody>
             <?php foreach ($contacts as $contact): ?>
             <tr>
-                <td><?= $this->Number->format($contact->id) ?></td>
                 <td><?= h($contact->name) ?></td>
                 <td><?= h($contact->phone) ?></td>
                 <td><?= h($contact->email) ?></td>
