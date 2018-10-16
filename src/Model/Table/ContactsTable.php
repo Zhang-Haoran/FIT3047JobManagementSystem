@@ -66,21 +66,47 @@ class ContactsTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmpty('name')
+            ->add('name','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'message' => 'Name should contain character only'
+            ]);
 
         $validator
             ->scalar('phone')
             ->maxLength('phone', 15)
             ->allowEmpty('phone');
+            $australianMobile = '/^(0|\+61)4\d{8}$/';
+            $validator
+            ->add('phone', 'custom', [
+                'rule' => function ($value, $context) use ($australianMobile) {
+                    // remove spaces to make the regex simpler
+                    $check = preg_replace('/\s/', '', $value);
+
+                    // checks for either of these styles
+                    // +61412 345 678 or 0412 345 678
+                    $found = preg_match($australianMobile, $check);
+                    return boolval($found);
+                },
+                'message' => 'Your phone format is not valid'
+            ]);
 
         $validator
             ->email('email')
-            ->allowEmpty('email');
+            ->allowEmpty('email')
+            ->add('email','validEmail',[
+                'rule' => 'email',
+                'message' => 'Your e-mail format is not valid'
+            ]);
 
         $validator
             ->scalar('role')
             ->maxLength('role', 255)
-            ->allowEmpty('role');
+            ->allowEmpty('role')
+            ->add('name','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z]*$/'),
+                'message' => 'Name should contain character only'
+            ]);
 
         $validator
             ->boolean('is_deleted')

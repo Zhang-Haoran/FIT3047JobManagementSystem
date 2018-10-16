@@ -26,7 +26,7 @@
             </div>
             <div class="panel-body">
 
-                <div class="form-group"><?= $this->Form->control('password',  ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('password',  ['type' => 'password','class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('confirmed_password', ['type' => 'password','class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']) ?></div>

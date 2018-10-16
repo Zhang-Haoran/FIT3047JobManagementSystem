@@ -63,6 +63,7 @@ class ImagesTable extends Table
 
         $validator
             ->scalar('description')
+            ->maxLength('description', 500)
             ->allowEmpty('description');
 
         return $validator;
