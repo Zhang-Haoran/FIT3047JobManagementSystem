@@ -30,7 +30,7 @@
                 <div class="form-group"><?= $this->Form->control('confirmed_password', ['type' => 'password','class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('access_level', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('access_level', array('class' => 'form-control', 'type' => 'select', 'options' => $acLOptions)) ?></div>
                 <?php
                 echo $this->Form->hidden('token');
                 echo $this->Form->hidden('timeout');
