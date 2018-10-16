@@ -34,11 +34,11 @@
 
                     <?php
                     if( $employee->access_level == 1)
-                        echo "<td class='text-warning'>Administrator</td>";
+                        echo "<td class='p-3 mb-2 bg-primary text-white'>Administrator</td>";
                     elseif ($employee->access_level == 2)
-                        echo "<td>Office Staff</td>";
+                        echo "<td class='p-3 mb-2 bg-danger text-white'>Office Staff</td>";
                     elseif($employee->access_level == 3)
-                        echo "<td>Field Employee</td>";
+                        echo "<td class='p-3 mb-2 bg-info text-white'>Field Employee</td>";
                     ?>
 
                 <td><?= $this->Html->link(__('View'), ['action' => 'view', $employee->id]) ?>
