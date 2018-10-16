@@ -6,39 +6,17 @@
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('View Job') ?></h1>
+        <h1 class="page-header"><?=h($job->name) ?></h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
 
-<?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div id="map"></div>
-    </div>
-</div>
-
-
-
 <div class="col-lg-6">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <th>Job Name: <?=h($job->name) ?></th>
-        </div>
-
-
-
-
         <table class="panel-body">
             <tr class="table-responsive">
-                <table id="table" class="table table-striped table-bordered table-hover">
+                <table id="table" class="table table-striped">
                 <tbody>
-
-        <tr>
-            <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($job->name) ?></td>
-        </tr>
         <tr>
             <th scope="row"><?= __('Status') ?></th>
             <td><?= h($job->job_status) ?></td>
@@ -46,8 +24,11 @@
         <tr>
             <th scope="row"><?= __('Site') ?></th>
             <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?></td>
-            <td><b>Address: </b></td>
-            <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Address') ?></th>
+            <td><?= $job->has('address') ? $this->Html->link($job->site->address, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
+            <class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Event Type') ?></th>
@@ -199,6 +180,16 @@
     <?php endif; ?>
             </tr>
         </table>
+
+
+        <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="map"></div>
+            </div>
+        </div>
+
     </div>
 </div>
 
