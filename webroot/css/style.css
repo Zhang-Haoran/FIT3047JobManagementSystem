@@ -11,7 +11,7 @@ html {
 
 .footer {
     margin-top: 10px;
-    position: absolute;
+    position: static;
     bottom: 0;
     width: 100%;
     /* Set the fixed height of the footer here */
@@ -24,23 +24,22 @@ body {
 }
 #wrapper {
   width: 100%;
+  /* Negative indent footer by its height */
+  margin: 0px 0px -60px;
+  /* Pad bottom by footer height */
+  padding: 0px 0 60px;
 }
+
 #page-wrapper {
+  padding: 2px 15px;
   min-height: 568px;
   background-color: white;
-  /* Negative indent footer by its height */
-  margin: 20px 15px -60px;
-  /* Pad bottom by footer height */
-  padding: 30px 0 60px;
-
 }
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-
-    margin: 0 0 -60px 250px;
-    padding: 30px 0 60px;
-
+    margin: 0 0 0 250px;
+    padding: 0 10px 15px 10px;
     border-left: 1px solid #e7e7e7;
   }
 }
@@ -481,4 +480,3 @@ table.dataTable thead .sorting:after {
   background-color:#a90329;
   color:#fff;
 }
-
