@@ -37,8 +37,13 @@ body {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
+<<<<<<< HEAD
     margin: 0 0 -60px 250px;
     padding: 30px 0 60px;
+=======
+    margin: 0 0 0 250px;
+    padding: 0 30px;
+>>>>>>> 601f13cb529ce8a87d79f9b0f1c20651ab2c5b45
     border-left: 1px solid #e7e7e7;
   }
 }
@@ -461,7 +466,22 @@ table.dataTable thead .sorting:after {
   visibility: visible;
 }
 
+<<<<<<< HEAD
 #map{
     height: 500px;
     margin-top: 2%;
 }
+=======
+.required > label {
+  font-weight: bold;
+}
+.required > label:after {
+  content: ' *';
+  color: #C3232D;
+}
+
+.error-message {
+  background-color:#a90329;
+  color:#fff;
+}
+>>>>>>> 601f13cb529ce8a87d79f9b0f1c20651ab2c5b45
