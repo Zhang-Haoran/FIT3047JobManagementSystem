@@ -4,32 +4,45 @@
  * @var \App\Model\Entity\Contact $contact
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $contact->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $contact->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Contacts'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Jobs'), ['controller' => 'Jobs', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Job'), ['controller' => 'Jobs', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="contacts form large-9 medium-8 columns content">
-    <?= $this->Form->create($contact) ?>
-    <fieldset>
-        <legend><?= __('Edit Contact') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('phone');
-            echo $this->Form->control('email');
-            echo $this->Form->control('role');
-            echo $this->Form->control('jobs_id', ['options' => $jobs]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit'),['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
-    <?= $this->Form->end() ?>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?= __('Edit Contact') ?></h1>
+    </div>
+    <!-- /.col-lg-12 -->
 </div>
+
+
+
+<div class="stocks form large-9 medium-8 columns content">
+    <?= $this->Form->create($contact) ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Basic details
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('role', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('job_id', ['option' => $jobs]); ?></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
+        <?= $this->Form->end() ?>
+    </div>
+
+
+
+
+    
