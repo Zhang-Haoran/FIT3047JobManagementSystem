@@ -62,16 +62,25 @@ class StocksTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmpty('name')
+            ->add('name','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'message' => 'Name should contain character only'
+            ]);
 
         $validator
             ->numeric('rent_value')
             ->greaterThanOrEqual('rent_value', 0)
-            ->allowEmpty('rent_value');
+            ->allowEmpty('rent_value')
+            ->numeric('rent_value')
+            ->greaterThanOrEqual('rent_value',0);
+
 
         $validator
             ->integer('min_accs')
-            ->allowEmpty('min_accs');
+            ->allowEmpty('min_accs')
+            ->numeric('min_accs')
+            ->greaterThanOrEqual('min_accs',0);
 
         $validator
             ->boolean('is_deleted')
