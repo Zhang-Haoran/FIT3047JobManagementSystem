@@ -11,6 +11,20 @@
     <!-- /.col-lg-12 -->
 </div>
 
+
+
+
+<style>
+    #map{
+        height: 500px;
+        width: 80%;
+        margin-top: 2%;
+    }
+</style>
+
+
+
+
 <div class="col-lg-6">
     <div class="panel panel-default">
         <table class="panel-body">
