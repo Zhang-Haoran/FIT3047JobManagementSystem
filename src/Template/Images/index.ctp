@@ -18,7 +18,7 @@
                 <thead>
                     <tr>
                         <th scope="col"><?= __('Path') ?></th>
-                        <th scope="col"><?= __('Description') ?></th>
+                        <th scope="col"><?= __('Name') ?></th>
                         <th scope="col"><?= __('Job name') ?></th>
                     </tr>
                 </thead>
@@ -27,7 +27,7 @@
                     <tr>
                         <td class="center"><?= h($image->path) ?></td>
                         <td class="center"><?= h($image->description) ?></td>
-                        <td class="center"><?= $customer->has('job_id') ? $this->Html->link($image->job_id->name, ['controller' => 'Jobs', 'action' => 'view', $image->job_id->id]) : '' ?></td>
+                        <td class="center"><?= $image->has('job_id') ? $this->Html->link($image->job_id->name, ['controller' => 'Jobs', 'action' => 'view', $image->job_id->id]) : '' ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
