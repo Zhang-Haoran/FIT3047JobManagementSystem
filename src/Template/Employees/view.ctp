@@ -32,8 +32,6 @@
                         <th>Last Name:</th>
                         <td><?= h($employee->lname) ?></td>
                     </tr>
-
-
                     <tr>
                         <th>Phone Number:</th>
                         <td><?= h($employee->phone) ?></td>
@@ -54,12 +52,8 @@
                         ?>
 
                     </tr>
-
-
                     </tbody>
                 </table>
-
-                <!--                            -->
             </div>
     </div>
 </div>

@@ -13,51 +13,22 @@
     <!-- /.col-lg-12 -->
 </div>
 
-
-
-
-
-
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Customer ID: <?=h($customer->id) ?></th>
+            <th>Customer details</th>
         </div>
-
-
 
 
         <table class="panel-body">
             <tr class="table-responsive">
                 <table id="table" class="table table-striped table-bordered table-hover">
 
+        <tr>
+            <th scope="row"><?= __('Name') ?></th>
+            <td><?= h($customer->name) ?></td>
+        </tr>
 
-
-
-        <tr>
-            <th scope="row"><?= __('First name') ?></th>
-            <td><?= h($customer->fname) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Last name') ?></th>
-            <td><?= h($customer->lname) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Contact name') ?></th>
-            <td><?= h($customer->contact) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Phone number') ?></th>
-            <td><?= h($customer->phone) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Mobile number') ?></th>
-            <td><?= h($customer->mobile) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Email address') ?></th>
-            <td><?= h($customer->email) ?></td>
-        </tr>
         <tr>
             <th scope="row"><?= __('Type') ?></th>
             <td><?= $customer->has('cust_type') ? $this->Html->link($customer->cust_type->name, ['controller' => 'CustTypes', 'action' => 'view', $customer->cust_type->id]) : '' ?></td>
@@ -68,19 +39,11 @@
 </div>
 </div>
 
-
-
-
-
-
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Customer ID: <?=h($customer->id) ?> Related to jobs</th>
+            <th>Jobs related to customer</th>
         </div>
-
-
-
 
         <table class="panel-body">
             <tr class="table-responsive">
@@ -89,7 +52,6 @@
 
 
                 <tr>
-                    <th scope="row"><?= __('Id') ?></th>
                     <th scope="row"><?= __('Name') ?></th>
                     <th scope="row"><?= __('Status') ?></th>
                     <th scope="row"><?= __('Job Date') ?></th>
@@ -99,9 +61,8 @@
                 </tr>
                 <?php foreach ($customer->jobs as $jobs): ?>
                     <tr>
-                        <td><?= h($jobs->id) ?></td>
                         <td><?= h($jobs->name) ?></td>
-                        <td><?= h($jobs->status) ?></td>
+                        <td><?= h($jobs->job_status) ?></td>
                         <td><?= h($jobs->job_date) ?></td>
                         <td><?= h($jobs->booked_date) ?></td>
 
