@@ -65,25 +65,21 @@ class ImagesController extends AppController
 
         $image = $this->Images->newEntity();
         if ($this->request->is('post')) {
+
+            $imageName = $this->request->getData()['path']['name'];
+            $imageTep = $this->request->getData()['path']['tmp_name'];
+
+
             $image = $this->Images->patchEntity($image, $this->request->getData());
-            if (!empty($this->data['images']['path']['description'])) {
+            $this->loadModel('Jobs');
 
-                $file = $this->data['images']['path'];
-                $image['description'] = $file['name'];
-                $dir = WWW_ROOT . 'img' . DS;
+               $dir = '/img' . $imageName;
+               $image->description = $imageName;
+               $image->path = $dir;
+               $image->job_id = 1;
 
-
-                if (move_uploaded_file($file['tmp_name'], $dir . $file['name'])) {
-                    $this->Flash->error(__('Image could not be saved. Please, try again.'));
-                    return $this->redirect(['action' => 'index']);
-
-                }
-
-
-            }
-
-
-            if ($this->Images->save($image)) {
+            if (move_uploaded_file($imageTep, WWW_ROOT.$dir)) {
+                $this->Images->save($image);
                 $this->Flash->success(__('The image has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
