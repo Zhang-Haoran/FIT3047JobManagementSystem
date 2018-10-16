@@ -19,7 +19,7 @@
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Contact Name: <?= h($contact->name) ?></th>
+            <th>Contact Details</th>
         </div>
 
         <table class="panel-body">
