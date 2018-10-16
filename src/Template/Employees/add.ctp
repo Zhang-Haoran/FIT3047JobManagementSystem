@@ -39,7 +39,7 @@
 
             </div>
         </div>
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%']) ?>
+        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-outline btn-primary btn-lg btn-block', 'style' => 'width:95%;margin-left:2.5%', 'id' => 'btnSubmit']) ?>
     </div>
 
 </div>
