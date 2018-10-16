@@ -60,7 +60,7 @@ class SitesTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name','Site name can not be empty')
             ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'rule' => array('custom','/^[ a-zA-Z ]*$/'),
                 'message' => 'Name should contain character only'
             ]);
 
