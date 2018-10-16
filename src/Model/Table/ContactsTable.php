@@ -68,7 +68,7 @@ class ContactsTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z]*$/'),
+                'rule' => array('custom','/^[ a-zA-Z]*$/'),
                 'message' => 'Name should contain character only'
             ]);
 
@@ -103,7 +103,7 @@ class ContactsTable extends Table
             ->scalar('role')
             ->maxLength('role', 255)
             ->allowEmpty('role')
-            ->add('name','characterOnly',[
+            ->add('role','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z]*$/'),
                 'message' => 'Name should contain character only'
             ]);

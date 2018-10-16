@@ -64,7 +64,7 @@ class StocksTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'rule' => array('custom','/^[ a-zA-Z ]*$/'),
                 'message' => 'Name should contain character only'
             ]);
 
