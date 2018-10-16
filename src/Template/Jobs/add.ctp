@@ -6,8 +6,7 @@
 ?>
 
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
-<?= $this->html->script('jquery.js')?>
-<?= $this->html->script('jquery.datetimepicker.full.js')?>
+<?= $this->html->script('jquery.datetimepicker.full.js', ['block' => scriptBottom]); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -163,7 +162,7 @@
                     <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']) ?></div>
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
                 </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
                 <?= $this->Form->end() ?>
             </div>
         </div>
@@ -172,27 +171,48 @@
 </div>
 
 
-<script>
-    $("#job_datetime").datetimepicker({
-     defaultDate: new Date(),
-     assumeNearbyYear: true,
-     step:1
-     });
-    $("#e_arrival_datetime").datetimepicker({
-     defaultDate: new Date(),
-     step:1
-     });
-     $("#e_setup_datetime").datetimepicker({
-      defaultDate: new Date(),
-      step:1
-      });
-      $("#e_pickup_datetime").datetimepicker({
-       defaultDate: new Date(),
-       step:1
-       });
-    $(document).ready(function() {
-        $("#type_html_id").chosen();
-        $("#cust_html_id").chosen();
-        $("#site_html_id").chosen();
-    });
-</script>
+<?php
+  $this->Html->scriptStart(array("block"=>'script'));
+?>
+$("#job_datetime").datetimepicker({
+ defaultDate: new Date(),
+ assumeNearbyYear: true,
+ step:1
+ });
+$("#e_arrival_datetime").datetimepicker({
+ defaultDate: new Date(),
+ step:1
+ });
+ $("#e_setup_datetime").datetimepicker({
+  defaultDate: new Date(),
+  step:1
+  });
+  $("#e_pickup_datetime").datetimepicker({
+   defaultDate: new Date(),
+   step:1
+   });
+
+   $("#job_datetime").on("dp.change", function (e) {
+       $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
+       $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
+       $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+   });
+   $("#e_arrival_datetime").on("dp.change", function (e) {
+       $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
+   });
+   $("#e_setup_datetime").on("dp.change", function (e) {
+       $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+   });
+
+
+;
+
+
+$(document).ready(function() {
+    $("#type_html_id").chosen();
+    $("#cust_html_id").chosen();
+    $("#site_html_id").chosen();
+});
+<?php
+  $this->Html->scriptEnd();
+?>

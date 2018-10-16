@@ -36,7 +36,7 @@ body {
   #page-wrapper {
     position: inherit;
     margin: 0 0 0 250px;
-    padding: 0 30px;
+    padding: 30px;
     border-left: 1px solid #e7e7e7;
   }
 }
@@ -457,17 +457,4 @@ table.dataTable thead .sorting:after {
 .tab-pane.fade.in.active{
   display: block;
   visibility: visible;
-}
-
-.required > label {
-  font-weight: bold;
-}
-.required > label:after {
-  content: ' *';
-  color: #C3232D;
-}
-
-.error-message {
-  background-color:#a90329;
-  color:#fff;
 }

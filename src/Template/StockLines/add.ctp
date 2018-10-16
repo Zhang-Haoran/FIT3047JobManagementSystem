@@ -16,7 +16,7 @@
         ?>
 
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit', ['id' => 'btnSubmit'])) ?>
     <?= $this->Form->end() ?>
 </div>
 

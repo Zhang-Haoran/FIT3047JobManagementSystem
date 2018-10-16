@@ -142,7 +142,7 @@ class CustomersController extends AppController
             return $this->redirect($this->Auth->redirectUrl());
         }
 
-        $this->request->allowMethod(['get', 'delete']);
+        $this->request->allowMethod(['post', 'delete']);
         $customer = $this->Customers->get($id);
         if ($this->Customers->delete($customer)) {
             $this->Flash->success(__('The customer has been deleted.'));
