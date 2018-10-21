@@ -25,14 +25,11 @@
                         <div class="row">
                             <div class="col-lg-6">
 
-                                <div class="form-group"><?= $this->Form->control('fname', ['label' => 'First name', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('lname', ['label' => 'Last name', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('contact', ['label' => 'Contact number', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('phone', ['label' => 'Phone number', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('mobile', ['label' => 'Mobile number', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('email', ['label' => 'Email address', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->hidden('is_deleted'); ?></div>
+                                <div class="panel-body">
+                                    <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','label' => 'Name']) ?></div>
+                                    <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type', 'class' => 'form-control']) ?></div>
+
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -89,7 +89,7 @@ class JobsTable extends Table
             ->notEmpty('name')
             ->add('name','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'name should contain character only'
+                'message' => 'Name should contain character only'
             ]);
 
         $validator
