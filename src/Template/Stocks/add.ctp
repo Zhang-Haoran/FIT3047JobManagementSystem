@@ -27,8 +27,8 @@
             </div>
             <div class="panel-body">
 
-                <div class="form-group"><?= $this->Form->control('rent_value', ['class' => 'form-control','min'=>'0',  'value'=>'0', 'step'=>'1']) ?></div>
-                <div class="form-group"><?= $this->Form->control('min_accs', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('rent value', ['class' => 'form-control','min'=>'0',  'value'=>'0', 'step'=>'1']) ?></div>
+                <div class="form-group"><?= $this->Form->control('minimum accessory', ['class' => 'form-control']) ?></div>
                 <div class="form-group"><?= $this->Form->control('accessorie_id', ['label' => 'Accessory', 'options' => $accessories, 'empty' => true,'class' => 'form-control']) ?></div>
 
 

@@ -60,7 +60,7 @@ class SitesTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name','Site name can not be empty')
             ->add('name','characterOnly',[
-                'rule' => array('custom','/^[ a-zA-Z ]*$/'),
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
                 'message' => 'Name should contain character only'
             ]);
 
@@ -69,9 +69,9 @@ class SitesTable extends Table
             ->maxLength('address', 255,'Address can not be too long')
             ->requirePresence('address', 'create')
             ->notEmpty('address','Address can not be empty')
-            ->add('address','characterOnly',[
+            ->add('name','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Address should contain character only'
+                'message' => 'Name should contain character only'
             ]);
 
         $validator
@@ -79,9 +79,9 @@ class SitesTable extends Table
             ->maxLength('suburb', 255,'Suburb can not be too long')
             ->requirePresence('suburb', 'create')
             ->notEmpty('suburb','Suburb van not be empty')
-            ->add('suburb','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z ]*$/'),
-                'message' => 'Suburb should contain character only'
+            ->add('name','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Name should contain character only'
             ]);
 
         $validator
