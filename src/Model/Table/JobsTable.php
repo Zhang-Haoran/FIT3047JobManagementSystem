@@ -87,7 +87,10 @@ class JobsTable extends Table
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
             ->notEmpty('name')
-            ->alphaNumeric('name','Job name must be alphanumeric.');
+            ->add('name','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Name should contain character only'
+            ]);
 
         $validator
             ->scalar('job_status')

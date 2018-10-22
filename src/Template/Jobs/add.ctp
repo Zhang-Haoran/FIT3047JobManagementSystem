@@ -29,6 +29,8 @@
                     </li>
                     <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
                     </li>
+                    <li><a href="#contacts" data-toggle="tab">Contacts</a>
+                    </li>
                 </ul>
                 <div class="panel-body">
                         <div class="tab-pane fade in active" id="job">
@@ -109,6 +111,11 @@
                             <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
+
+                        <div class="tab-pane fade" id="contacts">
+                          <h1>Work in progress</h1>
+                        </div>
+                        
                       </div>
                     </div>
     <div class ="col-lg-12">
@@ -139,7 +146,7 @@
                             echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
                             ?>
                         </fieldset>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg' ,'disabled']) ?>
                         <?= $this->Form->end() ?>
                     </div>
                 </div>
@@ -162,7 +169,7 @@
                     <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']) ?></div>
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
                 </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit' ,'disabled']) ?>
                 <?= $this->Form->end() ?>
             </div>
         </div>

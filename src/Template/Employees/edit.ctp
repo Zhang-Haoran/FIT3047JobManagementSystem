@@ -33,7 +33,7 @@
                                 <!--add password match feature, to make sure user don't type unexpected password.-->
                                 <div class="form-group"><?= $this->Form->control('phone',  ['label' => 'Phone Number', 'class' => 'form-control']); ?></div>
                                 <div class="form-group"><?= $this->Form->control('email',  ['label' => 'Email', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('access_level',  ['label' => 'Access Level', 'class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('access_level', array('class' => 'form-control', 'type' => 'select', 'options' => $acLOptions)) ?></div>
                                 <?php
                                 echo $this->Form->hidden('token');
                                 echo $this->Form->hidden('timeout');

@@ -40,7 +40,16 @@
             <?php foreach ($jobs as $job): ?>
             <tr>
                 <td><?= h($job->name) ?></td>
-                <td><?= h($job->job_status) ?></td>
+                <?php
+                if( $job->job_status == 'Started')
+                    echo "<td class='bg-danger text-white'>Started</td>";
+                elseif ($job->job_status == 'Confirmed')
+                    echo "<td class='bg-success text-white'>Confirmed</td>";
+                elseif($job->job_status == 'Quote')
+                    echo "<td class='bg-warning text-white'>Quote</td>";
+                elseif($job->job_status == 'Completed')
+                    echo "<td class='bg-info text-white'>Completed</td>";
+                ?>
                 <td><?= h($job->job_date) ?></td>
                 <td class="center"><?= h($job->booked_date) ?></td>
                 <td class="center"><?= $this->Number->format($job->price) ?></td>

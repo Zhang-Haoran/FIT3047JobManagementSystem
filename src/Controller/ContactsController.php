@@ -25,7 +25,7 @@ class ContactsController extends AppController
             return $this->redirect($this->Auth->redirectUrl());
         }
 
-        $contacts = $this->Contacts->find('all');
+        $contacts = $this->Contacts->find('all')->contain(['Jobs']);
 
         $this->set(compact('contacts'));
     }
