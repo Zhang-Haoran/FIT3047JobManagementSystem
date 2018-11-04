@@ -36,7 +36,7 @@ $cakeDescription = 'Instant Marquees';
 <!-- Sticky Footer -->
 
 
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom:10%">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div style="padding-top: 25px;">
@@ -54,11 +54,11 @@ $cakeDescription = 'Instant Marquees';
                             <div class="form-group">
                                 <?= $this->Form->control('email', ['class' => 'form-control', 'placeholder' => 'E-mail', 'autofocus']) ?>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" style="margin-bottom: 0px;">
                                 <?= $this->Form->control('password', ['class' => 'form-control', 'placeholder' => 'Password']) ?>
                             </div>
                             <div class="nav-link">
-                                <?= $this->Html->link(__('Forgot Password'), ['controller' => 'Employees', 'action' => 'password'], ['class' => 'btn btn-link']) ?>
+                                <?= $this->Html->link(__('Forgot Password'), ['controller' => 'Employees', 'action' => 'password'], ['class' => 'btn btn-link', 'style' => 'margin-bottom:0px;font-size:18px;']) ?>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
                             <?= $this->Form->button(__('Login'), ['class' => 'btn btn-lg btn-success btn-block']) ?>
@@ -70,7 +70,7 @@ $cakeDescription = 'Instant Marquees';
         </div>
     </div>
 </div>
-<footer class="footer">
+<footer class="footer" style="position:fixed;">
     <div class="container">
         <p class="text-muted text-center pad-20">Copyright © Instant Marquees 2018</p>
     </div>
