@@ -24,10 +24,10 @@
                     <div class="tab-content">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']); ?></div>
                                 <div class="form-group"><?= $this->Form->hidden('is_deleted', ['class' => 'form-control']); ?></div>
                             </div>
                         </div>
