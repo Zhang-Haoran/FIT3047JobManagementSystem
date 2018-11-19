@@ -71,7 +71,7 @@ class SitesTable extends Table
             ->notEmpty('address','Address can not be empty')
             ->add('name','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain character only'
+                'message' => 'Name should contain [a-zA-Z 0-9] only'
             ]);
 
         $validator
@@ -81,7 +81,7 @@ class SitesTable extends Table
             ->notEmpty('suburb','Suburb van not be empty')
             ->add('name','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain character only'
+                'message' => 'Name should contain [a-zA-Z 0-9] only'
             ]);
 
         $validator
@@ -89,7 +89,7 @@ class SitesTable extends Table
             ->maxLength('postcode', 5,'Postcode can not be too long')
             ->requirePresence('postcode', 'create')
             ->notEmpty('postcode','Postcode can not be empty')
-            ->numeric('postcode','Postcode must be number');
+            ->numeric('postcode','Postcode should be number');
 
         $validator
             ->boolean('is_deleted')

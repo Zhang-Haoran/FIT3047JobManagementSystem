@@ -24,9 +24,9 @@
                     <div class="tab-content">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('rent value', ['class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('minimum accessory', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('rent value', ['class' => 'form-control','placeholder' => 'rent value should be numeric']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('minimum accessory', ['class' => 'form-control','placeholder' => 'minimum accessory should be numeric']); ?></div>
                                 <div class="form-group"><?= $this->Form->control('accessorie_id', ['options' => $accessories, 'empty' => true, 'class' => 'form-control']); ?></div>
                                 <div class="form-group"><?= $this->Form->hidden('is_deleted'); ?></div>
                             </div>
