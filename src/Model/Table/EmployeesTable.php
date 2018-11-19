@@ -60,8 +60,8 @@ class EmployeesTable extends Table
             ->requirePresence('fname', 'create')
             ->notEmpty('fname','First name can not be empty')
             ->add('fname','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z]*$/'),
-                'message' => 'Your name should contain character only'
+                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'message' => 'Your name should contain [a-zA-Z ] only'
             ]);
 
         $validator
@@ -70,8 +70,8 @@ class EmployeesTable extends Table
             ->requirePresence('lname', 'create')
             ->notEmpty('lname','Last name can not be empty')
             ->add('lname','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z]*$/'),
-                'message' => 'Your name should contain character only'
+                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'message' => 'Your name should contain [a-zA-Z ] only'
             ]);
 
         $validator
@@ -105,7 +105,7 @@ class EmployeesTable extends Table
                 $found = preg_match($australianMobile, $check);
                 return boolval($found);
             },
-            'message' => 'Your phone format is not valid'
+            'message' => 'Your phone format should be like +61412 345 678 or 0412 345 678'
         ]);
 
 
@@ -115,7 +115,7 @@ class EmployeesTable extends Table
             ->allowEmpty('email')
             ->add('email','validEmail',[
                 'rule' => 'email',
-                'message' => 'Your e-mail format is not valid'
+                'message' => 'Your e-mail format should be like example@example.com'
             ]);
 
 
@@ -126,7 +126,7 @@ class EmployeesTable extends Table
             ->numeric('access_level')
             ->add('access_level','1-3',[
                 'rule' => array('custom','/^[1-3]*$/'),
-                'message' => 'Your name should be 1-3 '
+                'message' => 'Your access level should be 1-3 '
             ]);
 
 

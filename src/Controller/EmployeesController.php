@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -17,18 +18,19 @@ use Cake\Mailer\Email;
  */
 class EmployeesController extends AppController
 {
-  public function initialize()
-{
-    parent::initialize();
-    $this->Auth->allow([
-      'logout',
-      'password',
-      'reset',
-      //'add',
-      //'index'
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow([
+            'logout',
+            'password',
+            'reset',
+            //'add',
+            //'index'
 
-  ]);
-}
+        ]);
+    }
+
     /**
      * Index method
      *
@@ -36,11 +38,10 @@ class EmployeesController extends AppController
      */
     public function index()
     {
-        if($this->Auth->user('access_level')=='3'){
+        if ($this->Auth->user('access_level') == '3') {
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
             return $this->redirect($this->Auth->redirectUrl());
-        }
-        elseif ($this->Auth->user('access_level')=='2'){
+        } elseif ($this->Auth->user('access_level') == '2') {
             $this->Flash->set(__('You have no authorization to access this page as a office staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
@@ -58,11 +59,10 @@ class EmployeesController extends AppController
      */
     public function view($id = null)
     {
-        if($this->Auth->user('access_level')=='3'){
+        if ($this->Auth->user('access_level') == '3') {
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
             return $this->redirect($this->Auth->redirectUrl());
-        }
-        elseif ($this->Auth->user('access_level')=='2'){
+        } elseif ($this->Auth->user('access_level') == '2') {
             $this->Flash->set(__('You have no authorization to access this page as a office staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
@@ -80,11 +80,10 @@ class EmployeesController extends AppController
      */
     public function add()
     {
-        if($this->Auth->user('access_level')=='3'){
-        $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+        if ($this->Auth->user('access_level') == '3') {
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
             return $this->redirect($this->Auth->redirectUrl());
-        }
-        elseif ($this->Auth->user('access_level')=='2'){
+        } elseif ($this->Auth->user('access_level') == '2') {
             $this->Flash->set(__('You have no authorization to access this page as a office staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
@@ -111,11 +110,10 @@ class EmployeesController extends AppController
      */
     public function edit($id = null)
     {
-        if($this->Auth->user('access_level')=='3'){
+        if ($this->Auth->user('access_level') == '3') {
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
             return $this->redirect($this->Auth->redirectUrl());
-        }
-        elseif ($this->Auth->user('access_level')=='2'){
+        } elseif ($this->Auth->user('access_level') == '2') {
             $this->Flash->set(__('You have no authorization to access this page as a office staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
@@ -144,11 +142,10 @@ class EmployeesController extends AppController
      */
     public function delete($id = null)
     {
-        if($this->Auth->user('access_level')=='3'){
+        if ($this->Auth->user('access_level') == '3') {
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
             return $this->redirect($this->Auth->redirectUrl());
-        }
-        elseif ($this->Auth->user('access_level')=='2'){
+        } elseif ($this->Auth->user('access_level') == '2') {
             $this->Flash->set(__('You have no authorization to access this page as a office staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
@@ -162,6 +159,7 @@ class EmployeesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
     /**
      * Login method
      */
@@ -173,22 +171,21 @@ class EmployeesController extends AppController
             if ($employee) {
                 $this->Auth->setUser($employee);
 //                return $this->redirect($this->Auth->redirectUrl());
-                if($this->Auth->user('access_level')== '1'){
+                if ($this->Auth->user('access_level') == '1') {
                     $this->Flash->success('You have logged in as admin');
-                    return $this->redirect(['controller' => 'jobs','action' => 'index']);
-                }
-                elseif ($this->Auth->user('access_level')=='2'){
+                    return $this->redirect(['controller' => 'jobs', 'action' => 'index']);
+                } elseif ($this->Auth->user('access_level') == '2') {
                     $this->Flash->success('You have logged in as office staff');
-                    return $this->redirect(['controller' => 'jobs','action' => 'index']);
-                }
-                elseif ($this->Auth->user('access_level')=='3'){
+                    return $this->redirect(['controller' => 'jobs', 'action' => 'index']);
+                } elseif ($this->Auth->user('access_level') == '3') {
                     $this->Flash->success('You have logged in as field staff');
-                    return $this->redirect(['controller' => 'jobs','action' => 'index']);
+                    return $this->redirect(['controller' => 'jobs', 'action' => 'index']);
                 }
             }
             $this->Flash->error('Your username or password is incorrect.');
         }
     }
+
     /**
      * Logout method
      */
@@ -197,6 +194,7 @@ class EmployeesController extends AppController
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
     }
+
     /**
      * Forget Password method
      */
@@ -211,7 +209,7 @@ class EmployeesController extends AppController
                 $token = uniqid();
                 $url = Router::Url(['controller' => 'Employees', 'action' => 'reset'], true) . '/' . $token;
                 $timeout = time() + DAY;
-                if ($this->Employees->updateAll(['token' => $token, 'timeout' => $timeout], ['id' => $employee->id])){
+                if ($this->Employees->updateAll(['token' => $token, 'timeout' => $timeout], ['id' => $employee->id])) {
                     $this->sendResetEmail($url, $employee);
                     return $this->redirect(['action' => 'login']);
                 } else {
@@ -221,12 +219,13 @@ class EmployeesController extends AppController
         }
 
 
-
     }
+
     /**
      * Sending the reset password link method
      */
-    private function sendResetEmail($url, $employee) {
+    private function sendResetEmail($url, $employee)
+    {
         $email = new Email();
         $email->template('resetpw');
         $email->emailFormat('both');
@@ -240,10 +239,12 @@ class EmployeesController extends AppController
             $this->Flash->error(__('Error sending email: ') . $email->smtpError);
         }
     }
+
     /**
      * Reseting the password method
      */
-    public function reset($token = null) {
+    public function reset($token = null)
+    {
         if ($token) {
             $query = $this->Employees->find('all', ['conditions' => ['token' => $token, 'timeout >' => time()]]);
             $employee = $query->first();

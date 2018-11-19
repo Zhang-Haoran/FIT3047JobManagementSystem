@@ -13,7 +13,7 @@
                     Basic details
                 </div>
                 <div class="panel-body">
-                       <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
+                       <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </div>
             </div>
     </div>
@@ -23,9 +23,9 @@
                     Site Address
                 </div>
                 <div class="panel-body">
-                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </div>
             </div>
     </div>

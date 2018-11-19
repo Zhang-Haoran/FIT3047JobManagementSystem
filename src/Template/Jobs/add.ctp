@@ -37,7 +37,7 @@
                           <div class="tab-content">
                             <div class="row">
                             <div class="col-lg-6">
-                            <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder'=>'Name']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
@@ -137,12 +137,12 @@
                         <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
                         <fieldset>
                             <?php
-                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control']);
-                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control']);
-                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control']);
-                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control']);
-                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control']);
-                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control']);
+                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control','placeholder' => 'This field is required']);
+                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control','placeholder' => 'This field is required']);
+                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control','placeholder' => 'This field is required']);
+                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
+                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
+                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control','placeholder' => 'example@example.com']);
                             echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
                             ?>
                         </fieldset>
@@ -164,10 +164,10 @@
             <div class="modal-body">
                 <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd']]) ?>
                 <fieldset>
-                    <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </fieldset>
                 <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit' ,'disabled']) ?>
                 <?= $this->Form->end() ?>

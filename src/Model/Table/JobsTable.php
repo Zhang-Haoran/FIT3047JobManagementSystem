@@ -89,7 +89,7 @@ class JobsTable extends Table
             ->notEmpty('name')
             ->add('name','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain character only'
+                'message' => 'Name should contain [a-zA-Z 0-9] only'
             ]);
 
         $validator
@@ -111,13 +111,13 @@ class JobsTable extends Table
             ->numeric('price')
             ->greaterThanOrEqual('price', 0)
             ->allowEmpty('price')
-            ->numeric('price');
+            ->numeric('price','price should be numeric');
 
         $validator
             ->numeric('deposit')
             ->greaterThanOrEqual('deposit', 0)
             ->allowEmpty('deposit')
-            ->numeric('deposit');
+            ->numeric('deposit','deposit should be numeric');
 
         $validator
             ->scalar('order_detail')
@@ -151,20 +151,18 @@ class JobsTable extends Table
         $validator
             ->scalar('Invoice')
             ->maxLength('Invoice', 45)
-            ->allowEmpty('Invoice')
-            ->numeric('Invoice');
+            ->allowEmpty('Invoice');
+
 
         $validator
             ->scalar('job_order')
             ->maxLength('job_order', 45)
-            ->allowEmpty('job_order')
-            ->numeric('job_order');
+            ->allowEmpty('job_order');
 
         $validator
             ->scalar('quote')
             ->maxLength('quote', 45)
-            ->allowEmpty('quote')
-            ->numeric('quote');
+            ->allowEmpty('quote');
 
         $validator
             ->scalar('token')
