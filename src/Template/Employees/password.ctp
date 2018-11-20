@@ -35,25 +35,29 @@ $cakeDescription = 'Instant Marquees';
 
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-fluid" style="margin-bottom: 10%">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div style="padding-top: 25px;">
-<div class="panel-body">
+                <?= $this->Html->image('image_02.gif', ['alt' => 'Logo', 'class' => 'img-responsive center-block']) ?>
+            </div>
+            <div style="padding-top: 25px;">
+
 
 
                 <div class="login-panel panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Reset password</h3>
                     </div>
+                    <div class="panel-body">
+                <?= $this->Form->create('', ['style' => 'margin-bottom:0px']); ?>
 
-                <?= $this->Form->create(); ?>
-
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 0px">
                     <?= $this->Form->control('email', ['autofocus' => true, 'required' => true,'class' => 'form-control']);?>
 
                     </div>
-                    </br>
+
+                    <?= $this->Html->link(__('Back'), ['controller' => 'Employees', 'action' => 'login'], ['class' => 'btn btn-link', 'style' => 'margin-bottom:0px;font-size:18px;']) ?>
 
 
                 <?= $this->Form->button('Request reset email', ['class' => 'btn btn-lg btn-success btn-block']); ?>
@@ -68,6 +72,11 @@ $cakeDescription = 'Instant Marquees';
         </div>
     </div>
 </div>
+<footer class="footer" style="position:fixed;">
+    <div class="container">
+        <p class="text-muted text-center pad-20">Copyright © Instant Marquees 2018</p>
+    </div>
+</footer>
 
 
 

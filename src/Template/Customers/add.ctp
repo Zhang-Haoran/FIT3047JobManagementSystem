@@ -15,7 +15,7 @@
                 Customer detail
             </div>
             <div class="panel-body">
-                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','label' => 'Name']) ?></div>
+                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','label' => 'Name','placeholder' => 'This field is required']) ?></div>
                 <div class="form-group"><?= $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type', 'class' => 'form-control']) ?></div>
 
             </div>

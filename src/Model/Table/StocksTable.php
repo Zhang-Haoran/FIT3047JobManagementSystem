@@ -64,22 +64,22 @@ class StocksTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->add('name','characterOnly',[
-                'rule' => array('custom','/^[ a-zA-Z ]*$/'),
-                'message' => 'Name should contain character only'
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Name should contain [a-zA-Z 0-9] only'
             ]);
 
         $validator
             ->numeric('rent_value')
             ->greaterThanOrEqual('rent_value', 0)
             ->allowEmpty('rent_value')
-            ->numeric('rent_value')
+            ->numeric('rent_value','rent value should be numeric')
             ->greaterThanOrEqual('rent_value',0);
 
 
         $validator
             ->integer('min_accs')
             ->allowEmpty('min_accs')
-            ->numeric('min_accs')
+            ->numeric('min_accs','minimum accessory should be numeric')
             ->greaterThanOrEqual('min_accs',0);
 
         $validator
