@@ -6,9 +6,11 @@ use Cake\ORM\Entity;
 /**
  * StockLine Entity
  *
- * @property int $stock_id
- * @property int $job_id
+ * @property int $id
  * @property int $stock_num
+ * @property bool $loaded
+ * @property int $stocks_id
+ * @property int $jobs_id
  *
  * @property \App\Model\Entity\Stock $stock
  * @property \App\Model\Entity\Job $job
@@ -27,6 +29,9 @@ class StockLine extends Entity
      */
     protected $_accessible = [
         'stock_num' => true,
+        'loaded' => true,
+        'stocks_id' => true,
+        'jobs_id' => true,
         'stock' => true,
         'job' => true
     ];

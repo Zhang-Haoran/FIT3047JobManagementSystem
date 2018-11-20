@@ -9,8 +9,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $stockLine->stock_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $stockLine->stock_id)]
+                ['action' => 'delete', $stockLine->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $stockLine->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Stock Lines'), ['action' => 'index']) ?></li>
@@ -26,6 +26,9 @@
         <legend><?= __('Edit Stock Line') ?></legend>
         <?php
             echo $this->Form->control('stock_num');
+            echo $this->Form->control('loaded');
+            echo $this->Form->control('stocks_id', ['options' => $stocks]);
+            echo $this->Form->control('jobs_id', ['options' => $jobs]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

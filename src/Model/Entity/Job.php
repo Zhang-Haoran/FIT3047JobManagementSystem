@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $job_status
- * @property \Cake\I18n\FrozenTime $job_date
+ * @property \Cake\I18n\FrozenDate $job_date
  * @property \Cake\I18n\FrozenTime $booked_date
  * @property float $price
  * @property float $deposit
@@ -30,14 +30,15 @@ use Cake\ORM\Entity;
  * @property string $token
  * @property \Cake\I18n\FrozenTime $timeout
  * @property bool $is_deleted
+ * @property string $arrive_note
+ * @property string $setup_note
+ * @property string $pickup_note
  *
  * @property \App\Model\Entity\Site $site
  * @property \App\Model\Entity\EventType $event_type
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Employee $employee
- * @property \App\Model\Entity\AccessorieLine[] $accessorie_lines
  * @property \App\Model\Entity\Image[] $images
- * @property \App\Model\Entity\StockLine[] $stock_lines
  */
 class Job extends Entity
 {
@@ -75,13 +76,14 @@ class Job extends Entity
         'token' => true,
         'timeout' => true,
         'is_deleted' => true,
+        'arrive_note' => true,
+        'setup_note' => true,
+        'pickup_note' => true,
         'site' => true,
         'event_type' => true,
         'customer' => true,
         'employee' => true,
-        'accessorie_lines' => true,
-        'images' => true,
-        'stock_lines' => true
+        'images' => true
     ];
 
     /**
