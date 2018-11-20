@@ -46,7 +46,6 @@
 
 </head>
 <body>
-  <div class="contianer-fluid">
     <div id="wrapper"  >
         <!-- Navigation -->
         <!-- Navigation -->
@@ -59,7 +58,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <?php
-                echo $this->Html->image('logo-new.png', ['alt' => 'Logo', 'class' => 'navbar-brand'])
+                 echo $this->Html->link($this->Html->image('logo-new.png', ['alt' => 'Logo', 'class' => 'navbar-brand']), ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                 ?>
             </div>
             <!-- /.navbar-header -->
@@ -274,7 +273,6 @@
             <p class="text-muted text-center">Copyright © Instant Marquees 2018</p>
         </div>
     </footer>
-  </div>
 </body>
 <!-- /#wrapper -->
 

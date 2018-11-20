@@ -68,8 +68,8 @@ class ContactsTable extends Table
             ->requirePresence('name', 'create')
             ->notEmpty('name')
             ->add('name','characterOnly',[
-                'rule' => array('custom','/^[ a-zA-Z]*$/'),
-                'message' => 'Name should contain character only'
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Name should contain [a-zA-Z 0-9] only'
             ]);
 
         $validator
@@ -88,7 +88,7 @@ class ContactsTable extends Table
                     $found = preg_match($australianMobile, $check);
                     return boolval($found);
                 },
-                'message' => 'Your phone format is not valid'
+                'message' => 'Your phone format should be like +61412 345 678 or 0412 345 678'
             ]);
 
         $validator
@@ -96,7 +96,7 @@ class ContactsTable extends Table
             ->allowEmpty('email')
             ->add('email','validEmail',[
                 'rule' => 'email',
-                'message' => 'Your e-mail format is not valid'
+                'message' => 'Your e-mail format should be like example@example.com'
             ]);
 
         $validator
@@ -104,8 +104,8 @@ class ContactsTable extends Table
             ->maxLength('role', 255)
             ->allowEmpty('role')
             ->add('role','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z]*$/'),
-                'message' => 'Name should contain character only'
+                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'message' => 'Name should contain [a-zA-Z ] only'
             ]);
 
         $validator

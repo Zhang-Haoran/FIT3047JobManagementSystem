@@ -13,7 +13,7 @@
                 Contact Name
             </div>
             <div class="panel-body">
-                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','label' => 'Name']) ?>
+                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','label' => 'Name','placeholder' => 'This field is required']) ?>
                 </div>
             </div>
         </div>
@@ -26,10 +26,10 @@
             </div>
             <div class="panel-body">
 
-                <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('role',  ['class' => 'form-control']) ?></div>
-                <div class="form-group"><?= $this->Form->control('jobs_id', ['options' => $jobs, 'label' => 'Type', 'class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']) ?></div>
+                <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control','placeholder' => 'example@example.com']) ?></div>
+                <div class="form-group"><?= $this->Form->control('role',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                <div class="form-group"><?= $this->Form->control('jobs_id', ['options' => $jobs, 'label' => 'Related job', 'class' => 'form-control']) ?></div>
                 <?php
                 echo $this->Form->hidden('is_deleted');
                 ?>
