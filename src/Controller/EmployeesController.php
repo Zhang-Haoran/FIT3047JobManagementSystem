@@ -25,7 +25,7 @@ class EmployeesController extends AppController
             'logout',
             'password',
             'reset',
-            //'add',
+            'add',
             //'index'
 
         ]);

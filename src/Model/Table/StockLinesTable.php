@@ -36,14 +36,14 @@ class StockLinesTable extends Table
 
         $this->setTable('stock_lines');
         $this->setDisplayField('stock_id');
-        $this->setPrimaryKey(['stock_id', 'job_id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Stocks', [
-            'foreignKey' => 'stock_id',
+            'foreignKey' => 'stocks_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Jobs', [
-            'foreignKey' => 'job_id',
+            'foreignKey' => 'jobs_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -57,9 +57,16 @@ class StockLinesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
+            ->integer('id')
+            ->allowEmpty('id', 'create');
+
+        $validator
             ->integer('stock_num')
-            ->requirePresence('stock_num', 'create')
-            ->notEmpty('stock_num');
+            ->allowEmpty('stock_num');
+
+        $validator
+            ->boolean('loaded')
+            ->allowEmpty('loaded');
 
         return $validator;
     }
@@ -73,8 +80,8 @@ class StockLinesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['stock_id'], 'Stocks'));
-        $rules->add($rules->existsIn(['job_id'], 'Jobs'));
+        $rules->add($rules->existsIn(['stocks_id'], 'Stocks'));
+        $rules->add($rules->existsIn(['jobs_id'], 'Jobs'));
 
         return $rules;
     }
