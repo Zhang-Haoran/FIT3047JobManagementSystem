@@ -19,22 +19,26 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('stock_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('job_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('stock_num') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('loaded') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('stocks_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('jobs_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($stockLines as $stockLine): ?>
             <tr>
+                <td><?= $this->Number->format($stockLine->id) ?></td>
+                <td><?= $this->Number->format($stockLine->stock_num) ?></td>
+                <td><?= h($stockLine->loaded) ?></td>
                 <td><?= $stockLine->has('stock') ? $this->Html->link($stockLine->stock->name, ['controller' => 'Stocks', 'action' => 'view', $stockLine->stock->id]) : '' ?></td>
                 <td><?= $stockLine->has('job') ? $this->Html->link($stockLine->job->name, ['controller' => 'Jobs', 'action' => 'view', $stockLine->job->id]) : '' ?></td>
-                <td><?= $this->Number->format($stockLine->stock_num) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $stockLine->stock_id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $stockLine->stock_id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $stockLine->stock_id], ['confirm' => __('Are you sure you want to delete # {0}?', $stockLine->stock_id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $stockLine->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $stockLine->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $stockLine->id], ['confirm' => __('Are you sure you want to delete # {0}?', $stockLine->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

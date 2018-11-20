@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  * @property string $name
  * @property int $cust_type_id
  * @property bool $is_deleted
+ * @property bool $is_business
  *
  * @property \App\Model\Entity\CustType $cust_type
  * @property \App\Model\Entity\Job[] $jobs
@@ -30,6 +31,7 @@ class Customer extends Entity
         'name' => true,
         'cust_type_id' => true,
         'is_deleted' => true,
+        'is_business' => true,
         'cust_type' => true,
         'jobs' => true
     ];

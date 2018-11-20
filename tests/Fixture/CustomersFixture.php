@@ -21,6 +21,7 @@ class CustomersFixture extends TestFixture
         'name' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => '', 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'cust_type_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'is_deleted' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => '0', 'comment' => '', 'precision' => null],
+        'is_business' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_indexes' => [
             'fk_customers_cust_types1_idx' => ['type' => 'index', 'columns' => ['cust_type_id'], 'length' => []],
         ],
@@ -47,7 +48,8 @@ class CustomersFixture extends TestFixture
                 'id' => 1,
                 'name' => 'Lorem ipsum dolor sit amet',
                 'cust_type_id' => 1,
-                'is_deleted' => 1
+                'is_deleted' => 1,
+                'is_business' => 1
             ],
         ];
         parent::init();

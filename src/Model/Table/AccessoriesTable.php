@@ -52,11 +52,7 @@ class AccessoriesTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain [a-zA-Z 0-9] only'
-            ]);
+            ->notEmpty('name');
 
         $validator
             ->boolean('is_deleted')

@@ -9,8 +9,8 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $accessorieLine->accessorie_id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $accessorieLine->accessorie_id)]
+                ['action' => 'delete', $accessorieLine->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $accessorieLine->id)]
             )
         ?></li>
         <li><?= $this->Html->link(__('List Accessorie Lines'), ['action' => 'index']) ?></li>
@@ -27,6 +27,9 @@
         <?php
             echo $this->Form->control('accs_in');
             echo $this->Form->control('accs_out');
+            echo $this->Form->control('loaded');
+            echo $this->Form->control('accessories_id', ['options' => $accessories]);
+            echo $this->Form->control('jobs_id', ['options' => $jobs]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
