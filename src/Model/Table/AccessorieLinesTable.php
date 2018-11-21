@@ -36,14 +36,14 @@ class AccessorieLinesTable extends Table
 
         $this->setTable('accessorie_lines');
         $this->setDisplayField('accessorie_id');
-        $this->setPrimaryKey(['accessorie_id', 'job_id']);
+        $this->setPrimaryKey('id');
 
         $this->belongsTo('Accessories', [
-            'foreignKey' => 'accessorie_id',
+            'foreignKey' => 'accessories_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Jobs', [
-            'foreignKey' => 'job_id',
+            'foreignKey' => 'jobs_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -57,13 +57,20 @@ class AccessorieLinesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
+            ->integer('id')
+            ->allowEmpty('id', 'create');
+
+        $validator
             ->integer('accs_in')
-            ->requirePresence('accs_in', 'create')
-            ->notEmpty('accs_in');
+            ->allowEmpty('accs_in');
 
         $validator
             ->integer('accs_out')
             ->allowEmpty('accs_out');
+
+        $validator
+            ->boolean('loaded')
+            ->allowEmpty('loaded');
 
         return $validator;
     }
@@ -77,8 +84,8 @@ class AccessorieLinesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['accessorie_id'], 'Accessories'));
-        $rules->add($rules->existsIn(['job_id'], 'Jobs'));
+        $rules->add($rules->existsIn(['accessories_id'], 'Accessories'));
+        $rules->add($rules->existsIn(['jobs_id'], 'Jobs'));
 
         return $rules;
     }

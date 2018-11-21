@@ -6,7 +6,7 @@
 ?>
 
 <div>
-         <button onclick="goBack()" class="btn btn-success">Go Back</button>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
 
     <script>
         function goBack() {

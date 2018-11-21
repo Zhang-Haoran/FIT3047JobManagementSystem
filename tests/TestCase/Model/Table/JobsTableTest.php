@@ -29,9 +29,7 @@ class JobsTableTest extends TestCase
         'app.event_types',
         'app.customers',
         'app.employees',
-        'app.accessorie_lines',
-        'app.images',
-        'app.stock_lines'
+        'app.images'
     ];
 
     /**

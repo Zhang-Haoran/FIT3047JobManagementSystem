@@ -10,7 +10,6 @@ use Cake\Validation\Validator;
  * Stocks Model
  *
  * @property \App\Model\Table\AccessoriesTable|\Cake\ORM\Association\BelongsTo $Accessories
- * @property \App\Model\Table\StockLinesTable|\Cake\ORM\Association\HasMany $StockLines
  *
  * @method \App\Model\Entity\Stock get($primaryKey, $options = [])
  * @method \App\Model\Entity\Stock newEntity($data = null, array $options = [])
@@ -41,9 +40,6 @@ class StocksTable extends Table
         $this->belongsTo('Accessories', [
             'foreignKey' => 'accessorie_id'
         ]);
-        $this->hasMany('StockLines', [
-            'foreignKey' => 'stock_id'
-        ]);
     }
 
     /**
@@ -62,25 +58,16 @@ class StocksTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain [a-zA-Z 0-9] only'
-            ]);
+            ->notEmpty('name');
 
         $validator
             ->numeric('rent_value')
             ->greaterThanOrEqual('rent_value', 0)
-            ->allowEmpty('rent_value')
-            ->numeric('rent_value','rent value should be numeric')
-            ->greaterThanOrEqual('rent_value',0);
-
+            ->allowEmpty('rent_value');
 
         $validator
             ->integer('min_accs')
-            ->allowEmpty('min_accs')
-            ->numeric('min_accs','minimum accessory should be numeric')
-            ->greaterThanOrEqual('min_accs',0);
+            ->allowEmpty('min_accs');
 
         $validator
             ->boolean('is_deleted')

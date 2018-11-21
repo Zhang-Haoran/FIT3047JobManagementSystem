@@ -63,54 +63,53 @@ class ContactsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('name')
-            ->maxLength('name', 255)
-            ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain [a-zA-Z 0-9] only'
-            ]);
+            ->scalar('lname')
+            ->maxLength('lname', 255)
+            ->requirePresence('lname', 'create')
+            ->notEmpty('lname');
 
         $validator
             ->scalar('phone')
             ->maxLength('phone', 15)
             ->allowEmpty('phone');
-            $australianMobile = '/^(0|\+61)4\d{8}$/';
-            $validator
-            ->add('phone', 'custom', [
-                'rule' => function ($value, $context) use ($australianMobile) {
-                    // remove spaces to make the regex simpler
-                    $check = preg_replace('/\s/', '', $value);
-
-                    // checks for either of these styles
-                    // +61412 345 678 or 0412 345 678
-                    $found = preg_match($australianMobile, $check);
-                    return boolval($found);
-                },
-                'message' => 'Your phone format should be like +61412 345 678 or 0412 345 678'
-            ]);
 
         $validator
             ->email('email')
-            ->allowEmpty('email')
-            ->add('email','validEmail',[
-                'rule' => 'email',
-                'message' => 'Your e-mail format should be like example@example.com'
-            ]);
+            ->allowEmpty('email');
 
         $validator
             ->scalar('role')
             ->maxLength('role', 255)
-            ->allowEmpty('role')
-            ->add('role','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z ]*$/'),
-                'message' => 'Name should contain [a-zA-Z ] only'
-            ]);
+            ->allowEmpty('role');
 
         $validator
             ->boolean('is_deleted')
             ->allowEmpty('is_deleted');
+
+        $validator
+            ->scalar('street')
+            ->maxLength('street', 255)
+            ->allowEmpty('street');
+
+        $validator
+            ->scalar('suburb')
+            ->maxLength('suburb', 255)
+            ->allowEmpty('suburb');
+
+        $validator
+            ->scalar('city')
+            ->maxLength('city', 255)
+            ->allowEmpty('city');
+
+        $validator
+            ->scalar('postcode')
+            ->maxLength('postcode', 255)
+            ->allowEmpty('postcode');
+
+        $validator
+            ->scalar('fname')
+            ->maxLength('fname', 255)
+            ->allowEmpty('fname');
 
         return $validator;
     }

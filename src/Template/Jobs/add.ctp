@@ -5,8 +5,8 @@
  */
 ?>
 
-<?= $this->html->css('jquery.datetimepicker.min.css')?>
-<?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
+<?= $this->html->css('bootstrap-datetimepicker.min.css')?>
+<?= $this->html->script('bootstrap-datetimepicker.min.js', ['block' => 'scriptBottom']); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -39,8 +39,7 @@
                             <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>
-                            <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','data-format'=>'dd/MM/yyyy hh:mm:ss','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'))?><span class=".input-group-addon"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span></div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
@@ -74,6 +73,7 @@
                         </div>
                       </div>
                     </div>
+
 
                         <div class="tab-pane fade" id="site">
 
@@ -118,7 +118,13 @@
 
                       </div>
                     </div>
-    <div class ="col-lg-12">
+
+    <div class ="tab-content">
+        <div class="btn-group">
+            <button class="btn" id="btnPrev" type="button">Prev</button>
+            <button class="btn" id="btnNext" type="button">Next</button>
+        </div>
+
       <div class="submitButton">
       <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
       <?= $this->Form->end() ?>
@@ -178,46 +184,44 @@
 </div>
 
 
-<?php
-  $this->Html->scriptStart(array("block"=>'script'));
-?>
-$("#job_datetime").datetimepicker({
-format: 'LT'
- });
-$("#e_arrival_datetime").datetimepicker({
- defaultDate: new Date(),
- step:30
- });
- $("#e_setup_datetime").datetimepicker({
-  defaultDate: new Date(),
-  step:30
-  });
-  $("#e_pickup_datetime").datetimepicker({
-   defaultDate: new Date(),
-   step:30
-   });
-
-   $("#job_datetime").on("dp.change", function (e) {
-       $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
-       $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
-       $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-   });
-   $("#e_arrival_datetime").on("dp.change", function (e) {
-       $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
-   });
-   $("#e_setup_datetime").on("dp.change", function (e) {
-       $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-   });
+<?php $this->start('script'); ?>
+<script>
+    $(function () {
+        $('#job_date').datetimepicker({
+            language: 'pt-BR'
+        });
+    });
 
 
-;
+    $("#job_datetime").on("dp.change", function (e) {
+        $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
+        $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
+        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+    });
+    $("#e_arrival_datetime").on("dp.change", function (e) {
+        $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
+    });
+    $("#e_setup_datetime").on("dp.change", function (e) {
+        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+    });
 
 
-$(document).ready(function() {
-    $("#type_html_id").chosen();
-    $("#cust_html_id").chosen();
-    $("#site_html_id").chosen();
-});
-<?php
-  $this->Html->scriptEnd();
-?>
+    $(document).ready(function () {
+        $("#type_html_id").chosen();
+        $("#cust_html_id").chosen();
+        $("#site_html_id").chosen();
+    });
+
+    $(function() {
+        var $tabs = $('.col-lg-12 li');
+
+        $('#btnPrev').on('click', function() {
+            $tabs.filter('.active').prev('li').find('a[data-toggle="tab"]').tab('show');
+        });
+        $('#btnNext').on('click', function() {
+            $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
+        });
+    });
+
+</script>
+<?php $this->end(); ?>

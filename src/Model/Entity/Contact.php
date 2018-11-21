@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * Contact Entity
  *
  * @property int $id
- * @property string $name
+ * @property string $lname
  * @property string $phone
  * @property string $email
  * @property string $role
@@ -15,6 +15,11 @@ use Cake\ORM\Entity;
  * @property int $sites_id
  * @property int $customers_id
  * @property bool $is_deleted
+ * @property string $street
+ * @property string $suburb
+ * @property string $city
+ * @property string $postcode
+ * @property string $fname
  *
  * @property \App\Model\Entity\Job $job
  * @property \App\Model\Entity\Site $site
@@ -33,7 +38,7 @@ class Contact extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
+        'lname' => true,
         'phone' => true,
         'email' => true,
         'role' => true,
@@ -41,6 +46,11 @@ class Contact extends Entity
         'sites_id' => true,
         'customers_id' => true,
         'is_deleted' => true,
+        'street' => true,
+        'suburb' => true,
+        'city' => true,
+        'postcode' => true,
+        'fname' => true,
         'job' => true,
         'site' => true,
         'customer' => true
