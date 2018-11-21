@@ -50,7 +50,6 @@
 
 
                             <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','data-format'=>'dd/MM/yyyy hh:mm:ss','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'))?><span class=".input-group-addon"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'));?></div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
