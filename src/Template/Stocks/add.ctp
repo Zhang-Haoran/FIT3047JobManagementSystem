@@ -44,7 +44,9 @@
             </div>
             <div class="panel-body">
 
-                <div class="form-group"><?= $this->Form->control('rent value', ['class' => 'form-control','min'=>'0',  'value'=>'0', 'step'=>'1','placeholder' => 'rent value should be numeric']) ?></div>
+                <div class="form-group">
+                    <?= $this->Form->control('rent value', ['label'=>'rent value($AUD)','class' => 'form-control','min'=>'0',  'value'=>'$0', 'step'=>'1','placeholder' => 'rent value should be numeric']) ?>
+                </div>
                 <div class="form-group"><?= $this->Form->control('minimum accessory', ['class' => 'form-control','placeholder' => 'minimum accessory should be numeric']) ?></div>
                 <div class="form-group"><?= $this->Form->control('accessorie_id', ['label' => 'Accessory', 'options' => $accessories, 'empty' => true,'class' => 'form-control']) ?></div>
 

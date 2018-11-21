@@ -54,12 +54,12 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
+                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add', ['controller' => 'jobs', 'action' => 'add'])
+                                echo $this->Html->link('Add Job', ['controller' => 'jobs', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
