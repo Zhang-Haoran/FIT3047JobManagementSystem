@@ -4,6 +4,23 @@
  * @var \App\Model\Entity\Contact $contact
  */
 ?>
+
+<html>
+<body>
+
+<button onclick="goBack()">Go Back</button>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>
+
+
 <div class="row">
     <?= $this->Form->create($contact) ?>
 

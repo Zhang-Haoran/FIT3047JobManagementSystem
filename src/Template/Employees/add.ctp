@@ -4,6 +4,24 @@
  * @var \App\Model\Entity\Employee $employee
  */
 ?>
+
+
+<html>
+<body>
+
+<button onclick="goBack()">Go Back</button>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>
+
+
 <div class="row">
     <?= $this->Form->create($employee) ?>
 

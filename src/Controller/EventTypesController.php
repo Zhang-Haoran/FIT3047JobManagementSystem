@@ -76,6 +76,30 @@ class EventTypesController extends AppController
         $this->set(compact('eventType'));
     }
 
+
+
+    public function EventTypesAdd()
+    {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
+        $eventType = $this->EventTypes->newEntity();
+        if ($this->request->is('post')) {
+            $eventType = $this->EventTypes->patchEntity($eventType, $this->request->getData());
+            if ($this->EventTypes->save($eventType)) {
+                $this->Flash->success(__('The event type has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The event type could not be saved. Please, try again.'));
+        }
+        $this->set(compact('eventType'));
+    }
+
+
+
     /**
      * Edit method
      *
