@@ -480,3 +480,15 @@ table.dataTable thead .sorting:after {
   background-color:#a90329;
   color:#fff;
 }
+
+.Clearboth {
+  clear: both;
+}
+
+.divright {
+  float:right;
+}
+
+.divleft {
+  float:left;
+}

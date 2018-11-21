@@ -5,8 +5,8 @@
  */
 ?>
 
-<?= $this->html->css('bootstrap-datetimepicker.min.css')?>
-<?= $this->html->script('bootstrap-datetimepicker.min.js', ['block' => 'scriptBottom']); ?>
+<?= $this->html->css('jquery.datetimepicker.min.css')?>
+<?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
 
 <div class="row">
     <div class="col-lg-12">
@@ -39,7 +39,7 @@
                             <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','data-format'=>'dd/MM/yyyy hh:mm:ss','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'))?><span class=".input-group-addon"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span></div>
+                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'));?></div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
@@ -140,10 +140,17 @@
                     </div>
 
     <div class ="tab-content">
-        <div class="btn-group">
-            <button class="btn" id="btnPrev" type="button">Prev</button>
-            <button class="btn" id="btnNext" type="button">Next</button>
+        <div class="Footer">
+            <div class="divleft">
+                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab">Previous
+                </button>
+            </div>
+            <div class="divright">
+                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab">Next
+                </button>
+            </div>
         </div>
+        <div class="Clearboth"></div>
 
       <div class="submitButton">
       <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
@@ -223,10 +230,20 @@
 
 <?php $this->start('script'); ?>
 <script>
-    $(function () {
-        $('#job_date').datetimepicker({
-            language: 'pt-BR'
-        });
+    $("#job_date").datetimepicker({
+            format:'Y.m.d'
+    });
+    $("#e_arrival_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
+    });
+    $("#e_setup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
+    });
+    $("#e_pickup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
     });
 
 
