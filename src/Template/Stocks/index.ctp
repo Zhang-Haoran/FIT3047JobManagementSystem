@@ -28,7 +28,7 @@
                     <?php foreach ($stocks as $stock): ?>
                     <tr>
                         <td class="center"><?= h($stock->name) ?></td>
-                        <td class="center"><?= $this->Number->format($stock->rent_value) ?></td>
+                        <td class="center"><?= $this->Number->currency($stock->rent_value) ?></td>
                         <td class="center"><?= $this->Number->format($stock->min_accs) ?></td>
                         <td class="center"><?= $stock->has('accessory') ? $this->Html->link($stock->accessory->name, ['controller' => 'Accessories', 'action' => 'view', $stock->accessory->id]) : '' ?></td>
                         <td class="actions">
