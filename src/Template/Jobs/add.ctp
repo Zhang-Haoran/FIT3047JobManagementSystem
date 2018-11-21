@@ -58,7 +58,7 @@
                             <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>
+                                <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','data-format'=>'dd/MM/yyyy hh:mm:ss','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'))?><span class=".input-group-addon"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span></div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
 
                                 <div class="panel-heading">
@@ -68,7 +68,7 @@
                                 </div>
 
 
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','data-format'=>'dd/MM/yyyy hh:mm:ss','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'))?><span class=".input-group-addon"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span></div>
+
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
