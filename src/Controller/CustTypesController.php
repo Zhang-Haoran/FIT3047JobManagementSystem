@@ -76,6 +76,28 @@ class CustTypesController extends AppController
         $this->set(compact('custType'));
     }
 
+
+    public function CustTypesAdd()
+    {
+        if($this->Auth->user('access_level')=='3'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
+        $custType = $this->CustTypes->newEntity();
+        if ($this->request->is('post')) {
+            $custType = $this->CustTypes->patchEntity($custType, $this->request->getData());
+            if ($this->CustTypes->save($custType)) {
+                $this->Flash->success(__('The cust type has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The cust type could not be saved. Please, try again.'));
+        }
+        $this->set(compact('custType'));
+    }
+
+
     /**
      * Edit method
      *

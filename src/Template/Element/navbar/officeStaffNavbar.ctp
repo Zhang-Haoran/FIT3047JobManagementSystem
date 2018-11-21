@@ -132,45 +132,7 @@
                         <!-- /.nav-second-level -->
                     </li>
 
-
-                    <li>
-                        <a href="#"><i class=""></i> Types<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Customer Types <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Index', ['controller' => 'CustTypes', 'action' => 'index'])
-                                        ?>
-                                    </li>
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Add', ['controller' => 'CustTypes', 'action' => 'add'])
-                                        ?>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- /.nav-third-level -->
-                            <li>
-                                <a href="#">Event Types <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Index', ['controller' => 'EventTypes', 'action' => 'index'])
-                                        ?>
-                                    </li>
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Add', ['controller' => 'EventTypes', 'action' => 'add'])
-                                        ?>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                    
 
                     <li>
                         <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
