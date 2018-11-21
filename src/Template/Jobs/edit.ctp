@@ -5,6 +5,22 @@
  */
 ?>
 
+<html>
+<body>
+
+<button onclick="goBack()">Go Back</button>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>
+
+
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
 <?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
 
