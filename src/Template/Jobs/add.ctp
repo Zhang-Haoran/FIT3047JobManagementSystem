@@ -231,7 +231,8 @@
 <?php $this->start('script'); ?>
 <script>
     $("#job_date").datetimepicker({
-            format:'Y.m.d'
+        timepicker:false,
+        format:'Y/m/d'
     });
     $("#e_arrival_datetime").datetimepicker({
         defaultDate: new Date(),
