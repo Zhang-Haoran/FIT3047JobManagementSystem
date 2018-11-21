@@ -18,15 +18,19 @@
                     <div class="row">
                         <div class="col-xs-3 huge">
                             <?php
-                                $list = array_filter($jobs, function($job){
-                                $today = date("Y-m-d");
-                                $job_date = $job->job_date;
+                                $allJobs = array();
+                                foreach ($jobs as $job):
+                                    array_push($allJobs, $job);
+                                endforeach;
+                                $list = array_filter($allJobs, function($jobs){
+                                    $today = date("Y-m-d");
+                                    $job_date = $job->job_date;
 
-                                $today_time = strtotime($today);
-                                $job_date_time = strtotime($job_date);
-                                return $today_time == job_date_time;
+                                    $today_time = strtotime($today);
+                                    $job_date_time = strtotime($job_date);
+                                    return $today_time == job_date_time;
                                 });
-                                echo count($list)
+                            echo count($list);
                             ?>
                         </div>
                         <div class="col-lg-8 text-right"><h3>Today</h3></div>
@@ -48,15 +52,19 @@
                     <div class="row">
                         <div class="col-xs-3 huge">
                             <?php
-                                $list = array_filter($jobs, function($job){
-                                $today = date("Y-m-d");
-                                $job_date = $job->job_date;
+                                $allJobs = array();
+                                foreach ($jobs as $job):
+                                    array_push($allJobs, $job);
+                                endforeach;
+                                $list = array_filter($allJobs, function($jobs){
+                                    $today = date("Y-m-d");
+                                    $job_date = $job->job_date;
 
-                                $today_time = strtotime($today);
-                                $job_date_time = strtotime($job_date);
-                                return $today_time - job_date_time <= 7;
+                                    $today_time = strtotime($today);
+                                    $job_date_time = strtotime($job_date);
+                                    return $today_time - job_date_time <= 7;
                                 });
-                                echo count($list)
+                            echo count($list);
                             ?>
                         </div>
                         <div class="">
@@ -106,10 +114,14 @@
         </thead>
         <tbody id="non-quoted">
             <?php
-                $allJobs = array_filter($jobs, function($job){
+                $allJobs = array();
+                    foreach ($jobs as $job):
+                        array_push($allJobs, $job);
+                    endforeach;
+                $jobList = array_filter($allJobs, function($job){
                 return $job->job_status <> 'Quoted';
                 });
-                foreach ($allJobs as $job): ?>
+                foreach ($jobList as $job): ?>
             <tr>
                 <td><?= h($job->name) ?></td>
                 <?php
@@ -144,10 +156,14 @@
         </tbody>
         <tbody id="quoted" style="display: none">
             <?php
-                $allJobs = array_filter($jobs, function($job){
+                $allJobs = array();
+                    foreach ($jobs as $job):
+                        array_push($allJobs, $job);
+                    endforeach;
+                $jobList = array_filter($allJobs, function($job){
                 return $job->job_status == 'Quoted';
                 });
-                foreach ($jobs as $job): ?>
+                foreach ($jobList as $job): ?>
             <tr>
                 <td><?= h($job->name) ?></td>
                 <?php

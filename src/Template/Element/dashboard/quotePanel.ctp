@@ -5,10 +5,14 @@
             <div class="row">
                 <div class="col-xs-3 huge">
                     <?php
-                        $list = array_filter($jobs, function($job){
+                        $allJobs = array();
+                            foreach ($jobs as $job):
+                                array_push($allJobs, $job);
+                            endforeach;
+                        $list = array_filter($allJobs, function($job){
                             return $job->job_status == 'Quoted';
                         });
-                        echo count($list)
+                        echo count($list);
                     ?>
                 </div>
                 <div class="col-lg-8 text-right">
