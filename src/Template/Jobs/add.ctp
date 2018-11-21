@@ -74,6 +74,29 @@
                       </div>
                     </div>
 
+                    <div class="tab-pane fade" id="contacts">
+                        <div class="panel-group" id="accordion">
+                            <div class="panel panel-default">
+
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing contact</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <div class="form-group"><?= $this->Form->control('contact_id', ['options' => $contacts, 'class' => 'form-control','id'=> 'contact_html_id']) ?></div>
+                                    </div>
+                                </div>
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#contactsAdd" >Create new contact</a>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                         <div class="tab-pane fade" id="site">
 
@@ -112,9 +135,6 @@
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
 
-                        <div class="tab-pane fade" id="contacts">
-                          <h1>Work in progress</h1>
-                        </div>
 
                       </div>
                     </div>
@@ -143,16 +163,12 @@
                         <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
                         <fieldset>
                             <?php
-                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
-                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
-                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control','placeholder' => 'example@example.com']);
+                            echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                            echo $this->Form->control('is_business',['label' => 'is business?','class' => 'checkbox','type' => 'checkbox']);
                             echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
                             ?>
                         </fieldset>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg' ,'disabled']) ?>
+                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
                         <?= $this->Form->end() ?>
                     </div>
                 </div>
@@ -175,12 +191,33 @@
                     <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit' ,'disabled']) ?>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
                 <?= $this->Form->end() ?>
             </div>
         </div>
     </div>
+</div>
 
+
+    <div class="modal fade" id="contactsAdd" role="dialog">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">New Contact</h4>
+                </div>
+                <div class="modal-body">
+                    <?= $this->Form->create(null,['url' => ['controller' => 'Contacts','action' => 'jobAdd']]) ?>
+                    <fieldset>
+                        <?php
+                        echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                        ?>
+                    </fieldset>
+                    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                    <?= $this->Form->end() ?>
+                </div>
+            </div>
+        </div>
 </div>
 
 
