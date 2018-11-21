@@ -80,6 +80,11 @@
                                     <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
                                 </h4>
                             </div>
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#CustTypesAdd" >Create new customer Type</a>
+                                        </h4>
+                                    </div>
                         </div>
                       </div>
                     </div>
@@ -168,6 +173,28 @@
     </div>
     </div>
     </div>
+<div class="modal fade" id="EventTypesAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Event Types</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd']]) ?>
+                <fieldset>
+                    <?php
+                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
         <div class="modal fade" id="custAdd" role="dialog">
             <div class="modal-dialog" >
@@ -191,6 +218,26 @@
                 </div>
             </div>
 
+</div>
+<div class="modal fade" id="CustTypesAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Customer Types</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'CustTypes','action' => 'CustTypesAdd']]) ?>
+                <fieldset>
+                    <?php
+                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="siteAdd" role="dialog">
