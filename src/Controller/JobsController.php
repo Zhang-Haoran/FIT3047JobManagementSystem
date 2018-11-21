@@ -86,9 +86,11 @@ class JobsController extends AppController
         $eventTypes = $this->Jobs->EventTypes->find('list');
         $customers = $this->Jobs->Customers->find('list');
         $employees = $this->Jobs->Employees->find('list');
+        $this->loadModel('Contacts');
+        $contacts = $this->Contacts->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes','contacts'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 

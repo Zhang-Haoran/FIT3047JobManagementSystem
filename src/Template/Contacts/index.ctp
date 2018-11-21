@@ -17,11 +17,11 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
             <tr>
-                <th scope="col"><?= __('name') ?></th>
+                <th scope="col"><?= __('fname') ?></th>
+                <th scope="col"><?= __('lname') ?></th>
                 <th scope="col"><?= __('phone') ?></th>
                 <th scope="col"><?= __('email') ?></th>
                 <th scope="col"><?= __('role') ?></th>
-                <th scope="col"><?= __('jobs') ?></th>
                 <th scope="col"><?= __('Action') ?></th>
 
 
@@ -30,11 +30,11 @@
         <tbody>
             <?php foreach ($contacts as $contact): ?>
             <tr>
-                <td><?= h($contact->name) ?></td>
+                <td><?= h($contact->fname) ?></td>
+                <td><?= h($contact->lname) ?></td>
                 <td><?= h($contact->phone) ?></td>
                 <td><?= h($contact->email) ?></td>
                 <td><?= h($contact->role) ?></td>
-                <td><?= $contact->has('job') ? $this->Html->link($contact->job->name, ['controller' => 'Jobs', 'action' => 'view', $contact->job->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $contact->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contact->id]) ?>
