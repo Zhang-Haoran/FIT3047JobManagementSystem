@@ -292,9 +292,15 @@
                 <div class="modal-body">
                     <?= $this->Form->create(null,['url' => ['controller' => 'Contacts','action' => 'jobAdd']]) ?>
                     <fieldset>
-                        <?php
-                        echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
-                        ?>
+                        <div class="form-group"><?= $this->Form->control('fname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('lname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control','placeholder' => 'example@example.com']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('role',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('street',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('suburb',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('city',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('postcode',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     </fieldset>
                     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
                     <?= $this->Form->end() ?>
@@ -306,10 +312,21 @@
 
 <?php $this->start('script'); ?>
 <script>
-    $(function () {
-        $('#job_date').datetimepicker({
-            language: 'pt-BR'
-        });
+    $("#job_date").datetimepicker({
+        timepicker:false,
+        format:'Y/m/d'
+    });
+    $("#e_arrival_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
+    });
+    $("#e_setup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
+    });
+    $("#e_pickup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
     });
 
 
