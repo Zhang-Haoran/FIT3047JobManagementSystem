@@ -232,7 +232,7 @@
 <script>
     $("#job_date").datetimepicker({
         timepicker:false,
-        format:'Y/m/d'
+        format:'D, Y/m/d',
     });
     $("#e_arrival_datetime").datetimepicker({
         defaultDate: new Date(),
