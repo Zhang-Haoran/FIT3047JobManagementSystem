@@ -39,13 +39,13 @@
                                 foreach ($jobs as $job):
                                     array_push($allJobs, $job);
                                 endforeach;
-                                $list = array_filter($allJobs, function($jobs){
+                                $list = array_filter($allJobs, function($job){
                                     $today = date("Y-m-d");
                                     $job_date = $job->job_date;
 
                                     $today_time = strtotime($today);
                                     $job_date_time = strtotime($job_date);
-                                    return $today_time == job_date_time;
+                                    return $today_time == $job_date_time;
                                 });
                             echo count($list);
                             ?>
@@ -73,13 +73,13 @@
                                 foreach ($jobs as $job):
                                     array_push($allJobs, $job);
                                 endforeach;
-                                $list = array_filter($allJobs, function($jobs){
+                                $list = array_filter($allJobs, function($job){
                                     $today = date("Y-m-d");
                                     $job_date = $job->job_date;
 
                                     $today_time = strtotime($today);
                                     $job_date_time = strtotime($job_date);
-                                    return $today_time - job_date_time <= 7;
+                                    return $today_time - $job_date_time <= 7;
                                 });
                             echo count($list);
                             ?>
