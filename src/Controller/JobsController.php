@@ -41,7 +41,7 @@ class JobsController extends AppController
     public function view($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'AccessorieLines', 'Images', 'StockLines']
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images']
         ]);
 
         $this->loadModel('Sites');
