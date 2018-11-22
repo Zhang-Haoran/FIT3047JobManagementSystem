@@ -20,15 +20,6 @@
 </body>
 </html>
 
-<div>
-    <button onclick="goBack()" class="btn btn-success">Go Back</button>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</div>
 
 <div class="row">
 
