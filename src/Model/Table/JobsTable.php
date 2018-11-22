@@ -87,14 +87,12 @@ class JobsTable extends Table
             ->notEmpty('job_status');
 
         $validator
-            ->date('job_date')
-            ->requirePresence('job_date', 'create')
-            ->notEmpty('job_date');
+            ->dateTime('job_date')
+            ->allowEmpty('job_date');
 
         $validator
             ->dateTime('booked_date')
-            ->requirePresence('booked_date', 'create')
-            ->notEmpty('booked_date');
+            ->allowEmpty('booked_date');
 
         $validator
             ->numeric('price')
