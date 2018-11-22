@@ -8,9 +8,6 @@
 <html>
 <body>
 
-<button onclick="goBack()">Go Back</button>
-
-
 <script>
     function goBack() {
         window.history.back();
@@ -73,7 +70,10 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Site') ?></th>
-            <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?></td>
+            <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
+                <button onclick="moveToImage()" class="btn btn-success">Upload images</button>
+            </td>
+
         </tr>
         <tr>
             <th scope="row"><?= __('Address') ?></th>
@@ -201,3 +201,9 @@ $this->Html->scriptBlock('
         } );
     ', ['block' => true]);
     ?>
+
+<script>
+    function moveToImage() {
+        window.location.replace("/images/add");
+    }
+</script>
