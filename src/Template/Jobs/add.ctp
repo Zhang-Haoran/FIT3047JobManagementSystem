@@ -27,6 +27,16 @@
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
 <?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
 
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Add Job') ?></h1>
@@ -139,7 +149,9 @@
                             </div>
                             <div id="collapseThree" class="panel-collapse collapse in">
                                 <div class="panel-body">
+
                                     <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
+
                                 </div>
                             </div>
                                 <div class="panel-heading">
@@ -346,6 +358,7 @@
         $("#cust_html_id").chosen();
         $("#site_html_id").chosen();
         $("#contact_html_id").chosen();
+        $("#image_html_id").chosen();
     });
 
     $(function() {
