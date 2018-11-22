@@ -8,6 +8,16 @@
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
 <?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
 
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Add Job') ?></h1>

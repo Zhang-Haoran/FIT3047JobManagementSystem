@@ -5,17 +5,6 @@
  */
 ?>
 
-<html>
-<body>
-
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
-
-</body>
-</html>
 
 <div>
     <button onclick="goBack()" class="btn btn-success">Go Back</button>
