@@ -125,10 +125,10 @@
             <tr>
                 <td><?= h($job->name) ?></td>
                 <?php
-                if( $job->job_status == 'Started')
-                echo "<td class='bg-danger text-white'>Started</td>";
-                elseif ($job->job_status == 'Confirmed')
-                echo "<td class='bg-success text-white'>Confirmed</td>";
+                if( $job->job_status == 'Order')
+                echo "<td class='bg-danger text-white'>Order</td>";
+                elseif ($job->job_status == 'Ready')
+                echo "<td class='bg-success text-white'>Ready</td>";
                 elseif($job->job_status == 'Quote')
                 echo "<td class='bg-warning text-white'>Quote</td>";
                 elseif($job->job_status == 'Completed')
