@@ -4,6 +4,22 @@
  * @var \App\Model\Entity\Customer[]|\Cake\Collection\CollectionInterface $customers
  */
 ?>
+
+<html>
+<body>
+
+<button onclick="goBack()">Go Back</button>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Customers') ?></h1>

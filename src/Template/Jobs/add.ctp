@@ -12,7 +12,6 @@
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Add Job') ?></h1>
     </div>
-    <!-- /.col-lg-12 -->
 </div>
 
 <?= $this->Form->create($job) ?>
@@ -39,7 +38,14 @@
                             <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'));?></div>
+                                <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
+                            <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
+
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">
+                                        <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#EventTypesAdd" >Create new Event Type</a>
+                                    </h6>
+                                </div>
                           </div>
                           <div class="col-lg-6">
                             <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
@@ -70,6 +76,11 @@
                                     <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
                                 </h4>
                             </div>
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#CustTypesAdd" >Create new customer Type</a>
+                                        </h4>
+                                    </div>
                         </div>
                       </div>
                     </div>
@@ -158,6 +169,28 @@
     </div>
     </div>
     </div>
+<div class="modal fade" id="EventTypesAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Event Types</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd']]) ?>
+                <fieldset>
+                    <?php
+                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
         <div class="modal fade" id="custAdd" role="dialog">
             <div class="modal-dialog" >
@@ -181,6 +214,26 @@
                 </div>
             </div>
 
+</div>
+<div class="modal fade" id="CustTypesAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Customer Types</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'CustTypes','action' => 'CustTypesAdd']]) ?>
+                <fieldset>
+                    <?php
+                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="siteAdd" role="dialog">
@@ -236,10 +289,12 @@
 
 <?php $this->start('script'); ?>
 <script>
-    $("#job_date").datetimepicker({
-        timepicker:false,
-        format:'Y/m/d'
+    $("#job_datetime").datetimepicker({
+        defaultDate: new Date(),
+        assumeNearbyYear: true,
+        step:1
     });
+
     $("#e_arrival_datetime").datetimepicker({
         defaultDate: new Date(),
         step:30

@@ -54,12 +54,12 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
+                                echo $this->Html->link('Index', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add Job', ['controller' => 'jobs', 'action' => 'add'])
+                                echo $this->Html->link('Add', ['controller' => 'jobs', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
@@ -71,12 +71,12 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Customer List', ['controller' => 'customers', 'action' => 'index'])
+                                echo $this->Html->link('Index', ['controller' => 'customers', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add Customer', ['controller' => 'customers', 'action' => 'add'])
+                                echo $this->Html->link('Add', ['controller' => 'customers', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
@@ -87,12 +87,12 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Site List', ['controller' => 'sites', 'action' => 'index'])
+                                echo $this->Html->link('Index', ['controller' => 'sites', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add Site', ['controller' => 'sites', 'action' => 'add'])
+                                echo $this->Html->link('Add', ['controller' => 'sites', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
@@ -104,12 +104,12 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Stock List', ['controller' => 'stocks', 'action' => 'index'])
+                                echo $this->Html->link('Index', ['controller' => 'stocks', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add Stock', ['controller' => 'stocks', 'action' => 'add'])
+                                echo $this->Html->link('Add', ['controller' => 'stocks', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
@@ -120,69 +120,31 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Accessory List', ['controller' => 'Accessories', 'action' => 'index'])
+                                echo $this->Html->link('Index', ['controller' => 'Accessories', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add Accessory', ['controller' => 'Accessories', 'action' => 'add'])
+                                echo $this->Html->link('Add', ['controller' => 'Accessories', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->
                     </li>
 
-
-                    <li>
-                        <a href="#"><i class=""></i> Types<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Customer Types <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Customer Type List', ['controller' => 'CustTypes', 'action' => 'index'])
-                                        ?>
-                                    </li>
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Add Customer Type', ['controller' => 'CustTypes', 'action' => 'add'])
-                                        ?>
-                                    </li>
-                                </ul>
-                            </li>
-                            <!-- /.nav-third-level -->
-                            <li>
-                                <a href="#">Event Types <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Event Type List', ['controller' => 'EventTypes', 'action' => 'index'])
-                                        ?>
-                                    </li>
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Add Event Type', ['controller' => 'EventTypes', 'action' => 'add'])
-                                        ?>
-                                    </li>
-                                </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+                    
 
                     <li>
                         <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Contact List', ['controller' => 'contacts', 'action' => 'index'])
+                                echo $this->Html->link('Index', ['controller' => 'contacts', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add Contact', ['controller' => 'contacts', 'action' => 'add'])
+                                echo $this->Html->link('Add', ['controller' => 'contacts', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
