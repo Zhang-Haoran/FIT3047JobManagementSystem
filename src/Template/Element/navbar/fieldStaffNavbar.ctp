@@ -57,11 +57,6 @@
                                 echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                                 ?>
                             </li>
-                            <li>
-                                <?php
-                                echo $this->Html->link('Add Job', ['controller' => 'jobs', 'action' => 'add'])
-                                ?>
-                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
 
