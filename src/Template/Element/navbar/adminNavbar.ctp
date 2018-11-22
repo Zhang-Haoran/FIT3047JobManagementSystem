@@ -54,7 +54,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
+                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                                 ?>
                             </li>
                             <li>
@@ -71,7 +71,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'employees', 'action' => 'index'])
+                                echo $this->Html->link('Employee List', ['controller' => 'employees', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -88,7 +88,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'customers', 'action' => 'index'])
+                                echo $this->Html->link('Customer List', ['controller' => 'customers', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -104,7 +104,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'sites', 'action' => 'index'])
+                                echo $this->Html->link('Site List', ['controller' => 'sites', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -121,7 +121,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'stocks', 'action' => 'index'])
+                                echo $this->Html->link('Stock List', ['controller' => 'stocks', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -137,7 +137,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'Accessories', 'action' => 'index'])
+                                echo $this->Html->link('Accessory List', ['controller' => 'Accessories', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
