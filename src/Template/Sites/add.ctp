@@ -5,6 +5,16 @@
  */
 ?>
 
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
+
 <div class="row">
     <?= $this->Form->create($site) ?>
     <div class="col col-lg-6">
@@ -13,7 +23,7 @@
                     Basic details
                 </div>
                 <div class="panel-body">
-                       <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
+                       <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </div>
             </div>
     </div>
@@ -23,9 +33,9 @@
                     Site Address
                 </div>
                 <div class="panel-body">
-                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </div>
             </div>
     </div>

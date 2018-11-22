@@ -41,7 +41,7 @@ class JobsController extends AppController
     public function view($id = null)
     {
         $job = $this->Jobs->get($id, [
-            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'AccessorieLines', 'Images', 'StockLines']
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images']
         ]);
 
         $this->loadModel('Sites');
@@ -86,10 +86,12 @@ class JobsController extends AppController
         $eventTypes = $this->Jobs->EventTypes->find('list');
         $customers = $this->Jobs->Customers->find('list');
         $employees = $this->Jobs->Employees->find('list');
+        $this->loadModel('Contacts');
+        $contacts = $this->Contacts->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes'));
-        $this->set('statusOptions', array('Started' => 'Started', 'Confirmed' => 'Confirmed', 'Quote' => 'Quote', 'Completed' => 'Completed'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes','contacts'));
+        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
     /**
@@ -128,7 +130,7 @@ class JobsController extends AppController
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
-        $this->set('statusOptions', array('Started' => 'Started', 'Confirmed' => 'Confirmed', 'Quote' => 'Quote', 'Completed' => 'Completed'));
+        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
     /**
@@ -158,4 +160,3 @@ class JobsController extends AppController
 
 
 }
-

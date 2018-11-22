@@ -5,6 +5,16 @@
  */
 ?>
 
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Edit Employee') ?></h1>
@@ -25,14 +35,14 @@
                         <div class="row">
                             <div class="col-lg-6">
 
-                                <div class="form-group"><?= $this->Form->control('fname',  ['label' => 'First Name', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('lname',  ['label' => 'Last Name', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('password',  ['label' => 'Password','type' => 'password','value' => '', 'class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('fname',  ['label' => 'First Name', 'class' => 'form-control','placeholder' => 'This field is required']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('lname',  ['label' => 'Last Name', 'class' => 'form-control','placeholder' => 'This field is required']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('password',  ['label' => 'Password','type' => 'password','value' => '', 'class' => 'form-control','placeholder' => 'At least 6 characters']); ?></div>
                                 <!--password type should be password-->
-                                <div class="form-group"><?= $this->Form->control('confirmed_password',['type' => 'password','value' => '', 'class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('confirmed_password',['type' => 'password','value' => '', 'class' => 'form-control','placeholder' => 'Same as above']); ?></div>
                                 <!--add password match feature, to make sure user don't type unexpected password.-->
-                                <div class="form-group"><?= $this->Form->control('phone',  ['label' => 'Phone Number', 'class' => 'form-control']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('email',  ['label' => 'Email', 'class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('phone',  ['label' => 'Phone Number', 'class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('email',  ['label' => 'Email', 'class' => 'form-control','placeholder' => 'example@example.com']); ?></div>
                                 <div class="form-group"><?= $this->Form->control('access_level', array('class' => 'form-control', 'type' => 'select', 'options' => $acLOptions)) ?></div>
                                 <?php
                                 echo $this->Form->hidden('token');

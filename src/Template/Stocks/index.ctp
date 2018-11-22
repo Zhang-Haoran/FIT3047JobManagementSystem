@@ -4,6 +4,18 @@
  * @var \App\Model\Entity\Stock[]|\Cake\Collection\CollectionInterface $stocks
  */
 ?>
+
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
+
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Stocks') ?></h1>
@@ -28,7 +40,7 @@
                     <?php foreach ($stocks as $stock): ?>
                     <tr>
                         <td class="center"><?= h($stock->name) ?></td>
-                        <td class="center"><?= $this->Number->format($stock->rent_value) ?></td>
+                        <td class="center"><?= $this->Number->currency($stock->rent_value) ?></td>
                         <td class="center"><?= $this->Number->format($stock->min_accs) ?></td>
                         <td class="center"><?= $stock->has('accessory') ? $this->Html->link($stock->accessory->name, ['controller' => 'Accessories', 'action' => 'view', $stock->accessory->id]) : '' ?></td>
                         <td class="actions">

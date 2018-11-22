@@ -7,8 +7,8 @@
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Accessorie Line'), ['action' => 'edit', $accessorieLine->accessorie_id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Accessorie Line'), ['action' => 'delete', $accessorieLine->accessorie_id], ['confirm' => __('Are you sure you want to delete # {0}?', $accessorieLine->accessorie_id)]) ?> </li>
+        <li><?= $this->Html->link(__('Edit Accessorie Line'), ['action' => 'edit', $accessorieLine->id]) ?> </li>
+        <li><?= $this->Form->postLink(__('Delete Accessorie Line'), ['action' => 'delete', $accessorieLine->id], ['confirm' => __('Are you sure you want to delete # {0}?', $accessorieLine->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Accessorie Lines'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Accessorie Line'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Accessories'), ['controller' => 'Accessories', 'action' => 'index']) ?> </li>
@@ -29,12 +29,20 @@
             <td><?= $accessorieLine->has('job') ? $this->Html->link($accessorieLine->job->name, ['controller' => 'Jobs', 'action' => 'view', $accessorieLine->job->id]) : '' ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Id') ?></th>
+            <td><?= $this->Number->format($accessorieLine->id) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Accs In') ?></th>
             <td><?= $this->Number->format($accessorieLine->accs_in) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Accs Out') ?></th>
             <td><?= $this->Number->format($accessorieLine->accs_out) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Loaded') ?></th>
+            <td><?= $accessorieLine->loaded ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
 </div>

@@ -6,10 +6,12 @@ use Cake\ORM\Entity;
 /**
  * AccessorieLine Entity
  *
- * @property int $accessorie_id
- * @property int $job_id
+ * @property int $id
  * @property int $accs_in
  * @property int $accs_out
+ * @property bool $loaded
+ * @property int $accessories_id
+ * @property int $jobs_id
  *
  * @property \App\Model\Entity\Accessory $accessory
  * @property \App\Model\Entity\Job $job
@@ -29,6 +31,9 @@ class AccessorieLine extends Entity
     protected $_accessible = [
         'accs_in' => true,
         'accs_out' => true,
+        'loaded' => true,
+        'accessories_id' => true,
+        'jobs_id' => true,
         'accessory' => true,
         'job' => true
     ];

@@ -16,7 +16,7 @@
                 Adding Event Type
             </div>
             <div class="panel-body">
-                <div class="form-group"><?= $this->Form->control('name',['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('name',['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
             </div>
         </div>
         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>

@@ -5,6 +5,15 @@
  */
 ?>
 
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
 
 <div class="row">
     <?= $this->Form->create($accessory) ?>
@@ -14,7 +23,7 @@
                 Adding accessory
             </div>
             <div class="panel-body">
-                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
             </div>
         </div>
         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>

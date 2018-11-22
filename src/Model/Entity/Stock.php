@@ -14,7 +14,6 @@ use Cake\ORM\Entity;
  * @property bool $is_deleted
  *
  * @property \App\Model\Entity\Accessory $accessory
- * @property \App\Model\Entity\StockLine[] $stock_lines
  */
 class Stock extends Entity
 {
@@ -34,7 +33,6 @@ class Stock extends Entity
         'min_accs' => true,
         'accessorie_id' => true,
         'is_deleted' => true,
-        'accessory' => true,
-        'stock_lines' => true
+        'accessory' => true
     ];
 }

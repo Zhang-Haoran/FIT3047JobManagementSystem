@@ -21,8 +21,11 @@
         <?php
             echo $this->Form->control('accs_in');
             echo $this->Form->control('accs_out');
+            echo $this->Form->control('loaded');
+            echo $this->Form->control('accessories_id', ['options' => $accessories]);
+            echo $this->Form->control('jobs_id', ['options' => $jobs]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit',['id' => 'btnSubmit'])) ?>
+    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>

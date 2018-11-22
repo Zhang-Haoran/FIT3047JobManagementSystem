@@ -5,6 +5,23 @@
  */
 ?>
 
+
+
+<html>
+<body>
+
+<button onclick="goBack()">Go Back</button>
+
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+</body>
+</html>
+
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('Edit Accessory') ?></h1>
@@ -24,7 +41,7 @@
                     <div class="tab-content">
                         <div class="row">
                             <div class="col-lg-6">
-                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']); ?></div>
+                                <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']); ?></div>
                             </div>
                         </div>
                     </div>

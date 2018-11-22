@@ -13,9 +13,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\EventTypesTable|\Cake\ORM\Association\BelongsTo $EventTypes
  * @property \App\Model\Table\CustomersTable|\Cake\ORM\Association\BelongsTo $Customers
  * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\BelongsTo $Employees
- * @property \App\Model\Table\AccessorieLinesTable|\Cake\ORM\Association\HasMany $AccessorieLines
  * @property \App\Model\Table\ImagesTable|\Cake\ORM\Association\HasMany $Images
- * @property \App\Model\Table\StockLinesTable|\Cake\ORM\Association\HasMany $StockLines
  *
  * @method \App\Model\Entity\Job get($primaryKey, $options = [])
  * @method \App\Model\Entity\Job newEntity($data = null, array $options = [])
@@ -59,13 +57,7 @@ class JobsTable extends Table
             'foreignKey' => 'employee_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('AccessorieLines', [
-            'foreignKey' => 'job_id'
-        ]);
         $this->hasMany('Images', [
-            'foreignKey' => 'job_id'
-        ]);
-        $this->hasMany('StockLines', [
             'foreignKey' => 'job_id'
         ]);
     }
@@ -86,11 +78,7 @@ class JobsTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name')
-            ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain character only'
-            ]);
+            ->notEmpty('name');
 
         $validator
             ->scalar('job_status')
@@ -100,8 +88,7 @@ class JobsTable extends Table
 
         $validator
             ->dateTime('job_date')
-            ->requirePresence('job_date', 'create')
-            ->notEmpty('job_date');
+            ->allowEmpty('job_date');
 
         $validator
             ->dateTime('booked_date')
@@ -110,14 +97,12 @@ class JobsTable extends Table
         $validator
             ->numeric('price')
             ->greaterThanOrEqual('price', 0)
-            ->allowEmpty('price')
-            ->numeric('price');
+            ->allowEmpty('price');
 
         $validator
             ->numeric('deposit')
             ->greaterThanOrEqual('deposit', 0)
-            ->allowEmpty('deposit')
-            ->numeric('deposit');
+            ->allowEmpty('deposit');
 
         $validator
             ->scalar('order_detail')
@@ -151,20 +136,17 @@ class JobsTable extends Table
         $validator
             ->scalar('Invoice')
             ->maxLength('Invoice', 45)
-            ->allowEmpty('Invoice')
-            ->numeric('Invoice');
+            ->allowEmpty('Invoice');
 
         $validator
             ->scalar('job_order')
             ->maxLength('job_order', 45)
-            ->allowEmpty('job_order')
-            ->numeric('job_order');
+            ->allowEmpty('job_order');
 
         $validator
             ->scalar('quote')
             ->maxLength('quote', 45)
-            ->allowEmpty('quote')
-            ->numeric('quote');
+            ->allowEmpty('quote');
 
         $validator
             ->scalar('token')
@@ -178,6 +160,18 @@ class JobsTable extends Table
         $validator
             ->boolean('is_deleted')
             ->allowEmpty('is_deleted');
+
+        $validator
+            ->scalar('arrive_note')
+            ->allowEmpty('arrive_note');
+
+        $validator
+            ->scalar('setup_note')
+            ->allowEmpty('setup_note');
+
+        $validator
+            ->scalar('pickup_note')
+            ->allowEmpty('pickup_note');
 
         return $validator;
     }

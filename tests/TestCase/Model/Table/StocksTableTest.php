@@ -25,8 +25,7 @@ class StocksTableTest extends TestCase
      */
     public $fixtures = [
         'app.stocks',
-        'app.accessories',
-        'app.stock_lines'
+        'app.accessories'
     ];
 
     /**

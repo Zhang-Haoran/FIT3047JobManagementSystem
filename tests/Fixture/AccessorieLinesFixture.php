@@ -17,18 +17,20 @@ class AccessorieLinesFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
-        'accessorie_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'job_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'accs_in' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => '0', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        'accs_out' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => '0', 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
+        'accs_in' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'accs_out' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'loaded' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
+        'accessories_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'jobs_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
-            'fk_materials_has_jobs_jobs1_idx' => ['type' => 'index', 'columns' => ['job_id'], 'length' => []],
-            'fk_materials_has_jobs_materials1_idx' => ['type' => 'index', 'columns' => ['accessorie_id'], 'length' => []],
+            'fk_accessorie_lines_accessories1_idx' => ['type' => 'index', 'columns' => ['accessories_id'], 'length' => []],
+            'fk_accessorie_lines_jobs1_idx' => ['type' => 'index', 'columns' => ['jobs_id'], 'length' => []],
         ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['accessorie_id', 'job_id'], 'length' => []],
-            'fk_materials_has_jobs_jobs1' => ['type' => 'foreign', 'columns' => ['job_id'], 'references' => ['jobs', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
-            'fk_materials_has_jobs_materials1' => ['type' => 'foreign', 'columns' => ['accessorie_id'], 'references' => ['accessories', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
+            'fk_accessorie_lines_accessories1' => ['type' => 'foreign', 'columns' => ['accessories_id'], 'references' => ['accessories', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
+            'fk_accessorie_lines_jobs1' => ['type' => 'foreign', 'columns' => ['jobs_id'], 'references' => ['jobs', 'id'], 'update' => 'noAction', 'delete' => 'noAction', 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -46,10 +48,12 @@ class AccessorieLinesFixture extends TestFixture
     {
         $this->records = [
             [
-                'accessorie_id' => 1,
-                'job_id' => 1,
+                'id' => 1,
                 'accs_in' => 1,
-                'accs_out' => 1
+                'accs_out' => 1,
+                'loaded' => 1,
+                'accessories_id' => 1,
+                'jobs_id' => 1
             ],
         ];
         parent::init();
