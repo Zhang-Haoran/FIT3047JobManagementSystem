@@ -51,7 +51,7 @@
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Jobs related to site</th>
+            <th>Jobs on this site</th>
         </div>
 
         <table class="panel-body">
