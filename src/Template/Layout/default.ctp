@@ -101,6 +101,7 @@
 <?= $this->Html->script('chosen.jquery.js') ?>
 <?= $this->Html->script('select2.min.js') ?>
 <?= $this->Html->script('bootstrap-multiselect.js') ?>
+<?= $this->fetch('scriptBottom'); ?>
 
 <!--calling script.js-->
 <?= $this->Html->script('/js/script.js') ?>
