@@ -63,6 +63,12 @@ class ContactsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
+            ->scalar('fname')
+            ->maxLength('fname', 255)
+            ->requirePresence('fname', 'create')
+            ->notEmpty('fname');
+
+        $validator
             ->scalar('lname')
             ->maxLength('lname', 255)
             ->requirePresence('lname', 'create')
@@ -75,7 +81,9 @@ class ContactsTable extends Table
 
         $validator
             ->email('email')
-            ->allowEmpty('email');
+            ->requirePresence('email', 'create')
+            ->notEmpty('email')
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         $validator
             ->scalar('role')
@@ -103,13 +111,8 @@ class ContactsTable extends Table
 
         $validator
             ->scalar('postcode')
-            ->maxLength('postcode', 255)
+            ->maxLength('postcode', 5)
             ->allowEmpty('postcode');
-
-        $validator
-            ->scalar('fname')
-            ->maxLength('fname', 255)
-            ->allowEmpty('fname');
 
         return $validator;
     }
