@@ -202,7 +202,8 @@
             </div>
         </div>
     </div>
-      <?php $this->Html->scriptStart(['block' => true]) ?>
+    <?php $this->start('script'); ?>
+    <script>
 
     function hideQuoted(){
         var quotedRef = document.getElementById('quoted');
@@ -210,4 +211,6 @@
         quotedRef.style.display = 'none';
         nonquotedRef.style.display = 'block';
     }
-<?php $this->Html->scriptEnd() ?>
+
+    </script>
+    <?php $this->end(); ?>
