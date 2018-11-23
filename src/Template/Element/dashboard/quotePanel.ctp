@@ -10,7 +10,7 @@
                                 array_push($allJobs, $job);
                             endforeach;
                         $list = array_filter($allJobs, function($job){
-                            return $job->job_status == 'Quoted';
+                            return $job->job_status == 'Quote';
                         });
                         echo count($list);
                     ?>

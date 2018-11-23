@@ -5,23 +5,6 @@
  */
 ?>
 
-
-
-<html>
-<body>
-
-<button onclick="goBack()">Go Back</button>
-
-
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
-
-</body>
-</html>
-
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header"><?= __('Jobs to be done') ?></h1>
@@ -39,13 +22,13 @@
                                 foreach ($jobs as $job):
                                     array_push($allJobs, $job);
                                 endforeach;
-                                $list = array_filter($allJobs, function($jobs){
+                                $list = array_filter($allJobs, function($job){
                                     $today = date("Y-m-d");
                                     $job_date = $job->job_date;
 
                                     $today_time = strtotime($today);
                                     $job_date_time = strtotime($job_date);
-                                    return $today_time == job_date_time;
+                                    return $today_time == $job_date_time;
                                 });
                             echo count($list);
                             ?>
@@ -73,13 +56,13 @@
                                 foreach ($jobs as $job):
                                     array_push($allJobs, $job);
                                 endforeach;
-                                $list = array_filter($allJobs, function($jobs){
+                                $list = array_filter($allJobs, function($job){
                                     $today = date("Y-m-d");
                                     $job_date = $job->job_date;
 
                                     $today_time = strtotime($today);
                                     $job_date_time = strtotime($job_date);
-                                    return $today_time - job_date_time <= 7;
+                                    return $today_time - $job_date_time <= 7;
                                 });
                             echo count($list);
                             ?>
@@ -142,10 +125,10 @@
             <tr>
                 <td><?= h($job->name) ?></td>
                 <?php
-                if( $job->job_status == 'Started')
-                echo "<td class='bg-danger text-white'>Started</td>";
-                elseif ($job->job_status == 'Confirmed')
-                echo "<td class='bg-success text-white'>Confirmed</td>";
+                if( $job->job_status == 'Order')
+                echo "<td class='bg-danger text-white'>Order</td>";
+                elseif ($job->job_status == 'Ready')
+                echo "<td class='bg-success text-white'>Ready</td>";
                 elseif($job->job_status == 'Quote')
                 echo "<td class='bg-warning text-white'>Quote</td>";
                 elseif($job->job_status == 'Completed')

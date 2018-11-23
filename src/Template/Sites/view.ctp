@@ -5,21 +5,15 @@
  */
 ?>
 
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
 
-<html>
-<body>
-
-<button onclick="goBack()">Go Back</button>
-
-
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
-
-</body>
-</html>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
 
 
 
@@ -69,7 +63,7 @@
 <div class="col-lg-6">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <th>Jobs related to site</th>
+            <th>Jobs on this site</th>
         </div>
 
         <table class="panel-body">

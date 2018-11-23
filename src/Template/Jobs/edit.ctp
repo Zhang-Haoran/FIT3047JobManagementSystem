@@ -5,20 +5,15 @@
  */
 ?>
 
-<html>
-<body>
+<div>
+    <button onclick="goBack()" class="btn btn-success">Go Back</button>
 
-<button onclick="goBack()">Go Back</button>
-
-
-<script>
-    function goBack() {
-        window.history.back();
-    }
-</script>
-
-</body>
-</html>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</div>
 
 
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
@@ -26,7 +21,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('Add Job') ?></h1>
+        <h1 class="page-header"><?= __('Edit Job') ?></h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
