@@ -202,7 +202,8 @@
             </div>
         </div>
     </div>
-<script>
+    <?php $this->start('script'); ?>
+    <script>
 
     function hideQuoted(){
         var quotedRef = document.getElementById('quoted');
@@ -211,8 +212,5 @@
         nonquotedRef.style.display = 'block';
     }
 
-
-</script>
-
-
-
+    </script>
+    <?php $this->end(); ?>
