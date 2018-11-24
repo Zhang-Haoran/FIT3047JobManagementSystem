@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <a onclick="showQuoted()">
+        <a id="quote-panel">
             <div class="panel-footer">
                 <span class="pull-left">Show</span>
                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -29,11 +29,3 @@
         </a>
     </div>
 </div>
-<script>
-    function showQuoted(){
-        var quotedRef = document.getElementById('quoted');
-        var nonquotedRef = document.getElementById('non-quoted');
-        quotedRef.style.display = 'block';
-        nonquotedRef.style.display = 'none';
-    }
-</script>
