@@ -291,6 +291,7 @@
                         <div class="form-group"><?= $this->Form->control('suburb',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                         <div class="form-group"><?= $this->Form->control('city',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                         <div class="form-group"><?= $this->Form->control('postcode',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('job_id', ['class' => 'form-control','option' => $jobs]); ?></div>
                     </fieldset>
                     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
                     <?= $this->Form->end() ?>

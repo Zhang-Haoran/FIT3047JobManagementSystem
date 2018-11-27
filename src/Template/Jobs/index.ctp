@@ -125,10 +125,10 @@
             <tr>
                 <td><?= h($job->name) ?></td>
                 <?php
-                if( $job->job_status == 'Started')
-                echo "<td class='bg-danger text-white'>Started</td>";
-                elseif ($job->job_status == 'Confirmed')
-                echo "<td class='bg-success text-white'>Confirmed</td>";
+                if( $job->job_status == 'Order')
+                echo "<td class='bg-danger text-white'>Order</td>";
+                elseif ($job->job_status == 'Ready')
+                echo "<td class='bg-success text-white'>Ready</td>";
                 elseif($job->job_status == 'Quote')
                 echo "<td class='bg-warning text-white'>Quote</td>";
                 elseif($job->job_status == 'Completed')
@@ -146,10 +146,12 @@
                 <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
                 <td>
-
                     <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
+                    <div id = "needToHide">
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?></td>
+                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                    </div>
+                </td>
 
             </tr>
             <?php endforeach; ?>
@@ -188,11 +190,12 @@
                 <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
                 <td>
-
                     <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?></td>
 
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
+                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+
+                </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -200,12 +203,17 @@
             </div>
         </div>
     </div>
-<script>
+
+    <?php $this->start('script'); ?>
+    <script>
+
     function hideQuoted(){
         var quotedRef = document.getElementById('quoted');
         var nonquotedRef = document.getElementById('non-quoted');
         quotedRef.style.display = 'none';
         nonquotedRef.style.display = 'block';
     }
-</script>
+    var needToHide = document.getElementById('needToHide');
 
+    </script>
+    <?php $this->end(); ?>
