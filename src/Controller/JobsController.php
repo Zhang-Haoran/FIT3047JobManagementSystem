@@ -28,6 +28,10 @@ class JobsController extends AppController
         $jobs = $this->Jobs->find('all')->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
 
         $this->set(compact('jobs'));
+
+        $session = $this->getRequest()->getSession();
+        $name = $session->read('Auth.User.access_level');
+        $this->set('name', $name);
     }
 
 
