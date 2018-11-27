@@ -44,6 +44,7 @@
                 </div>
                 <div class="form-group"><?= $this->Form->control('minimum accessory', ['class' => 'form-control','placeholder' => 'minimum accessory should be numeric']) ?></div>
                 <div class="form-group"><?= $this->Form->control('accessorie_id', ['label' => 'Accessory', 'options' => $accessories, 'empty' => true,'class' => 'form-control']) ?></div>
+                <div class="form-group"><?= $this->Form->control('unit', ['class' => 'form-control','placeholder' => 'unit should be numeric']) ?></div>
 
 
             </div>
