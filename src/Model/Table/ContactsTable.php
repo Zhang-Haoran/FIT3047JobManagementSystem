@@ -40,13 +40,13 @@ class ContactsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Jobs', [
-            'foreignKey' => 'jobs_id'
+            'foreignKey' => 'job_id'
         ]);
         $this->belongsTo('Sites', [
-            'foreignKey' => 'sites_id'
+            'foreignKey' => 'site_id'
         ]);
         $this->belongsTo('Customers', [
-            'foreignKey' => 'customers_id'
+            'foreignKey' => 'customer_id'
         ]);
     }
 
@@ -127,9 +127,9 @@ class ContactsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
-        $rules->add($rules->existsIn(['jobs_id'], 'Jobs'));
-        $rules->add($rules->existsIn(['sites_id'], 'Sites'));
-        $rules->add($rules->existsIn(['customers_id'], 'Customers'));
+        $rules->add($rules->existsIn(['job_id'], 'Jobs'));
+        $rules->add($rules->existsIn(['site_id'], 'Sites'));
+        $rules->add($rules->existsIn(['customer_id'], 'Customers'));
 
         return $rules;
     }
