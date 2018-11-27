@@ -12,7 +12,7 @@ use Cake\ORM\Entity;
  * @property int $min_accs
  * @property int $accessorie_id
  * @property bool $is_deleted
- * @property string $unit
+ * @property int $unit
  *
  * @property \App\Model\Entity\Accessory $accessory
  */
