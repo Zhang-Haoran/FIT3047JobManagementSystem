@@ -34,12 +34,12 @@ class StocklinesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('stocklines');
+        $this->setTable('stock_lines');
         $this->setDisplayField('stock_id');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Stocks', [
-            'foreignKey' => 'stocks_id',
+            'foreignKey' => 'stock_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Jobs', [
@@ -84,7 +84,7 @@ class StocklinesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['stocks_id'], 'Stocks'));
+        $rules->add($rules->existsIn(['stock_id'], 'Stocks'));
         $rules->add($rules->existsIn(['jobs_id'], 'Jobs'));
 
         return $rules;

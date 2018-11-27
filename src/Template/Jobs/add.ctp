@@ -5,6 +5,7 @@
  */
 ?>
 
+
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
 <?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
 
@@ -364,8 +365,8 @@
         });
         $('a[href="#stock"]').on('hide.bs.tab', function () {
             $('button#btnNext').show();
+            $('button#Submit').hide();
         });
-
 
     });
 
