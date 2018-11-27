@@ -88,6 +88,7 @@
         ?>
     </div>
 <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
+<a id="reloadBtn" class="btn btn-lg btn-info" style="margin-left:1%">Reload</a>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel-body">
@@ -138,10 +139,10 @@
                 <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]) : '' ?></td>
                 <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
-                <td>
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                <td style="width:6%">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']) ?>
+                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
                 </td>
 
             </tr>
@@ -209,12 +210,13 @@
     })
 
 
-    /* not working
-    $('#nextWeek-panel').on('click', function(){
-        var table = $('#dataTables').DataTable({ajax: "data.json"});
-        table.ajax.reload(null, false);
+
+    $('#reloadBtn').on('click', function(){
+        var table = $('#dataTables').DataTable({AJAX: "data.json"});
+        table.AJAX.reload();
+        table.draw();
 
     })
-    */
+
     </script>
     <?php $this->end(); ?>
