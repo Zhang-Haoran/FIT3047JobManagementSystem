@@ -36,7 +36,7 @@
                         <div class="col-lg-8 text-right"><h3>Today</h3></div>
                     </div>
                 </div>
-                <a onclick="hideQuoted()">
+                <a id="today-panel">
                     <div class="panel-footer">
                         <span class="pull-left">Show</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <a onclick="hideQuoted()">
+                <a id="nextWeek-panel">
                     <div class="panel-footer">
                         <span class="pull-left">Show</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -88,6 +88,7 @@
         ?>
     </div>
 <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
+<a id="reloadBtn" class="btn btn-lg btn-info" style="margin-left:1%">Reload</a>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel-body">
@@ -112,16 +113,9 @@
 
             </tr>
         </thead>
-        <tbody id="non-quoted">
+        <tbody>
             <?php
-                $allJobs = array();
-                    foreach ($jobs as $job):
-                        array_push($allJobs, $job);
-                    endforeach;
-                $jobList = array_filter($allJobs, function($job){
-                return $job->job_status <> 'Quoted';
-                });
-                foreach ($jobList as $job): ?>
+                foreach ($jobs as $job): ?>
             <tr>
                 <td><?= h($job->name) ?></td>
                 <?php
@@ -145,56 +139,12 @@
                 <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]) : '' ?></td>
                 <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
-                <td>
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
-                    <div id = "needToHide">
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                <td style="width:6%">
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+                    <div class="needToHide">
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']) ?>
+                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
                     </div>
-                </td>
-
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-        <tbody id="quoted" style="display: none">
-            <?php
-                $allJobs = array();
-                    foreach ($jobs as $job):
-                        array_push($allJobs, $job);
-                    endforeach;
-                $jobList = array_filter($allJobs, function($job){
-                return $job->job_status == 'Quoted';
-                });
-                foreach ($jobList as $job): ?>
-            <tr>
-                <td><?= h($job->name) ?></td>
-                <?php
-                    if( $job->job_status == 'Started')
-                echo "<td class='bg-danger text-white'>Started</td>";
-                elseif ($job->job_status == 'Confirmed')
-                echo "<td class='bg-success text-white'>Confirmed</td>";
-                elseif($job->job_status == 'Quote')
-                echo "<td class='bg-warning text-white'>Quote</td>";
-                elseif($job->job_status == 'Completed')
-                echo "<td class='bg-info text-white'>Completed</td>";
-                ?>
-                <td><?= h($job->job_date) ?></td>
-                <td class="center"><?= h($job->booked_date) ?></td>
-                <td class="center"><?= $this->Number->format($job->price) ?></td>
-                <td class="center"><?= $this->Number->format($job->deposit) ?></td>
-                <td class="center"><?= h($job->e_arrival_time) ?></td>
-                <td class="center"><?= h($job->e_setup_time) ?></td>
-                <td class="center"><?= h($job->e_pickup_time) ?></td>
-                <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?></td>
-                <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]) : '' ?></td>
-                <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
-                <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
-                <td>
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
-
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
-
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -207,13 +157,67 @@
     <?php $this->start('script'); ?>
     <script>
 
-    function hideQuoted(){
-        var quotedRef = document.getElementById('quoted');
-        var nonquotedRef = document.getElementById('non-quoted');
-        quotedRef.style.display = 'none';
-        nonquotedRef.style.display = 'block';
-    }
-    var needToHide = document.getElementById('needToHide');
+    $('#quote-panel').on('click', function(){
+        var table = $('#dataTables').DataTable();
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var status = data[1];
+
+                if(status === 'Quote')
+                    return true;
+                return false;
+
+            }
+        );
+
+        table.draw();
+    })
+
+
+    $('#today-panel').on('click', function(){
+        var table = $('#dataTables').DataTable();
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var date = new Date (data[2]);
+                var today = new Date();
+
+                if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
+                    return true;
+                return false;
+
+            }
+        );
+
+        table.draw();
+    })
+
+    $('#nextWeek-panel').on('click', function(){
+        var table = $('#dataTables').DataTable();
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+                var date = new Date (data[2]);
+                var today = new Date();
+                var datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
+                console.log(datetime);
+
+                if(datetime <= 7 && datetime > 0)
+                    return true;
+                return false;
+
+            }
+        );
+
+        table.draw();
+    })
+
+
+
+    $('#reloadBtn').on('click', function(){
+        var table = $('#dataTables').DataTable({AJAX: "data.json"});
+        table.AJAX.reload();
+        table.draw();
+
+    })
 
     $(document).ready(function() {
         var table = $('#Jobs').DataTable({
