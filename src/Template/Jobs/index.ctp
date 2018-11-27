@@ -91,7 +91,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="panel-body">
-    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
+    <table width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
         <thead>
             <tr>
                 <th scope="col"><?= __('Name') ?></th>
@@ -211,6 +211,12 @@
         quotedRef.style.display = 'none';
         nonquotedRef.style.display = 'block';
     }
+
+    $(document).ready(function() {
+        var table = $('#Jobs').DataTable({
+            responsive: true
+        });
+    } );
 
     </script>
     <?php $this->end(); ?>
