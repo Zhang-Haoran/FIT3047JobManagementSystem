@@ -4,18 +4,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * StockLine Entity
+ * Stockline Entity
  *
  * @property int $id
  * @property int $stock_num
  * @property bool $loaded
  * @property int $stocks_id
  * @property int $jobs_id
+ * @property int $unit
  *
  * @property \App\Model\Entity\Stock $stock
  * @property \App\Model\Entity\Job $job
  */
-class StockLine extends Entity
+class Stockline extends Entity
 {
 
     /**
@@ -32,6 +33,7 @@ class StockLine extends Entity
         'loaded' => true,
         'stocks_id' => true,
         'jobs_id' => true,
+        'unit' => true,
         'stock' => true,
         'job' => true
     ];

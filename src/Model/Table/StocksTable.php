@@ -74,8 +74,7 @@ class StocksTable extends Table
             ->allowEmpty('is_deleted');
 
         $validator
-            ->scalar('unit')
-            ->maxLength('unit', 45)
+            ->integer('unit')
             ->allowEmpty('unit');
 
         return $validator;
