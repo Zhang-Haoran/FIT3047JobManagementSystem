@@ -129,11 +129,21 @@
 
                       </div>
                     </div>
-    <div class ="col-lg-12">
-      <div class="submitButton">
-      <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
-      <?= $this->Form->end() ?>
-    </div>
+    <div class ="tab-content">
+        <div class="Footer">
+            <div class="divleft">
+                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
+                </button>
+            </div>
+            <div class="divright">
+                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
+                </button>
+            </div>
+        </div>
+        <div class="divright">
+            <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
+            <?= $this->Form->end() ?>
+        </div>
     </div>
     </div>
 
@@ -189,48 +199,78 @@
 </div>
 
 
-<?php
-  $this->Html->scriptStart(array("block"=>'script'));
-?>
-$("#job_datetime").datetimepicker({
- defaultDate: new Date(),
- assumeNearbyYear: true,
- step:30
- });
-$("#e_arrival_datetime").datetimepicker({
- defaultDate: new Date(),
- step:30
- });
- $("#e_setup_datetime").datetimepicker({
-  defaultDate: new Date(),
-  step:30
-  });
-  $("#e_pickup_datetime").datetimepicker({
-   defaultDate: new Date(),
-   step:30
-   });
+<?php $this->start('script'); ?>
+<script>
+    $('button#btnPrev').hide();
+    $('button#Submit').hide();
 
-   $("#job_datetime").on("dp.change", function (e) {
-       $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
-       $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
-       $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-   });
-   $("#e_arrival_datetime").on("dp.change", function (e) {
-       $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
-   });
-   $("#e_setup_datetime").on("dp.change", function (e) {
-       $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-   });
+    $("#job_datetime").datetimepicker({
+        defaultDate: new Date(),
+        assumeNearbyYear: true,
+        step:1
+    });
+
+    $("#e_arrival_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
+    });
+    $("#e_setup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
+    });
+    $("#e_pickup_datetime").datetimepicker({
+        defaultDate: new Date(),
+        step:30
+    });
 
 
-;
+    $("#job_datetime").on("dp.change", function (e) {
+        $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
+        $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
+        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+    });
+    $("#e_arrival_datetime").on("dp.change", function (e) {
+        $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
+    });
+    $("#e_setup_datetime").on("dp.change", function (e) {
+        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+    });
 
 
-$(document).ready(function() {
-    $("#type_html_id").chosen();
-    $("#cust_html_id").chosen();
-    $("#site_html_id").chosen();
-});
-<?php
-  $this->Html->scriptEnd();
-?>
+    $(document).ready(function () {
+        $("#type_html_id").chosen();
+        $("#cust_html_id").chosen();
+        $("#site_html_id").chosen();
+        $("#contact_html_id").chosen();
+        $("#image_html_id").chosen();
+    });
+
+    $(function() {
+        var $tabs = $('.col-lg-12 li');
+
+        $('#btnPrev').on('click', function() {
+            $tabs.filter('.active').prev('li').find('a[data-toggle="tab"]').tab('show');
+        });
+        $('#btnNext').on('click', function() {
+            $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
+        });
+
+        $('a[href="#job"]').on('show.bs.tab', function () {
+            $('button#btnPrev').hide();
+        });
+        $('a[href="#job"]').on('hide.bs.tab', function () {
+            $('button#btnPrev').show();
+        });
+        $('a[href="#stock"]').on('show.bs.tab', function () {
+            $('button#btnNext').hide();
+            $('button#Submit').show();
+        });
+        $('a[href="#stock"]').on('hide.bs.tab', function () {
+            $('button#btnNext').show();
+        });
+
+
+    });
+
+</script>
+<?php $this->end(); ?>
