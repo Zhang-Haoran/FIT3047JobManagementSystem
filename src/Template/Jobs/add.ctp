@@ -364,6 +364,7 @@
         });
         $('a[href="#stock"]').on('hide.bs.tab', function () {
             $('button#btnNext').show();
+            $('button#Submit').hide();
         });
 
 
