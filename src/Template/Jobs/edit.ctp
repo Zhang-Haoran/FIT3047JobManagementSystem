@@ -130,6 +130,17 @@
                       </div>
                     </div>
     <div class ="col-lg-12">
+        <div class="Footer">
+            <div class="divleft">
+                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab">Previous
+                </button>
+            </div>
+            <div class="divright">
+                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab">Next
+                </button>
+            </div>
+        </div>
+        <div class="Clearboth"></div>
       <div class="submitButton">
       <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
       <?= $this->Form->end() ?>
@@ -231,6 +242,19 @@ $(document).ready(function() {
     $("#cust_html_id").chosen();
     $("#site_html_id").chosen();
 });
+
+
+$(function() {
+var $tabs = $('.col-lg-12 li');
+
+$('#btnPrev').on('click', function() {
+$tabs.filter('.active').prev('li').find('a[data-toggle="tab"]').tab('show');
+});
+$('#btnNext').on('click', function() {
+$tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
+});
+});
+
 <?php
   $this->Html->scriptEnd();
 ?>
