@@ -52,7 +52,13 @@
             <th scope="row"><?= __('Min Accs') ?></th>
             <td><?= $this->Number->format($stock->min_accs) ?></td>
         </tr>
-    </table>
+
+                    <tr>
+                        <th scope="row"><?= __('Unit') ?></th>
+                        <td><?= $this->Number->format($stock->unit) ?></td>
+                    </tr>
+
+                </table>
             </tr>
         </table>
     </div>
