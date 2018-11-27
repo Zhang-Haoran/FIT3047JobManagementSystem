@@ -7,21 +7,21 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * StockLines Model
+ * Stocklines Model
  *
  * @property \App\Model\Table\StocksTable|\Cake\ORM\Association\BelongsTo $Stocks
  * @property \App\Model\Table\JobsTable|\Cake\ORM\Association\BelongsTo $Jobs
  *
- * @method \App\Model\Entity\StockLine get($primaryKey, $options = [])
- * @method \App\Model\Entity\StockLine newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\StockLine[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\StockLine|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\StockLine|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\StockLine patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\StockLine[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\StockLine findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Stockline get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Stockline newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Stockline[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Stockline|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Stockline|bool saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Stockline patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Stockline[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Stockline findOrCreate($search, callable $callback = null, $options = [])
  */
-class StockLinesTable extends Table
+class StocklinesTable extends Table
 {
 
     /**
@@ -34,7 +34,7 @@ class StockLinesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('stock_lines');
+        $this->setTable('stocklines');
         $this->setDisplayField('stock_id');
         $this->setPrimaryKey('id');
 
@@ -67,6 +67,10 @@ class StockLinesTable extends Table
         $validator
             ->boolean('loaded')
             ->allowEmpty('loaded');
+
+        $validator
+            ->integer('unit')
+            ->allowEmpty('unit');
 
         return $validator;
     }

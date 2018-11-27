@@ -23,7 +23,7 @@ class StocksFixture extends TestFixture
         'min_accs' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'accessorie_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'is_deleted' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => '0', 'comment' => '', 'precision' => null],
-        'unit' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'unit' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'fk_stocks_materials1_idx' => ['type' => 'index', 'columns' => ['accessorie_id'], 'length' => []],
         ],
@@ -53,7 +53,7 @@ class StocksFixture extends TestFixture
                 'min_accs' => 1,
                 'accessorie_id' => 1,
                 'is_deleted' => 1,
-                'unit' => 'Lorem ipsum dolor sit amet'
+                'unit' => 1
             ],
         ];
         parent::init();
