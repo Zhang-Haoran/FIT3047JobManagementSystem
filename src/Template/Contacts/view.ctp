@@ -36,9 +36,13 @@
                 <table id="table" class="table table-striped table-bordered table-hover">
 
         <tr>
-            <th scope="row"><?= __('Name') ?></th>
-            <td><?= h($contact->name) ?></td>
+            <th scope="row"><?= __('First Name') ?></th>
+            <td><?= h($contact->fname) ?></td>
         </tr>
+                    <tr>
+                        <th scope="row"><?= __('Last Name') ?></th>
+                        <td><?= h($contact->lname) ?></td>
+                    </tr>
         <tr>
             <th scope="row"><?= __('Phone') ?></th>
             <td><?= h($contact->phone) ?></td>
@@ -51,6 +55,22 @@
             <th scope="row"><?= __('Role') ?></th>
             <td><?= h($contact->role) ?></td>
         </tr>
+                    <tr>
+                        <th scope="row"><?= __('Street') ?></th>
+                        <td><?= h($contact->street) ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?= __('Suburb') ?></th>
+                        <td><?= h($contact->suburb) ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?= __('City') ?></th>
+                        <td><?= h($contact->city) ?></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?= __('Postcode') ?></th>
+                        <td><?= h($contact->postcode) ?></td>
+                    </tr>
         <tr>
             <th scope="row"><?= __('Job') ?></th>
             <td><?= $contact->has('job') ? $this->Html->link($contact->job->name, ['controller' => 'Jobs', 'action' => 'view', $contact->job->id]) : '' ?></td>

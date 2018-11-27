@@ -141,10 +141,11 @@
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
                 <td style="width:6%">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+                    <div class="needToHide">
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']) ?>
                     <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                    </div>
                 </td>
-
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -152,9 +153,9 @@
             </div>
         </div>
     </div>
+
     <?php $this->start('script'); ?>
     <script>
-
 
     $('#quote-panel').on('click', function(){
         var table = $('#dataTables').DataTable();
