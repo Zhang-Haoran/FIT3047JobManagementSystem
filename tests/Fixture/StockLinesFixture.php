@@ -4,11 +4,18 @@ namespace App\Test\Fixture;
 use Cake\TestSuite\Fixture\TestFixture;
 
 /**
- * StockLinesFixture
+ * StocklinesFixture
  *
  */
-class StockLinesFixture extends TestFixture
+class StocklinesFixture extends TestFixture
 {
+
+    /**
+     * Table name
+     *
+     * @var string
+     */
+    public $table = 'stock_lines';
 
     /**
      * Fields
@@ -22,6 +29,7 @@ class StockLinesFixture extends TestFixture
         'loaded' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         'stocks_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'jobs_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'unit' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         '_indexes' => [
             'fk_stock_lines_stocks1_idx' => ['type' => 'index', 'columns' => ['stocks_id'], 'length' => []],
             'fk_stock_lines_jobs1_idx' => ['type' => 'index', 'columns' => ['jobs_id'], 'length' => []],
@@ -51,7 +59,8 @@ class StockLinesFixture extends TestFixture
                 'stock_num' => 1,
                 'loaded' => 1,
                 'stocks_id' => 1,
-                'jobs_id' => 1
+                'jobs_id' => 1,
+                'unit' => 1
             ],
         ];
         parent::init();
