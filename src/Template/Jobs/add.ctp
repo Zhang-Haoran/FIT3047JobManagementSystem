@@ -158,28 +158,24 @@
                             <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
-
-
                       </div>
                     </div>
 
     <div class ="tab-content">
         <div class="Footer">
             <div class="divleft">
-                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab">Previous
+                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
                 </button>
             </div>
             <div class="divright">
-                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab">Next
+                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
                 </button>
             </div>
         </div>
-        <div class="Clearboth"></div>
-
-      <div class="submitButton">
-      <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
-      <?= $this->Form->end() ?>
-    </div>
+        <div class="divright">
+            <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
+            <?= $this->Form->end() ?>
+        </div>
     </div>
     </div>
 <div class="modal fade" id="EventTypesAdd" role="dialog">
@@ -303,6 +299,9 @@
 
 <?php $this->start('script'); ?>
 <script>
+    $('button#btnPrev').hide();
+    $('button#Submit').hide();
+
     $("#job_datetime").datetimepicker({
         defaultDate: new Date(),
         assumeNearbyYear: true,
@@ -353,6 +352,22 @@
         $('#btnNext').on('click', function() {
             $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
         });
+
+        $('a[href="#job"]').on('show.bs.tab', function () {
+            $('button#btnPrev').hide();
+        });
+        $('a[href="#job"]').on('hide.bs.tab', function () {
+            $('button#btnPrev').show();
+        });
+        $('a[href="#stock"]').on('show.bs.tab', function () {
+            $('button#btnNext').hide();
+            $('button#Submit').show();
+        });
+        $('a[href="#stock"]').on('hide.bs.tab', function () {
+            $('button#btnNext').show();
+        });
+
+
     });
 
 </script>
