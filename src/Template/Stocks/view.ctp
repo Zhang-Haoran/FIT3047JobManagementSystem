@@ -52,6 +52,7 @@
             <th scope="row"><?= __('Min Accs') ?></th>
             <td><?= $this->Number->format($stock->min_accs) ?></td>
         </tr>
+                    //nfkjg
 
                     <tr>
                         <th scope="row"><?= __('Unit') ?></th>
