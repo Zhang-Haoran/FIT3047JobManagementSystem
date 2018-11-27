@@ -73,6 +73,11 @@ class StocksTable extends Table
             ->boolean('is_deleted')
             ->allowEmpty('is_deleted');
 
+        $validator
+            ->scalar('unit')
+            ->maxLength('unit', 45)
+            ->allowEmpty('unit');
+
         return $validator;
     }
 
