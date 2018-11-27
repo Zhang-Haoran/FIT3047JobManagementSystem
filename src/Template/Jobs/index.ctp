@@ -147,8 +147,10 @@
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
                 <td>
                     <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
+                    <div id = "needToHide">
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
                     <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                    </div>
                 </td>
 
             </tr>
@@ -188,13 +190,12 @@
                 <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
                 <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
                 <td>
-
                     <?= $this->Html->link(__('View'), ['action' => 'view', $job->id]) ?>
+
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id]) ?>
                     <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
 
                 </td>
-
             </tr>
             <?php endforeach; ?>
         </tbody>
@@ -202,6 +203,7 @@
             </div>
         </div>
     </div>
+
     <?php $this->start('script'); ?>
     <script>
 
@@ -211,6 +213,7 @@
         quotedRef.style.display = 'none';
         nonquotedRef.style.display = 'block';
     }
+    var needToHide = document.getElementById('needToHide');
 
     </script>
     <?php $this->end(); ?>
