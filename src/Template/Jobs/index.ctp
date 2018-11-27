@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Job[]|\Cake\Collection\CollectionInterface $jobs
  */
 
-debug($name);
+//debug($name);
 ?>
 
     <div class="row">

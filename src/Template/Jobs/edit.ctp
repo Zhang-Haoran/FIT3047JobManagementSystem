@@ -110,7 +110,7 @@
                         </div>
 
                         <div class="tab-pane fade" id="priceInfo">
-                          <div class="form-group"><?= $this->Form->control('quote', ['class' => 'form-control','placeholder'=>'Quote#']) ?></div>
+                          <div class="form-group"><?= $this->Form->control('quote', ['label' => 'Quote number','class' => 'form-control','placeholder'=>'Quote#']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control','placeholder'=>'Order#','label' => 'Order']) ?></div>
                             <div class="form-group"><?= $this->Form->control('Invoice', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
                             <div class="form-group"><?= $this->Form->control('price', ['class' => 'form-control', 'min'=>'0',  'value'=>'0', 'step'=>'1']) ?></div>
@@ -207,7 +207,7 @@
     $("#job_datetime").datetimepicker({
         defaultDate: new Date(),
         assumeNearbyYear: true,
-        step:1
+        step:30
     });
 
     $("#e_arrival_datetime").datetimepicker({
