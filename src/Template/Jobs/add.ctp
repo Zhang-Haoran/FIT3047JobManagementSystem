@@ -302,6 +302,8 @@
 
 <?php $this->start('script'); ?>
 <script>
+    $('button#btnPrev').hide();
+
     $("#job_datetime").datetimepicker({
         defaultDate: new Date(),
         assumeNearbyYear: true,
@@ -351,6 +353,19 @@
         });
         $('#btnNext').on('click', function() {
             $tabs.filter('.active').next('li').find('a[data-toggle="tab"]').tab('show');
+        });
+
+        $('a[href="#job"]').on('show.bs.tab', function () {
+            $('button#btnPrev').hide();
+        });
+        $('a[href="#job"]').on('hide.bs.tab', function () {
+            $('button#btnPrev').show();
+        });
+        $('a[href="#stock"]').on('show.bs.tab', function () {
+            $('button#btnNext').hide();
+        });
+        $('a[href="#stock"]').on('hide.bs.tab', function () {
+            $('button#btnNext').show();
         });
     });
 
