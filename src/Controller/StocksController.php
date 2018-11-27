@@ -44,7 +44,11 @@ class StocksController extends AppController
             return $this->redirect($this->Auth->redirectUrl());
         }
 
+        $test = $this->Stocks->StockLines->get('1');
+        debug($test->toArray());
+
         $stock = $this->Stocks->get($id, [
+
             'contain' => ['Accessories', 'StockLines']
         ]);
 
