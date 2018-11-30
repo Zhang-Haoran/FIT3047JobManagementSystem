@@ -35,4 +35,9 @@ class Site extends Entity
         'is_deleted' => true,
         'jobs' => true
     ];
+
+    protected function _getLabel()
+    {
+        return $this->_properties['name'] . ' (' . $this->_properties['address'] . ',  ' . $this->_properties['suburb'] . ' ' . $this->_properties['postcode'] . ')';
+    }
 }
