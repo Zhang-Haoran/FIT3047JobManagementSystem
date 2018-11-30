@@ -51,7 +51,9 @@
                     </tr>
                     <tr>
                         <th>Email:</th>
-                        <td><?= h($employee->email) ?></td>
+                        <td>
+                            <a href = "mailto:<?= ($employee->email) ?>"><?= ($employee->email) ?></a>
+                        </td>
                     </tr>
                     <tr>
                         <th>Access Level:</th>
