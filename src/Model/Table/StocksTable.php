@@ -40,6 +40,7 @@ class StocksTable extends Table
         $this->belongsTo('Accessories', [
             'foreignKey' => 'accessorie_id'
         ]);
+        $this->hasMany('StockLines');
     }
 
     /**

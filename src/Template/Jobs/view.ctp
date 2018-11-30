@@ -6,15 +6,6 @@
 ?>
 
 
-<div>
-    <button onclick="goBack()" class="btn btn-success">Go Back</button>
-
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-</div>
 
 <div class="row">
 
@@ -32,7 +23,6 @@
         margin-top: 2%;
     }
 </style>
-
 
 <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
 
@@ -60,7 +50,7 @@
         <tr>
             <th scope="row"><?= __('Site') ?></th>
             <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
-                <button onclick="moveToImage()" class="btn btn-success">Upload images</button>
+                <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
             </td>
 
         </tr>
@@ -192,7 +182,7 @@ $this->Html->scriptBlock('
     ?>
 
 <script>
-    function moveToImage() {
-        window.location.replace("/images/add");
+    function moveToImage(jobId) {
+        window.location.replace("/images/add/" + jobId);
     }
 </script>

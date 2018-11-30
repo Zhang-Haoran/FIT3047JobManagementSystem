@@ -28,6 +28,10 @@ class JobsController extends AppController
         $jobs = $this->Jobs->find('all')->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
 
         $this->set(compact('jobs'));
+
+        $session = $this->getRequest()->getSession();
+        $name = $session->read('Auth.User.access_level');
+        $this->set('name', $name);
     }
 
 
@@ -82,7 +86,12 @@ class JobsController extends AppController
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
 
         }
-        $sites = $this->Jobs->Sites->find('list');
+        $sites = $this->Jobs->Sites->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($site) {
+                return $site->get('label');
+            }
+        ]);
         $eventTypes = $this->Jobs->EventTypes->find('list');
         $customers = $this->Jobs->Customers->find('list');
         $employees = $this->Jobs->Employees->find('list');

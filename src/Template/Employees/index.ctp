@@ -40,7 +40,7 @@
             <tr>
                 <td><?= h($employee->full_name) ?></td>
                 <td><?= h($employee->phone) ?></td>
-                <td><?= h($employee->email) ?></td>
+                <td><a href = "mailto:<?= ($employee->email) ?>"><?= ($employee->email) ?></a></td>
 
                     <?php
                     if( $employee->access_level == 1)

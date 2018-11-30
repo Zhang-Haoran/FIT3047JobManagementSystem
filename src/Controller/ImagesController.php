@@ -56,7 +56,7 @@ class ImagesController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($jobId = null)
     {
         if ($this->Auth->user('access_level') == '3') {
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
@@ -76,13 +76,13 @@ class ImagesController extends AppController
                $dir = '/img' . $imageName;
                $image->description = $imageName;
                $image->path = $dir;
-               $image->job_id = 1;
+               $image->job_id = $jobId;
 
             if (move_uploaded_file($imageTep, WWW_ROOT.$dir)) {
                 $this->Images->save($image);
                 $this->Flash->success(__('The image has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'jobs','action' => 'view', $jobId]);
             } else {
                 $this->Flash->error(__('The image could not be saved. Please, try again.'));
             }

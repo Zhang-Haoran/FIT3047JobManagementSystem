@@ -3,6 +3,8 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Job[]|\Cake\Collection\CollectionInterface $jobs
  */
+
+//debug($name);
 ?>
 
     <div class="row">
@@ -123,16 +125,66 @@
                 <td class="center"><?= h($job->e_arrival_time) ?></td>
                 <td class="center"><?= h($job->e_setup_time) ?></td>
                 <td class="center"><?= h($job->e_pickup_time) ?></td>
-                <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?></td>
-                <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]) : '' ?></td>
-                <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
-                <td class="center"><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
+                <td>
+                    <?php if( $job->has('site')){
+                        if($name == 1 || $name == 2){
+                            echo $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]);
+                        }
+                        else{
+                            echo h($job->site->name);
+                        }
+                    }
+                    else{
+                        '';
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php if($job->has('event_type')) {
+                        if ($name == 1 || $name == 2) {
+                            echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]);
+                        }
+                        else{
+                            echo h($job->event_type->name);
+                        }
+                    }
+                    else{
+                        '';
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php if($job->has('customer')) {
+                        if ($name == 1 || $name == 2) {
+                            echo $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]);
+                        }
+                        else{
+                            echo h($job->customer->name);
+                        }
+                    }
+                    else{
+                        '';
+                    }
+                    ?>
+                </td>
+                <td class="center">
+                    <?php if($job->has('employee')){
+                        if ($name == 1 || $name == 2) {
+                            echo $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]);
+                        }
+                        else    {
+                            echo h($job->employee->full_name);
+                        }
+                    }
+                    else{
+                        '';
+                    }
+                    ?>
+                </td>
                 <td style="width:6%">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-                    <div class="needToHide">
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']) ?>
-                    <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
-                    </div>
+                    <?= ($name == 1 || $name == 2)?$this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']):"" ?>
+                    <?= ($name == 1 || $name == 2)?$this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]):"" ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -216,7 +268,7 @@
                 'csvHtml5'
             ]
         });
-
+        
         $('#quote-panel').on('click', function(){
             button = 3;
 
