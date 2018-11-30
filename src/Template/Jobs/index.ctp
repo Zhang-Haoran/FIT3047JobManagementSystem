@@ -16,27 +16,11 @@
             <div class="panel panel-red">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-3 huge">
-                            <?php
-                                $allJobs = array();
-                                foreach ($jobs as $job):
-                                    array_push($allJobs, $job);
-                                endforeach;
-                                $list = array_filter($allJobs, function($job){
-                                    $today = date("Y-m-d");
-                                    $job_date = $job->job_date;
-
-                                    $today_time = strtotime($today);
-                                    $job_date_time = strtotime($job_date);
-                                    return $today_time == $job_date_time;
-                                });
-                            echo count($list);
-                            ?>
-                        </div>
+                        <div id="todayN" class="col-xs-3 huge">🤷‍</div>
                         <div class="col-lg-8 text-right"><h3>Today</h3></div>
                     </div>
                 </div>
-                <a id="today-panel">
+                <a id="today-panel" style="cursor: pointer">
                     <div class="panel-footer">
                         <span class="pull-left">Show</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -50,29 +34,13 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-xs-3 huge">
-                            <?php
-                                $allJobs = array();
-                                foreach ($jobs as $job):
-                                    array_push($allJobs, $job);
-                                endforeach;
-                                $list = array_filter($allJobs, function($job){
-                                    $today = date("Y-m-d");
-                                    $job_date = $job->job_date;
-
-                                    $today_time = strtotime($today);
-                                    $job_date_time = strtotime($job_date);
-                                    return $today_time - $job_date_time <= 7;
-                                });
-                            echo count($list);
-                            ?>
-                        </div>
+                        <div id="nextWeekN" class="col-xs-3 huge">🈲</div>
                         <div class="">
                             <div class="col-lg-8 text-right"><h3>Next week</h3></div>
                         </div>
                     </div>
                 </div>
-                <a id="nextWeek-panel">
+                <a id="nextWeek-panel" style="cursor: pointer">
                     <div class="panel-footer">
                         <span class="pull-left">Show</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -81,14 +49,34 @@
                 </a>
             </div>
         </div>
+
         <?php
         if($this->request->getsession()->read('Auth.User.access_level') <> '3'){
             echo $this->element('dashboard/quotePanel');
         }
         ?>
+
+    <div id="allJob" class="col-lg-3 col-md-6">
+        <div class="panel panel-green">
+            <div class="panel-heading">
+                <div class="row">
+                    <div id="total" class="col-xs-3 huge">🀄</div>
+                    <div class="">
+                        <div class="col-lg-8 text-right"><h3>All Job</h3></div>
+                    </div>
+                </div>
+            </div>
+            <a id="allJob-panel"  style="cursor: pointer">
+                <div class="panel-footer">
+                    <span class="pull-left">Show</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
     </div>
 <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
-<a id="reloadBtn" class="btn btn-lg btn-info" style="margin-left:1%">Reload</a>
     <div class="row">
         <div class="col-lg-12">
             <div class="panel-body">
@@ -157,73 +145,113 @@
     <?php $this->start('script'); ?>
     <script>
 
-    $('#quote-panel').on('click', function(){
-        var table = $('#dataTables').DataTable();
-        $.fn.dataTable.ext.search.push(
-            function( settings, data, dataIndex ) {
-                var status = data[1];
+    var button = -1;
+    var arrayOfData = [];
+    var number = {quoteN: 0, todayN: 0, nextWeekN:0, total: 0};
 
-                if(status === 'Quote')
-                    return true;
-                return false;
+    function quote(data){
+        var status = data[1];
 
-            }
-        );
+        if(status === 'Quote')
+            return true;
+        return false;
+    }
 
-        table.draw();
-    })
+    function today(data){
+        var date = new Date (data[2]);
+        var today = new Date();
+
+        if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
+            return true;
+        return false;
+    }
+
+    function nextWeek(data){
+        var date = new Date (data[2]);
+        var today = new Date();
+        var datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
+
+        if(datetime <= 7 && datetime > 1)
+            return true;
+        return false;
+    }
+
+    function getCount(data){
+        var status = data[1];
+        var date = new Date (data[2]);
+        var today = new Date();
+        var datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
+
+        if(status === 'Quote')
+            number.quoteN++;
+        if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
+            number.todayN++;
+        else if(datetime <= 7 && datetime > 0)
+            number.nextWeekN++;
+        number.total++;
+    }
+
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            if(button == 3)
+                return quote(data);
+            else if(button == 2)
+                return nextWeek(data);
+            else if(button == 1)
+                return today(data);
+            else if(button == -1)
+                return getCount(data);
+            else return true;
+
+        }
+    );
 
 
-    $('#today-panel').on('click', function(){
-        var table = $('#dataTables').DataTable();
-        $.fn.dataTable.ext.search.push(
-            function( settings, data, dataIndex ) {
-                var date = new Date (data[2]);
-                var today = new Date();
-
-                if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-                    return true;
-                return false;
-
-            }
-        );
-
-        table.draw();
-    })
-
-    $('#nextWeek-panel').on('click', function(){
-        var table = $('#dataTables').DataTable();
-        $.fn.dataTable.ext.search.push(
-            function( settings, data, dataIndex ) {
-                var date = new Date (data[2]);
-                var today = new Date();
-                var datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
-                console.log(datetime);
-
-                if(datetime <= 7 && datetime > 0)
-                    return true;
-                return false;
-
-            }
-        );
-
-        table.draw();
-    })
-
-
-
-    $('#reloadBtn').on('click', function(){
-        var table = $('#dataTables').DataTable({AJAX: "data.json"});
-        table.AJAX.reload();
-        table.draw();
-
-    })
 
     $(document).ready(function() {
         var table = $('#Jobs').DataTable({
-            responsive: true
+            responsive: true,
+            colReorder: false,
+            buttons: [
+                'csvHtml5'
+            ]
         });
-    } );
+
+        $('#quote-panel').on('click', function(){
+            button = 3;
+
+            table.draw();
+        });
+
+
+        $('#today-panel').on('click', function(){
+            button = 1;
+
+            table.draw();
+        });
+
+
+        $('#nextWeek-panel').on('click', function(){
+            button = 2;
+            table.draw();
+        });
+
+
+        $('#allJob-panel').on('click', function(){
+            button = 0;
+            table.draw();
+
+        });
+
+        button = 0;
+        table.draw();
+        document.getElementById('quoteN').innerHTML = number.quoteN;
+        document.getElementById('nextWeekN').innerHTML = number.nextWeekN;
+        document.getElementById('todayN').innerHTML = number.todayN;
+        document.getElementById('total').innerHTML = number.total;
+
+
+    });
 
     </script>
     <?php $this->end(); ?>
