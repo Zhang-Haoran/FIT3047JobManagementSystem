@@ -23,14 +23,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($images as $image): ?>
+                <?php foreach ($images as $image): ?>
                     <tr>
-                        <td class="center">
-                            <?php
-                            ?>
-                            <?= h($image->path) ? $this->Html->image($dir, ['alt' => '', 'data-bgrepeat' => 'no-repeat', 'data-bgfit' => 'cover', 'width' => '100%']): '' ?></td>
+                        <td class="center"><?= h($image->path) ?></td>
                         <td class="center"><?= h($image->description) ?></td>
-                        <td class="center"><?= $image->has('job') ? $this->Html->link($image->job->name, ['controller' => 'Jobs', 'action' => 'view', $image->job->id]) : '' ?></td>                    </tr>
+                        <td class="center"><?= $customer->has('job_id') ? $this->Html->link($image->job_id->name, ['controller' => 'Jobs', 'action' => 'view', $image->job_id->id]) : '' ?></td>
+                    </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
