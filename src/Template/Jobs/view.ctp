@@ -126,11 +126,10 @@
             <th scope="row"><?= __('Additional Note') ?></th>
             <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
         </tr>
-
-
-
-
-
+        <tr>
+            <th scope="row"><?= __('Images Information') ?></th>
+            <td><?= $job->has('image') ? $this->Html->link($job->image->path, ['controller' => 'Images', 'action' => 'view', $job->image->id]) : '' ?></td>
+        </tr>
 
 </tbody>
     </table>

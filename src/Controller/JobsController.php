@@ -96,7 +96,12 @@ class JobsController extends AppController
         $customers = $this->Jobs->Customers->find('list');
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('Contacts');
-        $contacts = $this->Contacts->find('list');
+        $contacts = $this->Contacts->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($contact) {
+                return $contact->get('label');
+            }
+        ]);
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes','contacts'));
