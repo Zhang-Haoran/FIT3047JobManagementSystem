@@ -30,8 +30,8 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
         <thead>
             <tr>
-                <th scope="col"><?= __('fname') ?></th>
-                <th scope="col"><?= __('lname') ?></th>
+                <th scope="col"><?= __('Fist Name') ?></th>
+                <th scope="col"><?= __('Last Name') ?></th>
                 <th scope="col"><?= __('phone') ?></th>
                 <th scope="col"><?= __('email') ?></th>
                 <th scope="col"><?= __('role') ?></th>

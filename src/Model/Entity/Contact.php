@@ -12,9 +12,9 @@ use Cake\ORM\Entity;
  * @property string $phone
  * @property string $email
  * @property string $role
- * @property int $jobs_id
- * @property int $sites_id
- * @property int $customers_id
+ * @property int $job_id
+ * @property int $site_id
+ * @property int $customer_id
  * @property bool $is_deleted
  * @property string $street
  * @property string $suburb
@@ -43,9 +43,9 @@ class Contact extends Entity
         'phone' => true,
         'email' => true,
         'role' => true,
-        'jobs_id' => true,
-        'sites_id' => true,
-        'customers_id' => true,
+        'job_id' => true,
+        'site_id' => true,
+        'customer_id' => true,
         'is_deleted' => true,
         'street' => true,
         'suburb' => true,
