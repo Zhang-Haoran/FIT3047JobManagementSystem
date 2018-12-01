@@ -33,7 +33,15 @@ class JobsController extends AppController
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
-
+        if($this->Auth->user('access_level')=='3'){
+            $this->render('fieldstaffdashboard');
+        }
+        elseif($this->Auth->user('access_level')=='2'){
+            $this->render('officestaffdashboard');
+        }
+        elseif($this->Auth->user('access_level')=='1'){
+            $this->render('admindashboard');
+        }
     }
 
 
