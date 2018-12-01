@@ -48,7 +48,6 @@
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
-                            <div class="form-group"><?= $this->Form->hidden('is_pickup',['label' => 'is pickup?','class' => 'checkbox','type' => 'checkbox','value'=>1]); ?></div>
                         </div>
 
                     </div>
