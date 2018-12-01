@@ -44,13 +44,7 @@ $(function() {
 
 
 $(document).ready(function() {
-    var table = $('#dataTables').DataTable({
-        responsive: true,
-        colReorder: true,
-        buttons: [
-            'csvHtml5'
-            ]
-    });
+
 
     $(btnSubmit).click(function(){
       setTimeout(function () {$(btnSubmit).attr("disabled", true); }, 0);

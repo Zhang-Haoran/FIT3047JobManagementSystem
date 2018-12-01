@@ -50,7 +50,7 @@
         <tr>
             <th scope="row"><?= __('Site') ?></th>
             <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
-                <button onclick="moveToImage()" class="btn btn-success">Upload images</button>
+                <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
             </td>
 
         </tr>
@@ -126,11 +126,10 @@
             <th scope="row"><?= __('Additional Note') ?></th>
             <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
         </tr>
-
-
-
-
-
+        <tr>
+            <th scope="row"><?= __('Images Information') ?></th>
+            <td><?= $job->has('image') ? $this->Html->link($job->image->path, ['controller' => 'Images', 'action' => 'view', $job->image->id]) : '' ?></td>
+        </tr>
 
 </tbody>
     </table>
@@ -182,7 +181,7 @@ $this->Html->scriptBlock('
     ?>
 
 <script>
-    function moveToImage() {
-        window.location.replace("/images/add");
+    function moveToImage(jobId) {
+        window.location.replace("/images/add/" + jobId);
     }
 </script>
