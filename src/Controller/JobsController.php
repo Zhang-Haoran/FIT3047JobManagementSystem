@@ -123,10 +123,11 @@ class JobsController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
-    {   if($this->Auth->user('access_level')=='3'){
-        $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-        return $this->redirect($this->Auth->redirectUrl());
-    }
+    {
+        if ($this->Auth->user('access_level') == '3') {
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
 
         $job = $this->Jobs->get($id, [
             'contain' => []
@@ -162,7 +163,22 @@ class JobsController extends AppController
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
-        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
+        $status = $this->Jobs->get($id)->job_status;
+        if ($status == 'Quote'){
+            $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
+        }
+        elseif ($status == 'Order'){
+            $this->set('statusOptions', array('Order'=>'Order', 'Ready'=>'Ready'));
+        }
+        elseif ($status == 'Ready'){
+            $this->set('statusOptions', array('Ready'=>'Ready', 'Completed'=>'Completed'));
+        }
+        elseif ($status == 'Completed'){
+            $this->set('statusOptions', array('Completed'=>'Completed', 'Invoice'=>'Invoice'));
+        }
+        else{
+            $this->set('statusOptions', array('Invoice'=>'Invoice', 'Paid'=>'Paid'));
+        }
     }
 
     /**
