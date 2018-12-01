@@ -47,7 +47,6 @@
 </head>
 <body>
 
-<?= $this->Flash->render() ?>
 <div>
 
 
@@ -107,8 +106,8 @@
 <?= $this->Html->script('/js/script.js') ?>
 
 <!--Call for code from script render and from the buffered block-->
-<?= $this->Flash->render() ?>
 <?= $this->fetch('script'); ?>
-
+<!--reder Flash-->
+<?= $this->Flash->render() ?>
 
 </html>

@@ -93,13 +93,25 @@ class JobsController extends AppController
             }
         ]);
         $eventTypes = $this->Jobs->EventTypes->find('list');
-        $customers = $this->Jobs->Customers->find('list');
+
+        $customers = $this->Jobs->Customers->find('all', [
+            'contain' => ['CustTypes'],
+            'keyField' => 'id',
+            'valueField' => function ($customer) {
+                return $customer->get('label');
+            }
+        ]);
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('Contacts');
-        $contacts = $this->Contacts->find('list');
+        $contacts = $this->Contacts->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($contact) {
+                return $contact->get('label');
+            }
+        ]);
         $this->loadModel('CustTypes');
-        $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes','contacts'));
+        $CustTypes = $this->CustTypes->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
@@ -111,10 +123,11 @@ class JobsController extends AppController
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
-    {   if($this->Auth->user('access_level')=='3'){
-        $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-        return $this->redirect($this->Auth->redirectUrl());
-    }
+    {
+        if ($this->Auth->user('access_level') == '3') {
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
 
         $job = $this->Jobs->get($id, [
             'contain' => []
@@ -132,14 +145,40 @@ class JobsController extends AppController
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
-        $sites = $this->Jobs->Sites->find('list');
+        $sites = $this->Jobs->Sites->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($site) {
+                return $site->get('label');
+            }
+        ]);
         $eventTypes = $this->Jobs->EventTypes->find('list');
-        $customers = $this->Jobs->Customers->find('list');
+        $customers = $this->Jobs->Customers->find('all', [
+            'contain' => ['CustTypes'],
+            'keyField' => 'id',
+            'valueField' => function ($customer) {
+                return $customer->get('label');
+            }
+        ]);
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
-        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
+        $status = $this->Jobs->get($id)->job_status;
+        if ($status == 'Quote'){
+            $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
+        }
+        elseif ($status == 'Order'){
+            $this->set('statusOptions', array('Order'=>'Order', 'Ready'=>'Ready'));
+        }
+        elseif ($status == 'Ready'){
+            $this->set('statusOptions', array('Ready'=>'Ready', 'Completed'=>'Completed'));
+        }
+        elseif ($status == 'Completed'){
+            $this->set('statusOptions', array('Completed'=>'Completed', 'Invoice'=>'Invoice'));
+        }
+        else{
+            $this->set('statusOptions', array('Invoice'=>'Invoice', 'Paid'=>'Paid'));
+        }
     }
 
     /**

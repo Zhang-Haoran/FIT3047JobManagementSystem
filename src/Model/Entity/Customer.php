@@ -35,4 +35,5 @@ class Customer extends Entity
         'cust_type' => true,
         'jobs' => true
     ];
+
 }
