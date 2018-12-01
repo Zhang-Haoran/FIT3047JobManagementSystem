@@ -79,7 +79,13 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
+                                    <?php
+                                    $list_cust= array();
+                                    foreach ($customers as $customer)
+                                         array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
+
+                                    ?>
+                                    <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
                                 </div>
                             </div>
                             <div class="panel-heading">
