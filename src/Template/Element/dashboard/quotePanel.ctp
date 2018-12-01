@@ -3,7 +3,7 @@
     <div class="panel panel-yellow">
         <div class="panel-heading">
             <div class="row">
-                <div id="quoteN" class="col-xs-3 huge">🎲</div>
+                <div id="quoteN" class="col-xs-3 huge">💛</div>
                 <div class="col-lg-8 text-right">
                     <h3>Quoted</h3>
                 </div>
