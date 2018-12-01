@@ -93,13 +93,20 @@ class JobsController extends AppController
             }
         ]);
         $eventTypes = $this->Jobs->EventTypes->find('list');
-        $customers = $this->Jobs->Customers->find('list');
+
+        $customers = $this->Jobs->Customers->find('all', [
+            'contain' => ['CustTypes'],
+            'keyField' => 'id',
+            'valueField' => function ($customer) {
+                return $customer->get('label');
+            }
+        ]);
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('Contacts');
         $contacts = $this->Contacts->find('list');
         $this->loadModel('CustTypes');
-        $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','custTypes','contacts'));
+        $CustTypes = $this->CustTypes->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
@@ -132,9 +139,20 @@ class JobsController extends AppController
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
-        $sites = $this->Jobs->Sites->find('list');
+        $sites = $this->Jobs->Sites->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($site) {
+                return $site->get('label');
+            }
+        ]);
         $eventTypes = $this->Jobs->EventTypes->find('list');
-        $customers = $this->Jobs->Customers->find('list');
+        $customers = $this->Jobs->Customers->find('all', [
+            'contain' => ['CustTypes'],
+            'keyField' => 'id',
+            'valueField' => function ($customer) {
+                return $customer->get('label');
+            }
+        ]);
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
