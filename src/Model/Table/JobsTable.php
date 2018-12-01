@@ -13,7 +13,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\EventTypesTable|\Cake\ORM\Association\BelongsTo $EventTypes
  * @property \App\Model\Table\CustomersTable|\Cake\ORM\Association\BelongsTo $Customers
  * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\BelongsTo $Employees
- * @property |\Cake\ORM\Association\HasMany $Contacts
+ * @property \App\Model\Table\ContactsTable|\Cake\ORM\Association\HasMany $Contacts
  * @property \App\Model\Table\ImagesTable|\Cake\ORM\Association\HasMany $Images
  *
  * @method \App\Model\Entity\Job get($primaryKey, $options = [])
@@ -174,6 +174,10 @@ class JobsTable extends Table
         $validator
             ->scalar('pickup_note')
             ->allowEmpty('pickup_note');
+
+        $validator
+            ->boolean('is_pickup')
+            ->allowEmpty('is_pickup');
 
         return $validator;
     }
