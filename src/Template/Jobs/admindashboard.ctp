@@ -178,8 +178,27 @@
                                 ?>
                             </td>
                             <td style="width:6%">
-                                <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-                                <?= ($name == 1 || $name == 2)?$this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']):"" ?>
+                                <?php if($job->is_pickup == 1){
+                                    echo $this->Html->link(__('View'), ['action' => 'viewpickup', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
+                                } else{
+                                    echo $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
+                                }
+                                ?>
+
+
+
+                                <?php if($name == 1 || $name == 2){
+                                    if($job->is_pickup == 1){
+                                        echo $this->Html->link(__('Edit'), ['action' => 'editpickup', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
+                                    }
+                                    else{
+                                        echo $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
+                                    }
+
+                                }else{
+                                    '';
+                                }
+                                ?>
                                 <?= ($name == 1 || $name == 2)?$this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]):"" ?>
                             </td>
                         </tr>

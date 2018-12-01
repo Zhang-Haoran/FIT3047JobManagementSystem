@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\I18n\Time;
+use Cake\ORM\TableRegistry;
 
 /**
  * Jobs Controller
@@ -215,5 +216,126 @@ class JobsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function addpickup()
+    {   if($this->Auth->user('access_level')=='3'){
+        $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+        return $this->redirect($this->Auth->redirectUrl());
+    }
+
+        $job = $this->Jobs->newEntity();
+        if ($this->request->is('post')) {
+            $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
+                'associated' => [
+                    'customers'
+                ]
+            ]);
+            $job->last_changed = Time::now();
+            $this->loadModel('Employees');
+            $staff = $this->Employees->get($this->Auth->user('id'));
+            $job->edited_by = $staff->full_name;
+            $job->employee_id = $this->Auth->user('id');
+
+            if ($this->Jobs->save($job)) {
+                $this->Flash->success(__('The job has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The job could not be saved. Please, try again.'));
+
+        }
+        $sites = $this->Jobs->Sites->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($site) {
+                return $site->get('label');
+            }
+        ]);
+        $eventTypes = $this->Jobs->EventTypes->find('list');
+
+        $customers = $this->Jobs->Customers->find('all', [
+            'contain' => ['CustTypes'],
+            'keyField' => 'id',
+            'valueField' => function ($customer) {
+                return $customer->get('label');
+            }
+        ]);
+        $employees = $this->Jobs->Employees->find('list');
+        $this->loadModel('Contacts');
+        $contacts = $this->Contacts->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($contact) {
+                return $contact->get('label');
+            }
+        ]);
+        $this->loadModel('CustTypes');
+        $CustTypes = $this->CustTypes->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
+        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
+    }
+
+    public function editpickup($id = null){
+        if ($this->Auth->user('access_level') == '3') {
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
+        $job = $this->Jobs->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $job = $this->Jobs->patchEntity($job, $this->request->getData());
+            $job->last_changed = Time::now();
+            $this->loadModel('Employees');
+            $staff = $this->Employees->get($this->Auth->user('id'));
+            $job->edited_by = $staff->full_name;
+
+            if ($this->Jobs->save($job)) {
+                $this->Flash->success(__('The job has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The job could not be saved. Please, try again.'));
+        }
+        $sites = $this->Jobs->Sites->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($site) {
+                return $site->get('label');
+            }
+        ]);
+        $eventTypes = $this->Jobs->EventTypes->find('list');
+        $customers = $this->Jobs->Customers->find('all', [
+            'contain' => ['CustTypes'],
+            'keyField' => 'id',
+            'valueField' => function ($customer) {
+                return $customer->get('label');
+            }
+        ]);
+        $employees = $this->Jobs->Employees->find('list');
+        $this->loadModel('CustTypes');
+        $custTypes = $this->CustTypes->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
+        $status = $this->Jobs->get($id)->job_status;
+        if ($status == 'Quote'){
+            $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
+        }
+        elseif ($status == 'Order'){
+            $this->set('statusOptions', array('Order'=>'Order', 'Ready'=>'Ready'));
+        }
+        elseif ($status == 'Ready'){
+            $this->set('statusOptions', array('Ready'=>'Ready', 'Completed'=>'Completed'));
+        }
+        elseif ($status == 'Completed'){
+            $this->set('statusOptions', array('Completed'=>'Completed', 'Invoice'=>'Invoice'));
+        }
+        else{
+            $this->set('statusOptions', array('Invoice'=>'Invoice', 'Paid'=>'Paid'));
+        }
+    }
+
+    public function viewpickup($id = null)
+    {
+        $job = $this->Jobs->get($id, [
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images']
+        ]);
+
+        $this->set('job', $job);
+    }
 
 }
