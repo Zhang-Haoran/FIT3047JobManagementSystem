@@ -33,11 +33,13 @@ use Cake\ORM\Entity;
  * @property string $arrive_note
  * @property string $setup_note
  * @property string $pickup_note
+ * @property bool $is_pickup
  *
  * @property \App\Model\Entity\Site $site
  * @property \App\Model\Entity\EventType $event_type
  * @property \App\Model\Entity\Customer $customer
  * @property \App\Model\Entity\Employee $employee
+ * @property \App\Model\Entity\Contact[] $contacts
  * @property \App\Model\Entity\Image[] $images
  */
 class Job extends Entity
@@ -79,10 +81,12 @@ class Job extends Entity
         'arrive_note' => true,
         'setup_note' => true,
         'pickup_note' => true,
+        'is_pickup' => true,
         'site' => true,
         'event_type' => true,
         'customer' => true,
         'employee' => true,
+        'contacts' => true,
         'images' => true
     ];
 
