@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">Today we have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s)</p><p id="encouragement" style="display: inline"></p></h1>
+            <h1 class="page-header">We today have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s)</p><p id="encouragement" style="display: inline"></p></h1>
         </div>
         <!-- /.col-lg-12 -->
 
@@ -52,11 +52,7 @@
             </div>
         </div>
 
-        <?php
-        if($this->request->getsession()->read('Auth.User.access_level') <> '3'){
-            echo $this->element('dashboard/quotePanel');
-        }
-        ?>
+    <?php echo $this->element('dashboard/quotePanel'); ?>
 
     <div id="allJob" class="col-lg-3 col-md-6">
         <div class="panel panel-green">
@@ -80,7 +76,7 @@
     </div>
 <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-8">
             <div class="panel-body">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
                     <thead>
@@ -183,8 +179,8 @@
                             </td>
                             <td style="width:6%">
                                 <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-                                <?= ($name == 1 || $name == 2)?$this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']):"" ?>
-                                <?= ($name == 1 || $name == 2)?$this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]):"" ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']) ?>
+                                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -192,6 +188,21 @@
                 </table>
             </div>
         </div>
+
+        <div class="col-lg-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Notification</div>
+                <div class="panel-body">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">danger</a>
+                        <a href="#" class="list-group-item">heading</a>
+                        <a href="#" class="list-group-item">info</a>
+                        <a href="#" class="list-group-item">success</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php $this->start('script'); ?>
     <script>
