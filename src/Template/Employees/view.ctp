@@ -58,14 +58,13 @@
                     <tr>
                         <th>Access Level:</th>
                         <?php
-                        if( $employee->access_level == 1)
+                        if($employee->access_level == 1)
                         echo "<td>Administrator</td>";
                         elseif ($employee->access_level == 2)
                         echo "<td>Office Staff</td>";
                         elseif($employee->access_level == 3)
                         echo "<td>Field Employee</td>";
                         ?>
-
                     </tr>
                     </tbody>
                 </table>
