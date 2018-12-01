@@ -35,8 +35,6 @@
             </li>
             <li><a href="#contacts" data-toggle="tab">Contacts</a>
             </li>
-            <li><a href="#site" data-toggle="tab">Site</a>
-            </li>
             <li><a href="#priceInfo" data-toggle="tab">Billing Info</a>
             </li>
             <li><a href="#stock" data-toggle="tab">Stock & Order Detail</a>
@@ -50,7 +48,6 @@
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
-                            <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
                         </div>
 
                     </div>
@@ -116,31 +113,6 @@
             </div>
 
 
-            <div class="tab-pane fade" id="site">
-
-                <div class="panel-group" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Select existing site</a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse in">
-                            <div class="panel-body">
-
-                                <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
-
-                            </div>
-                        </div>
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#siteAdd" >Create new site</a>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="tab-pane fade" id="priceInfo">
                 <div class="form-group"><?= $this->Form->control('quote', ['label' => 'Quote number','class' => 'form-control','placeholder'=>'Quote#']) ?></div>
                 <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control','placeholder'=>'Order#','label' => 'Order']) ?></div>
@@ -174,26 +146,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="EventTypesAdd" role="dialog">
-    <div class="modal-dialog" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">New Event Types</h4>
-            </div>
-            <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd']]) ?>
-                <fieldset>
-                    <?php
-                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
-                    ?>
-                </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
-                <?= $this->Form->end() ?>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 
 
@@ -241,27 +194,6 @@
     </div>
 </div>
 
-<div class="modal fade" id="siteAdd" role="dialog">
-    <div class="modal-dialog" >
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">New site</h4>
-            </div>
-            <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd']]) ?>
-                <fieldset>
-                    <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
-                <?= $this->Form->end() ?>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 <div class="modal fade" id="contactsAdd" role="dialog">
