@@ -25,7 +25,7 @@
                     <li>
                         <a href="#"></a>
                         <?php
-                        echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit','1'], ['escape' => false])
+                        echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit',$employees_ID], ['escape' => false])
                         ?>
                     </li>
                     <li>
