@@ -25,13 +25,20 @@ class JobsController extends AppController
      */
     public function index()
     {
-        $jobs = $this->Jobs->find('all')->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
-
-        $this->set(compact('jobs'));
-
+        if($this->Auth->user('access_level') =='1' ) {
+            $jobs = $this->Jobs->find('all')
+                ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
+        }else{
+            $jobs = $this->Jobs->find('all')
+                ->where(['jobs.is_deleted >' => '0'])
+                ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
+        }
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
+
+
+        $this->set(compact('jobs'));
     }
 
 
@@ -47,6 +54,11 @@ class JobsController extends AppController
         $job = $this->Jobs->get($id, [
             'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images']
         ]);
+        if($job->is_deleted == '1' && $this->Auth->user('access_level') !='1' ) {
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            $this->redirect($this->Auth->redirectUrl());
+        }
+
 
         $this->loadModel('Sites');
         $site = $this->Sites->get($job->site_id);
@@ -157,12 +169,19 @@ class JobsController extends AppController
         }
 
         $this->request->allowMethod(['get', 'delete']);
+
         $job = $this->Jobs->get($id);
-        if ($this->Jobs->delete($job)) {
+
+        $job->last_changed = Time::now();
+        $this->loadModel('Employees');
+        $staff = $this->Employees->get($this->Auth->user('id'));
+        $job->edited_by = $staff->full_name;
+
+        if ($this->Jobs->save($job)) {
             $this->Flash->success(__('The job has been deleted.'));
-        } else {
-            $this->Flash->error(__('The job could not be deleted. Please, try again.'));
+            return $this->redirect(['action' => 'index']);
         }
+        $this->Flash->error(__('The job could not be deleted. Please, try again.'));
 
         return $this->redirect(['action' => 'index']);
     }
