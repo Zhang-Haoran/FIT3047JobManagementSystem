@@ -150,8 +150,15 @@ class JobsController extends AppController
             $job->edited_by = $staff->full_name;
 
             if ($this->Jobs->save($job)) {
-                $this->Flash->success(__('The job has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $date1 = $this->Jobs->get($id)->e_arrival_time;
+                $date2 = $this->Jobs->get($id)->e_setup_time;
+                if (strtotime($date1)<= strtotime($date2)){
+
+                    $this->Flash->success(__('The job has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }elseif(strtotime($date1)> strtotime($date2)){
+                    $this->Flash->error(__('The job could not be saved. Please, try again.'));
+                }
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
@@ -349,6 +356,51 @@ class JobsController extends AppController
 
         $this->set('site', $site);
         $this->set('job', $job);
+    }
+    public function exportJobData(){
+        $datatbp = '<table cellspacing="2" cellpadding="5" style="border: 2px;text-align: center;" border="1",width="60%">';
+
+        $datatbp .='<tr>
+
+                       <th style="text-align: center">Job Name</th>
+                       <th style="text-align: center">Status</th>
+                       <th style="text-align: center">Job Date</th>
+                       <th style="text-align: center">Booked Date</th>
+                       <th style="text-align: center">Price</th>
+                       <th style="text-align: center">Deposit</th>
+                       <th style="text-align: center">Expected arrival time</th>
+
+                    </tr>';
+
+        $contents = $this->Jobs->find('all')->toArray();
+        foreach ($contents as $content){
+            $jobName = $content['name'];
+            $jobStatus = $content['job_status'];
+            $jobDate = $content['job_date'];
+            $bookedDate = $content['booked_date'];
+            $price = $content['price'];
+            $deposit = $content['deposit'];
+            $exArrivalTime = $content['e_arrival_time'];
+
+            $datatbp .='<tr>
+                       
+                       <td style="text-align: center">'. $jobName.'</td>
+                       <td style="text-align: center">'. $jobStatus.'</td>
+                       <td style="text-align: center">'. $jobDate.'</td>
+                       <td style="text-align: center">'. $bookedDate.'</td>
+                       <td style="text-align: center">'. $price.'</td>
+                       <td style="text-align: center">'. $deposit.'</td>
+                       <td style="text-align: center">'. $exArrivalTime.'</td>
+
+                    </tr>';
+        }
+        $datatbp .="</table>";
+        header('Content-Type: application/force-download');
+        header('Content-disposition: attachment; filename= jobs.xls');
+        header("Pragma: ");
+        header("Cache-Control: ");
+        echo $datatbp;
+        die;
     }
 
 }
