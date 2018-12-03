@@ -73,6 +73,7 @@
     </div>
     </div>
 <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
+<?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
     <div class="row">
 
         <div class="col-lg-12">

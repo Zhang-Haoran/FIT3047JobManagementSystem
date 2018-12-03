@@ -310,8 +310,7 @@
 
     $("#job_datetime").datetimepicker({
         defaultDate: new Date(),
-        assumeNearbyYear: true,
-        step:30
+        timepicker:false,
     });
 
     $("#e_arrival_datetime").datetimepicker({
@@ -325,19 +324,6 @@
     $("#e_pickup_datetime").datetimepicker({
         defaultDate: new Date(),
         step:30
-    });
-
-
-    $("#job_datetime").on("dp.change", function (e) {
-        $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_arrival_datetime").on("dp.change", function (e) {
-        $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_setup_datetime").on("dp.change", function (e) {
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
     });
 
 
