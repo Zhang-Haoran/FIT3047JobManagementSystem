@@ -50,14 +50,14 @@
                             <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime')) ?> </div>
+                                <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
                           </div>
-                          <div class="col-lg-6">
-                            <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
-                            <div class="form-group"><?php echo $this->Form->control('e_setup_time', array('class' => 'form-control','placeholder'=>'Please select expected setup time','label' => 'Setup by','type' => 'text','empty'=>'true','id' => 'e_setup_datetime'));?></div>
-                            <div class="form-group"><?php echo $this->Form->control('e_pickup_time', array('class' => 'form-control','placeholder'=>'Please select expected pickup time','label' => 'Pickup after','type' => 'text','empty'=>'true','id' => 'e_pickup_datetime'));?></div>
-                          </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
+                                    <div class="form-group"><?php echo $this->Form->control('e_setup_time', array('class' => 'form-control','placeholder'=>'Please select expected setup time','label' => 'Setup by','type' => 'text','empty'=>'true','id' => 'e_setup_datetime'));?></div>
+                                    <div class="form-group"><?php echo $this->Form->control('e_pickup_time', array('class' => 'form-control','placeholder'=>'Please select expected pickup time','label' => 'Pickup after','type' => 'text','empty'=>'true','id' => 'e_pickup_datetime'));?></div>
+                                </div>
                           </div>
                           </div>
 
@@ -74,7 +74,15 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
+
+                                    <?php
+                                    $list_cust= array();
+                                    foreach ($customers as $customer)
+                                        array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
+
+                                    ?>
+
+                                    <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
                                 </div>
                             </div>
                             <div class="panel-heading">
@@ -206,8 +214,7 @@
 
     $("#job_datetime").datetimepicker({
         defaultDate: new Date(),
-        assumeNearbyYear: true,
-        step:30
+        timepicker:false,
     });
 
     $("#e_arrival_datetime").datetimepicker({
@@ -221,19 +228,6 @@
     $("#e_pickup_datetime").datetimepicker({
         defaultDate: new Date(),
         step:30
-    });
-
-
-    $("#job_datetime").on("dp.change", function (e) {
-        $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_arrival_datetime").on("dp.change", function (e) {
-        $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_setup_datetime").on("dp.change", function (e) {
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
     });
 
 
@@ -267,8 +261,8 @@
         });
         $('a[href="#stock"]').on('hide.bs.tab', function () {
             $('button#btnNext').show();
+            $('button#Submit').hide();
         });
-
 
     });
 

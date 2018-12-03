@@ -79,7 +79,13 @@
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $customers, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
+                                    <?php
+                                    $list_cust= array();
+                                    foreach ($customers as $customer)
+                                         array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
+
+                                    ?>
+                                    <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
                                 </div>
                             </div>
                             <div class="panel-heading">
@@ -304,8 +310,7 @@
 
     $("#job_datetime").datetimepicker({
         defaultDate: new Date(),
-        assumeNearbyYear: true,
-        step:30
+        timepicker:false,
     });
 
     $("#e_arrival_datetime").datetimepicker({
@@ -319,19 +324,6 @@
     $("#e_pickup_datetime").datetimepicker({
         defaultDate: new Date(),
         step:30
-    });
-
-
-    $("#job_datetime").on("dp.change", function (e) {
-        $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_arrival_datetime").on("dp.change", function (e) {
-        $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_setup_datetime").on("dp.change", function (e) {
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
     });
 
 

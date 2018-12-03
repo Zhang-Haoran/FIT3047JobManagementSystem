@@ -55,4 +55,10 @@ class Contact extends Entity
         'site' => true,
         'customer' => true
     ];
+
+    protected function _getLabel()
+    {
+        return $this->_properties['fname'] .' '.$this->_properties['lname']. ' (' . $this->_properties['email'] .  ')';
+    }
+
 }

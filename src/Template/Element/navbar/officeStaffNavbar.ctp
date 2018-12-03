@@ -63,6 +63,11 @@
                                 echo $this->Html->link('Add', ['controller' => 'jobs', 'action' => 'add'])
                                 ?>
                             </li>
+                            <li>
+                                <?php
+                                echo $this->Html->link('Add Pickup job', ['controller' => 'jobs', 'action' => 'addpickup'])
+                                ?>
+                            </li>
                         </ul>
                         <!-- /.nav-second-level -->
 

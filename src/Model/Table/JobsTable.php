@@ -13,6 +13,7 @@ use Cake\Validation\Validator;
  * @property \App\Model\Table\EventTypesTable|\Cake\ORM\Association\BelongsTo $EventTypes
  * @property \App\Model\Table\CustomersTable|\Cake\ORM\Association\BelongsTo $Customers
  * @property \App\Model\Table\EmployeesTable|\Cake\ORM\Association\BelongsTo $Employees
+ * @property \App\Model\Table\ContactsTable|\Cake\ORM\Association\HasMany $Contacts
  * @property \App\Model\Table\ImagesTable|\Cake\ORM\Association\HasMany $Images
  *
  * @method \App\Model\Entity\Job get($primaryKey, $options = [])
@@ -42,12 +43,10 @@ class JobsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Sites', [
-            'foreignKey' => 'site_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'site_id'
         ]);
         $this->belongsTo('EventTypes', [
-            'foreignKey' => 'event_type_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'event_type_id'
         ]);
         $this->belongsTo('Customers', [
             'foreignKey' => 'customer_id',
@@ -56,6 +55,9 @@ class JobsTable extends Table
         $this->belongsTo('Employees', [
             'foreignKey' => 'employee_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Contacts', [
+            'foreignKey' => 'job_id'
         ]);
         $this->hasMany('Images', [
             'foreignKey' => 'job_id'
@@ -172,6 +174,10 @@ class JobsTable extends Table
         $validator
             ->scalar('pickup_note')
             ->allowEmpty('pickup_note');
+
+        $validator
+            ->boolean('is_pickup')
+            ->allowEmpty('is_pickup');
 
         return $validator;
     }
