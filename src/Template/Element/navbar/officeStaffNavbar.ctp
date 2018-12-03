@@ -25,6 +25,7 @@
                     <li>
                         <a href="#"></a>
                         <?php
+                        $employees_ID =$this->request->getsession()->read('Auth.User.id');
                         echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit',$employees_ID], ['escape' => false])
                         ?>
                     </li>

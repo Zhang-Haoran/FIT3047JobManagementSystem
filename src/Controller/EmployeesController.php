@@ -127,7 +127,7 @@ class EmployeesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $employee = $this->Employees->patchEntity($employee, $this->request->getData());
             if ($this->Employees->save($employee)) {
-                $this->Flash->success(__('The employee has been saved.'));
+
                 if($this->Auth->user('id') == $id) {
                     $session->write([
                         'Auth.User.fname' => $employee->fname,
@@ -136,10 +136,15 @@ class EmployeesController extends AppController
                         'Auth.User.phone' => $employee->phone,
                         'Auth.User.access_level' => $employee->access_level,
                     ]);
+
                 }
+
                 if($employee->access_level != '1') {
+                    $this->Flash->success(__('The employee has been saved.'));
+                    $this->Flash->default(__('Changed access level.'));
                     return $this->redirect(['controller'=>'jobs','action' => 'index']);
                 }
+                $this->Flash->success(__('The employee has been saved.'));
                 return $this->redirect(['action' => 'index']);
 
             }
