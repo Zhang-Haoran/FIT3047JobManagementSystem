@@ -148,9 +148,3 @@ $this->Html->scriptBlock('
         } );
     ', ['block' => true]);
 ?>
-
-<script>
-    function moveToImage(jobId) {
-        window.location.replace("/images/add/" + jobId);
-    }
-</script>

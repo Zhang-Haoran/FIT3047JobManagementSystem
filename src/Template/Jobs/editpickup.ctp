@@ -21,7 +21,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('Add Job') ?></h1>
+        <h1 class="page-header"><?= __('Edit Pickup Job') ?></h1>
     </div>
 </div>
 
@@ -215,7 +215,7 @@
                     <div class="form-group"><?= $this->Form->control('suburb',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('city',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('postcode',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('job_id', ['class' => 'form-control','option' => $jobs]); ?></div>
+
                 </fieldset>
                 <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
                 <?= $this->Form->end() ?>

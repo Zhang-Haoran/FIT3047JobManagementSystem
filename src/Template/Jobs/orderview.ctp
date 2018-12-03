@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th scope="row"><?= __('Contact Name') ?></th>
-                <td><?= $job->has('contact') ? $this->Html->link($job->contact->fname, ['controller' => 'Contacts', 'action' => 'view', $job->contact->id]) : '' ?></td>
+                <td><?= $job->has('contact') ? $this->Html->link($job->contact->id, ['controller' => 'Contacts', 'action' => 'view', $job->contact->id]) : '' ?></td>
             </tr>
             <tr>
                 <th scope="row"><?= __('Site') ?></th>
@@ -52,7 +52,6 @@
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?></td>
             </tr>
-
             <tr>
                 <th scope="row"><?= __('Expected Arrival Time') ?></th>
                 <td><?= h($job->e_arrival_time) ?></td>
