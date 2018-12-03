@@ -338,4 +338,17 @@ class JobsController extends AppController
         $this->set('job', $job);
     }
 
+    public function orderview($id = null)
+    {
+        $job = $this->Jobs->get($id, [
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images','Contacts']
+        ]);
+
+        $this->loadModel('Sites');
+        $site = $this->Sites->get($job->site_id);
+
+        $this->set('site', $site);
+        $this->set('job', $job);
+    }
+
 }
