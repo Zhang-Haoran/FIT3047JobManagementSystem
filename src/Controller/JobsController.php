@@ -26,6 +26,7 @@ class JobsController extends AppController
      */
     public function index()
     {
+
         if($this->Auth->user('access_level') =='1' ) {
             $jobs = $this->Jobs->find('all')
                 ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
@@ -34,6 +35,7 @@ class JobsController extends AppController
                 ->where(['jobs.is_deleted >' => '0'])
                 ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
         }
+        $this->set(compact('jobs'));
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
@@ -47,7 +49,8 @@ class JobsController extends AppController
         elseif($this->Auth->user('access_level')=='1'){
             $this->render('admindashboard');
         }
-        $this->set(compact('jobs'));
+
+
     }
 
 
