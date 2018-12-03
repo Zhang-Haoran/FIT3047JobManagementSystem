@@ -66,6 +66,7 @@ class EmployeesController extends AppController
             $this->Flash->set(__('You have no authorization to access this page as a office staff'));
             return $this->redirect($this->Auth->redirectUrl());
         }
+
         $employee = $this->Employees->get($id, [
             'contain' => ['Jobs']
         ]);
@@ -110,12 +111,15 @@ class EmployeesController extends AppController
      */
     public function edit($id = null)
     {
-        if ($this->Auth->user('access_level') == '3') {
-            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-            return $this->redirect($this->Auth->redirectUrl());
-        } elseif ($this->Auth->user('access_level') == '2') {
-            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
-            return $this->redirect($this->Auth->redirectUrl());
+        $session = $this->getRequest()->getSession();
+        if($this->Auth->user('id') != $id) {
+            if ($this->Auth->user('access_level') == '3') {
+                $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+                return $this->redirect($this->Auth->redirectUrl());
+            } elseif ($this->Auth->user('access_level') == '2') {
+                $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+                return $this->redirect($this->Auth->redirectUrl());
+            }
         }
         $employee = $this->Employees->get($id, [
             'contain' => []
@@ -124,8 +128,20 @@ class EmployeesController extends AppController
             $employee = $this->Employees->patchEntity($employee, $this->request->getData());
             if ($this->Employees->save($employee)) {
                 $this->Flash->success(__('The employee has been saved.'));
-
+                if($this->Auth->user('id') == $id) {
+                    $session->write([
+                        'Auth.User.fname' => $employee->fname,
+                        'Auth.User.lname' => $employee->lname,
+                        'Auth.User.email' => $employee->email,
+                        'Auth.User.phone' => $employee->phone,
+                        'Auth.User.access_level' => $employee->access_level,
+                    ]);
+                }
+                if($employee->access_level != '1') {
+                    return $this->redirect(['controller'=>'jobs','action' => 'index']);
+                }
                 return $this->redirect(['action' => 'index']);
+
             }
             $this->Flash->error(__('The employee could not be saved. Please, try again.'));
         }
