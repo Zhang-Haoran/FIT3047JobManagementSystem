@@ -221,6 +221,8 @@ class JobsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+
+
     public function delete($id = null)
     {
         if($this->Auth->user('access_level')=='3'){
@@ -234,8 +236,8 @@ class JobsController extends AppController
 
         $job->last_changed = Time::now();
         $this->loadModel('Employees');
-        $staff = $this->Employees->get($this->Auth->user('full_name'));
-        $job->edited_by = $staff;
+        $staff = $this->Employees->get($this->Auth->user('id'));
+        $job->edited_by = $staff->full_name;
         $job->is_deleted = '1';
 
 
@@ -302,6 +304,39 @@ class JobsController extends AppController
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
+
+    public function undelete($id = null)
+    {
+        if($this->Auth->user('access_level')!='1'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
+        $this->request->allowMethod(['get', 'delete']);
+
+        $job = $this->Jobs->get($id);
+
+        $job->last_changed = Time::now();
+        $this->loadModel('Employees');
+        $staff = $this->Employees->get($this->Auth->user('id'));
+        $job->edited_by = $staff->full_name;
+        $job->is_deleted = '0';
+
+
+        if ($this->Jobs->save($job)) {
+            $this->Flash->success(__('The job has been undeleted.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('The job could not be undeleted. Please, try again.'));
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+
+
+
+
+
 
     public function editpickup($id = null){
         if ($this->Auth->user('access_level') == '3') {

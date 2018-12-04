@@ -74,8 +74,10 @@
         </div>
     </div>
     </div>
-<?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
-<?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
+<div class="bd-example">
+    <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
+    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-success', 'style' => '']) ?>
+</div>
     <div class="row">
         <div class="col-lg-8">
             <div class="panel-body">
@@ -101,10 +103,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            foreach ($jobs as $job): ?>
+                        <?php foreach ($jobs as $job): ?>
                         <tr>
-                            <td><?= h($job->name) ?></td>
+                            <?php   if($job->is_deleted == '1'){?>
+                                <td class='bg-danger'><?= h($job->name) ?></td>
+                            <?php
+                            }else{
+                                ?>
+                                <td><?= h($job->name) ?></td>
+                            <?php
+                            }
+                            ?>
+
+
                             <?php
                             if( $job->job_status == 'Order')
                             echo "<td class='bg-danger text-white'>Order</td>";
@@ -200,7 +211,16 @@
                                     '';
                                 }
                                 ?>
-                                <?= ($name == 1 || $name == 2)?$this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]):"" ?>
+
+                                <?php   if($job->is_deleted == '1'){?>
+                                    <?= ($name == 1 || $name == 2)?$this->Html->link(__('Undelete'), ['action' => 'undelete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to undelete Job: {0}?',$job->name)]):"" ?>
+                                    <?php
+                        }else{
+                            ?>
+                            <?= ($name == 1 || $name == 2)?$this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]):"" ?>
+                            <?php
+                        }
+                        ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
