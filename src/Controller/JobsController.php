@@ -165,7 +165,7 @@ class JobsController extends AppController
                     $this->Flash->success(__('The job has been saved.'));
                     return $this->redirect(['action' => 'index']);
                 }elseif(strtotime($date1)> strtotime($date2)){
-                    $this->Flash->error(__('The job could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The expected setup time should be after arrival time. Please, try again.'));
                 }
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
