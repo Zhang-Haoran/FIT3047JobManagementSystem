@@ -78,7 +78,7 @@
                                     <?php
                                     $list_cust= array();
                                     foreach ($customers as $customer)
-                                        array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
+                                        $list_cust[$customer->id] = "{$customer->name} ({$customer->cust_type->name})";
 
                                     ?>
 
