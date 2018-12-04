@@ -72,9 +72,10 @@
         </div>
     </div>
     </div>
-<?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
-<?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
-    <div class="row">
+<div class="bd-example">
+    <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
+    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-success', 'style' => '']) ?>
+</div>    <div class="row">
 
         <div class="col-lg-12">
             <div class="panel-body">
