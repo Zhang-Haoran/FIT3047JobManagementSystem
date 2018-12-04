@@ -192,7 +192,7 @@
                 <h4 class="modal-title">New Event Types</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd'], 'id' => 'addNewEventType']) ?>
                 <fieldset>
                     <?php
                     echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
@@ -362,5 +362,41 @@
 
     });
 
+    //Ajax form submit for newEventType
+    $("#addNewEventType").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user know event type is added
+
+                $('.window.close').click(function(e));
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newEventId = data.id;
+                    $newEventName = data.name;
+                    console.log($newEventId);
+                    console.log($newEventName);
+                    //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
+                     $newEventId
+
+                    //reinitialize the event type list.
+                    $("#type_html_id").chosen();
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
 </script>
 <?php $this->end(); ?>
