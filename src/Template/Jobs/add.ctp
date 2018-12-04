@@ -21,7 +21,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('Add Job') ?></h1>
+        <h1 id="header" class="page-header"><?= __('Add Job') ?></h1>
     </div>
 </div>
 
@@ -195,10 +195,12 @@
                 <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd'], 'id' => 'addNewEventType']) ?>
                 <fieldset>
                     <?php
-                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                    echo $this->Form->control('name', ['label' => 'Name','class' => 'form-control','placeholder' => 'This field is required']);
                     ?>
                 </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <div class="bd-example">
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+                </div>
                 <?= $this->Form->end() ?>
             </div>
         </div>
@@ -376,19 +378,21 @@
             {
                 //TODO: Close the modal to let user know event type is added
 
-                $('.window.close').click(function(e));
+                //$('EventTypesAdd.window.close').click(function(e){});
+                $('#EventTypesAdd').modal('toggle');
 
                 if (data.error === false) {
                     //if new event type is successfully added to database
                     $newEventId = data.id;
                     $newEventName = data.name;
-                    console.log($newEventId);
-                    console.log($newEventName);
+                    //console.log($newEventId);
+                    //console.log($newEventName);
                     //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
-                     $newEventId
 
-                    //reinitialize the event type list.
-                    $("#type_html_id").chosen();
+                    $("#type_html_id").append("<option value='" + $newEventId + "'>" + $newEventName + "</option>");
+                    $("#header").append("<h1>" + $newEventId + "</h1>")
+
+                    $("#type_html_id").trigger("chosen:updated");
                 } else {
                     //If there's an error from the server
                     alert(data.error);
