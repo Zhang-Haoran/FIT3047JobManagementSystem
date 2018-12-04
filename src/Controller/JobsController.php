@@ -456,7 +456,7 @@ class JobsController extends AppController
         $JobsTable->save($jobs);
         //--------------------
 
-        
+
         $job = $this->Jobs->get($id, [
             'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images','Contacts']
         ]);

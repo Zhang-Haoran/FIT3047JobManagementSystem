@@ -44,8 +44,11 @@
     </p>
 
 
-    <span class="glyphicon glyphicon-map-marker" style="font-size: large"> <?= $site->address ?>
-        , <?= $site->suburb ?> <?= $site->postcode ?></span>
+    <span class="glyphicon glyphicon-map-marker" style="font-size: large" id="a">
+        <?= $site->address ?>
+            , <?= $site->suburb ?> <?= $site->postcode ?>
+
+    </span>
     <p></p>
     <span class="glyphicon glyphicon-time" style="font-size: large"> <?= h($job->e_arrival_time) ?></span>
 <p></p>
@@ -93,7 +96,7 @@ $this->Html->scriptBlock('
     }
 
     function codeAddress() {
-        var address = document.getElementById(\'table\').rows[3].cells[1].textContent;
+        var address = document.getElementById(\'a\').innerText;
         console.log(address);
         geocoder.geocode( { \'address\': address}, function(results, status) {
             if (status == \'OK\') {
