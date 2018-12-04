@@ -67,24 +67,33 @@ class ImagesController extends AppController
         if ($this->request->is('post')) {
 
             $imageName = $this->request->getData()['path']['name'];
-            $imageTep = $this->request->getData()['path']['tmp_name'];
+
+            $ext = substr(strtolower(strrchr($imageName, '.')), 1);
+            $arr_ext = array('jpg', 'png', 'jpeg', 'gif');
+            if (in_array($ext, $arr_ext)) {
 
 
-            $image = $this->Images->patchEntity($image, $this->request->getData());
-            $this->loadModel('Jobs');
+                $imageTep = $this->request->getData()['path']['tmp_name'];
 
-               $dir = '/img' . $imageName;
-               $image->description = $imageName;
-               $image->path = $dir;
-               $image->job_id = $jobId;
 
-            if (move_uploaded_file($imageTep, WWW_ROOT.$dir)) {
-                $this->Images->save($image);
-                $this->Flash->success(__('The image has been saved.'));
+                $image = $this->Images->patchEntity($image, $this->request->getData());
+                $this->loadModel('Jobs');
 
-                return $this->redirect(['controller' => 'jobs','action' => 'view', $jobId]);
+                $dir = '/img' . $imageName;
+                $image->description = $imageName;
+                $image->path = $dir;
+                $image->job_id = $jobId;
+
+                if (move_uploaded_file($imageTep, WWW_ROOT . $dir)) {
+                    $this->Images->save($image);
+                    $this->Flash->success(__('The image has been saved.'));
+
+                    return $this->redirect(['controller' => 'jobs', 'action' => 'view', $jobId]);
+                } else {
+                    $this->Flash->error(__('The image could not be saved. Please, try again.'));
+                }
             } else {
-                $this->Flash->error(__('The image could not be saved. Please, try again.'));
+                $this->Flash->error(__('the format of image is not correct'));
             }
         }
         $jobs = $this->Images->Jobs->find('list', ['limit' => 200]);
