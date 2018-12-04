@@ -160,7 +160,7 @@
 
                             <td style="width:6%">
                                 <?php
-                                    if ($job->job_status == "Ready"){
+                                    if ($job->job_status == "Order"){
                                         echo $this->Html->link(__('View'), ['action' => 'orderview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
                                     }
                                     else{
