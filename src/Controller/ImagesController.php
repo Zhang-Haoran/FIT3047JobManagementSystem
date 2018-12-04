@@ -92,6 +92,7 @@ class ImagesController extends AppController
                 } else {
                     $this->Flash->error(__('The image could not be saved. Please, try again.'));
                 }
+                return $this->redirect(['controller' => 'jobs', 'action' => 'view', $jobId]);
             } else {
                 $this->Flash->error(__('the format of image is not correct'));
             }
