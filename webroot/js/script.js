@@ -67,10 +67,5 @@ $(document).ready(function() {
             'csvHtml5'
         ]
     });
-
-
-
-    $(btnSubmit).click(function(){
-      setTimeout(function () {$(btnSubmit).attr("disabled", true); }, 0);
-    });
+    
 } );
