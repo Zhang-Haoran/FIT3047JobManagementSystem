@@ -383,6 +383,8 @@
 
 
 
+    $(document).ready(function() {
+        var table = $('#Jobs').DataTable();
 
         $('#quote-panel').on('click', function(){
             button = 3;
