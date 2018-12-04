@@ -21,7 +21,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 id="header" class="page-header"><?= __('Add Job') ?></h1>
+        <h1 class="page-header"><?= __('Add Job') ?></h1>
     </div>
 </div>
 
@@ -378,7 +378,7 @@
             {
                 //TODO: Close the modal to let user know event type is added
 
-                //$('EventTypesAdd.window.close').click(function(e){});
+
                 $('#EventTypesAdd').modal('toggle');
 
                 if (data.error === false) {
