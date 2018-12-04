@@ -101,6 +101,7 @@
                         <?php
                             $arrayOfJobs = array();
                             foreach ($jobs as $job):
+                                if($job->is_deleted == '0')
                                 array_push($arrayOfJobs, $job);
                             endforeach;
                             $list = array_filter($arrayOfJobs, function($job){

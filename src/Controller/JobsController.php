@@ -27,14 +27,8 @@ class JobsController extends AppController
     public function index()
     {
 
-        if($this->Auth->user('access_level') =='1' ) {
-            $jobs = $this->Jobs->find('all')
-                ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
-        }else{
-            $jobs = $this->Jobs->find('all')
-                ->where(['jobs.is_deleted >' => '0'])
-                ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
-        }
+        $jobs = $this->Jobs->find('all')
+            ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
         $this->set(compact('jobs'));
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
