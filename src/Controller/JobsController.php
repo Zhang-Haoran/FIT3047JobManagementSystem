@@ -229,8 +229,10 @@ class JobsController extends AppController
 
         $job->last_changed = Time::now();
         $this->loadModel('Employees');
-        $staff = $this->Employees->get($this->Auth->user('id'));
-        $job->edited_by = $staff->full_name;
+        $staff = $this->Employees->get($this->Auth->user('full_name'));
+        $job->edited_by = $staff;
+        $job->is_deleted = '1';
+
 
         if ($this->Jobs->save($job)) {
             $this->Flash->success(__('The job has been deleted.'));
