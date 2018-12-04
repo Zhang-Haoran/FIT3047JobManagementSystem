@@ -161,7 +161,7 @@
 
                             <td style="width:6%">
                                 <?php
-                                    if ($job->job_status == "Ready"){
+                                    if ($job->job_status == "Order"){
                                         echo $this->Html->link(__('View'), ['action' => 'orderview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
                                     }
                                     else{
@@ -208,7 +208,7 @@
         let today = new Date();
         let status = data[1];
 
-        if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Complete')
+        if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
             return true;
         return false;
     }
@@ -252,13 +252,7 @@
 
 
     $(document).ready(function() {
-        var table = $('#Jobs').DataTable({
-            responsive: true,
-            colReorder: false,
-            buttons: [
-                'csvHtml5'
-            ]
-        });
+        var table = $('#Jobs').DataTable();
 
         $('#today-panel').on('click', function(){
             button = 1;

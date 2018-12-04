@@ -82,8 +82,8 @@
                                     <?php
                                     $list_cust= array();
                                     foreach ($customers as $customer)
-                                         array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
-
+                                         //array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
+                                         $list_cust[$customer->id] = "{$customer->name} ({$customer->cust_type->name})";
                                     ?>
                                     <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
                                 </div>
@@ -192,13 +192,15 @@
                 <h4 class="modal-title">New Event Types</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd'], 'id' => 'addNewEventType']) ?>
                 <fieldset>
                     <?php
-                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                    echo $this->Form->control('name', ['label' => 'Name','class' => 'form-control','placeholder' => 'This field is required']);
                     ?>
                 </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <div class="bd-example">
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+                </div>
                 <?= $this->Form->end() ?>
             </div>
         </div>
@@ -220,7 +222,7 @@
                             <?php
                             echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
                             echo $this->Form->control('is_business',['label' => 'is business?','class' => 'checkbox','type' => 'checkbox']);
-                            echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                            echo $this->Form->control('cust_type_id', ['options' => $CustTypes, 'label' => 'Type','class' => 'form-control']);
                             ?>
                         </fieldset>
                         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
@@ -362,5 +364,43 @@
 
     });
 
+    //Ajax form submit for newEventType
+    $("#addNewEventType").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user know event type is added
+
+
+                $('#EventTypesAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newEventId = data.id;
+                    $newEventName = data.name;
+                    //console.log($newEventId);
+                    //console.log($newEventName);
+                    //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#type_html_id").append("<option value='" + $newEventId + "'>" + $newEventName + "</option>");
+                    $("#header").append("<h1>" + $newEventId + "</h1>")
+
+                    $("#type_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
 </script>
 <?php $this->end(); ?>

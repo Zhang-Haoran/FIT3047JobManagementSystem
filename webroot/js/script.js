@@ -44,9 +44,28 @@ $(function() {
 
 
 $(document).ready(function() {
-
-
-    $(btnSubmit).click(function(){
-      setTimeout(function () {$(btnSubmit).attr("disabled", true); }, 0);
+    $('#Jobs').DataTable({
+        responsive: true,
+        colReorder: false,
+        buttons: [
+            'csvHtml5'
+        ]
     });
+
+    $('#dataTables').DataTable({
+        responsive: true,
+        colReorder: false,
+        buttons: [
+            'csvHtml5'
+        ]
+    });
+
+    $('#dataTables-example').DataTable({
+        responsive: true,
+        colReorder: false,
+        buttons: [
+            'csvHtml5'
+        ]
+    });
+    
 } );
