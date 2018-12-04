@@ -376,7 +376,7 @@
             {
                 //TODO: Close the modal to let user know event type is added
 
-                $('.window.close').click(function(e));
+                $('.window.close').on(function(e){});
 
                 if (data.error === false) {
                     //if new event type is successfully added to database
