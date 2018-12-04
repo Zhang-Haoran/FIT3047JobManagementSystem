@@ -37,13 +37,15 @@
 
                                 <div class="form-group"><?= $this->Form->control('fname',  ['label' => 'First Name', 'class' => 'form-control','placeholder' => 'This field is required']); ?></div>
                                 <div class="form-group"><?= $this->Form->control('lname',  ['label' => 'Last Name', 'class' => 'form-control','placeholder' => 'This field is required']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('password',  ['label' => 'Password','type' => 'password','value' => '', 'class' => 'form-control','placeholder' => 'At least 6 characters']); ?></div>
-                                <!--password type should be password-->
-                                <div class="form-group"><?= $this->Form->control('confirmed_password',['type' => 'password','value' => '', 'class' => 'form-control','placeholder' => 'Same as above']); ?></div>
-                                <!--add password match feature, to make sure user don't type unexpected password.-->
                                 <div class="form-group"><?= $this->Form->control('phone',  ['label' => 'Phone Number', 'class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']); ?></div>
                                 <div class="form-group"><?= $this->Form->control('email',  ['label' => 'Email', 'class' => 'form-control','placeholder' => 'example@example.com']); ?></div>
-                                <div class="form-group"><?= $this->Form->control('access_level', array('class' => 'form-control', 'type' => 'select', 'options' => $acLOptions)) ?></div>
+                                <?php
+                                if($this->request->getsession()->read('Auth.User.access_level')=='1'){
+                                ?>
+                                    <div class="form-group"><?= $this->Form->control('access_level', array('class' => 'form-control', 'type' => 'select', 'options' => $acLOptions))?></div>
+                                <?php
+                                }
+                                ?>
                                 <?php
                                 echo $this->Form->hidden('token');
                                 echo $this->Form->hidden('timeout');

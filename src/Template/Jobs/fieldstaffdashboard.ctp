@@ -73,6 +73,7 @@
     </div>
     </div>
 <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
+<?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
     <div class="row">
 
         <div class="col-lg-12">
@@ -100,6 +101,7 @@
                         <?php
                             $arrayOfJobs = array();
                             foreach ($jobs as $job):
+                                if($job->is_deleted == '0')
                                 array_push($arrayOfJobs, $job);
                             endforeach;
                             $list = array_filter($arrayOfJobs, function($job){

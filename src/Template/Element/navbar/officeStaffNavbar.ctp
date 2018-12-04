@@ -25,7 +25,8 @@
                     <li>
                         <a href="#"></a>
                         <?php
-                        echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit','1'], ['escape' => false])
+                        $employees_ID =$this->request->getsession()->read('Auth.User.id');
+                        echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit',$employees_ID], ['escape' => false])
                         ?>
                     </li>
                     <li>
@@ -54,12 +55,12 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
+                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                                 ?>
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add', ['controller' => 'jobs', 'action' => 'add'])
+                                echo $this->Html->link('Add Normal job', ['controller' => 'jobs', 'action' => 'add'])
                                 ?>
                             </li>
                             <li>
@@ -76,7 +77,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'customers', 'action' => 'index'])
+                                echo $this->Html->link('Customer List', ['controller' => 'customers', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -92,7 +93,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'sites', 'action' => 'index'])
+                                echo $this->Html->link('Site List', ['controller' => 'sites', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -109,7 +110,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'stocks', 'action' => 'index'])
+                                echo $this->Html->link('Stock List', ['controller' => 'stocks', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -125,7 +126,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'Accessories', 'action' => 'index'])
+                                echo $this->Html->link('Accessory List', ['controller' => 'Accessories', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
@@ -187,7 +188,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'contacts', 'action' => 'index'])
+                                echo $this->Html->link('Contact List', ['controller' => 'contacts', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>

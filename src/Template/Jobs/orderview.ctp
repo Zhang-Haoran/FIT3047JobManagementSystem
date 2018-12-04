@@ -8,12 +8,9 @@
 
 
 <div class="row">
-
-
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('View Job') ?></h1>
     </div>
-    <!-- /.col-lg-12 -->
 </div>
 
 <style>
@@ -43,20 +40,18 @@
             </tr>
             <tr>
                 <th scope="row"><?= __('Contact Name') ?></th>
-                <td><?= $job->has('contact') ? $this->Html->link($job->contact->fname, ['controller' => 'Contacts', 'action' => 'view', $job->contact->id]) : '' ?></td>
+                <td><?= $job->has('contact') ? $this->Html->link($job->contact->id, ['controller' => 'Contacts', 'action' => 'view', $job->contact->id]) : '' ?></td>
             </tr>
             <tr>
                 <th scope="row"><?= __('Site') ?></th>
                 <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
                     <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
                 </td>
-
             </tr>
             <tr>
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?></td>
             </tr>
-
             <tr>
                 <th scope="row"><?= __('Expected Arrival Time') ?></th>
                 <td><?= h($job->e_arrival_time) ?></td>
@@ -83,12 +78,6 @@
         <div id="map"></div>
     </div>
 </div>
-
-
-
-
-
-
 
 <?php
 $this->Html->scriptBlock('

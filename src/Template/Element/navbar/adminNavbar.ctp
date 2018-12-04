@@ -25,7 +25,8 @@
                     <li>
                         <a href="#"></a>
                         <?php
-                        echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit','1'], ['escape' => false])
+                        $employees_ID =$this->request->getsession()->read('Auth.User.id');
+                        echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit',$employees_ID], ['escape' => false])
                         ?>
                     </li>
                     <li>
@@ -59,7 +60,7 @@
                             </li>
                             <li>
                                 <?php
-                                echo $this->Html->link('Add', ['controller' => 'jobs', 'action' => 'add'])
+                                echo $this->Html->link('Add Normal job', ['controller' => 'jobs', 'action' => 'add'])
                                 ?>
                             </li>
                             <li>
@@ -200,15 +201,12 @@
                         <!-- /.nav-second-level -->
                     </li>
 
-
-
-
                     <li>
                         <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Index', ['controller' => 'contacts', 'action' => 'index'])
+                                echo $this->Html->link('Contact List', ['controller' => 'contacts', 'action' => 'index'])
                                 ?>
                             </li>
                             <li>
