@@ -106,7 +106,7 @@
                         <?php foreach ($jobs as $job): ?>
                         <tr>
                             <?php   if($job->is_deleted == '1'){?>
-                                <td class='bg-danger'><?= h($job->name) ?></td>
+                                <td class='bg-danger' style="text-decoration: line-through"><?= h($job->name) ?></td>
                             <?php
                             }else{
                                 ?>
@@ -327,7 +327,8 @@
             responsive: true,
             colReorder: false,
             buttons: [
-                'csvHtml5'
+                'copyHtml5',
+                'csvHtml5',
             ]
         });
 
