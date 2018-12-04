@@ -28,7 +28,7 @@
                     Images Information
                 </div>
                 <div class="panel-body">
-                    <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('description', ['label'=>'Name','class' => 'form-control']) ?></div>
                 </div>
             </div>
         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success center-block btn-block btn-lg']) ?>
