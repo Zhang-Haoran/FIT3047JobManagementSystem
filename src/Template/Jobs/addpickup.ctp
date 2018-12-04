@@ -164,7 +164,7 @@
                     <?php
                     echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
                     echo $this->Form->control('is_business',['label' => 'is business?','class' => 'checkbox','type' => 'checkbox']);
-                    echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                    echo $this->Form->control('cust_type_id', ['options' => $CustTypes, 'label' => 'Type','class' => 'form-control']);
                     ?>
                 </fieldset>
                 <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
