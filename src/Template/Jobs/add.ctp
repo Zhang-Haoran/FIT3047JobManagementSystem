@@ -82,8 +82,8 @@
                                     <?php
                                     $list_cust= array();
                                     foreach ($customers as $customer)
-                                         array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
-
+                                         //array_push($list_cust, "{$customer->name} ({$customer->cust_type->name})");
+                                         $list_cust[$customer->id] = "{$customer->name} ({$customer->cust_type->name})";
                                     ?>
                                     <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
                                 </div>
@@ -192,7 +192,7 @@
                 <h4 class="modal-title">New Event Types</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd'], 'id' => 'addNewEventType']) ?>
                 <fieldset>
                     <?php
                     echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
@@ -293,14 +293,14 @@
                         <div class="form-group"><?= $this->Form->control('suburb',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                         <div class="form-group"><?= $this->Form->control('city',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                         <div class="form-group"><?= $this->Form->control('postcode',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                        <div class="form-group"><?= $this->Form->control('job_id', ['class' => 'form-control','option' => $jobs]); ?></div>
+
                     </fieldset>
                     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
                     <?= $this->Form->end() ?>
                 </div>
             </div>
         </div>
-</div>
+    </div>
 
 
 <?php $this->start('script'); ?>
@@ -310,8 +310,7 @@
 
     $("#job_datetime").datetimepicker({
         defaultDate: new Date(),
-        assumeNearbyYear: true,
-        step:30
+        timepicker:false,
     });
 
     $("#e_arrival_datetime").datetimepicker({
@@ -325,19 +324,6 @@
     $("#e_pickup_datetime").datetimepicker({
         defaultDate: new Date(),
         step:30
-    });
-
-
-    $("#job_datetime").on("dp.change", function (e) {
-        $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_arrival_datetime").on("dp.change", function (e) {
-        $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_setup_datetime").on("dp.change", function (e) {
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
     });
 
 
@@ -376,5 +362,41 @@
 
     });
 
+    //Ajax form submit for newEventType
+    $("#addNewEventType").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user know event type is added
+
+                $('.window.close').on(function(e){});
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newEventId = data.id;
+                    $newEventName = data.name;
+                    console.log($newEventId);
+                    console.log($newEventName);
+                    //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
+                     $newEventId
+
+                    //reinitialize the event type list.
+                    $("#type_html_id").chosen();
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
 </script>
 <?php $this->end(); ?>

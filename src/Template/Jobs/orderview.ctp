@@ -8,12 +8,9 @@
 
 
 <div class="row">
-
-
     <div class="col-lg-12">
         <h1 class="page-header"><?= __('View Job') ?></h1>
     </div>
-    <!-- /.col-lg-12 -->
 </div>
 
 <style>
@@ -26,12 +23,6 @@
 
 <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div id="map"></div>
-    </div>
-</div>
-
 <div class="form-group"></div>
 <div class="col-lg-6">
     <div class="panel panel-default">
@@ -40,92 +31,37 @@
             <tbody>
 
             <tr>
-                <th scope="row"><?= __('Name') ?></th>
+                <th scope="row"><?= __('Job Name') ?></th>
                 <td><?= h($job->name) ?></td>
             </tr>
             <tr>
-                <th scope="row"><?= __('Status') ?></th>
-                <td><?= h($job->job_status) ?></td>
+                <th scope="row"><?= __('Customer Name') ?></th>
+                <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
+            </tr>
+            <tr>
+                <th scope="row"><?= __('Contact Name') ?></th>
+                <td><?= $job->has('contact') ? $this->Html->link($job->contact->id, ['controller' => 'Contacts', 'action' => 'view', $job->contact->id]) : '' ?></td>
             </tr>
             <tr>
                 <th scope="row"><?= __('Site') ?></th>
                 <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
                     <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
                 </td>
-
             </tr>
             <tr>
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?></td>
             </tr>
             <tr>
-                <th scope="row"><?= __('Event Type') ?></th>
-                <td><?= $job->has('event_type') ? $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]) : '' ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Customer') ?></th>
-                <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Employee') ?></th>
-                <td><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Last edited By') ?></th>
-                <td><?= h($job->edited_by) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Invoice') ?></th>
-                <td><?= h($job->Invoice) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Order') ?></th>
-                <td><?= h($job->job_order) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Quote') ?></th>
-                <td><?= h($job->quote) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Price') ?></th>
-                <td><?= $this->Number->format($job->price) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Deposit') ?></th>
-                <td><?= $this->Number->format($job->deposit) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Job Date') ?></th>
-                <td><?= h($job->job_date) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Booked Date') ?></th>
-                <td><?= h($job->booked_date) ?></td>
-            </tr>
-            <tr>
                 <th scope="row"><?= __('Expected Arrival Time') ?></th>
                 <td><?= h($job->e_arrival_time) ?></td>
             </tr>
-            <tr>
-                <th scope="row"><?= __('Expected Setup Time') ?></th>
-                <td><?= h($job->e_setup_time) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Expected Pickup Time') ?></th>
-                <td><?= h($job->e_pickup_time) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Last Changed') ?></th>
-                <td><?= h($job->last_changed) ?></td>
-            </tr>
+
             <tr>
                 <th scope="row"><?= __('Order Detail') ?></th>
                 <td><?= $this->Text->autoParagraph(h($job->order_detail)); ?></td>
             </tr>
             <tr>
-                <th scope="row"><?= __('Additional Note') ?></th>
-                <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
-            </tr>
             <tr>
                 <th scope="row"><?= __('Images Information') ?></th>
                 <td><?= $job->has('image') ? $this->Html->link($job->image->path, ['controller' => 'Images', 'action' => 'view', $job->image->id]) : '' ?></td>
@@ -137,9 +73,11 @@
     </div>
 </div>
 
-
-
-
+<div class="row">
+    <div class="col-lg-12">
+        <div id="map"></div>
+    </div>
+</div>
 
 <?php
 $this->Html->scriptBlock('
