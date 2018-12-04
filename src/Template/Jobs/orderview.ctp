@@ -6,15 +6,14 @@
 ?>
 
 
-
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('View Job') ?></h1>
+        <h1 class="page-header"><?= __('Order') ?></h1>
     </div>
 </div>
 
 <style>
-    #map{
+    #map {
         height: 500px;
         width: 80%;
         margin-top: 2%;
@@ -22,59 +21,57 @@
 </style>
 
 <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
-
+<p></p>
+<p></
 <div class="form-group"></div>
-<div class="col-lg-6">
+<div class="col col-lg-6">
     <div class="panel panel-default">
 
-        <table id="table" class="table table-striped table-bordered table-hover">
-            <tbody>
 
-            <tr>
-                <th scope="row"><?= __('Job Name') ?></th>
-                <td><?= h($job->name) ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Customer Name') ?></th>
-                <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Contact Name') ?></th>
-                <td><?= $job->has('contact') ? $this->Html->link($job->contact->id, ['controller' => 'Contacts', 'action' => 'view', $job->contact->id]) : '' ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Site') ?></th>
-                <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
-                    <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Address') ?></th>
-                <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?></td>
-            </tr>
-            <tr>
-                <th scope="row"><?= __('Expected Arrival Time') ?></th>
-                <td><?= h($job->e_arrival_time) ?></td>
-            </tr>
+    <h1 style="font-size: x-large"><?= h($job->name) ?></h1>
+    <p></p>
+    <span class="glyphicon glyphicon-user"
+          style="font-size: large"> <?= $job->has('customer') ? h($job->customer->name) : '' ?></span>
+    <p>
+    </p>
 
-            <tr>
-                <th scope="row"><?= __('Order Detail') ?></th>
-                <td><?= $this->Text->autoParagraph(h($job->order_detail)); ?></td>
-            </tr>
-            <tr>
-            <tr>
-                <th scope="row"><?= __('Images Information') ?></th>
-                <td><?= $job->has('image') ? $this->Html->link($job->image->path, ['controller' => 'Images', 'action' => 'view', $job->image->id]) : '' ?></td>
-            </tr>
+    <p style="font-size: large">
+        <?= $job->has('contact') ? h($job->contact->id) : '' ?></p>
 
-            </tbody>
-        </table>
+    <span class="glyphicon glyphicon-home"
+          style="font-size: large">  <?= $job->has('site') ? h($job->site->name) : '' ?></span>
+    <p>
+    </p>
 
+
+    <span class="glyphicon glyphicon-map-marker" style="font-size: large"> <?= $site->address ?>
+        , <?= $site->suburb ?> <?= $site->postcode ?></span>
+    <p></p>
+    <span class="glyphicon glyphicon-time" style="font-size: large"> <?= h($job->e_arrival_time) ?></span>
+<p></p>
+
+    <span class="glyphicon glyphicon-shopping-cart" style="font-size: large">
+        <?= h($job->order_detail); ?>
+    </span>
+
+
+    </div>
+    <div class="divright">
+
+        <?= $this->Html->link(__('Job is ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+        <p></p>
+    </div>
+    <div class="divleft">
+
+        <?= $this->Html->link(__('Back to home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+        <p></p>
     </div>
 </div>
 
+
+
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-6">
         <div id="map"></div>
     </div>
 </div>
