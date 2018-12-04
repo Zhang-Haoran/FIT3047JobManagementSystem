@@ -26,13 +26,14 @@ class JobsController extends AppController
      */
     public function index()
     {
-        $jobs = $this->Jobs->find('all')->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
 
+        $jobs = $this->Jobs->find('all')
+            ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
         $this->set(compact('jobs'));
-
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
+
         if($this->Auth->user('access_level')=='3'){
             $this->render('fieldstaffdashboard');
         }
@@ -42,6 +43,8 @@ class JobsController extends AppController
         elseif($this->Auth->user('access_level')=='1'){
             $this->render('admindashboard');
         }
+
+
     }
 
 
@@ -57,6 +60,11 @@ class JobsController extends AppController
         $job = $this->Jobs->get($id, [
             'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images']
         ]);
+        if($job->is_deleted == '1' && $this->Auth->user('access_level') !='1' ) {
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            $this->redirect($this->Auth->redirectUrl());
+        }
+
 
         $this->loadModel('Sites');
         $site = $this->Sites->get($job->site_id);
@@ -121,6 +129,7 @@ class JobsController extends AppController
         ]);
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
+        //$csrfToken = $this->request->getParam('_csrfToken');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
@@ -150,8 +159,15 @@ class JobsController extends AppController
             $job->edited_by = $staff->full_name;
 
             if ($this->Jobs->save($job)) {
-                $this->Flash->success(__('The job has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                $date1 = $this->Jobs->get($id)->e_arrival_time;
+                $date2 = $this->Jobs->get($id)->e_setup_time;
+                if (strtotime($date1)<= strtotime($date2)){
+
+                    $this->Flash->success(__('The job has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }elseif(strtotime($date1)> strtotime($date2)){
+                    $this->Flash->error(__('The job could not be saved. Please, try again.'));
+                }
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
@@ -172,7 +188,9 @@ class JobsController extends AppController
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
+        $this->loadModel('Contacts');
+        $contacts = $this->Contacts->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
             $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
@@ -198,6 +216,8 @@ class JobsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
+
+
     public function delete($id = null)
     {
         if($this->Auth->user('access_level')=='3'){
@@ -206,12 +226,21 @@ class JobsController extends AppController
         }
 
         $this->request->allowMethod(['get', 'delete']);
+
         $job = $this->Jobs->get($id);
-        if ($this->Jobs->delete($job)) {
+
+        $job->last_changed = Time::now();
+        $this->loadModel('Employees');
+        $staff = $this->Employees->get($this->Auth->user('id'));
+        $job->edited_by = $staff->full_name;
+        $job->is_deleted = '1';
+
+
+        if ($this->Jobs->save($job)) {
             $this->Flash->success(__('The job has been deleted.'));
-        } else {
-            $this->Flash->error(__('The job could not be deleted. Please, try again.'));
+            return $this->redirect(['action' => 'index']);
         }
+        $this->Flash->error(__('The job could not be deleted. Please, try again.'));
 
         return $this->redirect(['action' => 'index']);
     }
@@ -271,6 +300,39 @@ class JobsController extends AppController
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
+    public function undelete($id = null)
+    {
+        if($this->Auth->user('access_level')!='1'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+
+        $this->request->allowMethod(['get', 'delete']);
+
+        $job = $this->Jobs->get($id);
+
+        $job->last_changed = Time::now();
+        $this->loadModel('Employees');
+        $staff = $this->Employees->get($this->Auth->user('id'));
+        $job->edited_by = $staff->full_name;
+        $job->is_deleted = '0';
+
+
+        if ($this->Jobs->save($job)) {
+            $this->Flash->success(__('The job has been undeleted.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('The job could not be undeleted. Please, try again.'));
+
+        return $this->redirect(['action' => 'index']);
+
+    }
+
+
+
+
+
+
     public function editpickup($id = null){
         if ($this->Auth->user('access_level') == '3') {
             $this->Flash->set(__('You have no authorization to access this page as a field staff'));
@@ -310,7 +372,9 @@ class JobsController extends AppController
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
+        $this->loadModel('Contacts');
+        $contacts = $this->Contacts->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
             $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
@@ -336,6 +400,64 @@ class JobsController extends AppController
         ]);
 
         $this->set('job', $job);
+    }
+
+    public function orderview($id = null)
+    {
+        $job = $this->Jobs->get($id, [
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images','Contacts']
+        ]);
+
+        $this->loadModel('Sites');
+        $site = $this->Sites->get($job->site_id);
+
+        $this->set('site', $site);
+        $this->set('job', $job);
+    }
+    public function exportJobData(){
+        $datatbp = '<table cellspacing="2" cellpadding="5" style="border: 2px;text-align: center;" border="1",width="60%">';
+
+        $datatbp .='<tr>
+
+                       <th style="text-align: center">Job Name</th>
+                       <th style="text-align: center">Status</th>
+                       <th style="text-align: center">Job Date</th>
+                       <th style="text-align: center">Booked Date</th>
+                       <th style="text-align: center">Price</th>
+                       <th style="text-align: center">Deposit</th>
+                       <th style="text-align: center">Expected arrival time</th>
+
+                    </tr>';
+
+        $contents = $this->Jobs->find('all')->toArray();
+        foreach ($contents as $content){
+            $jobName = $content['name'];
+            $jobStatus = $content['job_status'];
+            $jobDate = $content['job_date'];
+            $bookedDate = $content['booked_date'];
+            $price = $content['price'];
+            $deposit = $content['deposit'];
+            $exArrivalTime = $content['e_arrival_time'];
+
+            $datatbp .='<tr>
+
+                       <td style="text-align: center">'. $jobName.'</td>
+                       <td style="text-align: center">'. $jobStatus.'</td>
+                       <td style="text-align: center">'. $jobDate.'</td>
+                       <td style="text-align: center">'. $bookedDate.'</td>
+                       <td style="text-align: center">'. $price.'</td>
+                       <td style="text-align: center">'. $deposit.'</td>
+                       <td style="text-align: center">'. $exArrivalTime.'</td>
+
+                    </tr>';
+        }
+        $datatbp .="</table>";
+        header('Content-Type: application/force-download');
+        header('Content-disposition: attachment; filename= jobs.xls');
+        header("Pragma: ");
+        header("Cache-Control: ");
+        echo $datatbp;
+        die;
     }
 
 }

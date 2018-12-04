@@ -81,21 +81,43 @@ class EventTypesController extends AppController
     public function EventTypesAdd()
     {
         if($this->Auth->user('access_level')=='3'){
-            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-            return $this->redirect($this->Auth->redirectUrl());
-        }
-
-        $eventType = $this->EventTypes->newEntity();
-        if ($this->request->is('post')) {
-            $eventType = $this->EventTypes->patchEntity($eventType, $this->request->getData());
-            if ($this->EventTypes->save($eventType)) {
-                $this->Flash->success(__('The event type has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            $message = ['error' => 'You have no authorization to access this page as a field staff'];
+        } else {
+            //If user has right to add eventtype
+            $eventType = $this->EventTypes->newEntity();
+            if ($this->request->is('post')) {
+                $eventType = $this->EventTypes->patchEntity($eventType, $this->request->getData());
+                $save = $this->EventTypes->save($eventType);
+                if ($save) {
+                    $message = ['id' => $save->id, 'name' => $save->name, 'error' => false];
+                } else {
+                    $message = ['error' => 'Cannot save Event Type'];
+                }
+            } else {
+                $message = ['error' => 'Invalid request, must be POST'];
             }
-            $this->Flash->error(__('The event type could not be saved. Please, try again.'));
         }
-        $this->set(compact('eventType'));
+        $this->set([
+            'message' => $message,
+            '_serialize' => 'message',
+        ]);
+        $this->RequestHandler->renderAs($this, 'json');
+
+//        $eventType = $this->EventTypes->newEntity();
+//        if ($this->request->is('post')) {
+//            $eventType = $this->EventTypes->patchEntity($eventType, $this->request->getData());
+//            if ($this->EventTypes->save($eventType)) {
+//                //$this->Flash->success(__('The event type has been saved.'));
+//
+//                //return $this->redirect(['action' => 'index']);
+//                $newEventTypeId = xxx;
+//                return json_encode(array("id" => $newEventTypeId));
+//            }
+//            //$this->Flash->error(__('The event type could not be saved. Please, try again.'));
+//            return errormessage;
+//        }
+//        //$this->set(compact('eventType'));
+
     }
 
 

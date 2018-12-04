@@ -74,7 +74,10 @@
         </div>
     </div>
     </div>
-<?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
+<div class="bd-example">
+    <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
+    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-success', 'style' => '']) ?>
+</div>
     <div class="row">
         <div class="col-lg-8">
             <div class="panel-body">
@@ -101,7 +104,9 @@
                     </thead>
                     <tbody>
                         <?php
-                            foreach ($jobs as $job): ?>
+                            foreach ($jobs as $job):
+                                    if($job->is_deleted == '0'){
+                                ?>
                         <tr>
                             <td><?= h($job->name) ?></td>
                             <?php
@@ -183,7 +188,9 @@
                                 <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
                             </td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php
+                                    }
+                        endforeach; ?>
                     </tbody>
                 </table>
             </div>
