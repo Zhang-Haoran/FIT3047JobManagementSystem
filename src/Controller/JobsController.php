@@ -26,6 +26,7 @@ class JobsController extends AppController
      */
     public function index()
     {
+
         if($this->Auth->user('access_level') =='1' ) {
             $jobs = $this->Jobs->find('all')
                 ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
@@ -34,6 +35,7 @@ class JobsController extends AppController
                 ->where(['jobs.is_deleted >' => '0'])
                 ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
         }
+        $this->set(compact('jobs'));
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
@@ -47,7 +49,8 @@ class JobsController extends AppController
         elseif($this->Auth->user('access_level')=='1'){
             $this->render('admindashboard');
         }
-        $this->set(compact('jobs'));
+
+
     }
 
 
@@ -190,7 +193,9 @@ class JobsController extends AppController
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
+        $this->loadModel('Contacts');
+        $contacts = $this->Contacts->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
             $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
@@ -337,7 +342,9 @@ class JobsController extends AppController
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes'));
+        $this->loadModel('Contacts');
+        $contacts = $this->Contacts->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
             $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
