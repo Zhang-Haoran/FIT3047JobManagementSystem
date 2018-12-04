@@ -22,7 +22,7 @@
 
 <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
 <p></p>
-<p></
+<p></p>
 <div class="form-group"></div>
 <div class="col col-lg-6">
     <div class="panel panel-default">
