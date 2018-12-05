@@ -78,25 +78,55 @@ class ContactsController extends AppController
     }
 
     public function jobAdd()
+
     {
-        if($this->Auth->user('access_level')=='3'){
-            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-            return $this->redirect($this->Auth->redirectUrl());
-        }
-
-        $contacts = $this->Contacts->newEntity();
-        if ($this->request->is('post')) {
-            $contacts = $this->Contacts->patchEntity($contacts, $this->request->getData());
-            if ($this->Contacts->save($contacts)) {
-                $this->Flash->success(__('The contact has been saved.'));
-
-                return $this->redirect($this->referer());
+        if ($this->Auth->user('access_level') == '3') {
+            $message = ['error' => 'You have no authorization to access this page as a field staff'];
+        } else {
+            //If user has right to add eventtype
+            $contacts = $this->Contacts->newEntity();
+            if ($this->request->is('post')) {
+                $contacts = $this->Contacts->patchEntity($contacts, $this->request->getData());
+                $save = $this->Contacts->save($contacts);
+                if ($save) {
+                    $message = ['id' => $save->id, 'firstname' => $save->fname, 'lastname' => $save->lname, 'phone' => $save->phone, 'email' => $save->email,
+                        'role' => $save->role,  'street' => $save->street, 'suburb' => $save->suburb, 'surburb' => $save->suburb, 'city' => $save->city,
+                        'postcode' => $save->postcode, 'error' => false];
+                } else {
+                    $message = ['error' => 'Cannot save Contacts'];
+                }
+            } else {
+                $message = ['error' => 'Invalid request, must be POST'];
             }
-            $this->Flash->error(__('The contact could not be saved. Please, try again.'));
         }
-
-        $this->set(compact('contacts'));
+        $this->set([
+            'message' => $message,
+            '_serialize' => 'message',
+        ]);
+        $this->RequestHandler->renderAs($this, 'json');
     }
+
+
+
+//    {
+//        if($this->Auth->user('access_level')=='3'){
+//            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+//            return $this->redirect($this->Auth->redirectUrl());
+//        }
+//
+//        $contacts = $this->Contacts->newEntity();
+//        if ($this->request->is('post')) {
+//            $contacts = $this->Contacts->patchEntity($contacts, $this->request->getData());
+//            if ($this->Contacts->save($contacts)) {
+//                $this->Flash->success(__('The contact has been saved.'));
+//
+//                return $this->redirect($this->referer());
+//            }
+//            $this->Flash->error(__('The contact could not be saved. Please, try again.'));
+//        }
+//
+//        $this->set(compact('contacts'));
+//    }
 
     /**
      * Edit method
