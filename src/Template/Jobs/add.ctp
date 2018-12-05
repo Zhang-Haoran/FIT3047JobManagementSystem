@@ -260,7 +260,7 @@
                 <h4 class="modal-title">New site</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd'], 'id' =>'addNewSite' ]) ?>
                 <fieldset>
                     <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
@@ -283,7 +283,7 @@
                     <h4 class="modal-title">New Contact</h4>
                 </div>
                 <div class="modal-body">
-                    <?= $this->Form->create(null,['url' => ['controller' => 'Contacts','action' => 'jobAdd']]) ?>
+                    <?= $this->Form->create(null,['url' => ['controller' => 'Contacts','action' => 'jobAdd'], 'id' => 'addNewContact']) ?>
                     <fieldset>
                         <div class="form-group"><?= $this->Form->control('fname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                         <div class="form-group"><?= $this->Form->control('lname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
@@ -461,6 +461,7 @@
                     //if new event type is successfully added to database
                     $newCustomerId = data.id;
                     $newCustomerName = data.name;
+                    $isbusiness=data.is_business;
                     // console.log($newCustomerId);
                     // console.log($newCustomerName);
                     //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
@@ -478,6 +479,98 @@
         e.preventDefault(); //As the form don't actually submit and redirect to new page
     });
 
+
+
+
+
+    //Ajax form submit for newContacts
+    $("#addNewContact").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#contactsAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if a new contact is successfully added to database
+                    $newContactId = data.id;
+                    $newContactfName = data.firstname;
+                    $newContactlName=data.lastname;
+                    $newContactphone=data.phone;
+                    $newContactemail=data.email;
+                    $newContactrole=data.role;
+                    $newContactstreet=data.street;
+                    $newContactsurburb=data.suburb;
+                    $newContactcity=data.city;
+                    $newContactpostcode=data.postcode;
+
+
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#contact_html_id").append("<option value='" + $newContactId + "'>" + $newContactfName +' '+ $newContactlName + ' '+ '(' + $newContactemail + ')' + "</option>");
+
+                    $("#contact_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+    //Ajax form submit for newSite
+    $("#addNewSite").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#siteAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if a new site is successfully added to database
+                    $newSiteId = data.id;
+                    $newSiteName = data.name;
+                    $newSiteAddress=data.address;
+                    $newSiteSuburb=data.suburb;
+                    $newSitePostcode=data.postcode;
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#site_html_id").append("<option value='" + $newSiteId + "'>" + $newSiteName +' '+ '(' + $newSiteAddress + ',  ' + $newSiteSuburb + ' '
+                        + $newSitePostcode + ')' + "</option>");
+
+                    $("#site_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
 
 
 </script>

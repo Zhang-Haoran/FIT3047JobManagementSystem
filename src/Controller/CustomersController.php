@@ -89,7 +89,7 @@ class CustomersController extends AppController
                 $customer = $this->Customers->patchEntity($customer, $this->request->getData());
                 $save = $this->Customers->save($customer);
                 if ($save) {
-                    $message = ['id' => $save->id, 'name' => $save->name, 'error' => false];
+                    $message = ['id' => $save->id, 'name' => $save->name, 'is_business' => $save->is_business, 'error' => false];
                 } else {
                     $message = ['error' => 'Cannot save Customer'];
                 }
