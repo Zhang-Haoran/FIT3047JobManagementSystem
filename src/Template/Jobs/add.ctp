@@ -89,7 +89,7 @@
                             </div>
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
+                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#CustAdd" >Create new customer</a>
                                 </h4>
                             </div>
                                     <div class="panel-heading">
@@ -208,7 +208,7 @@
 
 
 
-        <div class="modal fade" id="custAdd" role="dialog">
+        <div class="modal fade" id="CustAdd" role="dialog">
             <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -216,7 +216,7 @@
                         <h4 class="modal-title">New Customer</h4>
                     </div>
                     <div class="modal-body">
-                        <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                        <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'CustAdd'] , 'id' => 'addNewCustomer']) ?>
                         <fieldset>
                             <?php
                             echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
@@ -239,7 +239,7 @@
                 <h4 class="modal-title">New Customer Types</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'CustTypes','action' => 'CustTypesAdd'],'id' => 'CustTypesAdd']) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'CustTypes','action' => 'CustTypesAdd'],'id' => 'addNewCustTypes']) ?>
                 <fieldset>
                     <?php
                     echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
@@ -404,7 +404,7 @@
 
 
     //Ajax form submit for newCustomerType
-    $("#CustTypesAdd").submit(function(e) {
+    $("#addNewCustTypes").submit(function(e) {
         //Get necessary info from the form
         var form = $(this);
         var url = form.attr('action');
@@ -428,9 +428,46 @@
                     // console.log($newEventName);
                     //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
 
-                    // $("#cust_html_id").append("<option value='" + $newCustTypeId + "'>" + $newCustTypeName + "</option>");
-                    //
-                    // $("#cust_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+
+    //Ajax form submit for newCustomer
+    $("#addNewCustomer").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#CustAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newCustomerId = data.id;
+                    $newCustomerName = data.name;
+                    // console.log($newCustomerId);
+                    // console.log($newCustomerName);
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + "</option>");
+
+                    $("#cust_html_id").trigger("chosen:updated");
                 } else {
                     //If there's an error from the server
                     alert(data.error);

@@ -78,6 +78,7 @@ class CustTypesController extends AppController
 
 
     public function CustTypesAdd()
+
     {
         if ($this->Auth->user('access_level') == '3') {
             $message = ['error' => 'You have no authorization to access this page as a field staff'];
