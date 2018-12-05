@@ -24,6 +24,7 @@
 <p></p>
 <p></p>
 <div class="form-group"></div>
+<div class="row">
 <div class="col col-lg-6">
     <div class="panel panel-default">
 
@@ -70,11 +71,11 @@
         <p></p>
     </div>
 </div>
-
+</div>
 
 
 <div class="row">
-    <div class="col-lg-6" style="margin-top: 10%">
+    <div class="col-lg-6" >
         <div id="map"></div>
     </div>
 </div>
