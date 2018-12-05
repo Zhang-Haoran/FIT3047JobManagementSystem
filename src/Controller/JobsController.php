@@ -189,7 +189,12 @@ class JobsController extends AppController
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
         $this->loadModel('Contacts');
-        $contacts = $this->Contacts->find('list');
+        $contacts = $this->Contacts->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($contact) {
+                return $contact->get('label');
+            }
+        ]);
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
