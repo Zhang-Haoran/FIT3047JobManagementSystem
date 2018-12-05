@@ -79,23 +79,56 @@ class CustTypesController extends AppController
 
     public function CustTypesAdd()
     {
-        if($this->Auth->user('access_level')=='3'){
-            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-            return $this->redirect($this->Auth->redirectUrl());
-        }
-
-        $custType = $this->CustTypes->newEntity();
-        if ($this->request->is('post')) {
-            $custType = $this->CustTypes->patchEntity($custType, $this->request->getData());
-            if ($this->CustTypes->save($custType)) {
-                $this->Flash->success(__('The cust type has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+        if ($this->Auth->user('access_level') == '3') {
+            $message = ['error' => 'You have no authorization to access this page as a field staff'];
+        } else {
+            //If user has right to add customer type
+            $custType = $this->CustTypes->newEntity();
+            if ($this->request->is('post')) {
+                $custType = $this->CustTypes->patchEntity($custType, $this->request->getData());
+                $save = $this->CustTypes->save($custType);
+                if ($save) {
+                    $message = ['id' => $save->id, 'name' => $save->name, 'error' => false];
+                } else {
+                    $message = ['error' => 'Cannot save Customer Type'];
+                }
+            } else {
+                $message = ['error' => 'Invalid request, must be POST'];
             }
-            $this->Flash->error(__('The cust type could not be saved. Please, try again.'));
         }
-        $this->set(compact('custType'));
+        $this->set([
+            'message' => $message,
+            '_serialize' => 'message',
+        ]);
+        $this->RequestHandler->renderAs($this, 'json');
     }
+
+
+
+
+
+//    {
+//        if($this->Auth->user('access_level')=='3'){
+//            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+//            return $this->redirect($this->Auth->redirectUrl());
+//        }
+//
+//        $custType = $this->CustTypes->newEntity();
+//        if ($this->request->is('post')) {
+//            $custType = $this->CustTypes->patchEntity($custType, $this->request->getData());
+//            if ($this->CustTypes->save($custType)) {
+//                $this->Flash->success(__('The cust type has been saved.'));
+//
+//                return $this->redirect(['action' => 'index']);
+//            }
+//            $this->Flash->error(__('The cust type could not be saved. Please, try again.'));
+//        }
+//        $this->set(compact('custType'));
+//    }
+//
+
+
+
 
 
     /**

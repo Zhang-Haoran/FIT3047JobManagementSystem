@@ -240,13 +240,13 @@
                 <h4 class="modal-title">New Customer Types</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'CustTypes','action' => 'CustTypesAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'CustTypes','action' => 'CustTypesAdd'],'id' => 'CustTypesAdd']) ?>
                 <fieldset>
                     <?php
                     echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
                     ?>
                 </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
                 <?= $this->Form->end() ?>
             </div>
         </div>
@@ -390,7 +390,6 @@
                     //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
 
                     $("#type_html_id").append("<option value='" + $newEventId + "'>" + $newEventName + "</option>");
-                    $("#header").append("<h1>" + $newEventId + "</h1>")
 
                     $("#type_html_id").trigger("chosen:updated");
                 } else {
@@ -402,5 +401,48 @@
 
         e.preventDefault(); //As the form don't actually submit and redirect to new page
     });
+
+
+
+    //Ajax form submit for newCustomerType
+    $("#CustTypesAdd").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user know event type is added
+
+
+                $('#CustTypesAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newCustTypeId = data.id;
+                    $newCustTypeName = data.name;
+                    // console.log($newEventId);
+                    // console.log($newEventName);
+                    //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    // $("#cust_html_id").append("<option value='" + $newCustTypeId + "'>" + $newCustTypeName + "</option>");
+                    //
+                    // $("#cust_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+
 </script>
 <?php $this->end(); ?>
