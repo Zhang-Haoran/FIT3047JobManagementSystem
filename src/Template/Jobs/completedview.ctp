@@ -24,6 +24,7 @@
 <p></p>
 
 <div class="form-group"></div>
+<div class="row">
 <div class="col col-lg-6">
     <div class="panel panel-default">
 
@@ -68,7 +69,7 @@
     </div>
 
 </div>
-
+</div>
 
 <div class="row">
     <div class="col-lg-6">
