@@ -71,7 +71,7 @@
 
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6" style="margin-top: 10%">
         <div id="map"></div>
     </div>
 </div>
