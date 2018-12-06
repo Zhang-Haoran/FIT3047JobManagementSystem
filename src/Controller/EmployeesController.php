@@ -77,6 +77,8 @@ class EmployeesController extends AppController
     /**
      * Add method
      *
+     *
+     *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
@@ -275,7 +277,7 @@ class EmployeesController extends AppController
                     // Clear token and timeout
                     $this->request->getData['token'] = '';
                     $this->request->getData['timeout'] = '';
-                    $employee = $this->Employees->patchEntity($employee, $this->request->data);
+                    $employee = $this->Employees->patchEntity($employee, $this->request->getData);
                     if ($this->Employees->save($employee)) {
                         $this->Flash->set(__('Your password has been updated.'));
                         return $this->redirect(array('action' => 'login'));
