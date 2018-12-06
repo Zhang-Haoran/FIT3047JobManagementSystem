@@ -8,7 +8,8 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('Order') ?></h1>
+        <h1 class="page-header"><?= h($job->name) ?></h1>
+
     </div>
 </div>
 
@@ -26,37 +27,57 @@
 <div class="form-group"></div>
 <div class="row">
 <div class="col col-lg-6">
-    <div class="panel panel-default">
+    <div class="panel panel-red">
+        <div class="panel-heading">Order</div>
 
 
-    <h1 style="font-size: x-large"><?= h($job->name) ?></h1>
+
     <p></p>
+
+        <span class="glyphicon glyphicon-filter" style="font-size: large"><?= $job->has('event_type') ? h($job->event_type->name) : '' ?></span>
+        <p>
+        </p>
     <span class="glyphicon glyphicon-user"
-          style="font-size: large"> <?= $job->has('customer') ? h($job->customer->name) : '' ?></span>
+          style="font-size: large"> </span><?= $job->has('customer') ? h($job->customer->name) : '' ?>
     <p>
     </p>
 
     <p style="font-size: large">
         <?= $job->has('contact') ? h($job->contact->id) : '' ?></p>
-
+        <div style="font-size: xx-large">
     <span class="glyphicon glyphicon-home"
-          style="font-size: large">  <?= $job->has('site') ? h($job->site->name) : '' ?></span>
+          style="font-size: large"> </span> <b> <?= $job->has('site') ? h($job->site->name) : '' ?></b></div>
     <p>
     </p>
 
 
-    <span class="glyphicon glyphicon-map-marker" style="font-size: large" id="a">
+    <span class="glyphicon glyphicon-map-marker" style="font-size: large" id="a"></span>
         <?= $site->address ?>
             , <?= $site->suburb ?> <?= $site->postcode ?>
 
-    </span>
-    <p></p>
-    <span class="glyphicon glyphicon-time" style="font-size: large"> <?= h($job->e_arrival_time) ?></span>
-<p></p>
 
-    <span class="glyphicon glyphicon-shopping-cart" style="font-size: large">
+    <p></p>
+
+
+        <span class="glyphicon glyphicon-calendar"
+              style="font-size: large"> </span><?= h($job->job_date) ?>
+        <p>
+        </p>
+
+        <span class="glyphicon glyphicon-time" style="font-size: large"></span> <?= h($job->e_arrival_time) ?>
+    <p></p>
+
+        <span class="glyphicon glyphicon-wrench" style="font-size: large"></span> <?= h($job->e_setup_time) ?>
+        <p></p>
+        <span class="glyphicon glyphicon-ok" style="font-size: large"> </span><?= h($job->e_pickup_time) ?>
+        <p></p>
+        <span class="glyphicon glyphicon-shopping-cart" style="font-size: large"></span>
         <?= h($job->order_detail); ?>
-    </span>
+
+        <p></p>
+        <span class="glyphicon glyphicon-pencil  " style="font-size: large"></span>
+        <?= h($job->additional_note); ?>
+
 
 
     </div>
