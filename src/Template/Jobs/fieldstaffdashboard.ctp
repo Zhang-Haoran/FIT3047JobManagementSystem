@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">We today have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s)</p><p id="encouragement" style="display: inline"></p></h1>
+            <h1 class="page-header">Today we have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s) left</p><p id="encouragement" style="display: inline"></p></h1>
         </div>
         <!-- /.col-lg-12 -->
 
