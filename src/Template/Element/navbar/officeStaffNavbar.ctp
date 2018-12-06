@@ -46,7 +46,7 @@
                 <ul class="nav" id="side-menu">
                     <li>
                         <?php
-                        echo $this->Html->link('<i class="fa fa-dashboard fa-fw"></i> Dashboard', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
+                        echo $this->Html->link('Dashboard', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                         ?>
                     </li>
                     <li>
