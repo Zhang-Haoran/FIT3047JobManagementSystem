@@ -78,7 +78,6 @@ class EmployeesController extends AppController
      * Add method
      *
      *
-     *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
     public function add()
@@ -273,11 +272,11 @@ class EmployeesController extends AppController
             $query = $this->Employees->find('all', ['conditions' => ['token' => $token, 'timeout >' => time()]]);
             $employee = $query->first();
             if ($employee) {
-                if (!empty($this->request->getData)) {
+                if (!empty($this->request->data)) {
                     // Clear token and timeout
-                    $this->request->getData['token'] = '';
-                    $this->request->getData['timeout'] = '';
-                    $employee = $this->Employees->patchEntity($employee, $this->request->getData);
+                    $this->request->data['token'] = '';
+                    $this->request->data['timeout'] = '';
+                    $employee = $this->Employees->patchEntity($employee, $this->request->data);
                     if ($this->Employees->save($employee)) {
                         $this->Flash->set(__('Your password has been updated.'));
                         return $this->redirect(array('action' => 'login'));

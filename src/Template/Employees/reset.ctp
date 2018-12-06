@@ -41,7 +41,11 @@ $cakeDescription = 'Instant Marquees';
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
+
             <div style="padding-top: 25px;">
+                <div style="padding-top: 25px;">
+                    <?= $this->Html->image('image_02.gif', ['alt' => 'Logo', 'class' => 'img-responsive center-block']) ?>
+                </div>
                 <div class="panel-body">
 
 
@@ -54,7 +58,7 @@ $cakeDescription = 'Instant Marquees';
 
                         <div class="form-group">
 
-                    <?= $this->Form->control('password', ['required' => true, 'autofocus' => true,'class' => 'form-control']); ?>
+                    <?= $this->Form->control('password', ['type' => 'password','required' => true,'class' => 'form-control']); ?>
 
                 </div>
 
