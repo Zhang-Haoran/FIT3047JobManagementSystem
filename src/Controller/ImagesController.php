@@ -59,10 +59,7 @@ class ImagesController extends AppController
      */
     public function add($jobId = null)
     {
-        if ($this->Auth->user('access_level') == '3') {
-            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-            return $this->redirect($this->Auth->redirectUrl());
-        }
+        
 
         $image = $this->Images->newEntity();
         if ($this->request->is('post')) {
