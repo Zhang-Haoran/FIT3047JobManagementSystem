@@ -122,7 +122,7 @@
             <tr>
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?>
-                    <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
+                    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
                 </td>
 
             </tr>
@@ -243,8 +243,3 @@ $this->Html->scriptBlock('
     ', ['block' => true]);
 ?>
 
-<script>
-    function moveToImage(jobId) {
-        window.location.replace("/images/add/" + jobId);
-    }
-</script>
