@@ -40,7 +40,7 @@
             <?php foreach ($job->contacts as $contact): ?>
                 <tr>
                     <th>
-                        <?="Contact: ";?>
+                        <?="Contact ";?>
                     </th>
                     <td>
                         <?=h($contact->fname);?>
@@ -49,7 +49,7 @@
                 </tr>
                 <tr>
                     <th>
-                        <?="Phone: ";?>
+                        <?="Phone ";?>
                     </th>
                     <td>
                         <?=h($contact->phone);?>
@@ -57,7 +57,7 @@
                 </tr>
                 <tr>
                     <th>
-                        <?="Email: ";?>
+                        <?="Email ";?>
                     </th>
                     <td>
                         <?=h($contact->email);?>
@@ -65,7 +65,7 @@
                 </tr>
                 <tr>
                     <th>
-                        <?="Role: ";?>
+                        <?="Role ";?>
                     </th>
                     <td>
                         <?=h($contact->role);?>
@@ -74,7 +74,7 @@
 
                 <tr>
                     <th>
-                        <?="Street: ";?>
+                        <?="Street ";?>
                     </th>
                     <td>
                         <?=h($contact->street);?>
@@ -83,7 +83,7 @@
 
                 <tr>
                     <th>
-                        <?="Suburb: ";?>
+                        <?="Suburb ";?>
                     </th>
                     <td>
                         <?=h($contact->suburb);?>
@@ -92,7 +92,7 @@
 
                 <tr>
                     <th>
-                        <?="City: ";?>
+                        <?="City ";?>
                     </th>
                     <td>
                         <?=h($contact->city);?>
@@ -101,7 +101,7 @@
 
                 <tr>
                     <th>
-                        <?="Postcode: ";?>
+                        <?="Postcode ";?>
                     </th>
                     <td>
                         <?=h($contact->postcode);?>
@@ -219,7 +219,7 @@ $this->Html->scriptBlock('
     }
 
     function codeAddress() {
-        var address = document.getElementById(\'table\').rows[1].cells[1].textContent;
+        var address = document.getElementById(\'table\').rows[0].cells[1].textContent;
         console.log(address);
         geocoder.geocode( { \'address\': address}, function(results, status) {
             if (status == \'OK\') {
