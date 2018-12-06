@@ -77,24 +77,53 @@ class SitesController extends AppController
     }
 
     public function siteAdd()
+
     {
-        if($this->Auth->user('access_level')=='3'){
-            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-            return $this->redirect($this->Auth->redirectUrl());
-        }
-
-        $site = $this->Sites->newEntity();
-        if ($this->request->is('post')) {
-            $site = $this->Sites->patchEntity($site, $this->request->getData());
-            if ($this->Sites->save($site)) {
-                $this->Flash->success(__('The site has been saved.'));
-
-                return $this->redirect($this->referer());
+        if ($this->Auth->user('access_level') == '3') {
+            $message = ['error' => 'You have no authorization to access this page as a field staff'];
+        } else {
+            //If user has right to add eventtype
+            $site = $this->Sites->newEntity();
+            if ($this->request->is('post')) {
+                $site = $this->Sites->patchEntity($site, $this->request->getData());
+                $save = $this->Sites->save($site);
+                if ($save) {
+                    $message = ['id' => $save->id, 'name' => $save->name, 'address' => $save->address, 'suburb' => $save->suburb, 'postcode' => $save->postcode, 'error' => false];
+                } else {
+                    $message = ['error' => 'Cannot save Event Type'];
+                }
+            } else {
+                $message = ['error' => 'Invalid request, must be POST'];
             }
-            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
         }
-        $this->set(compact('site'));
+        $this->set([
+            'message' => $message,
+            '_serialize' => 'message',
+        ]);
+        $this->RequestHandler->renderAs($this, 'json');
+
     }
+
+
+
+//    {
+//        if($this->Auth->user('access_level')=='3'){
+//            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+//            return $this->redirect($this->Auth->redirectUrl());
+//        }
+//
+//        $site = $this->Sites->newEntity();
+//        if ($this->request->is('post')) {
+//            $site = $this->Sites->patchEntity($site, $this->request->getData());
+//            if ($this->Sites->save($site)) {
+//                $this->Flash->success(__('The site has been saved.'));
+//
+//                return $this->redirect($this->referer());
+//            }
+//            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
+//        }
+//        $this->set(compact('site'));
+//    }
 
     /**
      * Edit method

@@ -23,7 +23,6 @@
                 </a>
                 <ul class="dropdown-menu dropdown-user">
                     <li>
-                        <a href="#"></a>
                         <?php
                         $employees_ID =$this->request->getsession()->read('Auth.User.id');
                         echo $this->Html->link('<i class="fa fa-user fa-fw"></i> User Profile', ['controller' => 'employees', 'action' => 'edit',$employees_ID], ['escape' => false])
@@ -31,7 +30,7 @@
                     </li>
                     <li>
                         <?php
-                        echo $this->Html->link('<i class="fa fa-sign-out fa-fw"></i> Logout', ['controller' => 'employees', 'action' => 'logout'], ['escape' => false])
+                        echo $this->Html->link('<i class="fas fa-sign-out-alt"></i> Logout', ['controller' => 'employees', 'action' => 'logout'], ['escape' => false])
                         ?>
                     </li>
 

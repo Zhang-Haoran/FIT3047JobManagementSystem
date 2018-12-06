@@ -141,6 +141,7 @@ class EmployeesController extends AppController
 
                 if($employee->access_level != '1') {
                     $this->Flash->success(__('The employee has been saved.'));
+                    if($this->Auth->user('id') == $id)
                     $this->Flash->default(__('Changed access level.'));
                     return $this->redirect(['controller'=>'jobs','action' => 'index']);
                 }

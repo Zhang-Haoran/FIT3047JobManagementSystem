@@ -166,7 +166,7 @@ class JobsController extends AppController
                     $this->Flash->success(__('The job has been saved.'));
                     return $this->redirect(['action' => 'index']);
                 }elseif(strtotime($date1)> strtotime($date2)){
-                    $this->Flash->error(__('The job could not be saved. Please, try again.'));
+                    $this->Flash->error(__('The expected setup time should be after arrival time. Please, try again.'));
                 }
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
@@ -189,7 +189,12 @@ class JobsController extends AppController
         $this->loadModel('CustTypes');
         $custTypes = $this->CustTypes->find('list');
         $this->loadModel('Contacts');
-        $contacts = $this->Contacts->find('list');
+        $contacts = $this->Contacts->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($contact) {
+                return $contact->get('label');
+            }
+        ]);
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
@@ -402,18 +407,7 @@ class JobsController extends AppController
         $this->set('job', $job);
     }
 
-    public function orderview($id = null)
-    {
-        $job = $this->Jobs->get($id, [
-            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images','Contacts']
-        ]);
 
-        $this->loadModel('Sites');
-        $site = $this->Sites->get($job->site_id);
-
-        $this->set('site', $site);
-        $this->set('job', $job);
-    }
     public function exportJobData(){
         $datatbp = '<table cellspacing="2" cellpadding="5" style="border: 2px;text-align: center;" border="1",width="60%">';
 
@@ -458,6 +452,66 @@ class JobsController extends AppController
         header("Cache-Control: ");
         echo $datatbp;
         die;
+    }
+    public function orderview($id = null)
+    {    //save job status
+        $JobsTable = TableRegistry::get('Jobs');
+        $jobs = $JobsTable->get($id); // Return article with id
+        $jobs->job_status = 'Order';
+        $JobsTable->save($jobs);
+        //--------------------
+
+
+        $job = $this->Jobs->get($id, [
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images','Contacts']
+        ]);
+
+        $this->loadModel('Sites');
+        $site = $this->Sites->get($job->site_id);
+
+        $this->set('site', $site);
+        $this->set('job', $job);
+    }
+
+    public function readyview($id = null)
+{    //save job status
+    $this->Flash->success(__('The job status has changed to Ready'));
+    $JobsTable = TableRegistry::get('Jobs');
+    $jobs = $JobsTable->get($id); // Return article with id
+    $jobs->job_status = 'Ready';
+    $JobsTable->save($jobs);
+    //--------------------
+    $job = $this->Jobs->get($id, [
+        'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images','Contacts']
+    ]);
+
+    $this->loadModel('Sites');
+    $site = $this->Sites->get($job->site_id);
+
+    $this->set('site', $site);
+    $this->set('job', $job);
+}
+    public function completedview($id = null)
+    {
+
+        //save job status
+        $this->Flash->success(__('The job status has changed to Completed'));
+        $JobsTable = TableRegistry::get('Jobs');
+        $jobs = $JobsTable->get($id); // Return article with id
+        $jobs->job_status = 'Completed';
+        $JobsTable->save($jobs);
+        //--------------------
+
+
+        $job = $this->Jobs->get($id, [
+            'contain' => ['Sites', 'EventTypes', 'Customers', 'Employees', 'Images','Contacts']
+        ]);
+
+        $this->loadModel('Sites');
+        $site = $this->Sites->get($job->site_id);
+
+        $this->set('site', $site);
+        $this->set('job', $job);
     }
 
 }
