@@ -49,7 +49,7 @@ image
         <tr>
             <th scope="row"><?= __('Site') ?></th>
             <td><?= $job->has('site') ? $this->Html->link($job->site->name, ['controller' => 'Sites', 'action' => 'view', $job->site->id]) : '' ?>
-                <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
+                <button class="btn btn-success"><?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id])?></button>
             </td>
 
         </tr>
@@ -187,8 +187,3 @@ $this->Html->scriptBlock('
     ', ['block' => true]);
     ?>
 
-<script>
-    function moveToImage(jobId) {
-        window.location.replace("/images/add/" + jobId);
-    }
-</script>
