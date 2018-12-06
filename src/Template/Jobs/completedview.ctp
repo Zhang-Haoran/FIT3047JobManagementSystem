@@ -180,6 +180,15 @@
         <div id="map"></div>
     </div>
 </div>
+<div class="col-lg-6">
+
+
+    <?php foreach ($job->images as $image): ?>
+
+        <?=$this->Html->image($image->path,['class'=>'img']);?>
+
+    <?php endforeach; ?>
+</div>
 
 <?php
 $this->Html->scriptBlock('
