@@ -187,7 +187,7 @@ class JobsController extends AppController
         ]);
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
-        $custTypes = $this->CustTypes->find('list');
+        $CustTypes = $this->CustTypes->find('list');
         $this->loadModel('Contacts');
         $contacts = $this->Contacts->find('list', [
             'keyField' => 'id',
@@ -195,7 +195,7 @@ class JobsController extends AppController
                 return $contact->get('label');
             }
         ]);
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'CustTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
             $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
