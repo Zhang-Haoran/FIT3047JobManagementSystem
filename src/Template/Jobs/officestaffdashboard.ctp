@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-lg-8">
             <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
+                <table style="max-width: 100px" width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
                     <thead>
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
@@ -105,7 +105,7 @@
                                     if($job->is_deleted == '0'){
                                 ?>
                         <tr>
-                            <td><?= h($job->name) ?></td>
+                            <td style="width: 50%"><?= h($job->name) ?></td>
                             <?php
                             if( $job->job_status == 'Order')
                             echo "<td class='bg-danger text-white'>Order</td>";
@@ -226,9 +226,11 @@
     var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, total: 0, tTotal: 0};
 
     function statusCheck(data, status, today){
+        let date = new Date (data[2]);
+        let todayDate = new Date();
         let jobStatus = data[1];
         if(today)
-            if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && jobStatus === status)
+            if (date.getDate() === todayDate.getDate() && date.getMonth() === todayDate.getMonth() && date.getFullYear() === todayDate.getFullYear() && jobStatus === status)
                 return true;
             else return false;
         else if(jobStatus === status)
@@ -247,7 +249,7 @@
         document.getElementById('encouragement').innerHTML = encouragement[randomN];
     }
 
-    function today(data, once){
+    function isToday(data, once){
         let date = new Date (data[2]);
         let today = new Date();
         let status = data[1];
@@ -267,7 +269,7 @@
         let today = new Date();
         let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
-        if(datetime <= 7 && datetime > 1)
+        if(datetime <= 7 && datetime > 0.01)
             return true;
         return false;
     }
@@ -307,13 +309,13 @@
         function( settings, data, dataIndex ) {
             switch (button){
                 case -2:
-                    return today(data, 0);
+                    return isToday(data, 0);
                 case -1:
                     return getCount(data);
                 case 0:
                     return true;
                 case 1:
-                    return today(data, 1);
+                    return isToday(data, 1);
                 case 2:
                     return nextWeek(data);
                 case 3:
