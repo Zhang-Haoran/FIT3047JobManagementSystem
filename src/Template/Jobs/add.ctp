@@ -221,7 +221,7 @@
                             <?php
                             echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
                             echo $this->Form->control('is_business',['label' => 'is business?','class' => 'checkbox','type' => 'checkbox']);
-                            echo $this->Form->control('cust_type_id', ['options' => $CustTypes, 'label' => 'Type','class' => 'form-control']);
+                            echo $this->Form->control('cust_type_id', ['options' => $CustTypes, 'label' => 'Type','class' => 'form-control','id' => 'custtype_html_id']);
                             ?>
                         </fieldset>
                         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
@@ -285,8 +285,8 @@
                 <div class="modal-body">
                     <?= $this->Form->create(null,['url' => ['controller' => 'Contacts','action' => 'jobAdd'], 'id' => 'addNewContact']) ?>
                     <fieldset>
-                        <div class="form-group"><?= $this->Form->control('fname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                        <div class="form-group"><?= $this->Form->control('lname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('fname',  ['label' => 'First Name','class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                        <div class="form-group"><?= $this->Form->control('lname',  ['label' => 'Last Name','class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                         <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']) ?></div>
                         <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control','placeholder' => 'example@example.com']) ?></div>
                         <div class="form-group"><?= $this->Form->control('role',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
@@ -428,6 +428,7 @@
                     // console.log($newEventName);
                     //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
 
+                    $("#custtype_html_id").append("<option value='" + $newCustTypeId + "'>" + $newCustTypeName + "</option>");
                 } else {
                     //If there's an error from the server
                     alert(data.error);
