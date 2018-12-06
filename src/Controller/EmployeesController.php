@@ -249,7 +249,7 @@ class EmployeesController extends AppController
     private function sendResetEmail($url, $employee)
     {
         $email = new Email();
-        $email->setLayout('resetpw');
+        $email->setTemplate('resetpw');
         $email->setEmailFormat('both');
         $email->setFrom('noreplyinstantmarquees@gmail.com');
         $email->setTo($employee->email);
