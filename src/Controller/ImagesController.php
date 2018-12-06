@@ -59,7 +59,7 @@ class ImagesController extends AppController
      */
     public function add($jobId = null)
     {
-        
+
 
         $image = $this->Images->newEntity();
         if ($this->request->is('post')) {
