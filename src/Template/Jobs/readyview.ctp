@@ -187,14 +187,21 @@
 
 <div class="col-lg-6">
 
+    <div class="row">
 
-    <?php foreach ($job->images as $image): ?>
+        <?php foreach ($job->images as $image): ?>
+            <div class="col-md-6">
+                <div class="thumbnail">
+                    <?=$this->Html->image($image->path,['class'=>'img img-responsive', 'alt' => $image->description]);?>
+                    <div class="caption">
+                        <p class="text-center text-capitalize text-muted"><?= $image->description ?></p>
+                    </div>
+                </div>
+            </div>
 
-        <?=$this->Html->image($image->path,['class'=>'img']);?>
-
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
 </div>
-
 <?php
 $this->Html->scriptBlock('
     var geocoder;
