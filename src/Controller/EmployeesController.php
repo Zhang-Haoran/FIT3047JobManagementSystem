@@ -249,7 +249,7 @@ class EmployeesController extends AppController
     private function sendResetEmail($url, $employee)
     {
         $email = new Email();
-        $email->setLayout('resetpw');
+        $email->setTemplate('resetpw');
         $email->setEmailFormat('both');
         $email->setFrom('noreplyinstantmarquees@gmail.com');
         $email->setTo($employee->email);
@@ -271,10 +271,10 @@ class EmployeesController extends AppController
             $query = $this->Employees->find('all', ['conditions' => ['token' => $token, 'timeout >' => time()]]);
             $employee = $query->first();
             if ($employee) {
-                if (!empty($this->request->data)) {
+                if (!empty($this->request->getData)) {
                     // Clear token and timeout
-                    $this->request->data['token'] = '';
-                    $this->request->data['timeout'] = '';
+                    $this->request->getData['token'] = '';
+                    $this->request->getData['timeout'] = '';
                     $employee = $this->Employees->patchEntity($employee, $this->request->data);
                     if ($this->Employees->save($employee)) {
                         $this->Flash->set(__('Your password has been updated.'));
