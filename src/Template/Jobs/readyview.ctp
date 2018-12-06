@@ -27,7 +27,7 @@
 <div class="row">
 <div class="col-lg-6">
     <div class="panel panel-primary">
-        <div class="panel-heading">Ready</div>
+        <div class="panel-heading" style="text-align: center;font-size: large">Ready</div>
 
 
 
@@ -122,7 +122,7 @@
             <tr>
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?>
-                    <button onclick="moveToImage(<?= h($job->id) ?>)" class="btn btn-success">Upload images</button>
+                    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
                 </td>
 
             </tr>
@@ -187,14 +187,21 @@
 
 <div class="col-lg-6">
 
+    <div class="row">
 
-    <?php foreach ($job->images as $image): ?>
+        <?php foreach ($job->images as $image): ?>
+            <div class="col-md-6">
+                <div class="thumbnail">
+                    <?=$this->Html->image($image->path,['class'=>'img img-responsive', 'alt' => $image->description]);?>
+                    <div class="caption">
+                        <p class="text-center text-capitalize text-muted"><?= $image->description ?></p>
+                    </div>
+                </div>
+            </div>
 
-        <?=$this->Html->image($image->path,['class'=>'img']);?>
-
-    <?php endforeach; ?>
+        <?php endforeach; ?>
+    </div>
 </div>
-
 <?php
 $this->Html->scriptBlock('
     var geocoder;
@@ -234,8 +241,3 @@ $this->Html->scriptBlock('
     ', ['block' => true]);
 ?>
 
-<script>
-    function moveToImage(jobId) {
-        window.location.replace("/images/add/" + jobId);
-    }
-</script>
