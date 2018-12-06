@@ -82,8 +82,8 @@
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
                             <th scope="col"><?= __('Status') ?></th>
-                            <th scope="col"><?= __('Date') ?></th>
-                            <th scope="col"><?= __('Time') ?></th>
+                            <th scope="col"><?= __('Event date') ?></th>
+                            <th scope="col"><?= __('Event time') ?></th>
                             <th scope="col"><?= __('Expected arrival time') ?></th>
                             <th scope="col"><?= __('Expected setup time') ?></th>
                             <th scope="col"><?= __('Expected pickup time') ?></th>
