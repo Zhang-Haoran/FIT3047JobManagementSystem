@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">We today have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s)</p><p id="encouragement" style="display: inline"></p></h1>
+            <h1 class="page-header">Today we have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s) left</p><p id="encouragement" style="display: inline"></p></h1>
         </div>
         <!-- /.col-lg-12 -->
 
@@ -231,29 +231,27 @@
 
         <div class="col-lg-4">
             <div class="panel panel-default">
-                <div class="panel-heading">Today Summary</div>
-                <div class="panel-body">
+                <div class="panel-heading"><b>Today Summary</b></div>
                     <div class="list-group">
-                        <a id="totalC" href="#" class="list-group-item">Total Jobs
+                        <a id="totalC" class="list-group-item">Total Jobs
                             <span id="totalN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="orderC" href="#" class="list-group-item">Jobs on order
+                        <a id="orderC" class="list-group-item">Jobs on order
                             <span id="orderN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="readyC" href="#" class="list-group-item">Jobs on ready
+                        <a id="readyC" class="list-group-item">Jobs on ready
                             <span id="readyN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="completedC" href="#" class="list-group-item">Jobs completed
+                        <a id="completedC" class="list-group-item">Jobs completed
                             <span id="completedN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="invoicedC" href="#" class="list-group-item">Jobs Invoiced
+                        <a id="invoicedC" class="list-group-item">Jobs Invoiced
                             <span id="invoicedN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="paidC" href="#" class="list-group-item">Jobs Paid
+                        <a id="paidC" class="list-group-item">Jobs Paid
                             <span id="paidN" class="pull-right text-muted small">0</span>
                         </a>
                     </div>
-                </div>
             </div>
         </div>
     </div>
@@ -272,12 +270,6 @@
         return false;
     }
 
-    function onStatusCheck(num){
-        let table = $('#dataTables').table();
-        button = num;
-        table.draw();
-    }
-
     function encourage(){
         let randomN = Math.floor(Math.random()*10 + 1);
         let encouragement = [', have a nice day!', ', do your best!', ', you got this!', ', what a day!', ', lets do this!', ', just another day in the office!', ', good luck!',
@@ -289,25 +281,19 @@
         document.getElementById('encouragement').innerHTML = encouragement[randomN];
     }
 
-    function quote(data){
-        let status = data[1];
 
-        if(status === 'Quote')
-            return true;
-        return false;
-    }
-
-    function today(data){
+    function today(data, once){
         let date = new Date (data[2]);
         let today = new Date();
         let status = data[1];
 
-        if(once === 1)
-            if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
+        if(once === 1) {
+            if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
                 return true;
-            else if(once === 0)
-                if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-                    return true;
+        }
+        else if(once === 0)
+            if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
+                return true;
         return false;
     }
 
@@ -337,17 +323,17 @@
             number.nextWeekN++;
         number.total++;
 
-        if(status === 'Quote')
+        if(status === 'Quote' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.quoteN++;
-        if(status === 'Order')
+        if(status === 'Order' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.orderN++;
-        if(status === 'Ready')
+        if(status === 'Ready' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.readyN++;
-        if(status === 'Completed')
+        if(status === 'Completed' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.completedN++;
-        if(status === 'Invoice')
+        if(status === 'Invoice' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.invoiceN++;
-        if(status === 'Paid')
+        if(status === 'Paid' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.paidN++;
     }
 
