@@ -301,6 +301,7 @@ class JobsController extends AppController
         ]);
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
+        //$csrfToken = $this->request->getParam('_csrfToken');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
