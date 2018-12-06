@@ -227,13 +227,9 @@
                         <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'CustAdd'],  'id' => 'addNewCustomer']) ?>
                         <fieldset>
                             <?php
-                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
-                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
-                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control','placeholder' => 'example@example.com']);
-                            echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                            echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                            echo $this->Form->control('is_business',['label' => 'is business?','class' => 'checkbox','type' => 'checkbox']);
+                            echo $this->Form->control('cust_type_id', ['options' => $CustTypes, 'label' => 'Type','class' => 'form-control','id' => 'custtype_html_id']);
                             ?>
                         </fieldset>
                         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
@@ -444,6 +440,8 @@
                     // console.log($newEventId);
                     // console.log($newEventName);
                     //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#custtype_html_id").append("<option value='" + $newCustTypeId + "'>" + $newCustTypeName + "</option>");
 
                 } else {
                     //If there's an error from the server

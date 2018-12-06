@@ -187,7 +187,7 @@ class JobsController extends AppController
         ]);
         $employees = $this->Jobs->Employees->find('list');
         $this->loadModel('CustTypes');
-        $custTypes = $this->CustTypes->find('list');
+        $CustTypes = $this->CustTypes->find('list');
         $this->loadModel('Contacts');
         $contacts = $this->Contacts->find('list', [
             'keyField' => 'id',
@@ -195,22 +195,22 @@ class JobsController extends AppController
                 return $contact->get('label');
             }
         ]);
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'custTypes','contacts'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees', 'CustTypes','contacts'));
         $status = $this->Jobs->get($id)->job_status;
         if ($status == 'Quote'){
             $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
         }
         elseif ($status == 'Order'){
-            $this->set('statusOptions', array('Order'=>'Order', 'Ready'=>'Ready'));
+            $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready'));
         }
         elseif ($status == 'Ready'){
-            $this->set('statusOptions', array('Ready'=>'Ready', 'Completed'=>'Completed'));
+            $this->set('statusOptions', array( 'Order' => 'Order', 'Ready'=>'Ready', 'Completed'=>'Completed'));
         }
         elseif ($status == 'Completed'){
-            $this->set('statusOptions', array('Completed'=>'Completed', 'Invoice'=>'Invoice'));
+            $this->set('statusOptions', array('Ready' => 'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice'));
         }
         else{
-            $this->set('statusOptions', array('Invoice'=>'Invoice', 'Paid'=>'Paid'));
+            $this->set('statusOptions', array('Completed' => 'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
         }
     }
 
@@ -301,6 +301,7 @@ class JobsController extends AppController
         ]);
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
+        //$csrfToken = $this->request->getParam('_csrfToken');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
@@ -460,6 +461,7 @@ class JobsController extends AppController
         $jobs->job_status = 'Order';
         $JobsTable->save($jobs);
         //--------------------
+
 
 
         $job = $this->Jobs->get($id, [

@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('Completed') ?></h1>
+        <h1 class="page-header"><?= h($job->name) ?></h1>
     </div>
 </div>
 <style>
@@ -26,45 +26,149 @@
 <div class="form-group"></div>
 <div class="row">
 <div class="col col-lg-6">
-    <div class="panel panel-default">
+    <div class="panel panel-green">
+        <div class="panel-heading" style="text-align: center;font-size: large">Completed</div>
+
+        <table id="table1" class="table table-striped table-bordered table-hover">
+            <tbody>
+            <div style="text-align: center;font-size: x-large">
+                    <span class="fa fa-building"
+                          style="font-size: large;text-align: center"> </span><b> <?= $job->has('customer') ? h($job->customer->name) : '' ?></b>
+            </div>
+            <?php foreach ($job->contacts as $contact): ?>
+                <tr>
+                    <th>
+                        <?="Contact ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->fname);?>
+                        <?=h($contact->lname);?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <?="Phone ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->phone);?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <?="Email ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->email);?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <?="Role ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->role);?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <?="Street ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->street);?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <?="Suburb ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->suburb);?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <?="City ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->city);?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <?="Postcode ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->postcode);?>
+                    </td>
+                </tr>
+
+            <?php endforeach; ?>
+
+            </tbody>
+        </table>
+        <table id="table" class="table table-striped table-bordered table-hover">
+            <tbody>
+            <div style="text-align: center;font-size: x-large">
+    <span class="glyphicon glyphicon-home"
+          style="font-size: large"> </span> <b> <?= $job->has('site') ? h($job->site->name) : '' ?></b></div>
 
 
-        <h1 style="font-size: x-large"><?= h($job->name) ?></h1>
-        <p></p>
-        <span class="glyphicon glyphicon-user"
-              style="font-size: large"> <?= $job->has('customer') ? h($job->customer->name) : '' ?></span>
-        <p>
-        </p>
+            <tr>
+                <th scope="row"><?= __('Address') ?></th>
+                <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?>
+                    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
+                </td>
 
-        <p style="font-size: large">
-            <?= $job->has('contact') ? h($job->contact->id) : '' ?></p>
-
-        <span class="glyphicon glyphicon-home"
-              style="font-size: large">  <?= $job->has('site') ? h($job->site->name) : '' ?></span>
-        <p>
-        </p>
+            </tr>
+            <tr>
+                <th scope="row"><?= __('Event Type') ?></th>
+                <td><?= $job->has('event_type') ? h($job->event_type->name) : '' ?></td>
+            </tr>
 
 
-        <span class="glyphicon glyphicon-map-marker" style="font-size: large" id="a"> <?= $site->address ?>
-            , <?= $site->suburb ?> <?= $site->postcode ?></span>
+            <tr>
+                <th scope="row"><?= __('Job Date') ?></th>
+                <td><?= h($job->job_date) ?></td>
+            </tr>
 
-        <p></p>
-        <span class="glyphicon glyphicon-usd" style="font-size: large"> <?= $this->Number->format($job->price) ?></span>
-        <p></p>
-        <span class="glyphicon glyphicon-pencil  " style="font-size: large">
-        <?= h($job->additional_note); ?>
-    </span>
+            <tr>
+                <th scope="row"><?= __('Expected Arrival Time') ?></th>
+                <td><?= h($job->e_arrival_time) ?></td>
+            </tr>
+            <tr>
+                <th scope="row"><?= __('Expected Setup Time') ?></th>
+                <td><?= h($job->e_setup_time) ?></td>
+            </tr>
+            <tr>
+                <th scope="row"><?= __('Expected Pickup Time') ?></th>
+                <td><?= h($job->e_pickup_time) ?></td>
+            </tr>
 
+            <tr>
+                <th scope="row"><?= __('Order Detail') ?></th>
+                <td><?= $this->Text->autoParagraph(h($job->order_detail)); ?></td>
+            </tr>
+            <tr>
+                <th scope="row"><?= __('Additional Note') ?></th>
+                <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
+            </tr>
+
+            </tbody>
+        </table>
 
     </div>
     <div class="divright">
 
-        <?= $this->Html->link(__('Back to home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+        <?= $this->Html->link(__('Back to Home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
         <p></p>
     </div>
     <div class="divleft">
 
-        <?= $this->Html->link(__('Back to ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+        <?= $this->Html->link(__('Back to Ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
         <p></p>
     </div>
 
@@ -74,6 +178,23 @@
 <div class="row">
     <div class="col-lg-6">
         <div id="map"></div>
+    </div>
+</div>
+<div class="col-lg-6">
+
+    <div class="row">
+
+        <?php foreach ($job->images as $image): ?>
+            <div class="col-md-6">
+                <div class="thumbnail">
+                    <?=$this->Html->image($image->path,['class'=>'img img-responsive', 'alt' => $image->description]);?>
+                    <div class="caption">
+                        <p class="text-center text-capitalize text-muted"><?= $image->description ?></p>
+                    </div>
+                </div>
+            </div>
+
+        <?php endforeach; ?>
     </div>
 </div>
 
@@ -94,7 +215,7 @@ $this->Html->scriptBlock('
     }
 
     function codeAddress() {
-        var address = document.getElementById(\'a\').innerText;
+        var address = document.getElementById(\'table\').rows[0].cells[1].textContent;
         console.log(address);
         geocoder.geocode( { \'address\': address}, function(results, status) {
             if (status == \'OK\') {
@@ -116,8 +237,3 @@ $this->Html->scriptBlock('
     ', ['block' => true]);
 ?>
 
-<script>
-    function moveToImage(jobId) {
-        window.location.replace("/images/add/" + jobId);
-    }
-</script>

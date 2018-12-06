@@ -27,7 +27,6 @@
                         <td class="center"><?= h($eventType->name) ?></td>
 
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $eventType->id]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $eventType->id]) ?>
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $eventType->id], ['confirm' => __('Are you sure you want to delete event type: {0}?', $eventType->name)]) ?>
                         </td>
