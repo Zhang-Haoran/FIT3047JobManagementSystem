@@ -72,9 +72,8 @@
         </div>
     </div>
     </div>
-<?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
-<?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-lg btn-success', 'style' => '']) ?>
-    <div class="row">
+
+   <div class="row">
 
         <div class="col-lg-12">
             <div class="panel-body">
@@ -160,11 +159,14 @@
 
                             <td style="width:6%">
                                 <?php
-                                    if ($job->job_status == "Ready"){
+                                    if ($job->job_status == "Order"){
                                         echo $this->Html->link(__('View'), ['action' => 'orderview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
                                     }
+                                    elseif($job->job_status == "Ready"){
+                                        echo $this->Html->link(__('View'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
+                                    }
                                     else{
-                                        echo $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
+                                        echo $this->Html->link(__('View'), ['action' => 'completedview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
                                     }
                                 ?>
                             </td>

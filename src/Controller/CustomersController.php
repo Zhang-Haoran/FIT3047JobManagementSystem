@@ -77,26 +77,54 @@ class CustomersController extends AppController
         $this->set(compact('customer', 'custTypes'));
     }
 
-    public function jobAdd()
+    public function CustAdd()
+
     {
-        if($this->Auth->user('access_level')=='3'){
-            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
-            return $this->redirect($this->Auth->redirectUrl());
-        }
-
-        $customer = $this->Customers->newEntity();
-        if ($this->request->is('post')) {
-            $customer = $this->Customers->patchEntity($customer, $this->request->getData());
-            if ($this->Customers->save($customer)) {
-                $this->Flash->success(__('The customer has been saved.'));
-
-                return $this->redirect($this->referer());
+        if ($this->Auth->user('access_level') == '3') {
+            $message = ['error' => 'You have no authorization to access this page as a field staff'];
+        } else {
+            //If user has right to add customer
+            $customer = $this->Customers->newEntity();
+            if ($this->request->is('post')) {
+                $customer = $this->Customers->patchEntity($customer, $this->request->getData());
+                $save = $this->Customers->save($customer);
+                if ($save) {
+                    $message = ['id' => $save->id, 'name' => $save->name, 'is_business' => $save->is_business, 'error' => false];
+                } else {
+                    $message = ['error' => 'Cannot save Customer'];
+                }
+            } else {
+                $message = ['error' => 'Invalid request, must be POST'];
             }
-            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
         }
-        $custTypes = $this->Customers->CustTypes->find('list');
-        $this->set(compact('customer', 'custTypes'));
+        $this->set([
+            'message' => $message,
+            '_serialize' => 'message',
+        ]);
+        $this->RequestHandler->renderAs($this, 'json');
     }
+
+
+
+//    {
+//        if($this->Auth->user('access_level')=='3'){
+//            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+//            return $this->redirect($this->Auth->redirectUrl());
+//        }
+//
+//        $customer = $this->Customers->newEntity();
+//        if ($this->request->is('post')) {
+//            $customer = $this->Customers->patchEntity($customer, $this->request->getData());
+//            if ($this->Customers->save($customer)) {
+//                $this->Flash->success(__('The customer has been saved.'));
+//
+//                return $this->redirect($this->referer());
+//            }
+//            $this->Flash->error(__('The customer could not be saved. Please, try again.'));
+//        }
+//        $custTypes = $this->Customers->CustTypes->find('list');
+//        $this->set(compact('customer', 'custTypes'));
+//    }
 
     /**
      * Edit method

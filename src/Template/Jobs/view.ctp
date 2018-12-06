@@ -31,11 +31,10 @@ image
         <div id="map"></div>
     </div>
 </div>
-
-<div class="form-group"></div>
+<div class="row">
 <div class="col-lg-6">
+    <div class="form-group"></div>
     <div class="panel panel-default">
-
                 <table id="table" class="table table-striped table-bordered table-hover">
                 <tbody>
 
@@ -67,7 +66,7 @@ image
             <td><?= $job->has('customer') ? $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]) : '' ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Employee') ?></th>
+            <th scope="row"><?= __('Created by') ?></th>
             <td><?= $job->has('employee') ? $this->Html->link($job->employee->full_name, ['controller' => 'Employees', 'action' => 'view', $job->employee->id]) : '' ?></td>
         </tr>
         <tr>
@@ -126,15 +125,23 @@ image
             <th scope="row"><?= __('Additional Note') ?></th>
             <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Images Information') ?></th>
-            <td><?= $job->has('image') ? $this->Html->link($job->image->path, ['controller' => 'Images', 'action' => 'view', $job->image->id]) : '' ?></td>
-        </tr>
+
+
 
 </tbody>
     </table>
 
 </div>
+</div>
+    <div class="col-lg-6">
+
+
+        <?php foreach ($job->images as $image): ?>
+
+            <?=$this->Html->image($image->path,['class'=>'img']);?>
+
+        <?php endforeach; ?>
+    </div>
 </div>
 
 
