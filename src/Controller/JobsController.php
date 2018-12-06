@@ -201,16 +201,16 @@ class JobsController extends AppController
             $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
         }
         elseif ($status == 'Order'){
-            $this->set('statusOptions', array('Order'=>'Order', 'Ready'=>'Ready'));
+            $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready'));
         }
         elseif ($status == 'Ready'){
-            $this->set('statusOptions', array('Ready'=>'Ready', 'Completed'=>'Completed'));
+            $this->set('statusOptions', array( 'Order' => 'Order', 'Ready'=>'Ready', 'Completed'=>'Completed'));
         }
         elseif ($status == 'Completed'){
-            $this->set('statusOptions', array('Completed'=>'Completed', 'Invoice'=>'Invoice'));
+            $this->set('statusOptions', array('Ready' => 'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice'));
         }
         else{
-            $this->set('statusOptions', array('Invoice'=>'Invoice', 'Paid'=>'Paid'));
+            $this->set('statusOptions', array('Completed' => 'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
         }
     }
 
