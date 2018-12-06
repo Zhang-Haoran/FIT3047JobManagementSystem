@@ -54,7 +54,7 @@ $cakeDescription = 'Instant Marquees';
 
                         <div class="form-group">
 
-                    <?= $this->Form->input('password', ['required' => true, 'autofocus' => true,'class' => 'form-control']); ?>
+                    <?= $this->Form->control('password', ['required' => true, 'autofocus' => true,'class' => 'form-control']); ?>
 
                 </div>
 
@@ -62,7 +62,7 @@ $cakeDescription = 'Instant Marquees';
 
                         <div class="form-group">
 
-                    <?= $this->Form->input('confirm_password', ['type' => 'password', 'required' => true,'class' => 'form-control']); ?>
+                    <?= $this->Form->control('confirm_password', ['type' => 'password', 'required' => true,'class' => 'form-control']); ?>
 
                 </div>
 

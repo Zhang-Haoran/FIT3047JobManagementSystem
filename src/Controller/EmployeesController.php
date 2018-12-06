@@ -223,7 +223,7 @@ class EmployeesController extends AppController
     public function password()
     {
         if ($this->request->is('post')) {
-            $query = $this->Employees->findByEmail($this->request->data['email']);
+            $query = $this->Employees->findByEmail($this->request->getData('email'));
             $employee = $query->first();
             if (is_null($employee)) {
                 $this->Flash->error('Email address does not exist. Please try again');
@@ -249,12 +249,12 @@ class EmployeesController extends AppController
     private function sendResetEmail($url, $employee)
     {
         $email = new Email();
-        $email->template('resetpw');
-        $email->emailFormat('both');
-        $email->from('noreplyinstantmarquees@gmail.com');
-        $email->to($employee->email);
-        $email->subject('Reset your password');
-        $email->viewVars(['url' => $url, 'fname' => $employee->fname]);
+        $email->setLayout('resetpw');
+        $email->setEmailFormat('both');
+        $email->setFrom('noreplyinstantmarquees@gmail.com');
+        $email->setTo($employee->email);
+        $email->setSubject('Reset your password');
+        $email->setViewVars(['url' => $url, 'fname' => $employee->fname]);
         if ($email->send()) {
             $this->Flash->success(__('Check your email for your reset password link'));
         } else {
