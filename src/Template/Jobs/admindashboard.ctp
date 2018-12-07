@@ -76,7 +76,8 @@
     </div>
 <div class="bd-example">
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-success', 'style' => '']) ?>
+    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-info', 'style' => '']) ?>
+    <button id="pickup" type="button" class="btn" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
 </div>
     <div class="row">
         <div class="col-lg-8">
@@ -128,8 +129,8 @@
                             ?>
                             <td><?= h($job->job_date) ?></td>
                             <td class="center"><?= h($job->booked_date) ?></td>
-                            <td class="center"><?= $this->Number->format($job->price) ?></td>
-                            <td class="center"><?= $this->Number->format($job->deposit) ?></td>
+                            <td class="center">$<?= $this->Number->format($job->price) ?></td>
+                            <td class="center">$<?= $this->Number->format($job->deposit) ?></td>
                             <td class="center"><?= h($job->e_arrival_time) ?></td>
                             <td class="center"><?= h($job->e_setup_time) ?></td>
                             <td class="center"><?= h($job->e_pickup_time) ?></td>
@@ -341,6 +342,12 @@
 
     }
 
+    function pickup(data){
+        if(data[9] === "")
+            return true;
+        return false;
+    }
+
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
             switch (button){
@@ -366,6 +373,8 @@
                     return statusCheck(data, 'Invoice', true);
                 case 8:
                     return statusCheck(data, 'Paid', true);
+                case 9:
+                    return pickup(data);
             }
 
         }
@@ -436,6 +445,11 @@
             button = 8;
             table.draw();
 
+        });
+
+        $('#pickup').on('click', function(){
+           button = 9;
+           table.draw();
         });
 
         button = 0;
