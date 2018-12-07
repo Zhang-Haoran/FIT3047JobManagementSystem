@@ -269,7 +269,7 @@
         let today = new Date();
         let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
-        if(datetime <= 7 && datetime > 0.01)
+        if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             return true;
         return false;
     }
