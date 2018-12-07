@@ -304,9 +304,8 @@
     function nextWeek(data){
         let date = new Date (data[2]);
         let today = new Date();
-        let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
-        if(datetime <= 7 && datetime > 0.01)
+        if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             return true;
         return false;
     }
@@ -323,7 +322,7 @@
                 number.todayN++;
         }
 
-        else if(datetime <= 7 && datetime > 0)
+        else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             number.nextWeekN++;
         number.total++;
 
