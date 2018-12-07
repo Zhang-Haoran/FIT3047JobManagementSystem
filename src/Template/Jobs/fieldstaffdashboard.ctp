@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">We today have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s)</p><p id="encouragement" style="display: inline"></p></h1>
+            <h1 class="page-header">Today we have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s) left</p><p id="encouragement" style="display: inline"></p></h1>
         </div>
         <!-- /.col-lg-12 -->
 
@@ -72,10 +72,8 @@
         </div>
     </div>
     </div>
-<div class="bd-example">
-    <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-success', 'style' => '']) ?>
-</div>    <div class="row">
+
+   <div class="row">
 
         <div class="col-lg-12">
             <div class="panel-body">
@@ -84,8 +82,8 @@
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
                             <th scope="col"><?= __('Status') ?></th>
-                            <th scope="col"><?= __('Date') ?></th>
-                            <th scope="col"><?= __('Time') ?></th>
+                            <th scope="col"><?= __('Event date') ?></th>
+                            <th scope="col"><?= __('Event time') ?></th>
                             <th scope="col"><?= __('Expected arrival time') ?></th>
                             <th scope="col"><?= __('Expected setup time') ?></th>
                             <th scope="col"><?= __('Expected pickup time') ?></th>
@@ -164,8 +162,11 @@
                                     if ($job->job_status == "Order"){
                                         echo $this->Html->link(__('View'), ['action' => 'orderview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
                                     }
+                                    elseif($job->job_status == "Ready"){
+                                        echo $this->Html->link(__('View'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
+                                    }
                                     else{
-                                        echo $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
+                                        echo $this->Html->link(__('View'), ['action' => 'completedview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
                                     }
                                 ?>
                             </td>

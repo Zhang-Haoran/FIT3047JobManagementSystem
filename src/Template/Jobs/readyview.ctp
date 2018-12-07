@@ -9,10 +9,8 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header"><?= h($job->name) ?></h1>
-
     </div>
 </div>
-
 <style>
     #map {
         height: 500px;
@@ -24,11 +22,13 @@
 <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
 <p></p>
 <p></p>
+
 <div class="form-group"></div>
 <div class="row">
-<div class="col col-lg-6">
-    <div class="panel panel-red">
-        <div class="panel-heading" style="text-align: center;font-size: large">Order</div>
+<div class="col-lg-6">
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="text-align: center;font-size: large">Ready</div>
+
 
 
         <table id="table1" class="table table-striped table-bordered table-hover">
@@ -37,74 +37,74 @@
                     <span class="fa fa-building"
                           style="font-size: large;text-align: center"> </span><b> <?= $job->has('customer') ? h($job->customer->name) : '' ?></b>
             </div>
-                <?php foreach ($job->contacts as $contact): ?>
-                <tr>
-            <th>
-                <?="Contact ";?>
-            </th>
-            <td>
-                <?=h($contact->fname);?>
-                <?=h($contact->lname);?>
-            </td>
-                </tr>
-                <tr>
-                <th>
-            <?="Phone ";?>
-                </th>
-                <td>
-            <?=h($contact->phone);?>
-                </td>
-                </tr>
-                    <tr>
-                    <th>
-            <?="Email ";?>
-                    </th>
-                    <td>
-            <?=h($contact->email);?>
-                    </td>
-                    </tr>
+            <?php foreach ($job->contacts as $contact): ?>
                 <tr>
                     <th>
-            <?="Role ";?>
+                        <?="Contact ";?>
                     </th>
                     <td>
-            <?=h($contact->role);?>
+                        <?=h($contact->fname);?>
+                        <?=h($contact->lname);?>
                     </td>
                 </tr>
-
                 <tr>
                     <th>
-            <?="Street ";?>
+                        <?="Phone ";?>
                     </th>
                     <td>
-            <?=h($contact->street);?>
+                        <?=h($contact->phone);?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <?="Email ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->email);?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <?="Role ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->role);?>
                     </td>
                 </tr>
 
                 <tr>
                     <th>
-            <?="Suburb ";?>
+                        <?="Street ";?>
                     </th>
                     <td>
-            <?=h($contact->suburb);?>
+                        <?=h($contact->street);?>
                     </td>
                 </tr>
 
                 <tr>
                     <th>
-            <?="City ";?>
+                        <?="Suburb ";?>
                     </th>
                     <td>
-            <?=h($contact->city);?>
+                        <?=h($contact->suburb);?>
                     </td>
                 </tr>
 
                 <tr>
                     <th>
-            <?="Postcode ";?>
+                        <?="City ";?>
                     </th>
                     <td>
-            <?=h($contact->postcode);?>
+                        <?=h($contact->city);?>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <?="Postcode ";?>
+                    </th>
+                    <td>
+                        <?=h($contact->postcode);?>
                     </td>
                 </tr>
 
@@ -113,8 +113,8 @@
             </tbody>
         </table>
         <table id="table" class="table table-striped table-bordered table-hover">
-                <tbody>
-                <div style="text-align: center;font-size: x-large">
+            <tbody>
+            <div style="text-align: center;font-size: x-large">
     <span class="glyphicon glyphicon-home"
           style="font-size: large"> </span> <b> <?= $job->has('site') ? h($job->site->name) : '' ?></b></div>
 
@@ -163,19 +163,18 @@
         </table>
 
 
-
-
     </div>
     <div class="divright">
 
-        <?= $this->Html->link(__('Job is ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+        <?= $this->Html->link(__('Job is done'), ['action' => 'completedview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
         <p></p>
     </div>
     <div class="divleft">
 
-        <?= $this->Html->link(__('Back to home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+        <?= $this->Html->link(__('Back to order'), ['action' => 'orderview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
         <p></p>
     </div>
+
 </div>
 </div>
 
@@ -203,7 +202,6 @@
         <?php endforeach; ?>
     </div>
 </div>
-
 <?php
 $this->Html->scriptBlock('
     var geocoder;

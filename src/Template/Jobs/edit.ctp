@@ -52,7 +52,17 @@
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
                                 <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
+
+                                <div class="panel-heading">
+                                    <h6 class="panel-title">
+                                        <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#EventTypesAdd" style="color: #00A5E3" >Create new Event Type</a>
+                                    </h6>
+                                </div>
+
+
                           </div>
+
+
                                 <div class="col-lg-6">
                                     <div class="form-group"><?php echo $this->Form->control('e_arrival_time', array('class' => 'form-control','placeholder'=>'Please select expected arrival time','label' => 'Arrive by','type' => 'text','empty'=>'true','id' => 'e_arrival_datetime'));?></div>
                                     <div class="form-group"><?php echo $this->Form->control('e_setup_time', array('class' => 'form-control','placeholder'=>'Please select expected setup time','label' => 'Setup by','type' => 'text','empty'=>'true','id' => 'e_setup_datetime'));?></div>
@@ -87,9 +97,15 @@
                             </div>
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#custAdd" >Create new customer</a>
+                                    <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#CustAdd" >Create new customer</a>
                                 </h4>
                             </div>
+
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-parent="#accordion" href="#collapseTwo" data-toggle="modal" data-target = "#CustTypesAdd" >Create new customer Type</a>
+                                        </h4>
+                                    </div>
                         </div>
                       </div>
                     </div>
@@ -174,7 +190,33 @@
     </div>
     </div>
 
-        <div class="modal fade" id="custAdd" role="dialog">
+
+<div class="modal fade" id="EventTypesAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Event Types</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'EventTypes','action' => 'EventTypesAdd'], 'id' => 'addNewEventType']) ?>
+                <fieldset>
+                    <?php
+                    echo $this->Form->control('name', ['label' => 'Name','class' => 'form-control','placeholder' => 'This field is required']);
+                    ?>
+                </fieldset>
+                <div class="bd-example">
+                    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+                </div>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+        <div class="modal fade" id="CustAdd" role="dialog">
             <div class="modal-dialog" >
                 <div class="modal-content">
                     <div class="modal-header">
@@ -182,25 +224,74 @@
                         <h4 class="modal-title">New Customer</h4>
                     </div>
                     <div class="modal-body">
-                        <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'jobAdd']]) ?>
+                        <?= $this->Form->create(null,['url' => ['controller' => 'Customers','action' => 'CustAdd'],  'id' => 'addNewCustomer']) ?>
                         <fieldset>
                             <?php
-                            echo $this->Form->control('fname', ['label' => 'First name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('lname', ['label' => 'Last name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('contact', ['label' => 'Contact name','class' => 'form-control','placeholder' => 'This field is required']);
-                            echo $this->Form->control('phone', ['label' => 'Phone number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
-                            echo $this->Form->control('mobile', ['label' => 'Mobile number','class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']);
-                            echo $this->Form->control('email', ['label' => 'Email address','class' => 'form-control','placeholder' => 'example@example.com']);
-                            echo $this->Form->control('cust_type_id', ['options' => $custTypes, 'label' => 'Type','class' => 'form-control']);
+                            echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                            echo $this->Form->control('is_business',['label' => 'is business?','class' => 'checkbox','type' => 'checkbox']);
+                            echo $this->Form->control('cust_type_id', ['options' => $CustTypes, 'label' => 'Type','class' => 'form-control','id' => 'custtype_html_id']);
                             ?>
                         </fieldset>
-                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg' ,'disabled']) ?>
+                        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
                         <?= $this->Form->end() ?>
                     </div>
                 </div>
             </div>
 
 </div>
+
+
+<div class="modal fade" id="CustTypesAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Customer Types</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'CustTypes','action' => 'CustTypesAdd'],'id' => 'addNewCustTypes']) ?>
+                <fieldset>
+                    <?php
+                    echo $this->Form->control('name', ['label' => 'name','class' => 'form-control','placeholder' => 'This field is required']);
+                    ?>
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="contactsAdd" role="dialog">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">New Contact</h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create(null,['url' => ['controller' => 'Contacts','action' => 'jobAdd'], 'id' => 'addNewContact']) ?>
+                <fieldset>
+                    <div class="form-group"><?= $this->Form->control('fname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('lname',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('phone', ['class' => 'form-control','placeholder' => ' +61412 345 678 or 0412 345 678']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('email', ['class' => 'form-control','placeholder' => 'example@example.com']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('role',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('street',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('suburb',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('city',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('postcode',  ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+
+                </fieldset>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg']) ?>
+                <?= $this->Form->end() ?>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="modal fade" id="siteAdd" role="dialog">
     <div class="modal-dialog" >
@@ -210,14 +301,14 @@
                 <h4 class="modal-title">New site</h4>
             </div>
             <div class="modal-body">
-                <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd']]) ?>
+                <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd'], 'id' =>'addNewSite' ]) ?>
                 <fieldset>
                     <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </fieldset>
-                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit' ,'disabled']) ?>
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
                 <?= $this->Form->end() ?>
             </div>
         </div>
@@ -284,6 +375,219 @@
         });
 
     });
+
+    //Ajax form submit for newEventType
+    $("#addNewEventType").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user know event type is added
+
+
+                $('#EventTypesAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newEventId = data.id;
+                    $newEventName = data.name;
+                    //console.log($newEventId);
+                    //console.log($newEventName);
+                    //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#type_html_id").append("<option value='" + $newEventId + "'>" + $newEventName + "</option>");
+
+                    $("#type_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+
+    //Ajax form submit for newCustomerType
+    $("#addNewCustTypes").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user know event type is added
+
+
+                $('#CustTypesAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newCustTypeId = data.id;
+                    $newCustTypeName = data.name;
+                    // console.log($newEventId);
+                    // console.log($newEventName);
+                    //TODO: Add above received info to the <select> of event types, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#custtype_html_id").append("<option value='" + $newCustTypeId + "'>" + $newCustTypeName + "</option>");
+
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+
+    //Ajax form submit for newCustomer
+    $("#addNewCustomer").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#CustAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newCustomerId = data.id;
+                    $newCustomerName = data.name;
+                    $isbusiness=data.is_business;
+                    // console.log($newCustomerId);
+                    // console.log($newCustomerName);
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + "</option>");
+
+                    $("#cust_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+
+
+
+    //Ajax form submit for newContacts
+    $("#addNewContact").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#contactsAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if a new contact is successfully added to database
+                    $newContactId = data.id;
+                    $newContactfName = data.firstname;
+                    $newContactlName=data.lastname;
+                    $newContactphone=data.phone;
+                    $newContactemail=data.email;
+                    $newContactrole=data.role;
+                    $newContactstreet=data.street;
+                    $newContactsurburb=data.suburb;
+                    $newContactcity=data.city;
+                    $newContactpostcode=data.postcode;
+
+
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#contact_html_id").append("<option value='" + $newContactId + "'>" + $newContactfName +' '+ $newContactlName + ' '+ '(' + $newContactemail + ')' + "</option>");
+
+                    $("#contact_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+    //Ajax form submit for newSite
+    $("#addNewSite").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#siteAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if a new site is successfully added to database
+                    $newSiteId = data.id;
+                    $newSiteName = data.name;
+                    $newSiteAddress=data.address;
+                    $newSiteSuburb=data.suburb;
+                    $newSitePostcode=data.postcode;
+
+
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#site_html_id").append("<option value='" + $newSiteId + "'>" + $newSiteName +' '+ '(' + $newSiteAddress + ',  ' + $newSiteSuburb + ' '
+                        + $newSitePostcode + ')' + "</option>");
+
+                    $("#site_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
 
 </script>
 <?php $this->end(); ?>

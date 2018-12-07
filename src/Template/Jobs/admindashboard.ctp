@@ -9,7 +9,7 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">We today have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s)</p><p id="encouragement" style="display: inline"></p></h1>
+            <h1 class="page-header">Today we have <p id="workForToday" style="display: inline; color: red"></p><p style="display: inline;"> job(s) left</p><p id="encouragement" style="display: inline"></p></h1>
         </div>
         <!-- /.col-lg-12 -->
 
@@ -231,51 +231,48 @@
 
         <div class="col-lg-4">
             <div class="panel panel-default">
-                <div class="panel-heading">Today Summary</div>
-                <div class="panel-body">
+                <div class="panel-heading"><b>Today Summary</b></div>
                     <div class="list-group">
-                        <a id="totalC" href="#" class="list-group-item">Total Jobs
+                        <a id="totalC" class="list-group-item">Total Jobs
                             <span id="totalN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="orderC" href="#" class="list-group-item">Jobs on order
+                        <a id="orderC" class="list-group-item">Jobs on order
                             <span id="orderN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="readyC" href="#" class="list-group-item">Jobs on ready
+                        <a id="readyC" class="list-group-item">Jobs on ready
                             <span id="readyN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="completedC" href="#" class="list-group-item">Jobs completed
+                        <a id="completedC" class="list-group-item">Jobs completed
                             <span id="completedN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="invoicedC" href="#" class="list-group-item">Jobs Invoiced
+                        <a id="invoicedC" class="list-group-item">Jobs Invoiced
                             <span id="invoicedN" class="pull-right text-muted small">0</span>
                         </a>
-                        <a id="paidC" href="#" class="list-group-item">Jobs Paid
+                        <a id="paidC" class="list-group-item">Jobs Paid
                             <span id="paidN" class="pull-right text-muted small">0</span>
                         </a>
                     </div>
-                </div>
             </div>
         </div>
     </div>
 
     <?php $this->start('script'); ?>
-    <script>
+<script>
 
     var button = -1;
     var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, total: 0, tTotal: 0};
 
-    function statusCheck(data, status){
+    function statusCheck(data, status, today){
+        let date = new Date (data[2]);
+        let todayDate = new Date();
         let jobStatus = data[1];
-
-        if (jobStatus === status)
+        if(today)
+            if (date.getDate() === todayDate.getDate() && date.getMonth() === todayDate.getMonth() && date.getFullYear() === todayDate.getFullYear() && jobStatus === status)
+                return true;
+            else return false;
+        else if(jobStatus === status)
             return true;
         return false;
-    }
-
-    function onStatusCheck(num){
-        let table = $('#dataTables').table();
-        button = num;
-        table.draw();
     }
 
     function encourage(){
@@ -289,34 +286,26 @@
         document.getElementById('encouragement').innerHTML = encouragement[randomN];
     }
 
-    function quote(data){
-        let status = data[1];
-
-        if(status === 'Quote')
-            return true;
-        return false;
-    }
-
-    function today(data){
+    function isToday(data, once){
         let date = new Date (data[2]);
         let today = new Date();
         let status = data[1];
 
-        if(once === 1)
-            if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
+        if(once === 1) {
+            if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
                 return true;
-            else if(once === 0)
-                if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-                    return true;
+        }
+        else if(once === 0)
+            if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
+                return true;
         return false;
     }
 
     function nextWeek(data){
         let date = new Date (data[2]);
         let today = new Date();
-        let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
-        if(datetime <= 7 && datetime > 1)
+        if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             return true;
         return false;
     }
@@ -333,49 +322,50 @@
                 number.todayN++;
         }
 
-        else if(datetime <= 7 && datetime > 0)
+        else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             number.nextWeekN++;
         number.total++;
 
         if(status === 'Quote')
             number.quoteN++;
-        if(status === 'Order')
+        if(status === 'Order' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.orderN++;
-        if(status === 'Ready')
+        if(status === 'Ready' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.readyN++;
-        if(status === 'Completed')
+        if(status === 'Completed' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.completedN++;
-        if(status === 'Invoice')
+        if(status === 'Invoice' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.invoiceN++;
-        if(status === 'Paid')
+        if(status === 'Paid' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.paidN++;
+
     }
 
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
             switch (button){
                 case -2:
-                    return today(data, 0);
+                    return isToday(data, 0);
                 case -1:
                     return getCount(data);
                 case 0:
                     return true;
                 case 1:
-                    return today(data, 1);
+                    return isToday(data, 1);
                 case 2:
                     return nextWeek(data);
                 case 3:
-                    return statusCheck(data, 'Quote');
+                    return statusCheck(data, 'Quote', false);
                 case 4:
-                    return statusCheck(data, 'Order');
+                    return statusCheck(data, 'Order', true);
                 case 5:
-                    return statusCheck(data, 'Ready');
+                    return statusCheck(data, 'Ready',true);
                 case 6:
-                    return statusCheck(data, 'Completed');
+                    return statusCheck(data, 'Completed', true);
                 case 7:
-                    return statusCheck(data, 'Invoice');
+                    return statusCheck(data, 'Invoice', true);
                 case 8:
-                    return statusCheck(data, 'Paid');
+                    return statusCheck(data, 'Paid', true);
             }
 
         }
@@ -467,5 +457,5 @@
 
     });
 
-    </script>
+</script>
     <?php $this->end(); ?>
