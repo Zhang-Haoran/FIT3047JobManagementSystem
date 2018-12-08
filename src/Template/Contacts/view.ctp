@@ -56,7 +56,7 @@
             <td><?= h($contact->role) ?></td>
         </tr>
                     <tr>
-                        <th scope="row"><?= __('Street') ?></th>
+                        <th scope="row"><?= __('Address') ?></th>
                         <td><?= h($contact->street) ?></td>
                     </tr>
                     <tr>

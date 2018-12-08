@@ -75,13 +75,26 @@ class ImagesController extends AppController
                 $imageDir =  $hash . "." . $ext;
                 $image->path = "assets/" . $imageDir;
                 $image->job_id = $jobId;
+                $this->loadModel('Jobs');
+                $status = $this->Jobs->get($jobId)->job_status;
 
 
                 if ($this->Images->save($image)) {
 
                     if (move_uploaded_file($this->request->getData()['path']['tmp_name'],WWW_ROOT . "/img/assets/" .$imageDir)){
                         $this->Flash->success(__('The image has been saved.'));
-                        return $this->redirect(['controller' => 'jobs','action' => 'view',$jobId]);
+                        if ($this->Auth->user('access_level')=='3'){
+                            if($status == "Ready"){
+                                return $this->redirect(['controller' => 'jobs', 'action' => 'readyview', $jobId]);
+                            }elseif($status == "Order"){
+                                return $this->redirect(['controller' => 'jobs', 'action' => 'orderview', $jobId]);
+                            }else{
+                                return $this->redirect(['controller' => 'jobs', 'action' => 'completedview', $jobId]);
+                            }
+                        }
+                        else {
+                            return $this->redirect(['controller' => 'jobs', 'action' => 'view', $jobId]);
+                        }
                     }else
                         $this->Flash->error(__('The image failed to upload. Please, try again'));
 
