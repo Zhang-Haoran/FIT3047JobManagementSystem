@@ -101,13 +101,13 @@ class JobsTable extends Table
             ->allowEmpty('booked_date');
 
         $validator
-            ->numeric('price')
+            ->numeric('price','price should be number')
             ->maxLength('price',13)
             ->greaterThanOrEqual('price', 0)
             ->allowEmpty('price');
 
         $validator
-            ->numeric('deposit')
+            ->numeric('deposit','deposit should be number')
             ->maxLength('deposit',13)
             ->greaterThanOrEqual('deposit', 0)
             ->allowEmpty('deposit');
