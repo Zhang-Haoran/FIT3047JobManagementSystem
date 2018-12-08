@@ -88,6 +88,22 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
+                        <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <?php
+                                echo $this->Html->link('Contact List', ['controller' => 'contacts', 'action' => 'index'])
+                                ?>
+                            </li>
+                            <li>
+                                <?php
+                                echo $this->Html->link('Add', ['controller' => 'contacts', 'action' => 'add'])
+                                ?>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
                         <a href="#"><i class=""></i> Sites<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -182,22 +198,7 @@
                         <!-- /.nav-second-level -->
                     </li>
 
-                    <li>
-                        <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <?php
-                                echo $this->Html->link('Contact List', ['controller' => 'contacts', 'action' => 'index'])
-                                ?>
-                            </li>
-                            <li>
-                                <?php
-                                echo $this->Html->link('Add', ['controller' => 'contacts', 'action' => 'add'])
-                                ?>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
+
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->
