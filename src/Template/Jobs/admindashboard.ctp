@@ -151,7 +151,7 @@
                             <td>
                                 <?php if($job->has('event_type')) {
                                     if ($name == 1 || $name == 2) {
-                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]);
+                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'edit', $job->event_type->id]);
                                     }
                                     else{
                                         echo h($job->event_type->name);
