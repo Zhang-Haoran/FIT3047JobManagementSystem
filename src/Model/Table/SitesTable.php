@@ -71,7 +71,7 @@ class SitesTable extends Table
             ->notEmpty('address','Address can not be empty')
             ->add('name','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain [a-zA-Z 0-9] only'
+                'message' => 'Address should contain [a-z/A-Z/0-9] only'
             ]);
 
         $validator
@@ -81,7 +81,7 @@ class SitesTable extends Table
             ->notEmpty('suburb','Suburb van not be empty')
             ->add('name','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain [a-zA-Z 0-9] only'
+                'message' => 'Suburb should contain [a-z/A-Z/0-9] only'
             ]);
 
         $validator
