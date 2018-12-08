@@ -122,11 +122,15 @@
             <tr>
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?>
-                    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
+
                 </td>
 
             </tr>
-            <tr>
+
+
+
+
+                <tr>
                 <th scope="row"><?= __('Event Type') ?></th>
                 <td><?= $job->has('event_type') ? h($job->event_type->name) : '' ?></td>
             </tr>
@@ -158,30 +162,39 @@
                 <th scope="row"><?= __('Additional Note') ?></th>
                 <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
             </tr>
+                <tr>
+                    <th scope="row"><?= __('Image') ?></th>
+                    <td>    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?></td>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="divleft">
 
-            </tbody>
+                            <?= $this->Html->link(__('Back to home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="divright">
+                            <?= $this->Html->link(__('Job is ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
         </table>
 
 
 
 
     </div>
-    <div class="divright">
-
-        <?= $this->Html->link(__('Job is ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-        <p></p>
-    </div>
-    <div class="divleft">
-
-        <?= $this->Html->link(__('Back to home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-        <p></p>
-    </div>
+  
 </div>
 </div>
 
 
 <div class="row">
-    <div class="col-lg-6" >
+    <div class="col-lg-6">
         <div id="map"></div>
     </div>
 </div>
