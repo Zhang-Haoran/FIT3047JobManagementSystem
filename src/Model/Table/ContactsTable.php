@@ -118,8 +118,8 @@ class ContactsTable extends Table
             ->maxLength('role', 255)
             ->allowEmpty('role')
             ->add('role','characterOnly',[
-                'rule' => array('role','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Address should contain [a-z/A-Z/0-9] only'
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Role should contain [a-z/A-Z/0-9] only'
             ]);
 
         $validator
