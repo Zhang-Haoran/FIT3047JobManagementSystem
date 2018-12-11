@@ -76,7 +76,7 @@
     </div>
 <div class="bd-example">
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-info', 'style' => '']) ?>
+    <?= $this->Html->link(__('Download CSV'),[], ['class' => ' btn btn-info', 'id' => 'dTDownloadCSVBtn']) ?>
     <button id="pickup" type="button" class="btn" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
 </div>
     <div class="row">
@@ -98,7 +98,7 @@
                             <th scope="col"><?= __('Event type') ?></th>
                             <th scope="col"><?= __('Customer') ?></th>
                             <th scope="col"><?= __('Created by') ?></th>
-                            <th scope="col"><?= __('Action') ?></th>
+                            <th scope="col" class="notexport"><?= __('Action') ?></th>
 
 
                         </tr>
@@ -385,12 +385,25 @@
         var table = $('#Jobs').DataTable( {
             dom: 'Bfrtip',
             responsive: true,
-            buttons: [
-                'copyHtml5',
-                'excelHtml5',
-                'csvHtml5',
-            ]
+            buttons: [{
+                extend: 'csv',
+                attr: {
+                    id: 'dTCSVExportBtn'
+                },
+                exportOptions:{
+                    columns: ':not(.notexport)'
+                }
+            }],
+
         } );
+
+
+        $('#dTCSVExportBtn').hide(); //Hide the original dT export CSV button
+        //When our own CSV button clicked
+        $('#dTDownloadCSVBtn').click(function(){
+            //We trigger the hidden dT button to do the job!
+            table.button('#dTCSVExportBtn').trigger();
+        });
 
         $('#quote-panel').on('click', function(){
             button = 3;
