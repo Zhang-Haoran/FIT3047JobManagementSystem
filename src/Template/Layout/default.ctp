@@ -27,7 +27,7 @@
     <?= $this->Html->meta('icon') ?>
     <?= $this->Html->css('/vendor/bootstrap/css/bootstrap.min.css') ?>
     <?= $this->Html->css('/vendor/metisMenu/metisMenu.min.css') ?>
-    <?= $this->Html->css('https://cdn.datatables.net/v/bs/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/fh-3.1.4/r-2.2.2/datatables.min.css') ?>
+    <?= $this->Html->css('https://cdn.datatables.net/v/bs/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-html5-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/sl-1.2.6/datatables.css') ?>
     <?= $this->Html->css('/vendor/datatables-responsive/dataTables.responsive.css') ?>
     <?= $this->Html->css('/css/style.css') ?>
     <?= $this->Html->css('/vendor/morrisjs/morris.css') ?>
@@ -94,7 +94,7 @@
 <?= $this->Html->script('/vendor/raphael/raphael.min.js') ?>
 <?= $this->Html->script('/vendor/morrisjs/morris.min.js') ?>
 <?= $this->Html->script('/data/morris-data.js') ?>
-<?= $this->Html->script('https://cdn.datatables.net/v/bs/dt-1.10.18/b-1.5.4/b-colvis-1.5.4/b-html5-1.5.4/fh-3.1.4/r-2.2.2/datatables.min.js') ?>
+<?= $this->Html->script('//cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/b-1.5.4/b-html5-1.5.4/b-print-1.5.4/r-2.2.2/datatables.min.js') ?>
 <?= $this->Html->script('/vendor/momentjs/moment.js') ?>
 <?= $this->Html->script('/js/bootstrap-notify.js') ?>
 <?= $this->Html->script('chosen.jquery.js') ?>
