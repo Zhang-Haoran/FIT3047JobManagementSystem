@@ -55,17 +55,17 @@ $(document).ready(function() {
     $('#dataTables').DataTable({
         responsive: true,
         colReorder: false,
-        buttons: [
-            'csvHtml5'
-        ]
+        buttons: [{
+            extend: 'csvHtml5'
+        }]
     });
 
     $('#dataTables-example').DataTable({
         responsive: true,
         colReorder: false,
-        buttons: [
-            'csvHtml5'
-        ]
+        buttons: [{
+            extend: 'csvHtml5'
+        }]
     });
 
 } );

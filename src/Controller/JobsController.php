@@ -408,53 +408,6 @@ class JobsController extends AppController
         $this->set('job', $job);
     }
 
-
-    public function exportJobData(){
-        $datatbp = '<table cellspacing="2" cellpadding="5" style="border: 2px;text-align: center;" border="1",width="60%">';
-
-        $datatbp .='<tr>
-
-                       <th style="text-align: center">Job Name</th>
-                       <th style="text-align: center">Status</th>
-                       <th style="text-align: center">Job Date</th>
-                       <th style="text-align: center">Booked Date</th>
-                       <th style="text-align: center">Price</th>
-                       <th style="text-align: center">Deposit</th>
-                       <th style="text-align: center">Expected arrival time</th>
-
-                    </tr>';
-
-        $contents = $this->Jobs->find('all')->toArray();
-
-        foreach ($contents as $content){
-            $jobName = $content['name'];
-            $jobStatus = $content['job_status'];
-            $jobDate = $content['job_date'];
-            $bookedDate = $content['booked_date'];
-            $price = $content['price'];
-            $deposit = $content['deposit'];
-            $exArrivalTime = $content['e_arrival_time'];
-
-            $datatbp .='<tr>
-
-                       <td style="text-align: center">'. $jobName.'</td>
-                       <td style="text-align: center">'. $jobStatus.'</td>
-                       <td style="text-align: center">'. $jobDate.'</td>
-                       <td style="text-align: center">'. $bookedDate.'</td>
-                       <td style="text-align: center">'. $price.'</td>
-                       <td style="text-align: center">'. $deposit.'</td>
-                       <td style="text-align: center">'. $exArrivalTime.'</td>
-
-                    </tr>';
-        }
-        $datatbp .="</table>";
-        header('Content-Type: application/force-download');
-        header('Content-disposition: attachment; filename= jobs.xls');
-        header("Pragma: ");
-        header("Cache-Control: ");
-        echo $datatbp;
-        die;
-    }
     public function orderview($id = null)
     {    //save job status
         $JobsTable = TableRegistry::get('Jobs');
