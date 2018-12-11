@@ -76,12 +76,13 @@
     </div>
 <div class="bd-example">
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-success', 'style' => '']) ?>
+    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-info', 'style' => '']) ?>
+    <button id="pickup" type="button" class="btn" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
 </div>
     <div class="row">
         <div class="col-lg-8">
             <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
+                <table style="max-width: 100px" width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
                     <thead>
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
@@ -105,7 +106,7 @@
                                     if($job->is_deleted == '0'){
                                 ?>
                         <tr>
-                            <td><?= h($job->name) ?></td>
+                            <td style="width: 50%"><?= h($job->name) ?></td>
                             <?php
                             if( $job->job_status == 'Order')
                             echo "<td class='bg-danger text-white'>Order</td>";
@@ -136,7 +137,7 @@
                             <td>
                                 <?php if($job->has('event_type')) {
                                     if ($name == 1 || $name == 2) {
-                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]);
+                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'edit', $job->event_type->id]);
                                     }
                                     else{
                                         echo h($job->event_type->name);
@@ -226,9 +227,11 @@
     var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, total: 0, tTotal: 0};
 
     function statusCheck(data, status, today){
+        let date = new Date (data[2]);
+        let todayDate = new Date();
         let jobStatus = data[1];
         if(today)
-            if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && jobStatus === status)
+            if (date.getDate() === todayDate.getDate() && date.getMonth() === todayDate.getMonth() && date.getFullYear() === todayDate.getFullYear() && jobStatus === status)
                 return true;
             else return false;
         else if(jobStatus === status)
@@ -247,7 +250,7 @@
         document.getElementById('encouragement').innerHTML = encouragement[randomN];
     }
 
-    function today(data, once){
+    function isToday(data, once){
         let date = new Date (data[2]);
         let today = new Date();
         let status = data[1];
@@ -267,7 +270,7 @@
         let today = new Date();
         let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
-        if(datetime <= 7 && datetime > 1)
+        if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             return true;
         return false;
     }
@@ -303,17 +306,23 @@
 
     }
 
+    function pickup(data){
+        if(data[5] === "")
+            return true;
+        return false;
+    }
+
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
             switch (button){
                 case -2:
-                    return today(data, 0);
+                    return isToday(data, 0);
                 case -1:
                     return getCount(data);
                 case 0:
                     return true;
                 case 1:
-                    return today(data, 1);
+                    return isToday(data, 1);
                 case 2:
                     return nextWeek(data);
                 case 3:
@@ -328,6 +337,8 @@
                     return statusCheck(data, 'Invoice', true);
                 case 8:
                     return statusCheck(data, 'Paid', true);
+                case 9:
+                    return pickup(data);
             }
 
         }
@@ -398,6 +409,11 @@
             button = 8;
             table.draw();
 
+        });
+
+        $('#pickup').on('click', function(){
+            button = 9;
+            table.draw();
         });
 
         button = 0;

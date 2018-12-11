@@ -120,7 +120,6 @@
             <tr>
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?>
-                    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
                 </td>
 
             </tr>
@@ -156,21 +155,33 @@
                 <th scope="row"><?= __('Additional Note') ?></th>
                 <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
             </tr>
+<tr>
+    <th scope="row"><?= __('Image') ?></th>
+    <td>    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?></td>
+</tr>
+            <tr>
+                <th>
+                    <div class="divleft">
+
+                        <?= $this->Html->link(__('Back to Ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+                    </div>
+                </th>
+                <td>
+                    <div class="divright">
+                        <?= $this->Html->link(__('Back to Home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+
+                    </div>
+                </td>
+            </tr>
 
             </tbody>
         </table>
 
     </div>
-    <div class="divright">
 
-        <?= $this->Html->link(__('Back to Home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-        <p></p>
-    </div>
-    <div class="divleft">
 
-        <?= $this->Html->link(__('Back to Ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-        <p></p>
-    </div>
+
+
 
 </div>
 </div>

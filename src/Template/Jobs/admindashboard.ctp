@@ -76,7 +76,8 @@
     </div>
 <div class="bd-example">
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-success', 'style' => '']) ?>
+    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-info', 'style' => '']) ?>
+    <button id="pickup" type="button" class="btn" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
 </div>
     <div class="row">
         <div class="col-lg-8">
@@ -128,8 +129,8 @@
                             ?>
                             <td><?= h($job->job_date) ?></td>
                             <td class="center"><?= h($job->booked_date) ?></td>
-                            <td class="center"><?= $this->Number->format($job->price) ?></td>
-                            <td class="center"><?= $this->Number->format($job->deposit) ?></td>
+                            <td class="center">$<?= $this->Number->format($job->price) ?></td>
+                            <td class="center">$<?= $this->Number->format($job->deposit) ?></td>
                             <td class="center"><?= h($job->e_arrival_time) ?></td>
                             <td class="center"><?= h($job->e_setup_time) ?></td>
                             <td class="center"><?= h($job->e_pickup_time) ?></td>
@@ -150,7 +151,7 @@
                             <td>
                                 <?php if($job->has('event_type')) {
                                     if ($name == 1 || $name == 2) {
-                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]);
+                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'edit', $job->event_type->id]);
                                     }
                                     else{
                                         echo h($job->event_type->name);
@@ -257,15 +258,20 @@
     </div>
 
     <?php $this->start('script'); ?>
-    <script>
+<script>
 
     var button = -1;
     var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, total: 0, tTotal: 0};
 
-    function statusCheck(data, status){
+    function statusCheck(data, status, today){
+        let date = new Date (data[2]);
+        let todayDate = new Date();
         let jobStatus = data[1];
-
-        if (jobStatus === status)
+        if(today)
+            if (date.getDate() === todayDate.getDate() && date.getMonth() === todayDate.getMonth() && date.getFullYear() === todayDate.getFullYear() && jobStatus === status)
+                return true;
+            else return false;
+        else if(jobStatus === status)
             return true;
         return false;
     }
@@ -281,8 +287,7 @@
         document.getElementById('encouragement').innerHTML = encouragement[randomN];
     }
 
-
-    function today(data, once){
+    function isToday(data, once){
         let date = new Date (data[2]);
         let today = new Date();
         let status = data[1];
@@ -300,9 +305,8 @@
     function nextWeek(data){
         let date = new Date (data[2]);
         let today = new Date();
-        let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
-        if(datetime <= 7 && datetime > 1)
+        if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             return true;
         return false;
     }
@@ -319,11 +323,11 @@
                 number.todayN++;
         }
 
-        else if(datetime <= 7 && datetime > 0)
+        else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             number.nextWeekN++;
         number.total++;
 
-        if(status === 'Quote' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
+        if(status === 'Quote')
             number.quoteN++;
         if(status === 'Order' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.orderN++;
@@ -335,33 +339,42 @@
             number.invoiceN++;
         if(status === 'Paid' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.paidN++;
+
+    }
+
+    function pickup(data){
+        if(data[9] === "")
+            return true;
+        return false;
     }
 
     $.fn.dataTable.ext.search.push(
         function( settings, data, dataIndex ) {
             switch (button){
                 case -2:
-                    return today(data, 0);
+                    return isToday(data, 0);
                 case -1:
                     return getCount(data);
                 case 0:
                     return true;
                 case 1:
-                    return today(data, 1);
+                    return isToday(data, 1);
                 case 2:
                     return nextWeek(data);
                 case 3:
-                    return statusCheck(data, 'Quote');
+                    return statusCheck(data, 'Quote', false);
                 case 4:
-                    return statusCheck(data, 'Order');
+                    return statusCheck(data, 'Order', true);
                 case 5:
-                    return statusCheck(data, 'Ready');
+                    return statusCheck(data, 'Ready',true);
                 case 6:
-                    return statusCheck(data, 'Completed');
+                    return statusCheck(data, 'Completed', true);
                 case 7:
-                    return statusCheck(data, 'Invoice');
+                    return statusCheck(data, 'Invoice', true);
                 case 8:
-                    return statusCheck(data, 'Paid');
+                    return statusCheck(data, 'Paid', true);
+                case 9:
+                    return pickup(data);
             }
 
         }
@@ -441,6 +454,11 @@
 
         });
 
+        $('#pickup').on('click', function(){
+           button = 9;
+           table.draw();
+        });
+
         button = 0;
         table.draw();
         encourage();
@@ -460,5 +478,5 @@
 
     });
 
-    </script>
+</script>
     <?php $this->end(); ?>

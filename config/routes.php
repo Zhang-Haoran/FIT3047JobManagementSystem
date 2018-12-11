@@ -52,7 +52,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * its action called 'display', and we pass a param to select the view file
      * to use (in this case, src/Template/Pages/home.ctp)...
      */
-     $routes->connect('/', ['controller' => 'Jobs']);
+     $routes->connect('/', ['controller' => 'Jobs', 'action' => 'index']);
 
      //redirects /login to the login page
       $routes->connect('/login', ['controller' => 'Employees', 'action' => 'login']);

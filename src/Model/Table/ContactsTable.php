@@ -66,29 +66,61 @@ class ContactsTable extends Table
             ->scalar('fname')
             ->maxLength('fname', 255)
             ->requirePresence('fname', 'create')
-            ->notEmpty('fname');
+            ->notEmpty('fname')
+            ->add('fname','characterOnly',[
+        'rule' => array('custom','/^[a-zA-Z ]*$/'),
+        'message' => 'Your name should contain [a-z/A-Z] only'
+    ]);
+
+
 
         $validator
             ->scalar('lname')
             ->maxLength('lname', 255)
             ->requirePresence('lname', 'create')
-            ->notEmpty('lname');
+            ->notEmpty('lname')
+            ->add('lname','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z ]*$/'),
+                'message' => 'Your name should contain [a-zA-Z ] only'
+            ]);
 
         $validator
             ->scalar('phone')
             ->maxLength('phone', 15)
             ->allowEmpty('phone');
+            $australianMobile = '/^(0|\+61)4\d{8}$/';
+            $validator
+                ->add('phone', 'custom', [
+                    'rule' => function ($value, $context) use ($australianMobile) {
+                        // remove spaces to make the regex simpler
+                        $check = preg_replace('/\s/', '', $value);
+
+                        // checks for either of these styles
+                        // +61412 345 678 or 0412 345 678
+                        $found = preg_match($australianMobile, $check);
+                        return boolval($found);
+                    },
+                    'message' => 'Your phone format should be like +61412 345 678 or 0412 345 678'
+                ]);
 
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmpty('email')
-            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
+            ->add('email','validEmail',[
+                'rule' => 'email',
+                'message' => 'Your e-mail format should be like example@example.com'
+            ]);
 
         $validator
             ->scalar('role')
             ->maxLength('role', 255)
-            ->allowEmpty('role');
+            ->allowEmpty('role')
+            ->add('role','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Role should contain [a-z/A-Z/0-9] only'
+            ]);
 
         $validator
             ->boolean('is_deleted')
@@ -97,22 +129,35 @@ class ContactsTable extends Table
         $validator
             ->scalar('street')
             ->maxLength('street', 255)
-            ->allowEmpty('street');
+            ->allowEmpty('street')
+            ->add('street','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Address should contain [a-z/A-Z/0-9] only'
+            ]);
 
         $validator
             ->scalar('suburb')
             ->maxLength('suburb', 255)
-            ->allowEmpty('suburb');
+            ->allowEmpty('suburb')
+            ->add('name','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Suburb should contain [a-z/A-Z/0-9] only'
+            ]);
 
         $validator
             ->scalar('city')
             ->maxLength('city', 255)
-            ->allowEmpty('city');
+            ->allowEmpty('city')
+            ->add('city','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'City should contain [a-z/A-Z/0-9] only'
+            ]);
 
         $validator
             ->scalar('postcode')
             ->maxLength('postcode', 5)
-            ->allowEmpty('postcode');
+            ->allowEmpty('postcode')
+            ->numeric('postcode','Postcode should be number');
 
         return $validator;
     }
