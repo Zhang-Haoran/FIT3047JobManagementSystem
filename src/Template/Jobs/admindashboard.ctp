@@ -368,9 +368,16 @@
     );
 
 
-
     $(document).ready(function() {
-        var table = $('#Jobs').DataTable();
+        var table = $('#Jobs').DataTable( {
+            dom: 'Bfrtip',
+            responsive: true,
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+            ]
+        } );
 
         $('#quote-panel').on('click', function(){
             button = 3;

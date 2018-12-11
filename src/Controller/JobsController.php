@@ -425,6 +425,7 @@ class JobsController extends AppController
                     </tr>';
 
         $contents = $this->Jobs->find('all')->toArray();
+
         foreach ($contents as $content){
             $jobName = $content['name'];
             $jobStatus = $content['job_status'];
