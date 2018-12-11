@@ -44,13 +44,13 @@ $(function() {
 
 
 $(document).ready(function() {
-    // $('#Jobs').DataTable({
-    //     responsive: true,
-    //     colReorder: false,
-    //     buttons: [
-    //         'csvHtml5'
-    //     ]
-    // });
+    $('#Jobs').DataTable({
+        responsive: true,
+        colReorder: false,
+        buttons: [
+            'csvHtml5'
+        ]
+    });
 
     $('#dataTables').DataTable({
         responsive: true,

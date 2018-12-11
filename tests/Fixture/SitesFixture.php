@@ -23,6 +23,8 @@ class SitesFixture extends TestFixture
         'suburb' => ['type' => 'string', 'length' => 255, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'postcode' => ['type' => 'string', 'length' => 5, 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'is_deleted' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => '0', 'comment' => '', 'precision' => null],
+        'address2' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'address3' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_constraints' => [
             'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
@@ -47,7 +49,9 @@ class SitesFixture extends TestFixture
                 'address' => 'Lorem ipsum dolor sit amet',
                 'suburb' => 'Lorem ipsum dolor sit amet',
                 'postcode' => 'Lor',
-                'is_deleted' => 1
+                'is_deleted' => 1,
+                'address2' => 'Lorem ipsum dolor sit amet',
+                'address3' => 'Lorem ipsum dolor sit amet'
             ],
         ];
         parent::init();
