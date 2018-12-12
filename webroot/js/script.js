@@ -11,7 +11,7 @@ $(function() {
         var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
         if (width < 768) {
             $('div.navbar-collapse').addClass('collapse');
-            $
+
             topOffset = 100; // 2-row-menu
         } else {
             $('div.navbar-collapse').removeClass('collapse');
@@ -55,17 +55,17 @@ $(document).ready(function() {
     $('#dataTables').DataTable({
         responsive: true,
         colReorder: false,
-        buttons: [
-            'csvHtml5'
-        ]
+        buttons: [{
+            extend: 'csvHtml5'
+        }]
     });
 
     $('#dataTables-example').DataTable({
         responsive: true,
         colReorder: false,
-        buttons: [
-            'csvHtml5'
-        ]
+        buttons: [{
+            extend: 'csvHtml5'
+        }]
     });
-    
+
 } );

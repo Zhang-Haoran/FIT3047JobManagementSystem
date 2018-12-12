@@ -12,6 +12,8 @@ use Cake\ORM\Entity;
  * @property string $suburb
  * @property string $postcode
  * @property bool $is_deleted
+ * @property string $address2
+ * @property string $address3
  *
  * @property \App\Model\Entity\Job[] $jobs
  */
@@ -33,6 +35,8 @@ class Site extends Entity
         'suburb' => true,
         'postcode' => true,
         'is_deleted' => true,
+        'address2' => true,
+        'address3' => true,
         'jobs' => true
     ];
 

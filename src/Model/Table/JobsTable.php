@@ -80,7 +80,11 @@ class JobsTable extends Table
             ->scalar('name')
             ->maxLength('name', 255)
             ->requirePresence('name', 'create')
-            ->notEmpty('name');
+            ->notEmpty('name')
+            ->add('name','characterOnly',[
+                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
+                'message' => 'Name should contain character only'
+            ]);
 
         $validator
             ->scalar('job_status')
@@ -90,19 +94,22 @@ class JobsTable extends Table
 
         $validator
             ->dateTime('job_date')
-            ->allowEmpty('job_date');
+            ->requirePresence('job_date', 'create')
+            ->notEmpty('job_date');
 
         $validator
             ->dateTime('booked_date')
             ->allowEmpty('booked_date');
 
         $validator
-            ->numeric('price')
+            ->numeric('price','price should be number')
+            ->maxLength('price',13)
             ->greaterThanOrEqual('price', 0)
             ->allowEmpty('price');
 
         $validator
-            ->numeric('deposit')
+            ->numeric('deposit','deposit should be number')
+            ->maxLength('deposit',13)
             ->greaterThanOrEqual('deposit', 0)
             ->allowEmpty('deposit');
 

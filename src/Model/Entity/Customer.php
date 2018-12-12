@@ -11,6 +11,12 @@ use Cake\ORM\Entity;
  * @property int $cust_type_id
  * @property bool $is_deleted
  * @property bool $is_business
+ * @property string $phone
+ * @property string $email
+ * @property string $address
+ * @property string $surburb
+ * @property string $city
+ * @property string $postcode
  *
  * @property \App\Model\Entity\CustType $cust_type
  * @property \App\Model\Entity\Job[] $jobs
@@ -32,8 +38,13 @@ class Customer extends Entity
         'cust_type_id' => true,
         'is_deleted' => true,
         'is_business' => true,
+        'phone' => true,
+        'email' => true,
+        'address' => true,
+        'surburb' => true,
+        'city' => true,
+        'postcode' => true,
         'cust_type' => true,
         'jobs' => true
     ];
-
 }
