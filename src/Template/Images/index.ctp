@@ -35,3 +35,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#dataTables-example').DataTable({
+        responsive: true,
+        colReorder: false,
+    });
+</script>

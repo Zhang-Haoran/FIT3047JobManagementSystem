@@ -42,30 +42,3 @@ $(function() {
     }
 });
 
-
-$(document).ready(function() {
-    $('#Jobs').DataTable({
-        responsive: true,
-        colReorder: false,
-        buttons: [
-            'csvHtml5'
-        ]
-    });
-
-    $('#dataTables').DataTable({
-        responsive: true,
-        colReorder: false,
-        buttons: [{
-            extend: 'csvHtml5'
-        }]
-    });
-
-    $('#dataTables-example').DataTable({
-        responsive: true,
-        colReorder: false,
-        buttons: [{
-            extend: 'csvHtml5'
-        }]
-    });
-
-} );

@@ -76,7 +76,7 @@
    <div class="row">
 
         <div class="col-lg-12">
-            <div class="panel-body">
+            <div class="panel-body" style="margin-left: -15px">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
                     <thead>
                         <tr>
@@ -253,7 +253,10 @@
 
 
     $(document).ready(function() {
-        var table = $('#Jobs').DataTable();
+        var table = $('#Jobs').DataTable({
+            responsive: true,
+            colReorder: false
+        });
 
         $('#today-panel').on('click', function(){
             button = 1;
