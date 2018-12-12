@@ -54,7 +54,7 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <?php
-                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
+                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'joblist'], ['escape' => false])
                                 ?>
                             </li>
                             <li>

@@ -70,3 +70,9 @@
         </div>
     </div>
 
+<script>
+    $('#dataTables').DataTable({
+        responsive: true,
+        colReorder: false,
+    });
+</script>

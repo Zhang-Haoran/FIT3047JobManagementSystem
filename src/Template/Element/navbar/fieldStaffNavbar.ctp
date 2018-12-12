@@ -49,15 +49,7 @@
                         echo $this->Html->link('Dashboard', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                         ?>
                     </li>
-                    <li>
-                        <a href="#"><i class=""></i> Jobs<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <?php
-                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
-                                ?>
-                            </li>
-                        </ul>
+
                         <!-- /.nav-second-level -->
 
                 </ul>
