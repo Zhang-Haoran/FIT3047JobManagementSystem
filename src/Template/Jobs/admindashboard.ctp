@@ -276,7 +276,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3" style="margin-top: 57px">
+        <div class="col-lg-3" style="margin-top: 77px">
             <div class="panel panel-default">
                 <div class="panel-heading"><b>Today Summary</b></div>
                 <div class="list-group">
