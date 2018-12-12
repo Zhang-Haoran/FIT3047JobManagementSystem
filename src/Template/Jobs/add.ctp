@@ -316,7 +316,7 @@
     $(function () {
         $('#job_date').datetimepicker({
             locale: 'en-au',
-            format: 'L'
+            format: "L"
         });
 
         $('#e_arrival_datetime').datetimepicker({

@@ -95,6 +95,15 @@ class JobsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
+
+    public function convert_date($cake_date){
+        $separate = explode("/",$cake_date);
+        $date=[];
+        $date['year'] = $separate[2];
+        $date['month'] = $separate[1];
+        $date['day'] = $separate[0];
+        return $date;
+    }
     public function add()
     {   if($this->Auth->user('access_level')=='3'){
         $this->Flash->set(__('You have no authorization to access this page as a field staff'));
@@ -103,6 +112,17 @@ class JobsController extends AppController
 
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
+            $post = $this->request->getData();
+            $job_date = $post['job_date'];
+            debug($job_date);
+            if($job_date != "") {
+                $job_date = $this->convert_date($job_date);
+                debug($job_date);
+            }
+            $post['job_date'] = $job_date;
+            debug($post['job_date']);
+            $job = $this->Jobs->patchEntity($job,$post);
+            debug($job);
             $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
                 'associated' => [
                     'customers'
@@ -113,6 +133,7 @@ class JobsController extends AppController
             $staff = $this->Employees->get($this->Auth->user('id'));
             $job->edited_by = $staff->full_name;
             $job->employee_id = $this->Auth->user('id');
+
 
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
