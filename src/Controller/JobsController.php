@@ -47,6 +47,23 @@ class JobsController extends AppController
 
     }
 
+    public function joblist()
+    {
+        $jobs = $this->Jobs->find('all')
+            ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
+        $this->set(compact('jobs'));
+        $session = $this->getRequest()->getSession();
+        $name = $session->read('Auth.User.access_level');
+        $this->set('name', $name);
+
+        //reference from the authentication code from function view()
+        if($this->Auth->user('access_level') !='1' && $this->Auth->user('access_level') !='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            $this->redirect($this->Auth->redirectUrl());
+        }
+
+    }
+
 
     /**
      * View method
