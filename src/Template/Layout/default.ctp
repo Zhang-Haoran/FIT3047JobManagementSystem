@@ -34,6 +34,7 @@
     <?= $this->Html->css('https://use.fontawesome.com/releases/v5.3.1/css/all.css') ?>
 
     <?= $this->Html->css('/css/animate.css') ?>
+    <?= $this->Html->css('/css/bootstrap-datetimepicker.min')?>
     <?= $this->Html->css('bootstrap-multiselect.css') ?>
     <?= $this->Html->css('chosen.min.css') ?>
     <?= $this->Html->css('select2.min.css') ?>
@@ -100,6 +101,8 @@
 <?= $this->Html->script('chosen.jquery.js') ?>
 <?= $this->Html->script('select2.min.js') ?>
 <?= $this->Html->script('bootstrap-multiselect.js') ?>
+<?= $this->Html->script('/js/locale.js') ?>
+<?= $this->Html->script('/js/bootstrap-datetimepicker.min.js') ?>
 <?= $this->fetch('scriptBottom'); ?>
 
 <!--calling script.js-->
