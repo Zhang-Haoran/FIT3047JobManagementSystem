@@ -14,11 +14,12 @@ use Cake\ORM\Entity;
  * @property string $phone
  * @property string $email
  * @property string $address
- * @property string $surburb
+ * @property string $suburb
  * @property string $city
  * @property string $postcode
  *
  * @property \App\Model\Entity\CustType $cust_type
+ * @property \App\Model\Entity\Contact[] $contacts
  * @property \App\Model\Entity\Job[] $jobs
  */
 class Customer extends Entity
@@ -41,10 +42,11 @@ class Customer extends Entity
         'phone' => true,
         'email' => true,
         'address' => true,
-        'surburb' => true,
+        'suburb' => true,
         'city' => true,
         'postcode' => true,
         'cust_type' => true,
+        'contacts' => true,
         'jobs' => true
     ];
 }

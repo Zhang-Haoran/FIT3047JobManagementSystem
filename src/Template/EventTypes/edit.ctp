@@ -15,7 +15,7 @@
 <div class="eventTypes form large-9 medium-8 columns content">
     <?= $this->Form->create($eventType) ?>
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Basic details
@@ -23,7 +23,7 @@
                 <div class="panel-body">
                     <div class="tab-content">
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']); ?></div>
                                 <div class="form-group"><?= $this->Form->hidden('is_deleted'); ?></div>
                             </div>

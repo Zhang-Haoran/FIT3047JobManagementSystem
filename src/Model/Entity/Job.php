@@ -9,7 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $name
  * @property string $job_status
- * @property \Cake\I18n\FrozenTime $job_date
+ * @property \Cake\I18n\FrozenDate $job_date
  * @property \Cake\I18n\FrozenTime $booked_date
  * @property float $price
  * @property float $deposit
