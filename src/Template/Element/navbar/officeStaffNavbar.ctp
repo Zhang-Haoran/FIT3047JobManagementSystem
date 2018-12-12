@@ -50,10 +50,29 @@
                         ?>
                     </li>
                     <li>
-                        <?php
-                        echo $this->Html->link('Jobs', ['controller' => 'jobs', 'action' => 'joblist'])
-                        ?>
-                    </li>
+                        <a href="#"><i class=""></i> Jobs<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <?php
+                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'joblist'], ['escape' => false])
+                                ?>
+                            </li>
+                            <li>
+                                <?php
+                                echo $this->Html->link('Add Normal job', ['controller' => 'jobs', 'action' => 'add'])
+                                ?>
+                            </li>
+                            <li>
+                                <?php
+                                echo $this->Html->link('Add Pickup job', ['controller' => 'jobs', 'action' => 'addpickup'])
+                                ?>
+                            </li>
+                            <li>
+                                <?php
+                                echo $this->Html->link('Event Types List', ['controller' => 'EventTypes', 'action' => 'index'])
+                                ?>
+                            </li>
+                        </ul>
                         <!-- /.nav-second-level -->
 
 
@@ -68,6 +87,27 @@
                             <li>
                                 <?php
                                 echo $this->Html->link('Add', ['controller' => 'customers', 'action' => 'add'])
+                                ?>
+                            </li>
+                            <li>
+                                <?php
+                                echo $this->Html->link('Customer Types List', ['controller' => 'CustTypes', 'action' => 'index'])
+                                ?>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <?php
+                                echo $this->Html->link('Contact List', ['controller' => 'contacts', 'action' => 'index'])
+                                ?>
+                            </li>
+                            <li>
+                                <?php
+                                echo $this->Html->link('Add', ['controller' => 'contacts', 'action' => 'add'])
                                 ?>
                             </li>
                         </ul>
@@ -123,67 +163,8 @@
                         <!-- /.nav-second-level -->
                     </li>
 
-                    <li>
-                        <a href="#"><i class=""></i> Types<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#"><i class=""></i>Customer Types<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Index', ['controller' => 'CustTypes', 'action' => 'index'])
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Add', ['controller' => 'CustTypes', 'action' => 'add'])
-                                        ?>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
 
 
-
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#"><i class=""></i>Event Types<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Index', ['controller' => 'EventTypes', 'action' => 'index'])
-                                        ?>
-                                    </li>
-
-                                    <li>
-                                        <?php
-                                        echo $this->Html->link('Add', ['controller' => 'EventTypes', 'action' => 'add'])
-                                        ?>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <!-- /.nav-second-level -->
-                    </li>
-
-                    <li>
-                        <a href="#"><i class=""></i> Contacts<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <?php
-                                echo $this->Html->link('Contact List', ['controller' => 'contacts', 'action' => 'index'])
-                                ?>
-                            </li>
-                            <li>
-                                <?php
-                                echo $this->Html->link('Add', ['controller' => 'contacts', 'action' => 'add'])
-                                ?>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

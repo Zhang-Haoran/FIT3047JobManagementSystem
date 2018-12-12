@@ -174,10 +174,32 @@ class EmployeesController extends AppController
         }
         $this->request->allowMethod(['get', 'delete']);
         $employee = $this->Employees->get($id);
-        if ($this->Employees->delete($employee)) {
-            $this->Flash->success(__('The employee has been deleted.'));
+        $employee->is_deleted = 1;
+        if ($this->Employees->save($employee)) {
+            $this->Flash->success(__('The employee has been deactivated.'));
         } else {
-            $this->Flash->error(__('The employee could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The employee could not be deactivated. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
+    }
+
+    public function restore($id = null)
+    {
+        if ($this->Auth->user('access_level') == '3') {
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        } elseif ($this->Auth->user('access_level') == '2') {
+            $this->Flash->set(__('You have no authorization to access this page as a office staff'));
+            return $this->redirect($this->Auth->redirectUrl());
+        }
+        $this->request->allowMethod(['get', 'delete']);
+        $employee = $this->Employees->get($id);
+        $employee->is_deleted = 0;
+        if ($this->Employees->save($employee)) {
+            $this->Flash->success(__('The employee has been restored.'));
+        } else {
+            $this->Flash->error(__('The employee could not be restored. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
@@ -193,17 +215,9 @@ class EmployeesController extends AppController
             $employee = $this->Auth->identify();
             if ($employee) {
                 $this->Auth->setUser($employee);
-//                return $this->redirect($this->Auth->redirectUrl());
-                if ($this->Auth->user('access_level') == '1') {
-                    $this->Flash->success('You have logged in as admin');
-                    return $this->redirect(['controller' => 'jobs', 'action' => 'index']);
-                } elseif ($this->Auth->user('access_level') == '2') {
-                    $this->Flash->success('You have logged in as office staff');
-                    return $this->redirect(['controller' => 'jobs', 'action' => 'index']);
-                } elseif ($this->Auth->user('access_level') == '3') {
-                    $this->Flash->success('You have logged in as field staff');
-                    return $this->redirect(['controller' => 'jobs', 'action' => 'index']);
-                }
+                $staff = $this->Employees->get($this->Auth->user('id'));
+                $this->Flash->success("Welcome back " . $staff->full_name );
+                return $this->redirect(['controller' => 'jobs', 'action' => 'index']);
             }
             $this->Flash->error('Your username or password is incorrect.');
         }

@@ -12,15 +12,15 @@
 
     </div>
 </div>
-
 <style>
     #map {
         height: 500px;
-        width: 80%;
+        width: 100%;
         margin-top: 2%;
     }
-</style>
 
+</style>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <?= $this->Html->script('https://maps.googleapis.com/maps/api/js?key=AIzaSyAWDodbWDP0gwQTVe0_1R3WSAn8fsq7lQQ&callback=initMap', ['block' => 'scriptBottom']) ?>
 <p></p>
 <p></p>
@@ -116,17 +116,24 @@
                 <tbody>
                 <div style="text-align: center;font-size: x-large">
     <span class="glyphicon glyphicon-home"
-          style="font-size: large"> </span> <b> <?= $job->has('site') ? h($job->site->name) : '' ?></b></div>
+          style="font-size: large"> </span> <b> <?= $job->has('site') ? h($job->site->name) : '' ?></b>
+                    <div id="map"></div>
+
+                </div>
 
 
             <tr>
                 <th scope="row"><?= __('Address') ?></th>
                 <td class="address"><?= $site->address ?>, <?= $site->suburb ?> <?= $site->postcode ?>
-                    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
+
                 </td>
 
             </tr>
-            <tr>
+
+
+
+
+                <tr>
                 <th scope="row"><?= __('Event Type') ?></th>
                 <td><?= $job->has('event_type') ? h($job->event_type->name) : '' ?></td>
             </tr>
@@ -158,51 +165,88 @@
                 <th scope="row"><?= __('Additional Note') ?></th>
                 <td><?= $this->Text->autoParagraph(h($job->additional_note)); ?></td>
             </tr>
+                <tr>
+                    <th scope="row"><?= __('Image') ?></th>
+                    <td>    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
+                        <p></p>
+                        <div class="w3-content w3-display-container">
+                            <?php foreach ($job->images as $image): ?>
 
-            </tbody>
+
+                                <div class="mySlides">
+                                    <?=$this->Html->image($image->path,['class'=>'img img-responsive', 'alt' => $image->description]);?>
+                                    <div class="caption">
+                                        <p class="text-center text-capitalize text-muted"><?= $image->description ?></p>
+
+                                    </div>
+
+                                </div>
+                            <?php endforeach; ?>
+
+                            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="divleft">
+
+                            <?= $this->Html->link(__('Back to home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+                        </div>
+                    </th>
+                    <td>
+                        <div class="divright">
+                            <?= $this->Html->link(__('Job is ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+
+                        </div>
+                    </td>
+                </tr>
+
+                </tbody>
         </table>
 
 
 
 
     </div>
-    <div class="divright">
 
-        <?= $this->Html->link(__('Job is ready'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-        <p></p>
-    </div>
-    <div class="divleft">
-
-        <?= $this->Html->link(__('Back to home'), ['action' => 'index', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-        <p></p>
-    </div>
 </div>
 </div>
 
 
 <div class="row">
-    <div class="col-lg-6" >
-        <div id="map"></div>
+    <div class="col-lg-6">
+
     </div>
 </div>
 
-<div class="col-lg-6">
 
-    <div class="row">
 
-        <?php foreach ($job->images as $image): ?>
-            <div class="col-md-6">
-                <div class="thumbnail">
-                    <?=$this->Html->image($image->path,['class'=>'img img-responsive', 'alt' => $image->description]);?>
-                    <div class="caption">
-                        <p class="text-center text-capitalize text-muted"><?= $image->description ?></p>
-                    </div>
-                </div>
-            </div>
 
-        <?php endforeach; ?>
-    </div>
-</div>
+
+
+            <script>
+                var slideIndex = 1;
+                showDivs(slideIndex);
+
+                function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                }
+
+                function showDivs(n) {
+                    var i;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {slideIndex = 1}
+                    if (n < 1) {slideIndex = x.length}
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                    }
+                    x[slideIndex-1].style.display = "block";
+                }
+            </script>
+
 
 <?php
 $this->Html->scriptBlock('

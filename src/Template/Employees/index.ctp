@@ -53,7 +53,14 @@
 
                 <td><?= $this->Html->link(__('View'), ['action' => 'view', $employee->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $employee->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $employee->id], ['confirm' => __('Are you sure you want to delete Employee: {0}?', $employee->full_name)]) ?>
+                    <?php
+                    if($this->request->getsession()->read('Auth.User.id')!=$employee->id){
+                        ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $employee->id], ['confirm' => __('Are you sure you want to delete Employee: {0}?', $employee->full_name)]) ?>
+                        <?php
+                    }
+                    ?>
+
                 </td>
             </tr>
             <?php endforeach; ?>
