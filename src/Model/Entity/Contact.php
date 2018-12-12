@@ -58,7 +58,7 @@ class Contact extends Entity
 
     protected function _getLabel()
     {
-        return $this->_properties['fname'] .' '.$this->_properties['lname']. ' ( ' . $this->_properties['email'] . ' '. ')';
+        return $this->_properties['fname'] .' '.$this->_properties['lname']. ' ( email: ' . $this->_properties['email'] . ', phone:'.  $this->_properties['phone'] . ', address:'. $this->_properties['street'] . ' '.  $this->_properties['suburb'] . ' '. $this->_properties['city'] . $this->_properties['postcode'] .')';
     }
 
 }

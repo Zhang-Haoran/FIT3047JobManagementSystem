@@ -114,10 +114,8 @@
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <?= $this->Form->control('contact_id', ['options' => $contacts, 'class' => 'form-control','id'=> 'contact_html_id']) ?>
-                                            <? $contacts = $this->Contacts->get($id, ['label' => ['email','address']])?>
-
-
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="panel-heading">

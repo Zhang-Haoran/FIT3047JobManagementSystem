@@ -141,7 +141,7 @@ class JobsController extends AppController
         $contacts = $this->Contacts->find('list', [
             'keyField' => 'id',
             'valueField' => function ($contact) {
-                return $contact->get(['label' => 'email']);
+                return $contact->get('label');
             }
         ]);
         $this->loadModel('CustTypes');
