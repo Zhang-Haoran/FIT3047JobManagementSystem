@@ -50,24 +50,10 @@
                         ?>
                     </li>
                     <li>
-                        <a href="#"><i class=""></i> Jobs<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <?php
-                                echo $this->Html->link('Job List', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
-                                ?>
-                            </li>
-                            <li>
-                                <?php
-                                echo $this->Html->link('Add Normal job', ['controller' => 'jobs', 'action' => 'add'])
-                                ?>
-                            </li>
-                            <li>
-                                <?php
-                                echo $this->Html->link('Add Pickup job', ['controller' => 'jobs', 'action' => 'addpickup'])
-                                ?>
-                            </li>
-                        </ul>
+                        <?php
+                        echo $this->Html->link('Jobs', ['controller' => 'jobs', 'action' => 'joblist'])
+                        ?>
+                    </li>
                         <!-- /.nav-second-level -->
 
 
