@@ -52,6 +52,23 @@ class JobsController extends AppController
 
     }
 
+    public function joblist()
+    {
+        $jobs = $this->Jobs->find('all')
+            ->contain(['Sites', 'EventTypes', 'Customers', 'Employees']);
+        $this->set(compact('jobs'));
+        $session = $this->getRequest()->getSession();
+        $name = $session->read('Auth.User.access_level');
+        $this->set('name', $name);
+
+        //reference from the authentication code from function view()
+        if($this->Auth->user('access_level') !='1' && $this->Auth->user('access_level') !='2'){
+            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
+            $this->redirect($this->Auth->redirectUrl());
+        }
+
+    }
+
 
     /**
      * View method
@@ -81,8 +98,39 @@ class JobsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return array
      */
+
+    public function convert_date($cake_date){
+        $separate = explode("/",$cake_date);
+        $date=[];
+        $date['year'] = $separate[2];
+        $date['month'] = $separate[1];
+        $date['day'] = $separate[0];
+
+        return $date;
+    }
+
+    public function convert_datetime($cake_date){
+        $separate1 = explode(" ",$cake_date);
+
+        $separate2 = explode("/",$separate1[0]);
+        $date=[];
+        $date['year'] = $separate2[2];
+        $date['month'] = $separate2[1];
+        $date['day'] = $separate2[0];
+
+        $separate3 = explode(":",$separate1[1]);
+        debug($separate3[0]);
+        if ($separate1[2] == "PM"){
+            $separate3[0] = $separate3[0]+12;
+//            $separate3 = $separate3[0].":".$separate3[1];
+        }
+        $date['hour'] = $separate3[0];
+        $date['minute'] = $separate3[1];
+        return $date;
+
+    }
     public function add()
     {
         if($this->Auth->user('access_level')=='3'){
@@ -92,6 +140,43 @@ class JobsController extends AppController
 
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
+            $post = $this->request->getData();
+            //convert job date
+            $job_date = $post['job_date'];
+            if($job_date != "") {
+                $job_date = $this->convert_date($job_date);
+            }
+            $post['job_date'] = $job_date;
+            //job date end
+
+
+
+            //arrival time
+            $e_arrival_time = $post['e_arrival_time'];
+            if($e_arrival_time != "") {
+                $e_arrival_time = $this->convert_datetime($e_arrival_time);
+            }
+            $post['e_arrival_time'] = $e_arrival_time;
+
+
+            //setup time
+            $e_setup_time = $post['e_setup_time'];
+            if($e_setup_time != "") {
+                $e_setup_time = $this->convert_datetime($e_setup_time);
+            }
+            $post['e_setup_time'] = $e_setup_time;
+
+
+            //pickup time
+            $e_pickup_time = $post['e_pickup_time'];
+            if($e_pickup_time != "") {
+                $e_pickup_time = $this->convert_datetime($e_pickup_time);
+            }
+            $post['e_pickup_time'] = $e_pickup_time;
+
+
+
+
             $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
                 'associated' => [
                     'customers',
@@ -110,6 +195,7 @@ class JobsController extends AppController
             $job->edited_by = $staff->full_name;
             $job->employee_id = $this->Auth->user('id');
 
+            $job = $this->Jobs->patchEntity($job,$post);
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -426,52 +512,6 @@ class JobsController extends AppController
         $this->set('job', $job);
     }
 
-
-    public function exportJobData(){
-        $datatbp = '<table cellspacing="2" cellpadding="5" style="border: 2px;text-align: center;" border="1",width="60%">';
-
-        $datatbp .='<tr>
-
-                       <th style="text-align: center">Job Name</th>
-                       <th style="text-align: center">Status</th>
-                       <th style="text-align: center">Job Date</th>
-                       <th style="text-align: center">Booked Date</th>
-                       <th style="text-align: center">Price</th>
-                       <th style="text-align: center">Deposit</th>
-                       <th style="text-align: center">Expected arrival time</th>
-
-                    </tr>';
-
-        $contents = $this->Jobs->find('all')->toArray();
-        foreach ($contents as $content){
-            $jobName = $content['name'];
-            $jobStatus = $content['job_status'];
-            $jobDate = $content['job_date'];
-            $bookedDate = $content['booked_date'];
-            $price = $content['price'];
-            $deposit = $content['deposit'];
-            $exArrivalTime = $content['e_arrival_time'];
-
-            $datatbp .='<tr>
-
-                       <td style="text-align: center">'. $jobName.'</td>
-                       <td style="text-align: center">'. $jobStatus.'</td>
-                       <td style="text-align: center">'. $jobDate.'</td>
-                       <td style="text-align: center">'. $bookedDate.'</td>
-                       <td style="text-align: center">'. $price.'</td>
-                       <td style="text-align: center">'. $deposit.'</td>
-                       <td style="text-align: center">'. $exArrivalTime.'</td>
-
-                    </tr>';
-        }
-        $datatbp .="</table>";
-        header('Content-Type: application/force-download');
-        header('Content-disposition: attachment; filename= jobs.xls');
-        header("Pragma: ");
-        header("Cache-Control: ");
-        echo $datatbp;
-        die;
-    }
     public function orderview($id = null)
     {    //save job status
         $JobsTable = TableRegistry::get('Jobs');

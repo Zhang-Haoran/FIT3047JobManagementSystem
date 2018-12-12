@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Sites Model
  *
+ * @property |\Cake\ORM\Association\HasMany $Contacts
  * @property \App\Model\Table\JobsTable|\Cake\ORM\Association\HasMany $Jobs
  *
  * @method \App\Model\Entity\Site get($primaryKey, $options = [])
@@ -37,6 +38,9 @@ class SitesTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->hasMany('Contacts', [
+            'foreignKey' => 'site_id'
+        ]);
         $this->hasMany('Jobs', [
             'foreignKey' => 'site_id'
         ]);
@@ -94,6 +98,16 @@ class SitesTable extends Table
         $validator
             ->boolean('is_deleted')
             ->allowEmpty('is_deleted');
+
+        $validator
+            ->scalar('address2')
+            ->maxLength('address2', 45)
+            ->allowEmpty('address2');
+
+        $validator
+            ->scalar('address3')
+            ->maxLength('address3', 45)
+            ->allowEmpty('address3');
 
         return $validator;
     }

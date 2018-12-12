@@ -38,7 +38,6 @@
                     <tr>
                         <td class="center"><?= h($accessory->name) ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $accessory->id]) ?>
                             <?= $this->Html->link(__('Edit'), ['action' => 'edit', $accessory->id]) ?>
                             <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $accessory->id], ['confirm' => __('Are you sure you want to delete Accessory: {0}?', $accessory->name)]) ?>
                         </td>
@@ -49,3 +48,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#dataTables').DataTable({
+        responsive: true,
+        colReorder: false,
+    });
+</script>

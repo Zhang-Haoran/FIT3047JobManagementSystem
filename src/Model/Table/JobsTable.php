@@ -93,8 +93,9 @@ class JobsTable extends Table
             ->notEmpty('job_status');
 
         $validator
-            ->dateTime('job_date')
-            ->allowEmpty('job_date');
+            ->date('job_date')
+            ->requirePresence('job_date', 'create')
+            ->notEmpty('job_date');
 
         $validator
             ->dateTime('booked_date')

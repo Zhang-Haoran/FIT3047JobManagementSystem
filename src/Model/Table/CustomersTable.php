@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Customers Model
  *
  * @property \App\Model\Table\CustTypesTable|\Cake\ORM\Association\BelongsTo $CustTypes
+ * @property \App\Model\Table\ContactsTable|\Cake\ORM\Association\HasMany $Contacts
  * @property \App\Model\Table\JobsTable|\Cake\ORM\Association\HasMany $Jobs
  *
  * @method \App\Model\Entity\Customer get($primaryKey, $options = [])
@@ -41,6 +42,9 @@ class CustomersTable extends Table
         $this->belongsTo('CustTypes', [
             'foreignKey' => 'cust_type_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Contacts', [
+            'foreignKey' => 'customer_id'
         ]);
         $this->hasMany('Jobs', [
             'foreignKey' => 'customer_id'
@@ -77,6 +81,35 @@ class CustomersTable extends Table
             ->boolean('is_business')
             ->allowEmpty('is_business');
 
+        $validator
+            ->scalar('phone')
+            ->maxLength('phone', 15)
+            ->allowEmpty('phone');
+
+        $validator
+            ->email('email')
+            ->allowEmpty('email');
+
+        $validator
+            ->scalar('address')
+            ->maxLength('address', 45)
+            ->allowEmpty('address');
+
+        $validator
+            ->scalar('suburb')
+            ->maxLength('suburb', 45)
+            ->allowEmpty('suburb');
+
+        $validator
+            ->scalar('city')
+            ->maxLength('city', 45)
+            ->allowEmpty('city');
+
+        $validator
+            ->scalar('postcode')
+            ->maxLength('postcode', 5)
+            ->allowEmpty('postcode');
+
         return $validator;
     }
 
@@ -89,6 +122,7 @@ class CustomersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['cust_type_id'], 'CustTypes'));
 
         return $rules;

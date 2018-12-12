@@ -52,7 +52,25 @@
             </div>
         </div>
 
-    <?php echo $this->element('dashboard/quotePanel'); ?>
+    <div id="quote" class="col-lg-3 col-md-6" style="cursor: pointer">
+        <div class="panel panel-yellow">
+            <div class="panel-heading">
+                <div class="row">
+                    <div id="quoteN" class="col-xs-3 huge">💛</div>
+                    <div class="col-lg-8 text-right">
+                        <h3>Quoted</h3>
+                    </div>
+                </div>
+            </div>
+            <a id="quote-panel" style="cursor: pointer">
+                <div class="panel-footer">
+                    <span class="pull-left">Show</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
 
     <div id="allJob" class="col-lg-3 col-md-6">
         <div class="panel panel-green">
@@ -76,18 +94,19 @@
     </div>
 <div class="bd-example">
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-info', 'style' => '']) ?>
+    <?= $this->Html->link(__('New Pickup Job'), ['action' => 'addpickup'], ['class' => ' btn btn-success', 'style' => '']) ?>
     <button id="pickup" type="button" class="btn" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
 </div>
     <div class="row">
-        <div class="col-lg-8">
-            <div class="panel-body">
-                <table style="max-width: 100px" width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
+        <div class="col-lg-9">
+            <div class="panel-body" style="margin-left:-15px;">
+                <table style="max-width: 100px;" width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
                     <thead>
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
                             <th scope="col"><?= __('Status') ?></th>
                             <th scope="col"><?= __('Job Date') ?></th>
+                            <th scope="col"><?= __('Job Time') ?></th>
                             <th scope="col"><?= __('Price') ?></th>
                             <th scope="col"><?= __('Deposit') ?></th>
                             <th scope="col"><?= __('Site') ?></th>
@@ -117,7 +136,8 @@
                             elseif($job->job_status == 'Completed')
                             echo "<td class='bg-info text-white'>Completed</td>";
                             ?>
-                            <td><?= h($job->job_date) ?></td>
+                            <td><?= h($job->job_date->format('l jS F Y')) ?></td>
+                            <td><?= h($job->job_date->format('H:i A')) ?></td>
                             <td class="center">$<?= $this->Number->format($job->price) ?></td>
                             <td class="center">$<?= $this->Number->format($job->deposit) ?></td>
                             <td>
@@ -136,12 +156,7 @@
                             </td>
                             <td>
                                 <?php if($job->has('event_type')) {
-                                    if ($name == 1 || $name == 2) {
-                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'edit', $job->event_type->id]);
-                                    }
-                                    else{
-                                        echo h($job->event_type->name);
-                                    }
+                                    echo h($job->event_type->name);
                                 }
                                 else{
                                     '';
@@ -150,12 +165,7 @@
                             </td>
                             <td>
                                 <?php if($job->has('customer')) {
-                                    if ($name == 1 || $name == 2) {
-                                        echo $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]);
-                                    }
-                                    else{
-                                        echo h($job->customer->name);
-                                    }
+                                    echo h($job->customer->name);
                                 }
                                 else{
                                     '';
@@ -191,7 +201,7 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3" style="margin-top: 50px">
             <div class="panel panel-default">
                 <div class="panel-heading">Today Summary</div>
                 <div class="panel-body">
@@ -219,15 +229,21 @@
             </div>
         </div>
     </div>
-
-    <?php $this->start('script'); ?>
-    <script>
+<?php $this->start('script'); ?>
+<script>
 
     var button = -1;
     var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, total: 0, tTotal: 0};
 
+    function parseDate(date){
+        let dateArray = date.split(" ");
+        let day = parseInt(dateArray[1]);
+        let newDate = new Date(Date.parse(day + dateArray[2] + dateArray[3]));
+        return newDate;
+    }
+
     function statusCheck(data, status, today){
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let todayDate = new Date();
         let jobStatus = data[1];
         if(today)
@@ -251,7 +267,7 @@
     }
 
     function isToday(data, once){
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let today = new Date();
         let status = data[1];
 
@@ -266,9 +282,8 @@
     }
 
     function nextWeek(data){
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let today = new Date();
-        let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
         if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             return true;
@@ -277,9 +292,8 @@
 
     function getCount(data){
         let status = data[1];
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let today = new Date();
-        let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
         if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()) {
             number.tTotal++;
@@ -287,7 +301,7 @@
                 number.todayN++;
         }
 
-        else if(datetime <= 7 && datetime > 0)
+        else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
             number.nextWeekN++;
         number.total++;
 
@@ -307,7 +321,7 @@
     }
 
     function pickup(data){
-        if(data[5] === "")
+        if(data[6] === "")
             return true;
         return false;
     }
@@ -347,7 +361,10 @@
 
 
     $(document).ready(function() {
-        var table = $('#Jobs').DataTable();
+        var table = $('#Jobs').DataTable({
+            responsive: true,
+            colReorder: false
+        });
 
         $('#quote-panel').on('click', function(){
             button = 3;
@@ -435,5 +452,6 @@
 
     });
 
-    </script>
-    <?php $this->end(); ?>
+</script>
+<?php $this->end(); ?>
+

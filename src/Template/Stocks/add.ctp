@@ -29,11 +29,7 @@
             <div class="panel-body">
                 <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
             </div>
-        </div>
-    </div>
 
-    <div class="col col-lg-6">
-        <div class="panel panel-default">
             <div class="panel-heading">
                 Stock Details
             </div>
