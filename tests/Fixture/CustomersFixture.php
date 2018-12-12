@@ -25,7 +25,7 @@ class CustomersFixture extends TestFixture
         'phone' => ['type' => 'string', 'length' => 15, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'email' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'address' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
-        'surburb' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
+        'suburb' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'city' => ['type' => 'string', 'length' => 45, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         'postcode' => ['type' => 'string', 'length' => 5, 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'precision' => null, 'fixed' => null],
         '_indexes' => [
@@ -59,7 +59,7 @@ class CustomersFixture extends TestFixture
                 'phone' => 'Lorem ipsum d',
                 'email' => 'Lorem ipsum dolor sit amet',
                 'address' => 'Lorem ipsum dolor sit amet',
-                'surburb' => 'Lorem ipsum dolor sit amet',
+                'suburb' => 'Lorem ipsum dolor sit amet',
                 'city' => 'Lorem ipsum dolor sit amet',
                 'postcode' => 'Lor'
             ],
