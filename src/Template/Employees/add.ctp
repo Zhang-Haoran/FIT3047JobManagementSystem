@@ -27,11 +27,9 @@
                 <div class="form-group"><?= $this->Form->control('fname', ['class' => 'form-control','label' => 'First Name','placeholder' => 'This field is required']) ?></div>
                 <div class="form-group"><?= $this->Form->control('lname',  ['class' => 'form-control','label' => 'Last Name','placeholder' => 'This field is required']) ?></div>
             </div>
-        </div>
-    </div>
 
-    <div class="col col-lg-6">
-        <div class="panel panel-default">
+
+
             <div class="panel-heading">
                 Employee Details
             </div>
@@ -52,5 +50,4 @@
         </div>
         <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success btn-lg', 'id' => 'btnSubmit']) ?>
     </div>
-
 </div>
