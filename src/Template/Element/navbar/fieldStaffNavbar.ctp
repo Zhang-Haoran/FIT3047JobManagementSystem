@@ -49,9 +49,7 @@
                         echo $this->Html->link('Dashboard', ['controller' => 'jobs', 'action' => 'index'], ['escape' => false])
                         ?>
                     </li>
-
                         <!-- /.nav-second-level -->
-
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

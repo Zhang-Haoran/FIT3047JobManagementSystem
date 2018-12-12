@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Customers Model
  *
  * @property \App\Model\Table\CustTypesTable|\Cake\ORM\Association\BelongsTo $CustTypes
- * @property |\Cake\ORM\Association\HasMany $Contacts
+ * @property \App\Model\Table\ContactsTable|\Cake\ORM\Association\HasMany $Contacts
  * @property \App\Model\Table\JobsTable|\Cake\ORM\Association\HasMany $Jobs
  *
  * @method \App\Model\Entity\Customer get($primaryKey, $options = [])
@@ -96,9 +96,9 @@ class CustomersTable extends Table
             ->allowEmpty('address');
 
         $validator
-            ->scalar('surburb')
-            ->maxLength('surburb', 45)
-            ->allowEmpty('surburb');
+            ->scalar('suburb')
+            ->maxLength('suburb', 45)
+            ->allowEmpty('suburb');
 
         $validator
             ->scalar('city')
