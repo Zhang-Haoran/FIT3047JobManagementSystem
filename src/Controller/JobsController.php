@@ -137,17 +137,25 @@ class JobsController extends AppController
             }
         ]);
         $employees = $this->Jobs->Employees->find('list');
+
         $this->loadModel('Contacts');
+        $this->paginate = ['maxLimit' => 10, 'limit' => 10];
+//        $contacts = $this->paginate($this->Contacts);
+        $contacts2 = $this->paginate($this->Contacts);
+
+
+
         $contacts = $this->Contacts->find('list', [
             'keyField' => 'id',
             'valueField' => function ($contact) {
                 return $contact->get('label');
             }
         ]);
+
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
         //$csrfToken = $this->request->getParam('_csrfToken');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts', 'contacts2'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 

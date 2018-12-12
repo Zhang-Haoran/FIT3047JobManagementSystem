@@ -5,6 +5,19 @@
  */
 ?>
 
+<style>
+.colors {display:none;}
+</style>
+
+<script>
+    $(function() {
+        $('#contact_html_id').change(function(){
+            $('.colors').hide();
+            $('#' + $(this).val()).show();
+        });
+    });
+</script>
+
 
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
 <?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
@@ -113,7 +126,19 @@
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
                                         <div class="form-group">
+
+
                                             <?= $this->Form->control('contact_id', ['options' => $contacts, 'class' => 'form-control','id'=> 'contact_html_id']) ?>
+
+                                            <div id="contact_html_id2">
+                                            <?php foreach ($contacts2 as $contacts2): ?>
+                                            <div id="<?= $contacts2->id ?>" class="colors">
+                                            Phone: <?= $contacts2->phone ?><br>
+                                            Address: <?= $contacts2->street ?>, <?= $contacts2->suburb ?>, <?= $contacts2->city ?>, <?= $contacts2->postcode ?>
+                                            </div>
+                                            <?php endforeach; ?>
+                                            </div>
+
                                         </div>
 
                                     </div>
@@ -529,6 +554,11 @@
                     //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
 
                     $("#contact_html_id").append("<option value='" + $newContactId + "'>" + $newContactfName +' '+ $newContactlName + ' '+ '(' + $newContactemail + ')' + "</option>");
+
+                    $("#contact_html_id2").append("<div id=" + $newContactId + " class='colors'>Phone: " + $newContactphone + "<br>Address: " + $newContactstreet + ", " + $newContactsurburb + ", " + $newContactcity + ", " + $newContactpostcode + "</div>");
+
+
+
 
                     $("#contact_html_id").trigger("chosen:updated");
                 } else {
