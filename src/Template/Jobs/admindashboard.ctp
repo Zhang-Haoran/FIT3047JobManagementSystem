@@ -14,7 +14,9 @@
         <!-- /.col-lg-12 -->
 
         <!-- today panel-->
-        <div id="today" class="col-lg-3 col-md-6">
+    <div class="col-lg-12">
+        <div class="row">
+        <div id="today" class="col-lg-4 col-md-6" style="cursor: pointer">
             <div class="panel panel-red">
                 <div class="panel-heading">
                     <div class="row">
@@ -32,13 +34,13 @@
             </div>
         </div>
         <!-- coming week panel-->
-        <div id="nextWeek" class="col-lg-3 col-md-6">
+        <div id="nextWeek" class="col-lg-4 col-md-6" style="cursor: pointer">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="row">
-                        <div id="nextWeekN" class="col-xs-3 huge">💙</div>
+                        <div id="nextWeekN" class="col-xs-2 huge">💙</div>
                         <div class="">
-                            <div class="col-lg-8 text-right"><h3>Next week</h3></div>
+                            <div class="col-lg-9 text-right"><h3>Next Week</h3></div>
                         </div>
                     </div>
                 </div>
@@ -52,42 +54,103 @@
             </div>
         </div>
 
-        <?php echo $this->element('dashboard/quotePanel'); ?>
-
-    <div id="allJob" class="col-lg-3 col-md-6">
-        <div class="panel panel-green">
-            <div class="panel-heading">
-                <div class="row">
-                    <div id="total" class="col-xs-3 huge">💚</div>
-                    <div class="">
-                        <div class="col-lg-8 text-right"><h3>All Job</h3></div>
+        <div id="quote" class="col-lg-4 col-md-6" style="cursor: pointer">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div id="quoteN" class="col-xs-3 huge">💛</div>
+                        <div class="col-lg-8 text-right">
+                            <h3>Quoted</h3>
+                        </div>
                     </div>
                 </div>
+                <a id="quote-panel" style="cursor: pointer">
+                    <div class="panel-footer">
+                        <span class="pull-left">Show</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
             </div>
-            <a id="allJob-panel"  style="cursor: pointer">
-                <div class="panel-footer">
-                    <span class="pull-left">Show</span>
-                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                    <div class="clearfix"></div>
+        </div>
+        <!-- all job panel-->
+        <div id="allJob" class="col-lg-4 col-md-6" style="cursor: pointer">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div id="total" class="col-xs-3 huge">💚</div>
+                        <div class="">
+                            <div class="col-lg-8 text-right"><h3>All Job</h3></div>
+                        </div>
+                    </div>
                 </div>
-            </a>
+                <a id="allJob-panel"  style="cursor: pointer">
+                    <div class="panel-footer">
+                        <span class="pull-left">Show</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="pickupJob" class="col-lg-4 col-md-6" style="cursor: pointer">
+            <div class="panel panel-default" style="border-color: #5542a9">
+                <div class="panel-heading" style="background-color: #5542a9; color:white">
+                    <div class="row">
+                        <div id="pickup" class="col-xs-3 huge">💜</div>
+                        <div class="">
+                            <div class="col-lg-8 text-right"><h3>Pickup</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <a id="pickupJob-panel"  style="cursor: pointer; color:#5542a9">
+                    <div class="panel-footer">
+                        <span class="pull-left">Show</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div id="cancelledJob" class="col-lg-4 col-md-6" style="cursor: pointer">
+            <div class="panel panel-default" style="border-color: #757575">
+                <div class="panel-heading" style="background-color: #757575; color:white">
+                    <div class="row">
+                        <div id="cancelled" class="col-xs-3 huge">🖤</div>
+                        <div class="">
+                            <div class="col-lg-8 text-right"><h3>Cancelled</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <a id="cancelledJob-panel"  style="cursor: pointer; color: #757575">
+                    <div class="panel-footer">
+                        <span class="pull-left">Show</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
         </div>
     </div>
-    </div>
+</div>
 <div class="bd-example">
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <?= $this->Html->link(__('Download CSV'), ['action' => 'exportJobData'], ['class' => ' btn btn-info', 'style' => '']) ?>
-    <button id="pickup" type="button" class="btn" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
+    <?= $this->Html->link(__('New Pickup Job'), ['action' => 'addpickup'], ['class' => ' btn btn-success', 'style' => '']) ?>
+
 </div>
     <div class="row">
-        <div class="col-lg-8">
-            <div class="panel-body">
+        <div class="col-lg-9">
+            <div class="panel-body" style="margin-left: -15px;">
                 <table width="100%" class="table table-striped table-bordered table-hover" id="Jobs">
                     <thead>
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
                             <th scope="col"><?= __('Status') ?></th>
                             <th scope="col"><?= __('Job Date') ?></th>
+                            <th scope="col"><?= __('Job Time') ?></th>
                             <th scope="col"><?= __('Booked Date') ?></th>
                             <th scope="col"><?= __('Price') ?></th>
                             <th scope="col"><?= __('Deposit') ?></th>
@@ -106,19 +169,11 @@
                     <tbody>
                         <?php foreach ($jobs as $job): ?>
                         <tr>
-                            <?php   if($job->is_deleted == '1'){?>
-                                <td class='bg-danger' style="text-decoration: line-through"><?= h($job->name) ?></td>
+                            <td><?= h($job->name) ?></td>
                             <?php
-                            }else{
-                                ?>
-                                <td><?= h($job->name) ?></td>
-                            <?php
-                            }
-                            ?>
-
-
-                            <?php
-                            if( $job->job_status == 'Order')
+                            if($job->is_deleted == '1')
+                            echo "<td class='bg-default' style='color: white;background-color: #757575;'>Cancelled</td>";
+                            elseif( $job->job_status == 'Order')
                             echo "<td class='bg-danger text-white'>Order</td>";
                             elseif ($job->job_status == 'Ready')
                             echo "<td class='bg-success text-white'>Ready</td>";
@@ -127,8 +182,9 @@
                             elseif($job->job_status == 'Completed')
                             echo "<td class='bg-info text-white'>Completed</td>";
                             ?>
-                            <td><?= h($job->job_date) ?></td>
-                            <td class="center"><?= h($job->booked_date) ?></td>
+                            <td><?= h($job->job_date->format('l jS F Y')) ?></td>
+                            <td><?= h($job->job_date->format('g:i A')) ?></td>
+                            <td class="center"><?= h($job->booked_date->format('g:i A l jS F Y')) ?></td>
                             <td class="center">$<?= $this->Number->format($job->price) ?></td>
                             <td class="center">$<?= $this->Number->format($job->deposit) ?></td>
                             <td class="center"><?= h($job->e_arrival_time) ?></td>
@@ -150,12 +206,7 @@
                             </td>
                             <td>
                                 <?php if($job->has('event_type')) {
-                                    if ($name == 1 || $name == 2) {
-                                        echo $this->Html->link($job->event_type->name, ['controller' => 'EventTypes', 'action' => 'view', $job->event_type->id]);
-                                    }
-                                    else{
-                                        echo h($job->event_type->name);
-                                    }
+                                    echo h($job->event_type->name);
                                 }
                                 else{
                                     '';
@@ -164,12 +215,7 @@
                             </td>
                             <td>
                                 <?php if($job->has('customer')) {
-                                    if ($name == 1 || $name == 2) {
-                                        echo $this->Html->link($job->customer->name, ['controller' => 'Customers', 'action' => 'view', $job->customer->id]);
-                                    }
-                                    else{
-                                        echo h($job->customer->name);
-                                    }
+                                    echo h($job->customer->name);
                                 }
                                 else{
                                     '';
@@ -230,29 +276,29 @@
             </div>
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-3" style="margin-top: 57px">
             <div class="panel panel-default">
                 <div class="panel-heading"><b>Today Summary</b></div>
-                    <div class="list-group">
-                        <a id="totalC" class="list-group-item">Total Jobs
-                            <span id="totalN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="orderC" class="list-group-item">Jobs on order
-                            <span id="orderN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="readyC" class="list-group-item">Jobs on ready
-                            <span id="readyN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="completedC" class="list-group-item">Jobs completed
-                            <span id="completedN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="invoicedC" class="list-group-item">Jobs Invoiced
-                            <span id="invoicedN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="paidC" class="list-group-item">Jobs Paid
-                            <span id="paidN" class="pull-right text-muted small">0</span>
-                        </a>
-                    </div>
+                <div class="list-group">
+                    <a id="totalC" class="list-group-item">Total Jobs
+                        <span id="totalN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="orderC" class="list-group-item">Jobs on order
+                        <span id="orderN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="readyC" class="list-group-item">Jobs on ready
+                        <span id="readyN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="completedC" class="list-group-item">Jobs completed
+                        <span id="completedN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="invoicedC" class="list-group-item">Jobs Invoiced
+                        <span id="invoicedN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="paidC" class="list-group-item">Jobs Paid
+                        <span id="paidN" class="pull-right text-muted small">0</span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -261,10 +307,17 @@
 <script>
 
     var button = -1;
-    var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, total: 0, tTotal: 0};
+    var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, pickupN:0, total: 0, tTotal: 0, cancelN:0};
+
+    function parseDate(date){
+        let dateArray = date.split(" ");
+        let day = parseInt(dateArray[1]);
+        let newDate = new Date(Date.parse(day + dateArray[2] + dateArray[3]));
+        return newDate;
+    }
 
     function statusCheck(data, status, today){
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let todayDate = new Date();
         let jobStatus = data[1];
         if(today)
@@ -288,7 +341,7 @@
     }
 
     function isToday(data, once){
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let today = new Date();
         let status = data[1];
 
@@ -303,7 +356,7 @@
     }
 
     function nextWeek(data){
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let today = new Date();
 
         if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
@@ -313,9 +366,8 @@
 
     function getCount(data){
         let status = data[1];
-        let date = new Date (data[2]);
+        let date = parseDate(data[2]);
         let today = new Date();
-        let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
         if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()) {
             number.tTotal++;
@@ -339,11 +391,15 @@
             number.invoiceN++;
         if(status === 'Paid' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
             number.paidN++;
+        if(data[10] === "")
+            number.pickupN++;
+        if(status === 'Cancelled')
+            number.cancelN++;
 
     }
 
     function pickup(data){
-        if(data[9] === "")
+        if(data[10] === "")
             return true;
         return false;
     }
@@ -375,6 +431,8 @@
                     return statusCheck(data, 'Paid', true);
                 case 9:
                     return pickup(data);
+                case 10:
+                    return statusCheck(data, 'Cancelled', false);
             }
 
         }
@@ -383,29 +441,32 @@
 
 
     $(document).ready(function() {
-        var table = $('#Jobs').DataTable();
+        var table = $('#Jobs').DataTable({
+            responsive: true,
+            colReorder: false,
+        });
 
-        $('#quote-panel').on('click', function(){
+        $('#quote').on('click', function(){
             button = 3;
 
             table.draw();
         });
 
 
-        $('#today-panel').on('click', function(){
+        $('#today').on('click', function(){
             button = 1;
 
             table.draw();
         });
 
 
-        $('#nextWeek-panel').on('click', function(){
+        $('#nextWeek').on('click', function(){
             button = 2;
             table.draw();
         });
 
 
-        $('#allJob-panel').on('click', function(){
+        $('#allJob').on('click', function(){
             button = 0;
             table.draw();
 
@@ -447,8 +508,13 @@
 
         });
 
-        $('#pickup').on('click', function(){
+        $('#pickupJob').on('click', function(){
            button = 9;
+           table.draw();
+        });
+
+        $('#cancelledJob').on('click', function(){
+           button = 10;
            table.draw();
         });
 
@@ -466,6 +532,8 @@
         document.getElementById('total').innerHTML = number.total;
         document.getElementById('totalN').innerHTML = number.tTotal;
         document.getElementById('workForToday').innerHTML = number.todayN;
+        document.getElementById('pickup').innerHTML = number.pickupN;
+        document.getElementById('cancelled').innerHTML = number.cancelN;
 
 
 
