@@ -17,6 +17,10 @@ class JobsController extends AppController
     public function initialize()
     {
         parent::initialize();
+        $this->Auth->allow([
+            'index'
+
+        ]);
     }
 
     /**
@@ -33,16 +37,17 @@ class JobsController extends AppController
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
-
-        if($this->Auth->user('access_level')=='3'){
-            $this->render('fieldstaffdashboard');
-        }
-        elseif($this->Auth->user('access_level')=='2'){
-            $this->render('officestaffdashboard');
-        }
-        elseif($this->Auth->user('access_level')=='1'){
-            $this->render('admindashboard');
-        }
+            if($name) {
+                if ($this->Auth->user('access_level') == '3') {
+                    $this->render('fieldstaffdashboard');
+                } elseif ($this->Auth->user('access_level') == '2') {
+                    $this->render('officestaffdashboard');
+                } elseif ($this->Auth->user('access_level') == '1') {
+                    $this->render('admindashboard');
+                }
+            }else{
+                $this->redirect($this->Auth->logout());
+            }
 
 
     }
@@ -126,10 +131,11 @@ class JobsController extends AppController
 
     }
     public function add()
-    {   if($this->Auth->user('access_level')=='3'){
+    {
+        if($this->Auth->user('access_level')=='3'){
         $this->Flash->set(__('You have no authorization to access this page as a field staff'));
         return $this->redirect($this->Auth->redirectUrl());
-    }
+        }
 
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
@@ -170,12 +176,19 @@ class JobsController extends AppController
 
             $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
                 'associated' => [
-                    'customers'
+                    'customers',
+                    'site',
+                    'eventTypes',
                 ]
             ]);
+
+            //changing the time last changed to now
             $job->last_changed = Time::now();
+
+            //Adding the id of the employee that created the job
             $this->loadModel('Employees');
             $staff = $this->Employees->get($this->Auth->user('id'));
+
             $job->edited_by = $staff->full_name;
             $job->employee_id = $this->Auth->user('id');
 
@@ -211,11 +224,16 @@ class JobsController extends AppController
                 return $contact->get('label');
             }
         ]);
+        $contacts = $this->Contacts->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($contact) {
+                return $contact->get('label');
+            }
+        ]);
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
-        //$csrfToken = $this->request->getParam('_csrfToken');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
-        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
+        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
     }
 
     /**
