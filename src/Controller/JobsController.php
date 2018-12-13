@@ -245,15 +245,8 @@ class JobsController extends AppController
             $job->edited_by = $staff->full_name;
 
             if ($this->Jobs->save($job)) {
-                $date1 = $this->Jobs->get($id)->e_arrival_time;
-                $date2 = $this->Jobs->get($id)->e_setup_time;
-                if (strtotime($date1)<= strtotime($date2)){
-
                     $this->Flash->success(__('The job has been saved.'));
                     return $this->redirect(['action' => 'index']);
-                }elseif(strtotime($date1)> strtotime($date2)){
-                    $this->Flash->error(__('The expected setup time should be after arrival time. Please, try again.'));
-                }
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }

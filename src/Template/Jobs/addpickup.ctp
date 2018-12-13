@@ -6,9 +6,6 @@
 ?>
 
 
-<?= $this->html->css('jquery.datetimepicker.min.css')?>
-<?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
-
 <div>
     <button onclick="goBack()" class="btn btn-success">Go Back</button>
 
@@ -47,7 +44,7 @@
                         <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
+                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_date'))?></div>
                             <div class="form-group"><?= $this->Form->hidden('is_pickup',['label' => 'is pickup?','class' => 'checkbox','type' => 'checkbox','value'=>1]); ?></div>
                         </div>
 
@@ -236,38 +233,12 @@
     $('button#btnPrev').hide();
     $('button#Submit').hide();
 
-    $("#job_datetime").datetimepicker({
-        defaultDate: new Date(),
-        assumeNearbyYear: true,
-        step:30
+    $(function () {
+        $('#job_date').datetimepicker({
+            locale: 'en-au',
+            format: "L"
+        });
     });
-
-    $("#e_arrival_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
-    });
-    $("#e_setup_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
-    });
-    $("#e_pickup_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
-    });
-
-
-    $("#job_datetime").on("dp.change", function (e) {
-        $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_arrival_datetime").on("dp.change", function (e) {
-        $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-    $("#e_setup_datetime").on("dp.change", function (e) {
-        $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
-    });
-
 
     $(document).ready(function () {
         $("#type_html_id").chosen();
