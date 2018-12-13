@@ -73,26 +73,6 @@
                 </a>
             </div>
         </div>
-        <!-- all job panel-->
-        <div id="allJob" class="col-lg-4 col-md-6" style="cursor: pointer">
-            <div class="panel panel-green">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div id="total" class="col-xs-3 huge">💚</div>
-                        <div class="">
-                            <div class="col-lg-8 text-right"><h3>All Job</h3></div>
-                        </div>
-                    </div>
-                </div>
-                <a id="allJob-panel"  style="cursor: pointer">
-                    <div class="panel-footer">
-                        <span class="pull-left">Show</span>
-                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                        <div class="clearfix"></div>
-                    </div>
-                </a>
-            </div>
-        </div>
 
         <div id="pickupJob" class="col-lg-4 col-md-6" style="cursor: pointer">
             <div class="panel panel-default" style="border-color: #5542a9">
@@ -105,6 +85,27 @@
                     </div>
                 </div>
                 <a id="pickupJob-panel"  style="cursor: pointer; color:#5542a9">
+                    <div class="panel-footer">
+                        <span class="pull-left">Show</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- all job panel-->
+        <div id="allJob" class="col-lg-4 col-md-6" style="cursor: pointer">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div id="total" class="col-xs-3 huge">💚</div>
+                        <div class="">
+                            <div class="col-lg-8 text-right"><h3>All Job</h3></div>
+                        </div>
+                    </div>
+                </div>
+                <a id="allJob-panel"  style="cursor: pointer">
                     <div class="panel-footer">
                         <span class="pull-left">Show</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -172,15 +173,19 @@
                             <td><?= h($job->name) ?></td>
                             <?php
                             if($job->is_deleted == '1')
-                            echo "<td class='bg-default' style='color: white;background-color: #757575;'>Cancelled</td>";
+                            echo "<td class='bg-default' style='color: white;background-color: black;'>Cancelled</td>";
                             elseif( $job->job_status == 'Order')
                             echo "<td class='bg-danger text-white'>Order</td>";
                             elseif ($job->job_status == 'Ready')
-                            echo "<td class='bg-success text-white'>Ready</td>";
+                            echo "<td class='bg-info text-white'>Ready</td>";
                             elseif($job->job_status == 'Quote')
                             echo "<td class='bg-warning text-white'>Quote</td>";
                             elseif($job->job_status == 'Completed')
-                            echo "<td class='bg-info text-white'>Completed</td>";
+                            echo "<td class='bg-success text-white'>Completed</td>";
+                            elseif($job->job_status == 'Invoice')
+                            echo "<td class='bg-default text-white' style='background-color: #bbb4da;'>Invoice</td>";
+                            elseif($job->job_status == 'Paid')
+                            echo "<td class='bg-default text-white' style='background-color: #5bc0de85;'>Paid</td>";
                             ?>
                             <td><?= h($job->job_date->format('l jS F Y')) ?></td>
                             <td><?= h($job->job_date->format('g:i A')) ?></td>
@@ -268,6 +273,11 @@
                             <?php
                         }
                         ?>
+                                <?php if($job->job_status == 'Completed')
+                                    echo $this->Html->link(__('Invoice'), ['action' => 'invoice', $job->id], ['class' => 'btn btn-default', 'style' => 'width:100%;marign-left:1%;margin-top:1%;background-color: #5542a9;color: white;']);
+                                elseif($job->job_status == 'Invoice')
+                                    echo $this->Html->link(__('Paid'), ['action' => 'paid', $job->id], ['class' => 'btn btn-info', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
+                                ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -276,27 +286,47 @@
             </div>
         </div>
 
-        <div class="col-lg-3" style="margin-top: 77px">
+        <div class="col-lg-3 col-md-4" style="margin-top: 77px">
             <div class="panel panel-default">
                 <div class="panel-heading"><b>Today Summary</b></div>
                 <div class="list-group">
-                    <a id="totalC" class="list-group-item">Total Jobs
+                    <a id="totalC" class="list-group-item" style="cursor: pointer;">Total Jobs
                         <span id="totalN" class="pull-right text-muted small">0</span>
                     </a>
-                    <a id="orderC" class="list-group-item">Jobs on order
+                    <a id="orderC" class="list-group-item" style="cursor: pointer;">Jobs on order
                         <span id="orderN" class="pull-right text-muted small">0</span>
                     </a>
-                    <a id="readyC" class="list-group-item">Jobs on ready
+                    <a id="readyC" class="list-group-item" style="cursor: pointer;">Jobs on ready
                         <span id="readyN" class="pull-right text-muted small">0</span>
                     </a>
-                    <a id="completedC" class="list-group-item">Jobs completed
+                    <a id="completedC" class="list-group-item" style="cursor: pointer;">Jobs completed
                         <span id="completedN" class="pull-right text-muted small">0</span>
                     </a>
-                    <a id="invoicedC" class="list-group-item">Jobs Invoiced
+                    <a id="invoicedC" class="list-group-item" style="cursor: pointer;">Jobs Invoiced
                         <span id="invoicedN" class="pull-right text-muted small">0</span>
                     </a>
-                    <a id="paidC" class="list-group-item">Jobs Paid
+                    <a id="paidC" class="list-group-item" style="cursor: pointer;">Jobs Paid
                         <span id="paidN" class="pull-right text-muted small">0</span>
+                    </a>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>This month Summary</b></div>
+                <div class="list-group">
+                    <a class="list-group-item">Total Jobs
+                        <span id="totalMN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a class="list-group-item">Jobs Incomplete
+                        <span id="incompleteMN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a class="list-group-item">Jobs completed
+                        <span id="completedMN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a class="list-group-item">Jobs Paid
+                        <span id="paidMN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a class="list-group-item">Total Income ($)
+                        <span id="tIncomeMN" class="pull-right text-muted small">0</span>
                     </a>
                 </div>
             </div>

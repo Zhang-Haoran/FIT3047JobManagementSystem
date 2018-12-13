@@ -95,7 +95,7 @@
 <div class="bd-example">
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
     <?= $this->Html->link(__('New Pickup Job'), ['action' => 'addpickup'], ['class' => ' btn btn-success', 'style' => '']) ?>
-    <button id="pickup" type="button" class="btn" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
+    <button id="pickup" type="button" class="btn purpleB" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
 </div>
     <div class="row">
         <div class="col-lg-9">
@@ -127,14 +127,20 @@
                         <tr>
                             <td style="width: 50%"><?= h($job->name) ?></td>
                             <?php
-                            if( $job->job_status == 'Order')
+                            if($job->is_deleted == '1')
+                            echo "<td class='bg-default' style='color: white;background-color: black;'>Cancelled</td>";
+                            elseif( $job->job_status == 'Order')
                             echo "<td class='bg-danger text-white'>Order</td>";
                             elseif ($job->job_status == 'Ready')
-                            echo "<td class='bg-success text-white'>Ready</td>";
+                            echo "<td class='bg-info text-white'>Ready</td>";
                             elseif($job->job_status == 'Quote')
                             echo "<td class='bg-warning text-white'>Quote</td>";
                             elseif($job->job_status == 'Completed')
-                            echo "<td class='bg-info text-white'>Completed</td>";
+                            echo "<td class='bg-success text-white'>Completed</td>";
+                            elseif($job->job_status == 'Invoice')
+                            echo "<td class='bg-default text-white' style='background-color: #bbb4da;'>Invoice</td>";
+                            elseif($job->job_status == 'Paid')
+                            echo "<td class='bg-default text-white' style='background-color: #5bc0de85;'>Paid</td>";
                             ?>
                             <td><?= h($job->job_date->format('l jS F Y')) ?></td>
                             <td><?= h($job->job_date->format('H:i A')) ?></td>
@@ -187,10 +193,15 @@
                                 ?>
                             </td>
                             <td class="center"><?= h($job->booked_date) ?></td>
-                            <td style="width:6%">
+                            <td style="width:10%">
                                 <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']) ?>
-                                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;margin-top:1%']) ?>
+                                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                                <?php if($job->job_status == 'Completed')
+                                echo $this->Html->link(__('Invoice'), ['action' => 'invoice', $job->id], ['class' => 'btn btn-default', 'style' => 'width:100%;margin-top:1%;background-color: #5542a9;color: white;']);
+                                elseif($job->job_status == 'Invoice')
+                                echo $this->Html->link(__('Paid'), ['action' => 'paid', $job->id], ['class' => 'btn btn-info', 'style' => 'width:100%;margin-top:2%']);
+                                ?>
                             </td>
                         </tr>
                         <?php
@@ -204,28 +215,28 @@
         <div class="col-lg-3" style="margin-top: 57px">
             <div class="panel panel-default">
                 <div class="panel-heading">Today Summary</div>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <a id="totalC" href="#" class="list-group-item">Total Jobs
-                            <span id="totalN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="orderC" href="#" class="list-group-item">Jobs on order
-                            <span id="orderN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="readyC" href="#" class="list-group-item">Jobs on ready
-                            <span id="readyN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="completedC" href="#" class="list-group-item">Jobs completed
-                            <span id="completedN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="invoicedC" href="#" class="list-group-item">Jobs Invoiced
-                            <span id="invoicedN" class="pull-right text-muted small">0</span>
-                        </a>
-                        <a id="paidC" href="#" class="list-group-item">Jobs Paid
-                            <span id="paidN" class="pull-right text-muted small">0</span>
-                        </a>
-                    </div>
+
+                <div class="list-group">
+                    <a id="totalC" href="#" class="list-group-item">Total Jobs
+                        <span id="totalN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="orderC" href="#" class="list-group-item">Jobs on order
+                        <span id="orderN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="readyC" href="#" class="list-group-item">Jobs on ready
+                        <span id="readyN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="completedC" href="#" class="list-group-item">Jobs completed
+                        <span id="completedN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="invoicedC" href="#" class="list-group-item">Jobs Invoiced
+                        <span id="invoicedN" class="pull-right text-muted small">0</span>
+                    </a>
+                    <a id="paidC" href="#" class="list-group-item">Jobs Paid
+                        <span id="paidN" class="pull-right text-muted small">0</span>
+                    </a>
                 </div>
+
             </div>
         </div>
     </div>
