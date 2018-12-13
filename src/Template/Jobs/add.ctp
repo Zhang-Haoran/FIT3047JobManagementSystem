@@ -154,7 +154,7 @@
                                 <div class="panel-body">
 
                                     <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
-                                    <div id="site_html_id2">
+
 
                                 </div>
                             </div>
@@ -581,6 +581,7 @@
     });
 
 
+
     //Ajax form submit for newSite
     $("#addNewSite").submit(function(e) {
         //Get necessary info from the form
@@ -607,7 +608,7 @@
                     $newSitePostcode=data.postcode;
 
 
-                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
 
                     $("#site_html_id").append("<option value='" + $newSiteId + "'>" + $newSiteName +' '+ '(' + $newSiteAddress + ',  ' + $newSiteSuburb + ' '
                         + $newSitePostcode + ')' + "</option>");
@@ -622,6 +623,10 @@
 
         e.preventDefault(); //As the form don't actually submit and redirect to new page
     });
+
+
+    
+
 
     //hides all the contact information and shows only the one that is selected in the dropdownlist
     $(function() {
