@@ -648,8 +648,7 @@
                     if (data.error === false) {
                         //if a new contact is successfully added to database
                         $CustomerId = data.id;
-                        $CustomerfName = data.firstname;
-                        $CustomerlName=data.lastname;
+                        $CustomerfName = data.name;
                         $Customerphone=data.phone;
                         $Customeremail=data.email;
 
@@ -660,11 +659,12 @@
 
 
 
+
                         //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
 
 
 
-                        $("#cust_html_id2").html("Phone: " + $Customerphone + "<br>Address: " + $Customersuburb + ", " + $Customercity + ", " + $Customerpostcode + "</div>");
+                        $("#cust_html_id2").html("Phone: " + $Customerphone + "<br>Address: " + $Customeraddress+ ','+ $Customersuburb + ", " + $Customercity + ", " + $Customerpostcode + "</div>");
 
 
                     } else {
