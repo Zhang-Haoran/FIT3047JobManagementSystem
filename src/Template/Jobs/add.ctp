@@ -338,7 +338,7 @@
         });
 
         $('#e_arrival_datetime').datetimepicker({
-            useCurrent: false //Important! See issue #1075
+            useCurrent: false, //Important! See issue #1075
         });
         $("#job_date").on("dp.change", function (e) {
             $('#e_arrival_datetime').data("DateTimePicker").minDate(e.date);
@@ -350,7 +350,7 @@
 
     $(function () {
         $('#e_arrival_datetime').datetimepicker({
-            locale: 'en-au',
+            locale: 'en-au'
         });
         $('#e_setup_datetime').datetimepicker({
             useCurrent: false //Important! See issue #1075
