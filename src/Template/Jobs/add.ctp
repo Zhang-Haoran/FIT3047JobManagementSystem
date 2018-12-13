@@ -92,6 +92,7 @@
                                          $list_cust[$customer->id] = "{$customer->name} ({$customer->cust_type->name})";
                                     ?>
                                     <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
+                                    <div id="cust_html_id2">
                                 </div>
                             </div>
                             <div class="panel-heading">
@@ -625,7 +626,60 @@
     });
 
 
-    
+
+
+
+    //hides all the contact information and shows only the one that is selected in the dropdownlist
+    $(function() {
+        $('#cust_html_id').change(function(){
+            var url = "<?= $this->Url->build(['controller' => 'Customers', 'action' => 'jobView']) ?>"+"/"+$('#cust_html_id').val();
+
+
+            //Send out the ajax request
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) //This is the callback function that if server responses
+                {
+                    //TODO: Close the modal to let user customer is added
+                    //console.log(data);
+
+
+                    if (data.error === false) {
+                        //if a new contact is successfully added to database
+                        $CustomerId = data.id;
+                        $CustomerfName = data.firstname;
+                        $CustomerlName=data.lastname;
+                        $Customerphone=data.phone;
+                        $Customeremail=data.email;
+
+                        $Customeraddress=data.address;
+                        $Customersuburb=data.suburb;
+                        $Customercity=data.city;
+                        $Customerpostcode=data.postcode;
+
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+
+
+                        $("#cust_html_id2").html("Phone: " + $Customerphone + "<br>Address: " + $Customersuburb + ", " + $Customercity + ", " + $Customerpostcode + "</div>");
+
+
+                    } else {
+                        //If there's an error from the server
+                        alert(data.error);
+                    }
+                }
+            });
+        });
+    });
+
+
+
+
+
 
 
     //hides all the contact information and shows only the one that is selected in the dropdownlist
@@ -678,49 +732,7 @@
 
 
 
-    //hides all the contact information and shows only the one that is selected in the dropdownlist
-    $(function() {
-        $('#site_html_id').change(function(){
-            var url = "<?= $this->Url->build(['controller' => 'Site', 'action' => 'jobView']) ?>"+"/"+$('#site_html_id').val();
 
-
-            //Send out the ajax request
-            $.ajax({
-                type: "GET",
-                url: url,
-                success: function(data) //This is the callback function that if server responses
-                {
-                    //TODO: Close the modal to let user customer is added
-                    //console.log(data);
-
-
-                    if (data.error === false) {
-                        //if a new contact is successfully added to database
-
-                        $iteId = data.id;
-                        $SiteName = data.name;
-                        $SiteAddress=data.address;
-                        $SiteSuburb=data.suburb;
-                        $SitePostcode=data.postcode;
-
-
-
-
-                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
-
-
-
-                        $("#contact_html_id2").html("Phone: " + $Contactphone + "<br>Address: " + $Contactstreet + ", " + $Contactsurburb + ", " + $Contactcity + ", " + $Contactpostcode + "</div>");
-
-
-                    } else {
-                        //If there's an error from the server
-                        alert(data.error);
-                    }
-                }
-            });
-        });
-    });
 
 
 
