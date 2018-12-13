@@ -718,7 +718,7 @@
 
 
 
-                        $("#contact_html_id2").html("Phone: " + $Contactphone + "<br>Address: " + $Contactstreet + ", " + $Contactsurburb + ", " + $Contactcity + ", " + $Contactpostcode + "</div>");
+                        $("#contact_html_id2").html("Phone: " + $Contactphone + "<br>Address: " + $Contactstreet + ", " + $Contactsurburb + ", " + $Contactcity + ", " + $Contactpostcode );
 
 
                     } else {
