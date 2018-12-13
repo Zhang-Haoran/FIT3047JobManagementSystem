@@ -56,7 +56,7 @@
                             <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                                <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
+                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select the event date','label' => "Event Date",'type' => 'text','id' => 'job_date'))?></div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
 
                                 <div class="panel-heading">
@@ -224,7 +224,6 @@
 
 
 
-
         <div class="modal fade" id="CustAdd" role="dialog">
             <div class="modal-dialog" >
                 <div class="modal-content">
@@ -332,35 +331,57 @@
     $('button#btnPrev').hide();
     $('button#Submit').hide();
 
-    $("#job_datetime").datetimepicker({
-        defaultDate: new Date(),
-        timepicker:false,
+    $(function () {
+        $('#job_date').datetimepicker({
+            locale: 'en-au',
+            format: "L"
+        });
+
+        $('#e_arrival_datetime').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#job_date").on("dp.change", function (e) {
+            $('#e_arrival_datetime').data("DateTimePicker").minDate(e.date);
+        });
+        $("#e_arrival_datetime").on("dp.change", function (e) {
+            $('#job_date').data("DateTimePicker").maxDate(e.date);
+        });
     });
 
-    $("#e_arrival_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
+    $(function () {
+        $('#e_arrival_datetime').datetimepicker({
+            locale: 'en-au',
+        });
+        $('#e_setup_datetime').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $('#e_pickup_datetime').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#e_arrival_datetime").on("dp.change", function (e) {
+            $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
+        });
+        $("#e_setup_datetime").on("dp.change", function (e) {
+            $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
+        });
+        $("#e_setup_datetime").on("dp.change", function (e) {
+            $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+        });
+        $("#e_pickup_datetime").on("dp.change", function (e) {
+            $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
+        });
+
     });
-    $("#e_setup_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
-    });
-    $("#e_pickup_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
-    });
+
 
 
     $(document).ready(function () {
-
-
         $("#type_html_id").chosen();
         $("#cust_html_id").chosen();
         $("#site_html_id").chosen();
         $("#contact_html_id").chosen();
         $("#image_html_id").chosen();
     });
-
 
     $(function() {
         var $tabs = $('.col-lg-12 li');
@@ -467,6 +488,94 @@
 
 
 
+    //Ajax form submit for newCustomer
+    $("#addNewCustomer").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#CustAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if new event type is successfully added to database
+                    $newCustomerId = data.id;
+                    $newCustomerName = data.name;
+                    $isbusiness=data.is_business;
+                    // console.log($newCustomerId);
+                    // console.log($newCustomerName);
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + "</option>");
+
+                    $("#cust_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+
+
+
+    //Ajax form submit for newContacts
+    $("#addNewContact").submit(function(e) {
+        //Get necessary info from the form
+        var form = $(this);
+        var url = form.attr('action');
+        //Send out the ajax request
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
+            success: function(data) //This is the callback function that if server responses
+            {
+                //TODO: Close the modal to let user customer is added
+
+
+                $('#contactsAdd').modal('toggle');
+
+                if (data.error === false) {
+                    //if a new contact is successfully added to database
+                    $newContactId = data.id;
+                    $newContactfName = data.firstname;
+                    $newContactlName=data.lastname;
+                    $newContactphone=data.phone;
+                    $newContactemail=data.email;
+                    $newContactrole=data.role;
+                    $newContactstreet=data.street;
+                    $newContactsurburb=data.suburb;
+                    $newContactcity=data.city;
+                    $newContactpostcode=data.postcode;
+
+
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+                    $("#contact_html_id").append("<option value='" + $newContactId + "'>" + $newContactfName +' '+ $newContactlName + ' '+ '(' + $newContactemail + ')' + "</option>");
+
+                    $("#contact_html_id").trigger("chosen:updated");
+                } else {
+                    //If there's an error from the server
+                    alert(data.error);
+                }
+            }
+        });
+
+        e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
 
 
     //Ajax form submit for newSite
