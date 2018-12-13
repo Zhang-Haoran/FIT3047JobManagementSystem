@@ -17,6 +17,10 @@ class JobsController extends AppController
     public function initialize()
     {
         parent::initialize();
+        $this->Auth->allow([
+            'index'
+
+        ]);
     }
 
     /**
@@ -33,16 +37,17 @@ class JobsController extends AppController
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
-
-        if($this->Auth->user('access_level')=='3'){
-            $this->render('fieldstaffdashboard');
-        }
-        elseif($this->Auth->user('access_level')=='2'){
-            $this->render('officestaffdashboard');
-        }
-        elseif($this->Auth->user('access_level')=='1'){
-            $this->render('admindashboard');
-        }
+            if($name) {
+                if ($this->Auth->user('access_level') == '3') {
+                    $this->render('fieldstaffdashboard');
+                } elseif ($this->Auth->user('access_level') == '2') {
+                    $this->render('officestaffdashboard');
+                } elseif ($this->Auth->user('access_level') == '1') {
+                    $this->render('admindashboard');
+                }
+            }else{
+                $this->redirect($this->Auth->logout());
+            }
 
 
     }
@@ -93,26 +98,101 @@ class JobsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return array
      */
+
+    public function convert_date($cake_date){
+        $separate = explode("/",$cake_date);
+        $date=[];
+        $date['year'] = $separate[2];
+        $date['month'] = $separate[1];
+        $date['day'] = $separate[0];
+
+        return $date;
+    }
+
+    public function convert_datetime($cake_date){
+        $separate1 = explode(" ",$cake_date);
+
+        $separate2 = explode("/",$separate1[0]);
+        $date=[];
+        $date['year'] = $separate2[2];
+        $date['month'] = $separate2[1];
+        $date['day'] = $separate2[0];
+
+        $separate3 = explode(":",$separate1[1]);
+        if ($separate1[2] == "PM"){
+            $separate3[0] = $separate3[0]+12;
+//            $separate3 = $separate3[0].":".$separate3[1];
+        }
+        $date['hour'] = $separate3[0];
+        $date['minute'] = $separate3[1];
+        return $date;
+
+    }
     public function add()
-    {   if($this->Auth->user('access_level')=='3'){
+    {
+        if($this->Auth->user('access_level')=='3'){
         $this->Flash->set(__('You have no authorization to access this page as a field staff'));
         return $this->redirect($this->Auth->redirectUrl());
-    }
+        }
 
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
+            $post = $this->request->getData();
+            //convert job date
+            $job_date = $post['job_date'];
+            if($job_date != "") {
+                $job_date = $this->convert_date($job_date);
+            }
+            $post['job_date'] = $job_date;
+            //job date end
+
+
+            //arrival time
+            $e_arrival_time = $post['e_arrival_time'];
+            if($e_arrival_time != "") {
+                $e_arrival_time = $this->convert_datetime($e_arrival_time);
+            }
+            $post['e_arrival_time'] = $e_arrival_time;
+
+
+            //setup time
+            $e_setup_time = $post['e_setup_time'];
+            if($e_setup_time != "") {
+                $e_setup_time = $this->convert_datetime($e_setup_time);
+            }
+            $post['e_setup_time'] = $e_setup_time;
+
+
+            //pickup time
+            $e_pickup_time = $post['e_pickup_time'];
+            if($e_pickup_time != "") {
+                $e_pickup_time = $this->convert_datetime($e_pickup_time);
+            }
+            $post['e_pickup_time'] = $e_pickup_time;
+
+
+
             $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
                 'associated' => [
-                    'customers'
+                    'customers',
+                    'site',
+                    'eventTypes',
                 ]
             ]);
+
+            //changing the time last changed to now
             $job->last_changed = Time::now();
+
+            //Adding the id of the employee that created the job
             $this->loadModel('Employees');
             $staff = $this->Employees->get($this->Auth->user('id'));
+
             $job->edited_by = $staff->full_name;
             $job->employee_id = $this->Auth->user('id');
+
+            $job = $this->Jobs->patchEntity($job,$post);
 
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
@@ -144,20 +224,54 @@ class JobsController extends AppController
                 return $contact->get('label');
             }
         ]);
+        $contacts = $this->Contacts->find('list', [
+            'keyField' => 'id',
+            'valueField' => function ($contact) {
+                return $contact->get('label');
+            }
+        ]);
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
-        //$csrfToken = $this->request->getParam('_csrfToken');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
-        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
+        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
     }
 
     /**
      * Edit method
      *
      * @param string|null $id Job id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @return array
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
+    public function reconvert_date($cake_date){
+        $separate = explode("/",$cake_date);
+        $date=[];
+        $date['year'] = $separate[2];
+        $date['month'] = $separate[1];
+        $date['day'] = $separate[0];
+
+        return $date;
+    }
+    public function reconvert_datetime($cake_date){
+        $separate1 = explode(" ",$cake_date);
+
+        $separate2 = explode("/",$separate1[0]);
+        $date=[];
+        $date['year'] = $separate2[2];
+        $date['month'] = $separate2[1];
+        $date['day'] = $separate2[0];
+
+        $separate3 = explode(":",$separate1[1]);
+        if ($separate1[2] == "PM"){
+            $separate3[0] = $separate3[0]+12;
+//            $separate3 = $separate3[0].":".$separate3[1];
+        }
+        $date['hour'] =''.$separate3[0];
+        $date['minute'] = $separate3[1];
+        return $date;
+
+    }
+
     public function edit($id = null)
     {
         if ($this->Auth->user('access_level') == '3') {
@@ -168,23 +282,51 @@ class JobsController extends AppController
         $job = $this->Jobs->get($id, [
             'contain' => []
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $job = $this->Jobs->patchEntity($job, $this->request->getData());
+            $post = $this->request->getData();
+
+            //convert job date
+            $job_date = $post['job_date'];
+            $job_date = $this->reconvert_date($job_date);
+            $post['job_date'] =$job_date;
+            //job date end
+
+            //arrival time
+            $e_arrival_time = $post['e_arrival_time'];
+            if($e_arrival_time != "") {
+                $e_arrival_time = $this->reconvert_datetime($e_arrival_time);
+            }
+            $post['e_arrival_time'] = $e_arrival_time;
+            //arrival time end
+
+            //setup time
+            $e_setup_time = $post['e_setup_time'];
+            if($e_setup_time != "") {
+                $e_setup_time = $this->reconvert_datetime($e_setup_time);
+            }
+            $post['e_setup_time'] = $e_setup_time;
+            //setup time end
+
+            //pickup time
+            $e_pickup_time = $post['e_pickup_time'];
+            if($e_pickup_time != "") {
+                $e_pickup_time = $this->reconvert_datetime($e_pickup_time);
+            }
+            $post['e_pickup_time'] = $e_pickup_time;
+            //pickup time end
+
             $job->last_changed = Time::now();
             $this->loadModel('Employees');
             $staff = $this->Employees->get($this->Auth->user('id'));
             $job->edited_by = $staff->full_name;
 
-            if ($this->Jobs->save($job)) {
-                $date1 = $this->Jobs->get($id)->e_arrival_time;
-                $date2 = $this->Jobs->get($id)->e_setup_time;
-                if (strtotime($date1)<= strtotime($date2)){
 
+            $job = $this->Jobs->patchEntity($job,$post);
+
+            if ($this->Jobs->save($job)) {
                     $this->Flash->success(__('The job has been saved.'));
                     return $this->redirect(['action' => 'index']);
-                }elseif(strtotime($date1)> strtotime($date2)){
-                    $this->Flash->error(__('The expected setup time should be after arrival time. Please, try again.'));
-                }
             }
             $this->Flash->error(__('The job could not be saved. Please, try again.'));
         }
