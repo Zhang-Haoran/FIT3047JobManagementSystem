@@ -102,19 +102,19 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Expected Arrival Time') ?></th>
-            <td><?= h($job->e_arrival_time->format('g:i A l jS F Y')) ?></td>
+            <td><?= h($job->e_arrival_time) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Expected Setup Time') ?></th>
-            <td><?= h($job->e_setup_time->format('g:i A l jS F Y')) ?></td>
+            <td><?= h($job->e_setup_time) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Expected Pickup Time') ?></th>
-            <td><?= h($job->e_pickup_time->format('g:i A l jS F Y')) ?></td>
+            <td><?= h($job->e_pickup_time) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Last Changed') ?></th>
-            <td><?= h($job->last_changed->format('g:i A l jS F Y')) ?></td>
+            <td><?= h($job->last_changed) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Order Detail') ?></th>
