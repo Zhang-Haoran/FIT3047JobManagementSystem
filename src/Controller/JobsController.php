@@ -374,6 +374,56 @@ class JobsController extends AppController
     }
 
     /**
+     * invoiced method
+     *
+     * change job status to 'invoice'
+     * change job status to 'invoice'
+     * change job status to 'invoice'
+     */
+
+    public function invoice($id = null)
+    {
+        $job = $this->Jobs->get($id, [
+            'contain' => []
+        ]);
+        $job->job_status = 'Invoice';
+
+        if ($this->Jobs->save($job)) {
+            $this->Flash->success(__('Job status updated'));
+        }
+        else{
+            $this->Flash->error(__('Job status cannot be updated. Please, try again.'));
+
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * paid method
+     *
+     * change job status to 'paid'
+     * change job status to 'paid'
+     * change job status to 'paid'
+     */
+
+    public function paid($id = null)
+    {
+        $job = $this->Jobs->get($id, [
+            'contain' => []
+        ]);
+        $job->job_status = 'Paid';
+
+        if ($this->Jobs->save($job)) {
+            $this->Flash->success(__('Job status updated'));
+        }
+        else{
+            $this->Flash->error(__('Job status cannot be updated. Please, try again.'));
+
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
+    /**
      * Delete method
      *
      * @param string|null $id Job id.

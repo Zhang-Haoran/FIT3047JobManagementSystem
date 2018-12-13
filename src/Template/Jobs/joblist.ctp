@@ -52,15 +52,19 @@
                     <td><?= h($job->name) ?></td>
                     <?php
                             if($job->is_deleted == '1')
-                    echo "<td class='bg-default' style='color: white;background-color: #757575;'>Cancelled</td>";
+                    echo "<td class='bg-default' style='color: white;background-color: black;'>Cancelled</td>";
                     elseif( $job->job_status == 'Order')
                     echo "<td class='bg-danger text-white'>Order</td>";
                     elseif ($job->job_status == 'Ready')
-                    echo "<td class='bg-success text-white'>Ready</td>";
+                    echo "<td class='bg-info text-white'>Ready</td>";
                     elseif($job->job_status == 'Quote')
                     echo "<td class='bg-warning text-white'>Quote</td>";
                     elseif($job->job_status == 'Completed')
-                    echo "<td class='bg-info text-white'>Completed</td>";
+                    echo "<td class='bg-success text-white'>Completed</td>";
+                    elseif($job->job_status == 'Invoice')
+                    echo "<td class='bg-default text-white' style='background-color: #bbb4da;'>Invoice</td>";
+                    elseif($job->job_status == 'Paid')
+                    echo "<td class='bg-default text-white' style='background-color: #5bc0de85;'>Paid</td>";
                     ?>
                     <td><?= h($job->job_date->format('l jS F Y')) ?></td>
                     <td><?= h($job->job_date->format('g:i A')) ?></td>

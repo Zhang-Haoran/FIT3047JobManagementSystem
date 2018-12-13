@@ -1,5 +1,6 @@
 var button = -1;
 var number = {quoteN: 0, orderN: 0, readyN: 0, completedN: 0, invoiceN: 0, paidN: 0, todayN: 0, nextWeekN:0, pickupN:0, total: 0, tTotal: 0, cancelN:0};
+var numberM = {total:0, completedN:0, incompletedN:0, paidN:0, income:0};
 
 function parseDate(date){
     let dateArray = date.split(" ");
@@ -24,7 +25,7 @@ function statusCheck(data, status, today){
 function encourage(){
     let randomN = Math.floor(Math.random()*10 + 1);
     let encouragement = [', have a nice day!', ', do your best!', ', you got this!', ', what a day!', ', lets do this!', ', just another day in the office!', ', good luck!',
-        ', you are filled with determination!', ', lets get this over with', ', marquees! Marquees everywhere!', ', piece of cake!'];
+        ', you are filled with determination!', ', lets get this over with!', ', marquees! Marquees everywhere!', ', piece of cake!'];
     if(number.todayN === 0) {
         document.getElementById('workForToday').style.color = "green";
         randomN = 0;
@@ -60,34 +61,63 @@ function getCount(data){
     let status = data[1];
     let date = parseDate(data[2]);
     let today = new Date();
-
+    //counting total jobs for both today summary and the green panel
     if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()) {
         number.tTotal++;
         if (status !== 'Completed')
             number.todayN++;
     }
-
+    //counting jobs for next week and total amount of jobs
     else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
         number.nextWeekN++;
     number.total++;
 
+    //counting quoted jobs
     if(status === 'Quote')
         number.quoteN++;
-    if(status === 'Order' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-        number.orderN++;
-    if(status === 'Ready' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-        number.readyN++;
-    if(status === 'Completed' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-        number.completedN++;
-    if(status === 'Invoice' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-        number.invoiceN++;
-    if(status === 'Paid' && date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear())
-        number.paidN++;
+    //counting jobs for today summary
+    if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()){
+
+        switch (status) {
+            case 'Order':
+                number.orderN++;
+                break;
+            case 'Ready':
+                number.readyN++;
+                break;
+            case 'Completed':
+                number.completedN++;
+                break;
+            case 'Invoice':
+                number.invoiceN++;
+                break;
+            case 'Paid':
+                number.paidN++;
+        }
+
+    }
+    //counting pickup jobs
     if(data[10] === "")
         number.pickupN++;
+    //counting cancelled jobs
     if(status === 'Cancelled')
         number.cancelN++;
 
+    //counting jobs for this month summary
+    if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()){
+        switch (status){
+            case 'Completed':
+                numberM.completedN++;
+                break;
+            case "Paid":
+                numberM.paidN++;
+                let price = Number (data[5].replace(/[^0-9.-]+/g,""));
+                numberM.income += price;
+                break;
+            default:
+                numberM.incompletedN++;
+        }
+    }
 }
 
 function pickup(data){
@@ -230,19 +260,32 @@ $(document).ready(function() {
     button = 0;
     table.draw();
     encourage();
+    //display panel number
+    document.getElementById('todayN').innerHTML = number.todayN;
+    document.getElementById('nextWeekN').innerHTML = number.nextWeekN;
     document.getElementById('quoteN').innerHTML = number.quoteN;
+    document.getElementById('pickup').innerHTML = number.pickupN;
+    document.getElementById('total').innerHTML = number.total;
+    document.getElementById('cancelled').innerHTML = number.cancelN;
+
+    //display number for encouragement
+    document.getElementById('workForToday').innerHTML = number.todayN;
+
+    //display today summary number
+    document.getElementById('totalN').innerHTML = number.tTotal;
     document.getElementById('orderN').innerHTML = number.orderN;
     document.getElementById('readyN').innerHTML = number.readyN;
     document.getElementById('completedN').innerHTML = number.completedN;
     document.getElementById('invoicedN').innerHTML = number.invoiceN;
     document.getElementById('paidN').innerHTML = number.paidN;
-    document.getElementById('nextWeekN').innerHTML = number.nextWeekN;
-    document.getElementById('todayN').innerHTML = number.todayN;
-    document.getElementById('total').innerHTML = number.total;
-    document.getElementById('totalN').innerHTML = number.tTotal;
-    document.getElementById('workForToday').innerHTML = number.todayN;
-    document.getElementById('pickup').innerHTML = number.pickupN;
-    document.getElementById('cancelled').innerHTML = number.cancelN;
+
+
+    //display this month summary number
+    document.getElementById('totalMN').innerHTML = numberM.total;
+    document.getElementById('incompleteMN').innerHTML = numberM.incompletedN;
+    document.getElementById('completedMN').innerHTML = numberM.completedN;
+    document.getElementById('paidMN').innerHTML = numberM.paidN;
+    document.getElementById('tIncomeMN').innerHTML = numberM.income;
 
 
 
