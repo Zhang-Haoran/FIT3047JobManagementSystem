@@ -25,7 +25,7 @@ function statusCheck(data, status, today){
 function encourage(){
     let randomN = Math.floor(Math.random()*10 + 1);
     let encouragement = [', have a nice day!', ', do your best!', ', you got this!', ', what a day!', ', lets do this!', ', just another day in the office!', ', good luck!',
-        ', you are filled with determination!', ', lets get this over with', ', marquees! Marquees everywhere!', ', piece of cake!'];
+        ', you are filled with determination!', ', lets get this over with!', ', marquees! Marquees everywhere!', ', piece of cake!'];
     if(number.todayN === 0) {
         document.getElementById('workForToday').style.color = "green";
         randomN = 0;
