@@ -154,6 +154,7 @@
                                 <div class="panel-body">
 
                                     <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
+                                    <div id="site_html_id2">
 
                                 </div>
                             </div>
@@ -287,7 +288,9 @@
                 <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd'], 'id' =>'addNewSite' ]) ?>
                 <fieldset>
                     <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address 1', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address 2', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address 3', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </fieldset>
@@ -667,6 +670,56 @@
             });
         });
     });
+
+
+
+    //hides all the contact information and shows only the one that is selected in the dropdownlist
+    $(function() {
+        $('#site_html_id').change(function(){
+            var url = "<?= $this->Url->build(['controller' => 'Site', 'action' => 'jobView']) ?>"+"/"+$('#site_html_id').val();
+
+
+            //Send out the ajax request
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) //This is the callback function that if server responses
+                {
+                    //TODO: Close the modal to let user customer is added
+                    //console.log(data);
+
+
+                    if (data.error === false) {
+                        //if a new contact is successfully added to database
+
+                        $iteId = data.id;
+                        $SiteName = data.name;
+                        $SiteAddress=data.address;
+                        $SiteSuburb=data.suburb;
+                        $SitePostcode=data.postcode;
+
+
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+
+
+                        $("#contact_html_id2").html("Phone: " + $Contactphone + "<br>Address: " + $Contactstreet + ", " + $Contactsurburb + ", " + $Contactcity + ", " + $Contactpostcode + "</div>");
+
+
+                    } else {
+                        //If there's an error from the server
+                        alert(data.error);
+                    }
+                }
+            });
+        });
+    });
+
+
+
+
 </script>
 
 
