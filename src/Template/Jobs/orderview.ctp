@@ -170,7 +170,9 @@
                     <td>    <?= $this->Html->link("Upload Image",['controller' => 'Images', 'action' => 'add', $job->id],['class' => 'btn btn-info align-right'])?>
                         <p></p>
                         <div class="w3-content w3-display-container">
-                            <?php foreach ($job->images as $image): ?>
+                            <?php foreach ($job->images as $image):
+
+                                ?>
 
 
                                 <div class="mySlides">
@@ -183,9 +185,34 @@
                                 </div>
                             <?php endforeach; ?>
 
-                            <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                            <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-                        </div>
+
+
+                            <?php
+                            $cout = 0;
+                            foreach ($job->images as $image):
+
+                            if ($image->id != ''){
+
+                                    $cout = $cout + 1;
+                                    if ($cout >1) {
+
+
+                                        ?>
+
+                                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">
+                                            &#10094;
+                                        </button>
+                                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">
+                                            &#10095;
+                                        </button>
+                                        <?php
+                                    }
+                            }
+                            ?>
+                            <?php endforeach;
+
+
+                            ?>
 
                     </td>
                 </tr>
