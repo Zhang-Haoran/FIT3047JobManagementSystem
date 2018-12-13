@@ -216,19 +216,15 @@ class JobsController extends AppController
         ]);
         $employees = $this->Jobs->Employees->find('list');
 
-        $this->loadModel('Contacts');
-        $this->paginate = ['maxLimit' => 10, 'limit' => 10];
-//        $contacts = $this->paginate($this->Contacts);
-        $contacts2 = $this->paginate($this->Contacts);
 
 
-
-        $contacts = $this->Contacts->find('list', [
+        $contacts = $this->Jobs->Contacts->find('list', [
             'keyField' => 'id',
             'valueField' => function ($contact) {
                 return $contact->get('label');
             }
         ]);
+
 
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');

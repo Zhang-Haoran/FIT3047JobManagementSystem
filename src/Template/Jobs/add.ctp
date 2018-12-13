@@ -9,14 +9,8 @@
 .colors {display:none;}
 </style>
 
-<script>
-    $(function() {
-        $('#contact_html_id').change(function(){
-            $('.colors').hide();
-            $('#' + $(this).val()).show();
-        });
-    });
-</script>
+
+
 
 
 <?= $this->html->css('jquery.datetimepicker.min.css')?>
@@ -127,16 +121,10 @@
                                     <div class="panel-body">
                                         <div class="form-group">
 
-
                                             <?= $this->Form->control('contact_id', ['options' => $contacts, 'class' => 'form-control','id'=> 'contact_html_id']) ?>
-
                                             <div id="contact_html_id2">
-                                            <?php foreach ($contacts2 as $contacts2): ?>
-                                            <div id="<?= $contacts2->id ?>" class="colors">
-                                            Phone: <?= $contacts2->phone ?><br>
-                                            Address: <?= $contacts2->street ?>, <?= $contacts2->suburb ?>, <?= $contacts2->city ?>, <?= $contacts2->postcode ?>
-                                            </div>
-                                            <?php endforeach; ?>
+
+
                                             </div>
 
                                         </div>
@@ -233,6 +221,7 @@
         </div>
     </div>
 </div>
+
 
 
 
@@ -338,8 +327,6 @@
             </div>
         </div>
     </div>
-
-
 <?php $this->start('script'); ?>
 <script>
     $('button#btnPrev').hide();
@@ -365,12 +352,15 @@
 
 
     $(document).ready(function () {
+
+
         $("#type_html_id").chosen();
         $("#cust_html_id").chosen();
         $("#site_html_id").chosen();
         $("#contact_html_id").chosen();
         $("#image_html_id").chosen();
     });
+
 
     $(function() {
         var $tabs = $('.col-lg-12 li');
@@ -477,99 +467,6 @@
 
 
 
-    //Ajax form submit for newCustomer
-    $("#addNewCustomer").submit(function(e) {
-        //Get necessary info from the form
-        var form = $(this);
-        var url = form.attr('action');
-        //Send out the ajax request
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
-            success: function(data) //This is the callback function that if server responses
-            {
-                //TODO: Close the modal to let user customer is added
-
-
-                $('#CustAdd').modal('toggle');
-
-                if (data.error === false) {
-                    //if new event type is successfully added to database
-                    $newCustomerId = data.id;
-                    $newCustomerName = data.name;
-                    $isbusiness=data.is_business;
-                    // console.log($newCustomerId);
-                    // console.log($newCustomerName);
-                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
-
-                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + "</option>");
-
-                    $("#cust_html_id").trigger("chosen:updated");
-                } else {
-                    //If there's an error from the server
-                    alert(data.error);
-                }
-            }
-        });
-
-        e.preventDefault(); //As the form don't actually submit and redirect to new page
-    });
-
-
-
-
-
-    //Ajax form submit for newContacts
-    $("#addNewContact").submit(function(e) {
-        //Get necessary info from the form
-        var form = $(this);
-        var url = form.attr('action');
-        //Send out the ajax request
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: form.serialize(), //This is used to put the data from the form to format that server can recognise
-            success: function(data) //This is the callback function that if server responses
-            {
-                //TODO: Close the modal to let user customer is added
-
-
-                $('#contactsAdd').modal('toggle');
-
-                if (data.error === false) {
-                    //if a new contact is successfully added to database
-                    $newContactId = data.id;
-                    $newContactfName = data.firstname;
-                    $newContactlName=data.lastname;
-                    $newContactphone=data.phone;
-                    $newContactemail=data.email;
-                    $newContactrole=data.role;
-                    $newContactstreet=data.street;
-                    $newContactsurburb=data.suburb;
-                    $newContactcity=data.city;
-                    $newContactpostcode=data.postcode;
-
-
-                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
-
-                    $("#contact_html_id").append("<option value='" + $newContactId + "'>" + $newContactfName +' '+ $newContactlName + ' '+ '(' + $newContactemail + ')' + "</option>");
-
-                    $("#contact_html_id2").append("<div id=" + $newContactId + " class='colors'>Phone: " + $newContactphone + "<br>Address: " + $newContactstreet + ", " + $newContactsurburb + ", " + $newContactcity + ", " + $newContactpostcode + "</div>");
-
-
-
-
-                    $("#contact_html_id").trigger("chosen:updated");
-                } else {
-                    //If there's an error from the server
-                    alert(data.error);
-                }
-            }
-        });
-
-        e.preventDefault(); //As the form don't actually submit and redirect to new page
-    });
 
 
     //Ajax form submit for newSite
@@ -614,6 +511,55 @@
         e.preventDefault(); //As the form don't actually submit and redirect to new page
     });
 
+    //hides all the contact information and shows only the one that is selected in the dropdownlist
+    $(function() {
+        $('#contact_html_id').change(function(){
+            var url = "<?= $this->Url->build(['controller' => 'Contacts', 'action' => 'jobView']) ?>"+"/"+$('#contact_html_id').val();
 
+
+            //Send out the ajax request
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) //This is the callback function that if server responses
+                {
+                    //TODO: Close the modal to let user customer is added
+                    //console.log(data);
+
+
+                    if (data.error === false) {
+                        //if a new contact is successfully added to database
+                        $ContactId = data.id;
+                        $ContactfName = data.firstname;
+                        $ContactlName=data.lastname;
+                        $Contactphone=data.phone;
+                        $Contactemail=data.email;
+                        $Contactrole=data.role;
+                        $Contactstreet=data.street;
+                        $Contactsurburb=data.suburb;
+                        $Contactcity=data.city;
+                        $Contactpostcode=data.postcode;
+
+
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+
+
+                        $("#contact_html_id2").html("Phone: " + $Contactphone + "<br>Address: " + $Contactstreet + ", " + $Contactsurburb + ", " + $Contactcity + ", " + $Contactpostcode + "</div>");
+
+
+                    } else {
+                        //If there's an error from the server
+                        alert(data.error);
+                    }
+                }
+            });
+        });
+    });
 </script>
+
+
+
 <?php $this->end(); ?>
