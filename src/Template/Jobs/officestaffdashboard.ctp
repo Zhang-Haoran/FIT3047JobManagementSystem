@@ -212,7 +212,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3" style="margin-top: 57px">
+        <div class="col-lg-3" style="margin-top: 50px">
             <div class="panel panel-default">
                 <div class="panel-heading">Today Summary</div>
 

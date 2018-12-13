@@ -17,10 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Component\AuthComponent;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
-Use Cake\I18n\Time;
-Use Cake\I18n\Date;
-Use Cake\I18n\FrozenTime;
-Use Cake\I18n\FrozenDate;
+
 
 /**
  * Application Controller
@@ -44,11 +41,6 @@ class AppController extends Controller
     public function initialize()
     {
         parent::initialize();
-
-        Time::setToStringFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable DateTime
-        FrozenTime::setToStringFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable DateTime
-        Date::setToStringFormat('yyyy-MM-dd HH:mm:ss');  // For any mutable Date
-        FrozenDate::setToStringFormat('yyyy-MM-dd HH:mm:ss');  // For any immutable Date
 
         $this->loadComponent('RequestHandler', [
             'enableBeforeRedirect' => false,

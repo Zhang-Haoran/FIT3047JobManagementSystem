@@ -5,10 +5,6 @@
  */
 ?>
 
-
-<?= $this->html->css('jquery.datetimepicker.min.css')?>
-<?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
-
 <div>
     <button onclick="goBack()" class="btn btn-success">Go Back</button>
 
@@ -49,7 +45,7 @@
                             <div class="col-lg-6">
                             <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_status', array('class' => 'form-control', 'type' => 'select', 'options' => $statusOptions)) ?></div>
-                                <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select job date','label' => "Event Date",'type' => 'text','empty'=>'true','id' => 'job_datetime'))?></div>
+                            <div class="form-group"><?= $this->Form->control('job_date', array('class' => 'form-control','placeholder'=>'Please select the event date','label' => "Event Date",'type' => 'text','id' => 'job_date'))?></div>
                             <div class="form-group"><?= $this->Form->control('event_type_id', ['options' => $eventTypes, 'class' => 'form-control','id'=> 'type_html_id']) ?></div>
 
                                 <div class="panel-heading">
@@ -317,23 +313,48 @@
     $('button#btnPrev').hide();
     $('button#Submit').hide();
 
-    $("#job_datetime").datetimepicker({
-        defaultDate: new Date(),
-        timepicker:false,
+    $(function () {
+        $('#job_date').datetimepicker({
+            locale: 'en-au',
+            format: "L"
+        });
+
+        $('#e_arrival_datetime').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#job_date").on("dp.change", function (e) {
+            $('#e_arrival_datetime').data("DateTimePicker").minDate(e.date);
+        });
+        $("#e_arrival_datetime").on("dp.change", function (e) {
+            $('#job_date').data("DateTimePicker").maxDate(e.date);
+        });
     });
 
-    $("#e_arrival_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
+    $(function () {
+        $('#e_arrival_datetime').datetimepicker({
+            locale: 'en-au',
+        });
+        $('#e_setup_datetime').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $('#e_pickup_datetime').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#e_arrival_datetime").on("dp.change", function (e) {
+            $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
+        });
+        $("#e_setup_datetime").on("dp.change", function (e) {
+            $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
+        });
+        $("#e_setup_datetime").on("dp.change", function (e) {
+            $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
+        });
+        $("#e_pickup_datetime").on("dp.change", function (e) {
+            $('#e_setup_datetime').data("DateTimePicker").maxDate(e.date);
+        });
+
     });
-    $("#e_setup_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
-    });
-    $("#e_pickup_datetime").datetimepicker({
-        defaultDate: new Date(),
-        step:30
-    });
+
 
 
     $(document).ready(function () {

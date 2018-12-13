@@ -34,6 +34,7 @@
     <?= $this->Html->css('https://use.fontawesome.com/releases/v5.3.1/css/all.css') ?>
 
     <?= $this->Html->css('/css/animate.css') ?>
+    <?= $this->Html->css('/css/bootstrap-datetimepicker.min')?>
     <?= $this->Html->css('bootstrap-multiselect.css') ?>
     <?= $this->Html->css('chosen.min.css') ?>
     <?= $this->Html->css('select2.min.css') ?>
@@ -66,6 +67,7 @@
 
 
     ?>
+    <!-- calling all the java scripts dependencies -->
     <?= $this->Html->script('/vendor/jquery/jquery.min.js') ?>
     <?= $this->Html->script('/vendor/bootstrap/js/bootstrap.min.js') ?>
     <?= $this->Html->script('/vendor/metisMenu/metisMenu.min.js') ?>
@@ -78,7 +80,10 @@
     <?= $this->Html->script('chosen.jquery.js') ?>
     <?= $this->Html->script('select2.min.js') ?>
     <?= $this->Html->script('bootstrap-multiselect.js') ?>
+    <?= $this->Html->script('/js/locale.js') ?>
+    <?= $this->Html->script('/js/bootstrap-datetimepicker.min.js') ?>
     <?= $this->fetch('scriptBottom'); ?>
+
     <div id="page-wrapper">
 
         <div class="container-fluid">
@@ -99,11 +104,11 @@
 
 <!-- /#wrapper -->
 
-<!-- calling all the java scripts dependencies -->
 
 
 <!--calling script.js-->
 <?= $this->Html->script('/js/script.js') ?>
+
 
 
 <!--Call for code from script render and from the buffered block-->
