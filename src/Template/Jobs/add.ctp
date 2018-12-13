@@ -316,36 +316,40 @@
     $(function () {
         $('#job_date').datetimepicker({
             locale: 'en-au',
-            format: "L"
+            format: "L",
+            stepping: 30
         });
 
         $('#e_arrival_datetime').datetimepicker({
-            useCurrent: false //Important! See issue #1075
+            useCurrent: false,
+            stepping: 30
         });
+
+        $('#e_setup_datetime').datetimepicker({
+            useCurrent: false,
+            stepping: 30
+        });
+
+        $('#e_pickup_datetime').datetimepicker({
+            useCurrent: false,
+            stepping: 30
+        });
+
         $("#job_date").on("dp.change", function (e) {
             $('#e_arrival_datetime').data("DateTimePicker").minDate(e.date);
         });
+
         $("#e_arrival_datetime").on("dp.change", function (e) {
             $('#job_date').data("DateTimePicker").maxDate(e.date);
         });
-    });
 
-    $(function () {
-        $('#e_arrival_datetime').datetimepicker({
-            locale: 'en-au',
-        });
-        $('#e_setup_datetime').datetimepicker({
-            useCurrent: false //Important! See issue #1075
-        });
-        $('#e_pickup_datetime').datetimepicker({
-            useCurrent: false //Important! See issue #1075
-        });
         $("#e_arrival_datetime").on("dp.change", function (e) {
             $('#e_setup_datetime').data("DateTimePicker").minDate(e.date);
         });
         $("#e_setup_datetime").on("dp.change", function (e) {
             $('#e_arrival_datetime').data("DateTimePicker").maxDate(e.date);
         });
+
         $("#e_setup_datetime").on("dp.change", function (e) {
             $('#e_pickup_datetime').data("DateTimePicker").minDate(e.date);
         });
