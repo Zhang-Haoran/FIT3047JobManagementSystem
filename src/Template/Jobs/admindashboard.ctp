@@ -192,9 +192,9 @@
                             <td class="center"><?= h($job->booked_date->format('g:i A l jS F Y')) ?></td>
                             <td class="center">$<?= $this->Number->format($job->price) ?></td>
                             <td class="center">$<?= $this->Number->format($job->deposit) ?></td>
-                            <td class="center"><?= h($job->e_arrival_time->format('g:i A l jS F Y')) ?></td>
-                            <td class="center"><?= h($job->e_setup_time->format('g:i A l jS F Y')) ?></td>
-                            <td class="center"><?= h($job->e_pickup_time->format('g:i A l jS F Y')) ?></td>
+                            <td class="center"><?= h($job->e_arrival_time) ?></td>
+                            <td class="center"><?= h($job->e_setup_time) ?></td>
+                            <td class="center"><?= h($job->e_pickup_time) ?></td>
                             <td>
                                 <?php if( $job->has('site')){
                                     if($name == 1 || $name == 2){
