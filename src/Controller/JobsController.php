@@ -177,7 +177,7 @@ class JobsController extends AppController
             $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
                 'associated' => [
                     'customers',
-                    'site',
+                    'sites',
                     'eventTypes',
                 ]
             ]);
