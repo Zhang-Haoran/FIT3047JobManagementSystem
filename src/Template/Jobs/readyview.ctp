@@ -178,8 +178,31 @@
                             </div>
                         <?php endforeach; ?>
 
+
+                        <?php
+                        $cout = 0;
+                        foreach ($job->images as $image):
+
+                        if ($image->id != ''){
+
+                        $cout = $cout + 1;
+                        if ($cout >1) {
+
+
+                        ?>
+
+
                         <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                         <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+
+                            <?php
+                        }
+                        }
+                            ?>
+                        <?php endforeach;
+
+
+                        ?>
                     </div>
                 </td>
             </tr>
