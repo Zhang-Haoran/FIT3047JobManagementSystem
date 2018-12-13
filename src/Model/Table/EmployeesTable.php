@@ -61,7 +61,7 @@ class EmployeesTable extends Table
             ->notEmpty('fname','First name can not be empty')
             ->add('fname','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z ]*$/'),
-                'message' => 'Your name should contain [a-zA-Z ] only'
+                'message' => 'Your name should contain [a-z/A-Z] only'
             ]);
 
         $validator
@@ -71,7 +71,7 @@ class EmployeesTable extends Table
             ->notEmpty('lname','Last name can not be empty')
             ->add('lname','characterOnly',[
                 'rule' => array('custom','/^[a-zA-Z ]*$/'),
-                'message' => 'Your name should contain [a-zA-Z ] only'
+                'message' => 'Your name should contain [a-z/A-Z] only'
             ]);
 
         $validator
@@ -105,7 +105,7 @@ class EmployeesTable extends Table
                 $found = preg_match($australianMobile, $check);
                 return boolval($found);
             },
-            'message' => 'Your phone format should be like +61412 345 678 or 0412 345 678'
+            'message' => 'Your phone number should be like this +61412 345 678 or 0412 345 678'
         ]);
 
 
@@ -115,7 +115,7 @@ class EmployeesTable extends Table
             ->allowEmpty('email')
             ->add('email','validEmail',[
                 'rule' => 'email',
-                'message' => 'Your e-mail format should be like example@example.com'
+                'message' => 'Your e-mail should be like this example@example.com'
             ]);
 
 

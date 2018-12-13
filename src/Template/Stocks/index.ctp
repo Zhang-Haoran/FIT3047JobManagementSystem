@@ -29,10 +29,10 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                 <thead>
                     <tr>
-                        <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('rent_value') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('min_accs') ?></th>
-                        <th scope="col"><?= $this->Paginator->sort('accessorie_id') ?></th>
+                        <th scope="col"><?= __('name') ?></th>
+                        <th scope="col"><?= __('rent_value') ?></th>
+                        <th scope="col"><?= __('min_accs') ?></th>
+                        <th scope="col"><?= __('accessorie_id') ?></th>
                         <th scope="col" class="actions"><?= __('Actions') ?></th>
                     </tr>
                 </thead>

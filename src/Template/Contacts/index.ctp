@@ -32,9 +32,9 @@
             <tr>
                 <th scope="col"><?= __('Fist Name') ?></th>
                 <th scope="col"><?= __('Last Name') ?></th>
-                <th scope="col"><?= __('phone') ?></th>
-                <th scope="col"><?= __('email') ?></th>
-                <th scope="col"><?= __('role') ?></th>
+                <th scope="col"><?= __('Phone') ?></th>
+                <th scope="col"><?= __('Email') ?></th>
+                <th scope="col"><?= __('Role') ?></th>
                 <th scope="col"><?= __('Action') ?></th>
 
 
