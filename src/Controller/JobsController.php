@@ -33,16 +33,17 @@ class JobsController extends AppController
         $session = $this->getRequest()->getSession();
         $name = $session->read('Auth.User.access_level');
         $this->set('name', $name);
-
-        if($this->Auth->user('access_level')=='3'){
-            $this->render('fieldstaffdashboard');
-        }
-        elseif($this->Auth->user('access_level')=='2'){
-            $this->render('officestaffdashboard');
-        }
-        elseif($this->Auth->user('access_level')=='1'){
-            $this->render('admindashboard');
-        }
+            if($name) {
+                if ($this->Auth->user('access_level') == '3') {
+                    $this->render('fieldstaffdashboard');
+                } elseif ($this->Auth->user('access_level') == '2') {
+                    $this->render('officestaffdashboard');
+                } elseif ($this->Auth->user('access_level') == '1') {
+                    $this->render('admindashboard');
+                }
+            }else{
+                $this->redirect($this->Auth->logout());
+            }
 
 
     }
@@ -93,27 +94,104 @@ class JobsController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     * @return array
      */
+
+    public function convert_date($cake_date){
+        $separate = explode("/",$cake_date);
+        $date=[];
+        $date['year'] = $separate[2];
+        $date['month'] = $separate[1];
+        $date['day'] = $separate[0];
+
+        return $date;
+    }
+
+    public function convert_datetime($cake_date){
+        $separate1 = explode(" ",$cake_date);
+
+        $separate2 = explode("/",$separate1[0]);
+        $date=[];
+        $date['year'] = $separate2[2];
+        $date['month'] = $separate2[1];
+        $date['day'] = $separate2[0];
+
+        $separate3 = explode(":",$separate1[1]);
+        debug($separate3[0]);
+        if ($separate1[2] == "PM"){
+            $separate3[0] = $separate3[0]+12;
+//            $separate3 = $separate3[0].":".$separate3[1];
+        }
+        $date['hour'] = $separate3[0];
+        $date['minute'] = $separate3[1];
+        return $date;
+
+    }
     public function add()
-    {   if($this->Auth->user('access_level')=='3'){
+    {
+        if($this->Auth->user('access_level')=='3'){
         $this->Flash->set(__('You have no authorization to access this page as a field staff'));
         return $this->redirect($this->Auth->redirectUrl());
-    }
+        }
 
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
+            $post = $this->request->getData();
+            //convert job date
+            $job_date = $post['job_date'];
+            if($job_date != "") {
+                $job_date = $this->convert_date($job_date);
+            }
+            $post['job_date'] = $job_date;
+            //job date end
+
+
+
+            //arrival time
+            $e_arrival_time = $post['e_arrival_time'];
+            if($e_arrival_time != "") {
+                $e_arrival_time = $this->convert_datetime($e_arrival_time);
+            }
+            $post['e_arrival_time'] = $e_arrival_time;
+
+
+            //setup time
+            $e_setup_time = $post['e_setup_time'];
+            if($e_setup_time != "") {
+                $e_setup_time = $this->convert_datetime($e_setup_time);
+            }
+            $post['e_setup_time'] = $e_setup_time;
+
+
+            //pickup time
+            $e_pickup_time = $post['e_pickup_time'];
+            if($e_pickup_time != "") {
+                $e_pickup_time = $this->convert_datetime($e_pickup_time);
+            }
+            $post['e_pickup_time'] = $e_pickup_time;
+
+
+
+
             $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
                 'associated' => [
-                    'customers'
+                    'customers',
+                    'site',
+                    'eventTypes',
                 ]
             ]);
+
+            //changing the time last changed to now
             $job->last_changed = Time::now();
+
+            //Adding the id of the employee that created the job
             $this->loadModel('Employees');
             $staff = $this->Employees->get($this->Auth->user('id'));
+
             $job->edited_by = $staff->full_name;
             $job->employee_id = $this->Auth->user('id');
 
+            $job = $this->Jobs->patchEntity($job,$post);
             if ($this->Jobs->save($job)) {
                 $this->Flash->success(__('The job has been saved.'));
                 return $this->redirect(['action' => 'index']);
