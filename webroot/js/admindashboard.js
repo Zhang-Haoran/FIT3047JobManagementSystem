@@ -117,6 +117,7 @@ function getCount(data){
             default:
                 numberM.incompletedN++;
         }
+        numberM.total++;
     }
 }
 
