@@ -104,6 +104,7 @@
                     <thead>
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
+                            <th scope="col"><?= __('Action') ?></th>
                             <th scope="col"><?= __('Status') ?></th>
                             <th scope="col"><?= __('Job Date') ?></th>
                             <th scope="col"><?= __('Job Time') ?></th>
@@ -114,7 +115,6 @@
                             <th scope="col"><?= __('Customer') ?></th>
                             <th scope="col"><?= __('Created by') ?></th>
                             <th scope="col"><?= __('Booked Date') ?></th>
-                            <th scope="col"><?= __('Action') ?></th>
 
 
                         </tr>
@@ -126,6 +126,16 @@
                                 ?>
                         <tr>
                             <td style="width: 50%"><?= h($job->name) ?></td>
+                            <td style="width:10%">
+                                <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
+                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;margin-top:1%']) ?>
+                                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
+                                <?php if($job->job_status == 'Completed')
+                                echo $this->Html->link(__('Invoice'), ['action' => 'invoice', $job->id], ['class' => 'btn btn-default', 'style' => 'width:100%;margin-top:1%;background-color: #5542a9;color: white;']);
+                                elseif($job->job_status == 'Invoice')
+                                echo $this->Html->link(__('Paid'), ['action' => 'paid', $job->id], ['class' => 'btn btn-info', 'style' => 'width:100%;margin-top:2%']);
+                                ?>
+                            </td>
                             <?php
                             if($job->is_deleted == '1')
                             echo "<td class='bg-default' style='color: white;background-color: black;'>Cancelled</td>";
@@ -193,16 +203,7 @@
                                 ?>
                             </td>
                             <td class="center"><?= h($job->booked_date) ?></td>
-                            <td style="width:10%">
-                                <?= $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ?>
-                                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;margin-top:1%']) ?>
-                                <?= $this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]) ?>
-                                <?php if($job->job_status == 'Completed')
-                                echo $this->Html->link(__('Invoice'), ['action' => 'invoice', $job->id], ['class' => 'btn btn-default', 'style' => 'width:100%;margin-top:1%;background-color: #5542a9;color: white;']);
-                                elseif($job->job_status == 'Invoice')
-                                echo $this->Html->link(__('Paid'), ['action' => 'paid', $job->id], ['class' => 'btn btn-info', 'style' => 'width:100%;margin-top:2%']);
-                                ?>
-                            </td>
+
                         </tr>
                         <?php
                                     }
