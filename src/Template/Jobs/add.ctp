@@ -509,10 +509,20 @@
                 $('#CustAdd').modal('toggle');
 
                 if (data.error === false) {
-                    //if new event type is successfully added to database
+
                     $newCustomerId = data.id;
-                    $newCustomerName = data.name;
-                    $isbusiness=data.is_business;
+                    $newCustomerfName = data.name;
+                    $newCustomerphone=data.phone;
+                    $newCustomeremail=data.email;
+
+                    $newCustomeraddress=data.address;
+                    $newCustomersuburb=data.suburb;
+                    $newCustomercity=data.city;
+                    $newCustomerpostcode=data.postcode;
+
+
+
+
                     // console.log($newCustomerId);
                     // console.log($newCustomerName);
                     //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
