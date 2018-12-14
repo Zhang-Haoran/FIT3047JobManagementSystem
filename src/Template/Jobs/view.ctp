@@ -94,11 +94,11 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Job Date') ?></th>
-            <td><?= h($job->job_date) ?></td>
+            <td><?= h($job->job_date->format('l jS F Y')) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Booked Date') ?></th>
-            <td><?= h($job->booked_date) ?></td>
+            <td><?= h($job->booked_date->format('g:i A l jS F Y')) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Expected Arrival Time') ?></th>
