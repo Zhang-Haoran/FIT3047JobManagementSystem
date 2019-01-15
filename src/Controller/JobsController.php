@@ -140,6 +140,7 @@ class JobsController extends AppController
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
             $post = $this->request->getData();
+//            debug($post);
             //convert job date
             $job_date = $post['job_date'];
             if($job_date != "") {
@@ -194,7 +195,30 @@ class JobsController extends AppController
 
             $job = $this->Jobs->patchEntity($job,$post);
 
-            if ($this->Jobs->save($job)) {
+            //Save first to get status of the save action
+            $jobSaveStatus = $this->Jobs->save($job);
+            if ($jobSaveStatus) {
+                //debug($job);
+              //  exit;
+
+                //TODO: Save all stock info here
+                //$jobObj = $this->loadComponent('Stocklines');
+                $stocks = $job->stocks;
+                $jobID = $jobSaveStatus['id'];
+                $this->loadModel('Stocklines');
+                //foreach ($stocks as $stock) {
+                    $stockline = $this->Stocklines->newEntity();
+                    //debug($stockline);
+                $stockline->stock_id = '5';
+                $stockline->jobs_id = $jobID;
+                $stockline->loaded = true;
+                $stockline->unit = 42;
+                //debug($stockline);
+                //patchEntity();
+                    $stocklinessave = $this->Stocklines->save($stockline);
+                    //debug($stocklinessave);
+
+                //}
                 $this->Flash->success(__('The job has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
