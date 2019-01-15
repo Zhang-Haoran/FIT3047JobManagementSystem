@@ -10,9 +10,9 @@ function parseDate(date){
 }
 
 function statusCheck(data, status, today){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let todayDate = new Date();
-    let jobStatus = data[1];
+    let jobStatus = data[2];
     if(today)
         if (date.getDate() === todayDate.getDate() && date.getMonth() === todayDate.getMonth() && date.getFullYear() === todayDate.getFullYear() && jobStatus === status)
             return true;
@@ -34,9 +34,9 @@ function encourage(){
 }
 
 function isToday(data, once){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let today = new Date();
-    let status = data[1];
+    let status = data[2];
 
     if(once === 1) {
         if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
@@ -49,7 +49,7 @@ function isToday(data, once){
 }
 
 function nextWeek(data){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let today = new Date();
 
     if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
@@ -58,8 +58,8 @@ function nextWeek(data){
 }
 
 function getCount(data){
-    let status = data[1];
-    let date = parseDate(data[2]);
+    let status = data[2];
+    let date = parseDate(data[3]);
     let today = new Date();
 
     if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()) {
@@ -88,7 +88,7 @@ function getCount(data){
 }
 
 function pickup(data){
-    if(data[6] === "")
+    if(data[7] === "")
         return true;
     return false;
 }

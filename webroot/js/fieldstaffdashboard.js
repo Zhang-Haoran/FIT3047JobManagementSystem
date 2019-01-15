@@ -21,9 +21,9 @@ function encourage(){
 }
 
 function today(data){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let today = new Date();
-    let status = data[1];
+    let status = data[2];
 
     if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
         return true;
@@ -31,7 +31,7 @@ function today(data){
 }
 
 function nextWeek(data){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let today = new Date();
     let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
@@ -41,8 +41,8 @@ function nextWeek(data){
 }
 
 function getCount(data){
-    let status = data[1];
-    let date = parseDate(data[2]);
+    let status = data[2];
+    let date = parseDate(data[3]);
     let today = new Date();
     let datetime = (date.getTime() - today.getTime()) / (1000*3600*24);
 
