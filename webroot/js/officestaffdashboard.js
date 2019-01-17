@@ -70,7 +70,10 @@ function getCount(data){
 
     else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
         number.nextWeekN++;
-    number.total++;
+
+    if(status !== 'Completed') {
+        number.total++;
+    }
 
     if(status === 'Quote')
         number.quoteN++;
