@@ -58,7 +58,7 @@
                 <div class="row">
                     <div id="total" class="col-xs-3 huge">💚</div>
                     <div class="">
-                        <div class="col-lg-8 text-right"><h3>All Job</h3></div>
+                        <div class="col-lg-8 text-right"><h3>All Incomplete Job</h3></div>
                     </div>
                 </div>
             </div>
@@ -106,6 +106,8 @@
                             });
 
                             foreach ($list as $job):
+
+                                if($job->job_status != "Completed"){
                         ?>
                         <tr>
                             <td><?= h($job->name) ?></td>
@@ -170,7 +172,9 @@
 
 
                         </tr>
-                        <?php endforeach; ?>
+                        <?php
+                            }
+                            endforeach; ?>
                     </tbody>
                 </table>
             </div>
