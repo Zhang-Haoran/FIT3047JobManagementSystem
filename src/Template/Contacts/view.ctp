@@ -50,7 +50,7 @@
         <tr>
             <th scope="row"><?= __('Email') ?></th>
 
-            <a href = "mailto:<?= ($contact->email) ?>"><?= ($contact->email) ?></a>
+            <td><a href = "mailto:<?= ($contact->email) ?>"><?= ($contact->email) ?></a></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Role') ?></th>
