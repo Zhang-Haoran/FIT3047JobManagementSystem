@@ -50,7 +50,10 @@ function getCount(data){
         number.todayN++;
     else if(datetime <= 7 && datetime > 0)
         number.nextWeekN++;
-    number.total++;
+
+    if(status !== 'Completed') {
+        number.total++;
+    }
 }
 
 $.fn.dataTable.ext.search.push(

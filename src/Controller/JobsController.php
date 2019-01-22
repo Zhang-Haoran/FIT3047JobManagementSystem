@@ -17,10 +17,6 @@ class JobsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->Auth->allow([
-            'index'
-
-        ]);
     }
 
     /**
@@ -241,23 +237,22 @@ class JobsController extends AppController
             }
         ]);
         $employees = $this->Jobs->Employees->find('list');
-        $this->loadModel('Contacts');
-        $contacts = $this->Contacts->find('list', [
+
+
+
+        $contacts = $this->Jobs->Contacts->find('list', [
             'keyField' => 'id',
             'valueField' => function ($contact) {
                 return $contact->get('label');
             }
         ]);
-        $contacts = $this->Contacts->find('list', [
-            'keyField' => 'id',
-            'valueField' => function ($contact) {
-                return $contact->get('label');
-            }
-        ]);
+
+
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
+        //$csrfToken = $this->request->getParam('_csrfToken');
         $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
-        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order'));
+        $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
     /**
