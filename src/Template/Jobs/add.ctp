@@ -164,16 +164,31 @@
                           <div class="form-group"><?= $this->Form->control('quote', ['label' => 'Quote number','class' => 'form-control','placeholder'=>'Quote#']) ?></div>
                             <div class="form-group"><?= $this->Form->control('job_order', ['class' => 'form-control','placeholder'=>'Order#','label' => 'Order']) ?></div>
                             <div class="form-group"><?= $this->Form->control('Invoice', ['class' => 'form-control','placeholder'=>'Invoice#']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('price', ['class' => 'form-control', 'min'=>'0',  'value'=>'0', 'step'=>'1','placeholder'=>'Please enter a value greater than 0']) ?></div>
-                            <div class="form-group"><?= $this->Form->control('deposit', ['class' => 'form-control', 'min'=>'0', 'value'=>'0', 'step'=>'1','placeholder'=>'Please enter a value greater than 0']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('price', ['class' => 'form-control', 'min'=>'0',  'value'=>'0', 'step'=>'1']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('deposit', ['class' => 'form-control', 'min'=>'0', 'value'=>'0', 'step'=>'1']) ?></div>
                         </div>
 
 
                         <div class="tab-pane fade" id="stock">
-                            <div class="panel-heading">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
 
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Stock</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <?= $this->Form->control('stock_id', ['options' => $stocks, 'class' => 'form-control','id'=> 'stock_html_id']) ?>
 
+                                            </div>
 
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
