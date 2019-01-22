@@ -9,15 +9,6 @@
 .colors {display:none;}
 </style>
 
-
-
-
-
-<?= $this->html->css('jquery.datetimepicker.min.css')?>
-<?= $this->html->script('jquery.datetimepicker.full.js', ['block' => 'scriptBottom']); ?>
-
-
-
 <div>
     <button onclick="goBack()" class="btn btn-success">Go Back</button>
 
