@@ -106,6 +106,29 @@ class CustomersController extends AppController
 
 
 
+
+    public function jobView($id = null)
+    {
+        if ($this->Auth->user('access_level') == '3') {
+            $message = ['error' => 'You have no authorization to access this page as a field staff'];
+        } else {
+            //If user has right to add eventtype
+            if ($this->request->is('get')) {
+                $message = $this->Customers->get($id);
+                $message['error'] = false;
+            } else {
+                $message = ['error' => 'Invalid request, must be GET'];
+            }
+        }
+        $this->set([
+            'message' => $message,
+            '_serialize' => 'message',
+        ]);
+        $this->RequestHandler->renderAs($this, 'json');
+    }
+
+
+
 //    {
 //        if($this->Auth->user('access_level')=='3'){
 //            $this->Flash->set(__('You have no authorization to access this page as a field staff'));
