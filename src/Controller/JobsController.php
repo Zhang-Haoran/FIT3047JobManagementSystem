@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\Stock;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 
@@ -136,7 +137,6 @@ class JobsController extends AppController
         $job = $this->Jobs->newEntity();
         if ($this->request->is('post')) {
             $post = $this->request->getData();
-//            debug($post);
             //convert job date
             $job_date = $post['job_date'];
             if($job_date != "") {
@@ -144,7 +144,6 @@ class JobsController extends AppController
             }
             $post['job_date'] = $job_date;
             //job date end
-
 
             //arrival time
             $e_arrival_time = $post['e_arrival_time'];
@@ -171,7 +170,7 @@ class JobsController extends AppController
 
 
 
-            $job = $this->Jobs->patchEntity($job, $this->request->getData(),[
+            $job = $this->Jobs->patchEntity($job, $post,[
                 'associated' => [
                     'customers',
                     'sites',
@@ -194,21 +193,21 @@ class JobsController extends AppController
             //Save first to get status of the save action
             $jobSaveStatus = $this->Jobs->save($job);
             if ($jobSaveStatus) {
-                //debug($job);
-              //  exit;
+                //debug($post);
+                //exit;
+
+                //$stocks = $post['stocks'];
 
                 //TODO: Save all stock info here
                 //$jobObj = $this->loadComponent('Stocklines');
-                $stocks = $job->stocks;
+                //$stocks = $jobObj->Stocklines->find('list');
                 $jobID = $jobSaveStatus['id'];
                 $this->loadModel('Stocklines');
                 //foreach ($stocks as $stock) {
                     $stockline = $this->Stocklines->newEntity();
                     //debug($stockline);
-                $stockline->stock_id = '5';
+                $stockline->stock_id = $post['stock_id'];
                 $stockline->jobs_id = $jobID;
-                $stockline->loaded = true;
-                $stockline->unit = 42;
                 //debug($stockline);
                 //patchEntity();
                     $stocklinessave = $this->Stocklines->save($stockline);
@@ -251,7 +250,9 @@ class JobsController extends AppController
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
         //$csrfToken = $this->request->getParam('_csrfToken');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
+        $this->loadModel('Stocks');
+       $stocks = $this->Stocks->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts','stocks'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
