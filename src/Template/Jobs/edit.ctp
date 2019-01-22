@@ -168,25 +168,24 @@
                             </div>
                         </div>
                     </div>
-
-                      </div>
+                    <div class ="tab-content">
+                        <div class="Footer">
+                            <div class="divleft">
+                                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
+                                </button>
+                            </div>
+                            <div class="divright">
+                                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
+                                </button>
+                            </div>
+                        </div>
+                        <div class="divright">
+                            <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
+                            <?= $this->Form->end() ?>
+                        </div>
                     </div>
-    <div class ="tab-content">
-        <div class="Footer">
-            <div class="divleft">
-                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
-                </button>
-            </div>
-            <div class="divright">
-                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
-                </button>
-            </div>
+                </div>
         </div>
-        <div class="divright">
-            <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
     </div>
 
 
