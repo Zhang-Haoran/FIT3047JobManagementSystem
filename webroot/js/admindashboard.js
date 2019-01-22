@@ -10,9 +10,9 @@ function parseDate(date){
 }
 
 function statusCheck(data, status, today){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let todayDate = new Date();
-    let jobStatus = data[1];
+    let jobStatus = data[2];
     if(today)
         if (date.getDate() === todayDate.getDate() && date.getMonth() === todayDate.getMonth() && date.getFullYear() === todayDate.getFullYear() && jobStatus === status)
             return true;
@@ -34,9 +34,9 @@ function encourage(){
 }
 
 function isToday(data, once){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let today = new Date();
-    let status = data[1];
+    let status = data[2];
 
     if(once === 1) {
         if (date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && status !== 'Completed')
@@ -49,7 +49,7 @@ function isToday(data, once){
 }
 
 function nextWeek(data){
-    let date = parseDate(data[2]);
+    let date = parseDate(data[3]);
     let today = new Date();
 
     if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
@@ -58,8 +58,8 @@ function nextWeek(data){
 }
 
 function getCount(data){
-    let status = data[1];
-    let date = parseDate(data[2]);
+    let status = data[2];
+    let date = parseDate(data[3]);
     let today = new Date();
     //counting total jobs for both today summary and the green panel
     if(date.getDate() === today.getDate() && date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear()) {
@@ -70,7 +70,9 @@ function getCount(data){
     //counting jobs for next week and total amount of jobs
     else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
         number.nextWeekN++;
-    number.total++;
+
+    if(status !== 'Completed')
+        number.total++;
 
     //counting quoted jobs
     if(status === 'Quote')
@@ -97,7 +99,7 @@ function getCount(data){
 
     }
     //counting pickup jobs
-    if(data[10] === "")
+    if(data[11] === "")
         number.pickupN++;
     //counting cancelled jobs
     if(status === 'Cancelled')
@@ -111,17 +113,18 @@ function getCount(data){
                 break;
             case "Paid":
                 numberM.paidN++;
-                let price = Number (data[5].replace(/[^0-9.-]+/g,""));
+                let price = Number (data[6].replace(/[^0-9.-]+/g,""));
                 numberM.income += price;
                 break;
             default:
                 numberM.incompletedN++;
         }
+        numberM.total++;
     }
 }
 
 function pickup(data){
-    if(data[10] === "")
+    if(data[11] === "")
         return true;
     return false;
 }

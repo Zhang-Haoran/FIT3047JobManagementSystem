@@ -101,7 +101,7 @@
                     <div class="row">
                         <div id="total" class="col-xs-3 huge">💚</div>
                         <div class="">
-                            <div class="col-lg-8 text-right"><h3>All Job</h3></div>
+                            <div class="col-lg-8 text-right"><h3>All Incomplete Job</h3></div>
                         </div>
                     </div>
                 </div>
@@ -149,6 +149,7 @@
                     <thead>
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
+                            <th scope="col" class="notexport"><?= __('Action') ?></th>
                             <th scope="col"><?= __('Status') ?></th>
                             <th scope="col"><?= __('Job Date') ?></th>
                             <th scope="col"><?= __('Job Time') ?></th>
@@ -162,15 +163,55 @@
                             <th scope="col"><?= __('Event type') ?></th>
                             <th scope="col"><?= __('Customer') ?></th>
                             <th scope="col"><?= __('Created by') ?></th>
-                            <th scope="col" class="notexport"><?= __('Action') ?></th>
 
 
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($jobs as $job): ?>
+                        <?php foreach ($jobs as $job):
+
+                            if($job->job_status != "Completed"){
+                        ?>
                         <tr>
                             <td><?= h($job->name) ?></td>
+                            <td style="width:6%">
+                                <?php if($job->is_pickup == 1){
+                                echo $this->Html->link(__('View'), ['action' => 'viewpickup', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
+                                } else{
+                                echo $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
+                                }
+                                ?>
+
+
+
+                                <?php if($name == 1 || $name == 2){
+                                    if($job->is_pickup == 1){
+                                echo $this->Html->link(__('Edit'), ['action' => 'editpickup', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
+                                }
+                                else{
+                                echo $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
+                                }
+
+                                }else{
+                                '';
+                                }
+                                ?>
+
+                                <?php   if($job->is_deleted == '1'){?>
+                                <?= ($name == 1 || $name == 2)?$this->Html->link(__('Undelete'), ['action' => 'undelete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to undelete Job: {0}?',$job->name)]):"" ?>
+                                <?php
+                        }else{
+                            ?>
+                                <?= ($name == 1 || $name == 2)?$this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]):"" ?>
+                                <?php
+                        }
+                        ?>
+                                <?php if($job->job_status == 'Completed')
+                                echo $this->Html->link(__('Invoice'), ['action' => 'invoice', $job->id], ['class' => 'btn btn-default', 'style' => 'width:100%;marign-left:1%;margin-top:1%;background-color: #5542a9;color: white;']);
+                                elseif($job->job_status == 'Invoice')
+                                echo $this->Html->link(__('Paid'), ['action' => 'paid', $job->id], ['class' => 'btn btn-info', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
+                                ?>
+                            </td>
                             <?php
                             if($job->is_deleted == '1')
                             echo "<td class='bg-default' style='color: white;background-color: black;'>Cancelled</td>";
@@ -241,46 +282,11 @@
                                 }
                                 ?>
                             </td>
-                            <td style="width:6%">
-                                <?php if($job->is_pickup == 1){
-                                    echo $this->Html->link(__('View'), ['action' => 'viewpickup', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
-                                } else{
-                                    echo $this->Html->link(__('View'), ['action' => 'view', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
-                                }
-                                ?>
 
-
-
-                                <?php if($name == 1 || $name == 2){
-                                    if($job->is_pickup == 1){
-                                        echo $this->Html->link(__('Edit'), ['action' => 'editpickup', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
-                                    }
-                                    else{
-                                        echo $this->Html->link(__('Edit'), ['action' => 'edit', $job->id], ['class' => 'btn btn-warning', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
-                                    }
-
-                                }else{
-                                    '';
-                                }
-                                ?>
-
-                                <?php   if($job->is_deleted == '1'){?>
-                                    <?= ($name == 1 || $name == 2)?$this->Html->link(__('Undelete'), ['action' => 'undelete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to undelete Job: {0}?',$job->name)]):"" ?>
-                                    <?php
-                        }else{
-                            ?>
-                            <?= ($name == 1 || $name == 2)?$this->Html->link(__('Delete'), ['action' => 'delete', $job->id], ['class' => 'btn btn-danger', 'style' => 'width:100%;marign-right:1%;margin-top:1%', 'confirm' => __('Are you sure you want to delete Job: {0}?',$job->name)]):"" ?>
-                            <?php
-                        }
-                        ?>
-                                <?php if($job->job_status == 'Completed')
-                                    echo $this->Html->link(__('Invoice'), ['action' => 'invoice', $job->id], ['class' => 'btn btn-default', 'style' => 'width:100%;marign-left:1%;margin-top:1%;background-color: #5542a9;color: white;']);
-                                elseif($job->job_status == 'Invoice')
-                                    echo $this->Html->link(__('Paid'), ['action' => 'paid', $job->id], ['class' => 'btn btn-info', 'style' => 'width:100%;marign-left:1%;margin-top:1%']);
-                                ?>
-                            </td>
                         </tr>
-                        <?php endforeach; ?>
+                        <?php
+                            }
+                            endforeach; ?>
                     </tbody>
                 </table>
             </div>

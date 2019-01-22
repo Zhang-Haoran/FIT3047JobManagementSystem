@@ -58,7 +58,7 @@
                 <div class="row">
                     <div id="total" class="col-xs-3 huge">💚</div>
                     <div class="">
-                        <div class="col-lg-8 text-right"><h3>All Job</h3></div>
+                        <div class="col-lg-8 text-right"><h3>All Incomplete Job</h3></div>
                     </div>
                 </div>
             </div>
@@ -81,6 +81,7 @@
                     <thead>
                         <tr>
                             <th scope="col"><?= __('Name') ?></th>
+                            <th scope="col"><?= __('Action') ?></th>
                             <th scope="col"><?= __('Status') ?></th>
                             <th scope="col"><?= __('Event date') ?></th>
                             <th scope="col"><?= __('Event time') ?></th>
@@ -88,10 +89,7 @@
                             <th scope="col"><?= __('Expected setup time') ?></th>
                             <th scope="col"><?= __('Expected pickup time') ?></th>
                             <th scope="col"><?= __('Site') ?></th>
-
                             <th scope="col"><?= __('Customer') ?></th>
-
-                            <th scope="col"><?= __('Action') ?></th>
 
 
                         </tr>
@@ -108,9 +106,24 @@
                             });
 
                             foreach ($list as $job):
+
+                                if($job->job_status != "Completed"){
                         ?>
                         <tr>
                             <td><?= h($job->name) ?></td>
+                            <td style="width:6%">
+                                <?php
+                                    if ($job->job_status == "Order"){
+                                echo $this->Html->link(__('View'), ['action' => 'orderview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
+                                }
+                                elseif($job->job_status == "Ready"){
+                                echo $this->Html->link(__('View'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
+                                }
+                                else{
+                                echo $this->Html->link(__('View'), ['action' => 'completedview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
+                                }
+                                ?>
+                            </td>
                             <?php
                             if( $job->job_status == 'Order')
                             echo "<td class='bg-danger text-white'>Order</td>";
@@ -157,21 +170,11 @@
                                 ?>
                             </td>
 
-                            <td style="width:6%">
-                                <?php
-                                    if ($job->job_status == "Order"){
-                                        echo $this->Html->link(__('View'), ['action' => 'orderview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']);
-                                    }
-                                    elseif($job->job_status == "Ready"){
-                                        echo $this->Html->link(__('View'), ['action' => 'readyview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
-                                    }
-                                    else{
-                                        echo $this->Html->link(__('View'), ['action' => 'completedview', $job->id], ['class' => 'btn btn-primary', 'style' => 'width:100%']) ;
-                                    }
-                                ?>
-                            </td>
+
                         </tr>
-                        <?php endforeach; ?>
+                        <?php
+                            }
+                            endforeach; ?>
                     </tbody>
                 </table>
             </div>
