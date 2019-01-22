@@ -46,7 +46,7 @@
                 <td><?= h($contact->fname) ?></td>
                 <td><?= h($contact->lname) ?></td>
                 <td><?= h($contact->phone) ?></td>
-                <td><?= h($contact->email) ?></td>
+                <td><a href = "mailto:<?= ($contact->email) ?>"><?= ($contact->email) ?></a></td>
                 <td><?= h($contact->role) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $contact->id]) ?>
