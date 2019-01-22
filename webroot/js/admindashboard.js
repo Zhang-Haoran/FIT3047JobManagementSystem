@@ -70,7 +70,9 @@ function getCount(data){
     //counting jobs for next week and total amount of jobs
     else if(date.getMonth() === today.getMonth() && date.getFullYear() === today.getFullYear() && (date.getDate() - today.getDate()) < 7 && (date.getDate() - today.getDate()) > 1 )
         number.nextWeekN++;
-    number.total++;
+
+    if(status !== 'Completed')
+        number.total++;
 
     //counting quoted jobs
     if(status === 'Quote')
