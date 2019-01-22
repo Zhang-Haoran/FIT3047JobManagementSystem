@@ -87,7 +87,7 @@
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <?php
-                                    $list_cust= array();
+                                    $list_cust = array();
                                     foreach ($customers as $customer)
                                          $list_cust[$customer->id] = "{$customer->name} ({$customer->cust_type->name})";
                                     ?>
