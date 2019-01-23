@@ -16,9 +16,8 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                 <thead>
                     <tr>
-                        <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-
-                        <th scope="col" class="actions"><?= __('Actions') ?></th>
+                        <th scope="col"><?= __('Name') ?></th>
+                        <th scope="col"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>

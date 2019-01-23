@@ -90,6 +90,7 @@
                                     ?>
 
                                     <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
+                                    <div id="cust_html_id2"></div>
                                 </div>
                             </div>
                             <div class="panel-heading">
@@ -156,6 +157,7 @@
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
                                         <div class="form-group"><?= $this->Form->control('contact_id', ['options' => $contacts, 'class' => 'form-control','id'=> 'contact_html_id']) ?></div>
+                                        <div id="contact_html_id2" ></div>
                                     </div>
                                 </div>
                                 <div class="panel-heading">
@@ -166,25 +168,24 @@
                             </div>
                         </div>
                     </div>
-
-                      </div>
+                    <div class ="tab-content">
+                        <div class="Footer">
+                            <div class="divleft">
+                                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
+                                </button>
+                            </div>
+                            <div class="divright">
+                                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
+                                </button>
+                            </div>
+                        </div>
+                        <div class="divright">
+                            <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
+                            <?= $this->Form->end() ?>
+                        </div>
                     </div>
-    <div class ="tab-content">
-        <div class="Footer">
-            <div class="divleft">
-                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
-                </button>
-            </div>
-            <div class="divright">
-                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
-                </button>
-            </div>
+                </div>
         </div>
-        <div class="divright">
-            <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
     </div>
 
 
@@ -612,6 +613,107 @@
         });
 
         e.preventDefault(); //As the form don't actually submit and redirect to new page
+    });
+
+
+
+
+
+    //hides all the contact information and shows only the one that is selected in the dropdownlist
+    $(function() {
+        $('#cust_html_id').change(function(){
+            var url = "<?= $this->Url->build(['controller' => 'Customers', 'action' => 'jobView']) ?>"+"/"+$('#cust_html_id').val();
+
+
+            //Send out the ajax request
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) //This is the callback function that if server responses
+                {
+                    //TODO: Close the modal to let user customer is added
+                    //console.log(data);
+
+
+                    if (data.error === false) {
+                        //if a new contact is successfully added to database
+                        $CustomerId = data.id;
+                        $CustomerfName = data.name;
+                        $Customerphone=data.phone;
+                        $Customeremail=data.email;
+
+                        $Customeraddress=data.address;
+                        $Customersuburb=data.suburb;
+                        $Customercity=data.city;
+                        $Customerpostcode=data.postcode;
+
+
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+
+
+                        $("#cust_html_id2").html("Phone: " + $Customerphone + "<br>Address: " + $Customeraddress+ ','+ $Customersuburb + ", " + $Customercity + ", " + $Customerpostcode + "</div>");
+
+
+                    } else {
+                        //If there's an error from the server
+                        alert(data.error);
+                    }
+                }
+            });
+        });
+    });
+
+
+
+    //hides all the contact information and shows only the one that is selected in the dropdownlist
+    $(function() {
+        $('#contact_html_id').change(function(){
+            var url = "<?= $this->Url->build(['controller' => 'Contacts', 'action' => 'jobView']) ?>"+"/"+$('#contact_html_id').val();
+
+
+            //Send out the ajax request
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) //This is the callback function that if server responses
+                {
+                    //TODO: Close the modal to let user customer is added
+                    //console.log(data);
+
+
+                    if (data.error === false) {
+                        //if a new contact is successfully added to database
+                        $ContactId = data.id;
+                        $ContactfName = data.firstname;
+                        $ContactlName=data.lastname;
+                        $Contactphone=data.phone;
+                        $Contactemail=data.email;
+                        $Contactrole=data.role;
+                        $Contactstreet=data.street;
+                        $Contactsurburb=data.suburb;
+                        $Contactcity=data.city;
+                        $Contactpostcode=data.postcode;
+
+
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+
+
+                        $("#contact_html_id2").html("Phone: " + $Contactphone + "<br>Address: " + $Contactstreet + ", " + $Contactsurburb + ", " + $Contactcity + ", " + $Contactpostcode );
+
+
+                    } else {
+                        //If there's an error from the server
+                        alert(data.error);
+                    }
+                }
+            });
+        });
     });
 
 

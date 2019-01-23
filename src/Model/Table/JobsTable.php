@@ -104,13 +104,13 @@ class JobsTable extends Table
         $validator
             ->numeric('price','price should be number')
             ->maxLength('price',13)
-            ->greaterThanOrEqual('price', 0)
+            ->greaterThanOrEqual('price', 0,'price should be a positive number')
             ->allowEmpty('price');
 
         $validator
             ->numeric('deposit','deposit should be number')
             ->maxLength('deposit',13)
-            ->greaterThanOrEqual('deposit', 0)
+            ->greaterThanOrEqual('deposit', 0,'deposit should be a positive number')
             ->allowEmpty('deposit');
 
         $validator

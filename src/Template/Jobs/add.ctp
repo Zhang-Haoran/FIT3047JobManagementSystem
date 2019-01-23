@@ -5,6 +5,10 @@
  */
 ?>
 
+<style>
+.colors {display:none;}
+</style>
+
 <div>
     <button onclick="goBack()" class="btn btn-success">Go Back</button>
 
@@ -76,11 +80,12 @@
                             <div id="collapseOne" class="panel-collapse collapse in">
                                 <div class="panel-body">
                                     <?php
-                                    $list_cust= array();
+                                    $list_cust = array();
                                     foreach ($customers as $customer)
                                          $list_cust[$customer->id] = "{$customer->name} ({$customer->cust_type->name})";
                                     ?>
                                     <div class="form-group"><?= $this->Form->control('customer_id', ['options' => $list_cust, 'class' => 'form-control','id'=> 'cust_html_id']) ?></div>
+                                    <div id="cust_html_id2"></div>
                                 </div>
                             </div>
                             <div class="panel-heading">
@@ -108,7 +113,15 @@
                                 </div>
                                 <div id="collapseOne" class="panel-collapse collapse in">
                                     <div class="panel-body">
-                                        <div class="form-group"><?= $this->Form->control('contact_id', ['options' => $contacts, 'class' => 'form-control','id'=> 'contact_html_id']) ?></div>
+                                        <div class="form-group">
+                                            <?= $this->Form->control('contact_id', ['options' => $contacts, 'class' => 'form-control','id'=> 'contact_html_id']) ?>
+                                            <div id="contact_html_id2">
+
+
+                                            </div>
+
+                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="panel-heading">
@@ -135,6 +148,7 @@
 
                                     <div class="form-group"><?= $this->Form->control('site_id', ['options' => $sites, 'class' => 'form-control','id'=> 'site_html_id']) ?></div>
 
+
                                 </div>
                             </div>
                                 <div class="panel-heading">
@@ -156,28 +170,65 @@
 
 
                         <div class="tab-pane fade" id="stock">
+                            <div class="panel-group" id="accordion">
+                                <div class="panel panel-default">
+
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Stock</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <?= $this->Form->control('stock_id', ['options' => $stocks, 'class' => 'form-control','id'=> 'stock_html_id']) ?>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Accessory</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <?= $this->Form->control('accessory_id', ['options' => $access, 'class' => 'form-control','id'=> 'accessory_html_id']) ?>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
                             <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
                       </div>
-                    </div>
-
-    <div class ="tab-content">
-        <div class="Footer">
-            <div class="divleft">
-                <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
-                </button>
+        <div class ="tab-content">
+            <div class="Footer">
+                <div class="divleft">
+                    <button id="btnPrev"  type="button" value="Previous Tab" text="Previous Tab" class="btn btn-success btn-lg">Previous
+                    </button>
+                </div>
+                <div class="divright">
+                    <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
+                    </button>
+                </div>
             </div>
             <div class="divright">
-                <button id="btnNext" type="button" value="Next Tab"  text="Next Tab" class="btn btn-success btn-lg">Next
-                </button>
+                <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
+                <?= $this->Form->end() ?>
             </div>
         </div>
-        <div class="divright">
-            <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
-            <?= $this->Form->end() ?>
-        </div>
-    </div>
+                    </div>
     </div>
 <div class="modal fade" id="EventTypesAdd" role="dialog">
     <div class="modal-dialog" >
@@ -267,7 +318,9 @@
                 <?= $this->Form->create(null,['url' => ['controller' => 'Sites','action' => 'siteAdd'], 'id' =>'addNewSite' ]) ?>
                 <fieldset>
                     <div class="form-group"><?= $this->Form->control('name', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
-                    <div class="form-group"><?= $this->Form->control('address', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address 1', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address 2', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
+                    <div class="form-group"><?= $this->Form->control('address 3', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('suburb', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                     <div class="form-group"><?= $this->Form->control('postcode', ['class' => 'form-control','placeholder' => 'This field is required']) ?></div>
                 </fieldset>
@@ -306,8 +359,6 @@
             </div>
         </div>
     </div>
-
-
 <?php $this->start('script'); ?>
 <script>
     $('button#btnPrev').hide();
@@ -363,6 +414,8 @@
         $("#site_html_id").chosen();
         $("#contact_html_id").chosen();
         $("#image_html_id").chosen();
+        $("#stock_html_id").chosen();
+        $("#accessory_html_id").chosen();
     });
 
     $(function() {
@@ -488,10 +541,20 @@
                 $('#CustAdd').modal('toggle');
 
                 if (data.error === false) {
-                    //if new event type is successfully added to database
+
                     $newCustomerId = data.id;
-                    $newCustomerName = data.name;
-                    $isbusiness=data.is_business;
+                    $newCustomerfName = data.name;
+                    $newCustomerphone=data.phone;
+                    $newCustomeremail=data.email;
+
+                    $newCustomeraddress=data.address;
+                    $newCustomersuburb=data.suburb;
+                    $newCustomercity=data.city;
+                    $newCustomerpostcode=data.postcode;
+
+
+
+
                     // console.log($newCustomerId);
                     // console.log($newCustomerName);
                     //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
@@ -560,6 +623,7 @@
     });
 
 
+
     //Ajax form submit for newSite
     $("#addNewSite").submit(function(e) {
         //Get necessary info from the form
@@ -586,7 +650,7 @@
                     $newSitePostcode=data.postcode;
 
 
-                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
 
                     $("#site_html_id").append("<option value='" + $newSiteId + "'>" + $newSiteName +' '+ '(' + $newSiteAddress + ',  ' + $newSiteSuburb + ' '
                         + $newSitePostcode + ')' + "</option>");
@@ -603,5 +667,119 @@
     });
 
 
+
+
+
+    //hides all the contact information and shows only the one that is selected in the dropdownlist
+    $(function() {
+        $('#cust_html_id').change(function(){
+            var url = "<?= $this->Url->build(['controller' => 'Customers', 'action' => 'jobView']) ?>"+"/"+$('#cust_html_id').val();
+
+
+            //Send out the ajax request
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) //This is the callback function that if server responses
+                {
+                    //TODO: Close the modal to let user customer is added
+                    //console.log(data);
+
+
+                    if (data.error === false) {
+                        //if a new contact is successfully added to database
+                        $CustomerId = data.id;
+                        $CustomerfName = data.name;
+                        $Customerphone=data.phone;
+                        $Customeremail=data.email;
+
+                        $Customeraddress=data.address;
+                        $Customersuburb=data.suburb;
+                        $Customercity=data.city;
+                        $Customerpostcode=data.postcode;
+
+
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+
+
+                        $("#cust_html_id2").html("Phone: " + $Customerphone + "<br>Address: " + $Customeraddress+ ','+ $Customersuburb + ", " + $Customercity + ", " + $Customerpostcode + "</div>");
+
+
+                    } else {
+                        //If there's an error from the server
+                        alert(data.error);
+                    }
+                }
+            });
+        });
+    });
+
+
+
+
+
+
+
+    //hides all the contact information and shows only the one that is selected in the dropdownlist
+    $(function() {
+        $('#contact_html_id').change(function(){
+            var url = "<?= $this->Url->build(['controller' => 'Contacts', 'action' => 'jobView']) ?>"+"/"+$('#contact_html_id').val();
+
+
+            //Send out the ajax request
+            $.ajax({
+                type: "GET",
+                url: url,
+                success: function(data) //This is the callback function that if server responses
+                {
+                    //TODO: Close the modal to let user customer is added
+                    //console.log(data);
+
+
+                    if (data.error === false) {
+                        //if a new contact is successfully added to database
+                        $ContactId = data.id;
+                        $ContactfName = data.firstname;
+                        $ContactlName=data.lastname;
+                        $Contactphone=data.phone;
+                        $Contactemail=data.email;
+                        $Contactrole=data.role;
+                        $Contactstreet=data.street;
+                        $Contactsurburb=data.suburb;
+                        $Contactcity=data.city;
+                        $Contactpostcode=data.postcode;
+
+
+
+
+                        //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+
+
+
+                        $("#contact_html_id2").html("Phone: " + $Contactphone + "<br>Address: " + $Contactstreet + ", " + $Contactsurburb + ", " + $Contactcity + ", " + $Contactpostcode );
+
+
+                    } else {
+                        //If there's an error from the server
+                        alert(data.error);
+                    }
+                }
+            });
+        });
+    });
+
+
+
+
+
+
+
+
 </script>
+
+
+
 <?php $this->end(); ?>

@@ -42,6 +42,6 @@ class Site extends Entity
 
     protected function _getLabel()
     {
-        return $this->_properties['name'] . ' (' . $this->_properties['address'] . ',  ' . $this->_properties['suburb'] . ' ' . $this->_properties['postcode'] . ')';
+        return $this->_properties['name'] . ' (' . $this->_properties['address'] . $this->_properties['address2']. $this->_properties['address3']. ',  ' . $this->_properties['suburb'] . ' ' . $this->_properties['postcode'] . ')';
     }
 }
