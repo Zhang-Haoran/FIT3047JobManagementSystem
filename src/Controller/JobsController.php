@@ -204,16 +204,25 @@ class JobsController extends AppController
                 $jobID = $jobSaveStatus['id'];
                 $this->loadModel('Stocklines');
                 //foreach ($stocks as $stock) {
-                    $stockline = $this->Stocklines->newEntity();
-                    //debug($stockline);
+                $stockline = $this->Stocklines->newEntity();
+                //debug($stockline);
                 $stockline->stock_id = $post['stock_id'];
                 $stockline->jobs_id = $jobID;
                 //debug($stockline);
                 //patchEntity();
-                    $stocklinessave = $this->Stocklines->save($stockline);
-                    //debug($stocklinessave);
+                $stocklinessave = $this->Stocklines->save($stockline);
+                //debug($stocklinessave);
 
                 //}
+                $this->loadModel('Accessorielines');
+                $accessline = $this->Accessorielines->newEntity();
+                $accessline ->accessories_id = $post['accessory_id'];
+                $accessline ->jobs_id = $jobID;
+
+                $accessLinesave = $this->Accessorielines->save($accessline);
+
+
+
                 $this->Flash->success(__('The job has been saved.'));
                 return $this->redirect(['action' => 'index']);
             }
@@ -252,7 +261,9 @@ class JobsController extends AppController
         //$csrfToken = $this->request->getParam('_csrfToken');
         $this->loadModel('Stocks');
        $stocks = $this->Stocks->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts','stocks'));
+       $this->loadModel('Accessories');
+       $access = $this->Accessories->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts','stocks','access'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 

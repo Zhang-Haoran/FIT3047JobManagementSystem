@@ -188,8 +188,26 @@
                                         </div>
                                     </div>
 
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Accessory</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <?= $this->Form->control('accessory_id', ['options' => $access, 'class' => 'form-control','id'=> 'accessory_html_id']) ?>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+
+
+
                             <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
@@ -396,6 +414,8 @@
         $("#site_html_id").chosen();
         $("#contact_html_id").chosen();
         $("#image_html_id").chosen();
+        $("#stock_html_id").chosen();
+        $("#accessory_html_id").chosen();
     });
 
     $(function() {
