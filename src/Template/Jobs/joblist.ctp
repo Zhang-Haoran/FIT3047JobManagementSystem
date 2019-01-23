@@ -172,7 +172,7 @@
         } );
 
         // DataTable
-        var table = $('#Jobs').DataTable();
+        var table = $('#Jobs').DataTable({responsive:true});
 
         // Apply the search
         table.columns().every( function () {
