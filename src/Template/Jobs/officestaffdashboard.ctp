@@ -96,6 +96,8 @@
     <?= $this->Html->link(__('New Job'), ['action' => 'add'], ['class' => ' btn btn-success', 'style' => '']) ?>
     <?= $this->Html->link(__('New Pickup Job'), ['action' => 'addpickup'], ['class' => ' btn btn-success', 'style' => '']) ?>
     <button id="pickup" type="button" class="btn purpleB" style="background-color: #5542a9; border-color: #33276b; color: white">Show Pickup Job</button>
+    <?= $this->Html->link(__('Download CSV'),[], ['class' => ' btn btn-info', 'id' => 'dTDownloadCSVBtn']) ?>
+
 </div>
     <div class="row">
         <div class="col-lg-9">

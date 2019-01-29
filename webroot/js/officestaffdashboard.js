@@ -131,9 +131,27 @@ $.fn.dataTable.ext.search.push(
 
 
 $(document).ready(function() {
-    var table = $('#Jobs').DataTable({
+    var table = $('#Jobs').DataTable( {
+        dom: 'Bfrtip',
         responsive: true,
-        colReorder: false
+        buttons: [{
+            extend: 'csv',
+            attr: {
+                id: 'dTCSVExportBtn'
+            },
+            exportOptions:{
+                columns: ':not(.notexport)'
+            }
+        }],
+
+    } );
+
+
+    $('#dTCSVExportBtn').hide(); //Hide the original dT export CSV button
+    //When our own CSV button clicked
+    $('#dTDownloadCSVBtn').click(function(){
+        //We trigger the hidden dT button to do the job!
+        table.button('#dTCSVExportBtn').trigger();
     });
 
     $('#quote-panel').on('click', function(){

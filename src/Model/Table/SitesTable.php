@@ -63,30 +63,21 @@ class SitesTable extends Table
             ->maxLength('name', 255,'Site name can not be too long')
             ->requirePresence('name', 'create')
             ->notEmpty('name','Site name can not be empty')
-            ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Name should contain character only'
-            ]);
+           ;
 
         $validator
             ->scalar('address')
             ->maxLength('address', 255,'Address can not be too long')
             ->requirePresence('address', 'create')
             ->notEmpty('address','Address can not be empty')
-            ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Address should contain [a-z/A-Z/0-9] only'
-            ]);
+            ;
 
         $validator
             ->scalar('suburb')
             ->maxLength('suburb', 255,'Suburb can not be too long')
             ->requirePresence('suburb', 'create')
             ->notEmpty('suburb','Suburb van not be empty')
-            ->add('name','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z 0-9]*$/'),
-                'message' => 'Suburb should contain [a-z/A-Z/0-9] only'
-            ]);
+          ;
 
         $validator
             ->scalar('postcode')

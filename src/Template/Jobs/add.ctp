@@ -178,11 +178,43 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Stock</a>
                                         </h4>
                                     </div>
-                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                    <div id="collapseOne" class="panel-collapse collapse in" >
+                                        <div class="panel-body">
+                                            <div id="stocks" class="form-group">
+                                                <div>
+                                                    <div class="col-lg-9">
+                                                        <?= $this->Form->control('stock_id', ['options' => $stocks, 'class' => 'form-control','id'=> 'stock_html_id']) ?></div>
+                                                    <div class="col-lg-2">
+                                                        <?= $this->Form->control('unit', ['label' => 'Quantity','type' => 'number','class' => 'form-control','min' => '1','value' => '1','placeholder' => 'quantity should be numeric and more than 0']) ?></div>
+                                                    <div class="col-lg-1">
+                                                        <button id="firstButton" type="button" class="btn btn-circle btn-success" style="margin-top: 25px" onclick="moreStocks()"><i class="fa fa-plus"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        function moreStocks(){
+                                            var stocks = document.getElementById("stocks");
+                                            var clone = stocks.cloneNode(true);
+                                            clone.id = "";
+                                            stocks.appendChild(clone);
+                                        }
+                                    </script>
+
+                                    <div class="panel-heading" style="display: none;">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Accessory</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" style="display: none;">
                                         <div class="panel-body">
                                             <div class="form-group">
-                                                <?= $this->Form->control('stock_id', ['options' => $stocks, 'class' => 'form-control','id'=> 'stock_html_id']) ?>
-
+                                                <div class="col-lg-10">
+                                                    <?= $this->Form->control('accessory_id', ['options' => $access, 'class' => 'form-control','id'=> 'accessory_html_id']) ?></div>
+                                                <div class="col-lg-2">
+                                                    <?= $this->Form->control('accs_in', ['label' => 'Quantity','type' => 'number','class' => 'form-control','min' => '1','value' => '1','placeholder' => 'quantity should be numeric and more than 0']) ?></div>
                                             </div>
 
                                         </div>
@@ -190,6 +222,9 @@
 
                                 </div>
                             </div>
+
+
+
                             <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
@@ -396,6 +431,9 @@
         $("#site_html_id").chosen();
         $("#contact_html_id").chosen();
         $("#image_html_id").chosen();
+        $("#stock_html_id").chosen();
+        $("#stock1_html_id").chosen();
+        $("#accessory_html_id").chosen();
     });
 
     $(function() {

@@ -193,32 +193,43 @@ class JobsController extends AppController
             //Save first to get status of the save action
             $jobSaveStatus = $this->Jobs->save($job);
             if ($jobSaveStatus) {
-                //debug($post);
-                //exit;
+                debug($post);
+                exit;
 
-                //$stocks = $post['stocks'];
-
-                //TODO: Save all stock info here
-                //$jobObj = $this->loadComponent('Stocklines');
-                //$stocks = $jobObj->Stocklines->find('list');
-                $jobID = $jobSaveStatus['id'];
-                $this->loadModel('Stocklines');
-                //foreach ($stocks as $stock) {
-                    $stockline = $this->Stocklines->newEntity();
-                    //debug($stockline);
-                $stockline->stock_id = $post['stock_id'];
-                $stockline->jobs_id = $jobID;
-                //debug($stockline);
-                //patchEntity();
-                    $stocklinessave = $this->Stocklines->save($stockline);
-                    //debug($stocklinessave);
-
-                //}
-                $this->Flash->success(__('The job has been saved.'));
-                return $this->redirect(['action' => 'index']);
+//                //$stocks = $post['stocks'];
+//
+//                //TODO: Save all stock info here
+//                //$jobObj = $this->loadComponent('Stocklines');
+//                //$stocks = $jobObj->Stocklines->find('list');
+//                $jobID = $jobSaveStatus['id'];
+//                $this->loadModel('Stocklines');
+//                //foreach ($stocks as $stock) {
+//                $stockline = $this->Stocklines->newEntity();
+//                //debug($stockline);
+//                $stockline->stock_id = $post['stock_id'];
+//                $stockline->jobs_id = $jobID;
+//                //debug($stockline);
+//                //patchEntity();
+//                $stocklinessave = $this->Stocklines->save($stockline);
+//                //debug($stocklinessave);
+//
+//                //}
+//                $this->loadModel('Accessorielines');
+//                $accessline = $this->Accessorielines->newEntity();
+//                $accessline ->accessories_id = $post['accessory_id'];
+//                $accessline ->jobs_id = $jobID;
+//
+//                $accessLinesave = $this->Accessorielines->save($accessline);
+//
+//
+//
+//                $this->Flash->success(__('The job has been saved.'));
+//                return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The job could not be saved. Please, try again.'));
+            else{
 
+                $this->Flash->error(__('The job could not be saved. Please, try again.'));
+                }
         }
         $sites = $this->Jobs->Sites->find('list', [
             'keyField' => 'id',
@@ -252,7 +263,9 @@ class JobsController extends AppController
         //$csrfToken = $this->request->getParam('_csrfToken');
         $this->loadModel('Stocks');
        $stocks = $this->Stocks->find('list');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts','stocks'));
+       $this->loadModel('Accessories');
+       $access = $this->Accessories->find('list');
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts','stocks','access'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
