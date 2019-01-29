@@ -522,6 +522,7 @@
 
                 if (data.error === false) {
 
+
                     $newCustomerId = data.id;
                     $newCustomerName = data.name;
                     $newCustomerphone=data.phone;
@@ -533,13 +534,11 @@
                     $newCustomerpostcode=data.postcode;
 
 
-
-
                     // console.log($newCustomerId);
                     // console.log($newCustomerName);
                     //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
 
-                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + "</option>");
+                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + " (" + ")" + "</option>");
 
                     $("#cust_html_id").trigger("chosen:updated");
                 } else {
