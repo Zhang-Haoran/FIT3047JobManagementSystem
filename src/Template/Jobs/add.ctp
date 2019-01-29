@@ -523,10 +523,10 @@
                 if (data.error === false) {
 
                     $newCustomerId = data.id;
-                    $newCustomerfName = data.name;
+                    $newCustomerName = data.name;
                     $newCustomerphone=data.phone;
                     $newCustomeremail=data.email;
-
+                    $newCustomertype =data.cust_type
                     $newCustomeraddress=data.address;
                     $newCustomersuburb=data.suburb;
                     $newCustomercity=data.city;
