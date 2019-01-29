@@ -59,20 +59,14 @@ class EmployeesTable extends Table
             ->maxLength('fname', 255,'First name can not be too long')
             ->requirePresence('fname', 'create')
             ->notEmpty('fname','First name can not be empty')
-            ->add('fname','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z ]*$/'),
-                'message' => 'Your name should contain [a-z/A-Z] only'
-            ]);
+           ;
 
         $validator
             ->scalar('lname')
             ->maxLength('lname', 255,'Last name can not be too long')
             ->requirePresence('lname', 'create')
             ->notEmpty('lname','Last name can not be empty')
-            ->add('lname','characterOnly',[
-                'rule' => array('custom','/^[a-zA-Z ]*$/'),
-                'message' => 'Your name should contain [a-z/A-Z] only'
-            ]);
+            ;
 
         $validator
             ->scalar('password')
@@ -93,30 +87,14 @@ class EmployeesTable extends Table
             ->scalar('phone')
             ->maxLength('phone', 15,'Phone number cannot be longer than 15 numbers long')
             ->allowEmpty('phone');
-            $australianMobile = '/^(0|\+61)4\d{8}$/';
-            $validator
-            ->add('phone', 'custom', [
-                'rule' => function ($value, $context) use ($australianMobile) {
-                // remove spaces to make the regex simpler
-                $check = preg_replace('/\s/', '', $value);
 
-                // checks for either of these styles
-                // +61412 345 678 or 0412 345 678
-                $found = preg_match($australianMobile, $check);
-                return boolval($found);
-            },
-            'message' => 'Your phone number should be like this +61412 345 678 or 0412 345 678'
-        ]);
 
 
         $validator
             ->email('email')
             ->maxLength('email', 255,'Email address can not be too long')
             ->allowEmpty('email')
-            ->add('email','validEmail',[
-                'rule' => 'email',
-                'message' => 'Your e-mail should be like this example@example.com'
-            ]);
+           ;
 
 
         $validator
