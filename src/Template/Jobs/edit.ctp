@@ -504,14 +504,22 @@
                     //if new event type is successfully added to database
                     $newCustomerId = data.id;
                     $newCustomerName = data.name;
-                    $isbusiness=data.is_business;
-                    // console.log($newCustomerId);
-                    // console.log($newCustomerName);
-                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+                    $newCustomerphone=data.phone;
+                    $newCustomeremail=data.email;
+                    $newCustomertype =data.cust_type_id;
+                    $newCustomeraddress=data.address;
+                    $newCustomersuburb=data.suburb;
+                    $newCustomercity=data.city;
+                    $newCustomerpostcode=data.postcode;
 
-                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + "</option>");
+
+                    //TODO: Add above received info to the <select> of customers, then reinitialise chosen for event type (since there is a new event to choose from)
+                    
+
+                    $("#cust_html_id").append("<option value='" + $newCustomerId + "'>" + $newCustomerName + " (" + $newCustomertype+  ")" + "</option>");
 
                     $("#cust_html_id").trigger("chosen:updated");
+
                 } else {
                     //If there's an error from the server
                     alert(data.error);
