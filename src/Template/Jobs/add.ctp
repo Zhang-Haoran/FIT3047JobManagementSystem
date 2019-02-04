@@ -7,6 +7,7 @@
 
 <style>
 .colors {display:none;}
+label[for="oDetails"] { display:none; }
 </style>
 
 <div>
@@ -177,7 +178,7 @@
                                         <h4 class="panel-title">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Stock</a>
                                             <button id="firstButton" type="button" class="btn btn-circle btn-success" style="margin-left: 10px" onclick="addStock()"><i class="fa fa-plus"></i></button>
-                                            <button type="button" class="btn btn-info" onclick="addToOrder()">TRY ME!!!</button>
+                                            <button type="button" class="btn btn-info" onclick="addToOrder()" style="display: none;">TRY ME!!!</button>
                                         </h4>
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse in" >
@@ -252,6 +253,8 @@
                                             let theStock = document.getElementById("stock_html_id");
                                             let theNum = document.getElementById("stockNum");
                                             let stockToAdd = theStock.options[theStock.selectedIndex].text;
+                                            if(order.value !== "" )
+                                                order.value = "";
                                             order.value += stockToAdd + "x" + theNum.value + "\n";
 
                                             for(i = 1; i < count; i++){
@@ -291,7 +294,7 @@
 
 
 
-                            <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control', 'id' => 'oDetails']) ?></div>
+                            <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control', 'id' => 'oDetails', 'style' => 'display: none;']) ?></div>
                             <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
                         </div>
                       </div>
@@ -307,7 +310,7 @@
                 </div>
             </div>
             <div class="divright">
-                <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg">Submit</button>
+                <button id="Submit" type="submit" value="Submit" text="Submit" class="btn btn-success btn-lg" onclick="addToOrder()">Submit</button>
                 <?= $this->Form->end() ?>
             </div>
         </div>
@@ -331,11 +334,8 @@
                 <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
                 </div>
                 <?php
-                    $options = array(
-                        'label' => 'Submit',
-                        'id' => 'submit'
-                    );
-                    echo $this->Form->end($options)
+
+                    echo $this->Form->end()
                 ?>
             </div>
         </div>

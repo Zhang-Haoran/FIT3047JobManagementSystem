@@ -188,16 +188,18 @@ class JobsController extends AppController
             $job->edited_by = $staff->full_name;
             $job->employee_id = $this->Auth->user('id');
 
+            //Adding stocks to order details
+
             $job = $this->Jobs->patchEntity($job,$post);
 
             //Save first to get status of the save action
             $jobSaveStatus = $this->Jobs->save($job);
             if ($jobSaveStatus) {
-                debug($post);
-                exit;
+                //debug($post);
+                //exit;
 
-//                //$stocks = $post['stocks'];
-//
+                //$stocks = $post['stocks'];
+
 //                //TODO: Save all stock info here
 //                //$jobObj = $this->loadComponent('Stocklines');
 //                //$stocks = $jobObj->Stocklines->find('list');
@@ -220,11 +222,12 @@ class JobsController extends AppController
 //                $accessline ->jobs_id = $jobID;
 //
 //                $accessLinesave = $this->Accessorielines->save($accessline);
-//
-//
-//
-//                $this->Flash->success(__('The job has been saved.'));
-//                return $this->redirect(['action' => 'index']);
+
+
+
+
+                $this->Flash->success(__('The job has been saved.'));
+                return $this->redirect(['action' => 'index']);
             }
             else{
 
