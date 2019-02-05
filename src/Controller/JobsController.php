@@ -195,8 +195,8 @@ class JobsController extends AppController
             //Save first to get status of the save action
             $jobSaveStatus = $this->Jobs->save($job);
             if ($jobSaveStatus) {
-                debug($post);
-                exit;
+                //debug($post);
+                //exit;
 
                 //$stocks = $post['stocks'];
 
