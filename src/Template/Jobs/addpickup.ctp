@@ -5,6 +5,10 @@
  */
 ?>
 
+<style>
+    label[for="oDetails"] { display:none; }
+</style>
+
 
 <div>
     <button onclick="goBack()" class="btn btn-success">Go Back</button>
@@ -121,7 +125,129 @@
 
 
             <div class="tab-pane fade" id="stock">
-                <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control']) ?></div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Stock</a>
+                                <button id="firstButton" type="button" class="btn btn-circle btn-success" style="margin-left: 10px" onclick="addStock()"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-info" onclick="addToOrder()" style="display: none;">TRY ME!!!</button>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" >
+                            <div class="panel-body">
+                                <div class="form-group" id="pasteHere">
+                                    <div id="stocks">
+                                        <div class="col-lg-9">
+                                            <?= $this->Form->control('stock_id', ['options' => $stocks, 'class' => 'form-control', 'id' => 'stock_html_id']) ?></div>
+                                        <div class="col-lg-2">
+                                            <?= $this->Form->control('unit', ['id' => 'stockNum','label' => 'Quantity','type' => 'number','class' => 'form-control','min' => '1','value' => '1','placeholder' => 'quantity should be numeric and more than 0']) ?></div>
+                                        <div class="col-lg-1"><button id="cancelButton" type="button" class="btn btn-circle btn-danger" style="margin-top: 25px; display: none" onclick="removeStock(0)"><i class="fa fa-times"></i></button></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <script>
+                            var count = 1;
+                            function addStock(){
+                                //FOR THE RECORD, THIS FEATURE IS A TOTAL PITFALL
+                                //MIGHT HAVE A BETTER WAY TO IMPLEMENT IT THAN THIS FREAKING FUNCTION
+
+                                //copy elements to be cloned
+                                let stocks = document.getElementById("stocks");
+                                let paste = document.getElementById("pasteHere");
+                                let clones = stocks.cloneNode(true);
+                                let stock = clones.childNodes[1].childNodes[1].childNodes[1];
+                                let stockN = clones.childNodes[3].childNodes[1].childNodes[1];
+                                let butt = clones.childNodes[5].childNodes[0];
+
+                                //change attribute for stock div
+                                let string = 'stocks_' + count;
+                                clones.id = string;
+
+                                //change attribute for stock
+                                string = 'stock_html_id_' + count;
+                                stock.id = string;
+                                string = 'stock_id_' + count;
+                                stock.name = string;
+
+                                //change attribute for stock quantity
+                                string = 'stockNum_' + count;
+                                stockN.id = string;
+                                string = 'unit_' + count;
+                                stockN.name = string;
+
+                                //change attribute for cancelButton
+                                string = 'cancelButton_' + count;
+                                butt.id = string;
+                                string = "removeStock(" + count + ")";
+                                butt.setAttribute("onClick", string);
+                                butt.style.display = "block";
+
+                                //paste the cloned elements
+                                paste.appendChild(clones);
+                                count++;
+                            }
+
+                            function removeStock(num){
+                                let string = "stocks_" + num;
+                                document.getElementById(string).remove();
+                            }
+
+                            function test(){
+                                if(!null)
+                                    console.log('it works!!!');
+                            }
+
+                            function addToOrder(){
+                                let order = document.getElementById("oDetails");
+
+                                let theStock = document.getElementById("stock_html_id");
+                                let theNum = document.getElementById("stockNum");
+                                let stockToAdd = theStock.options[theStock.selectedIndex].text;
+                                if(order.value !== "" )
+                                    order.value = "";
+                                order.value += stockToAdd + "x" + theNum.value + "\n";
+
+                                for(i = 1; i < count; i++){
+
+                                    let string = "stock_html_id_" + i;
+                                    let stock = document.getElementById(string);
+                                    string = "stockNum_" + i;
+                                    let stockN = document.getElementById(string);
+                                    if(stock != null){
+                                        console.log(stock);
+                                        order.value += stock.options[stock.selectedIndex].text + "x" + stockN.value + "\n";
+                                    }
+                                }
+                            }
+
+                        </script>
+
+                        <div class="panel-heading" style="display: none;">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Select existing Accessory</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" style="display: none;">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <div class="col-lg-10">
+                                        <?= $this->Form->control('accessory_id', ['options' => $access, 'class' => 'form-control','id'=> 'accessory_html_id']) ?></div>
+                                    <div class="col-lg-2">
+                                        <?= $this->Form->control('accs_in', ['label' => 'Quantity','type' => 'number','class' => 'form-control','min' => '1','value' => '1','placeholder' => 'quantity should be numeric and more than 0']) ?></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group"><?= $this->Form->control('order_detail', ['class' => 'form-control', 'id' => 'oDetails', 'style' => 'display: none;']) ?></div>
                 <div class="form-group"><?= $this->Form->control('additional_note', ['class' => 'form-control']) ?></div>
             </div>
             <div class ="tab-content">

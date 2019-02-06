@@ -78,7 +78,7 @@
                 <div class="row">
                     <div id="total" class="col-xs-3 huge">💚</div>
                     <div class="">
-                        <div class="col-lg-8 text-right"><h3>All Incomplete Job</h3></div>
+                        <div class="col-lg-8 text-right"><h3>All Incomplete</h3></div>
                     </div>
                 </div>
             </div>

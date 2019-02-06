@@ -30,7 +30,7 @@
                 <thead>
                     <tr>
                         <th scope="col"><?= __('name') ?></th>
-                        <th scope="col" class="actions"><?= __('Actions') ?></th>
+                        <th scope="col" class="actions" style="max-width: 200px"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,8 +38,8 @@
                     <tr>
                         <td class="center"><?= h($accessory->name) ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $accessory->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $accessory->id], ['confirm' => __('Are you sure you want to delete Accessory: {0}?', $accessory->name)]) ?>
+                            <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('Edit'), ['action' => 'edit', $accessory->id], ['class' => 'btn btn-warning', 'style' => 'width:99%']) ?></div>
+                            <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $accessory->id], ['class' => 'btn btn-danger', 'style' => 'width:99%', 'confirm' => __('Are you sure you want to delete Accessory: {0}?', $accessory->name)]) ?></div>
                         </td>
                     </tr>
                     <?php endforeach; ?>

@@ -550,8 +550,10 @@ class JobsController extends AppController
         ]);
         $this->loadModel('CustTypes');
         $CustTypes = $this->CustTypes->find('list');
+        $this->loadModel('Stocks');
+        $stocks = $this->Stocks->find('list');
         //$csrfToken = $this->request->getParam('_csrfToken');
-        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts'));
+        $this->set(compact('job', 'sites', 'eventTypes', 'customers', 'employees','CustTypes','contacts', 'stocks'));
         $this->set('statusOptions', array('Quote' => 'Quote', 'Order'=>'Order', 'Ready'=>'Ready', 'Completed'=>'Completed', 'Invoice'=>'Invoice', 'Paid'=>'Paid'));
     }
 
@@ -646,6 +648,10 @@ class JobsController extends AppController
         else{
             $this->set('statusOptions', array('Invoice'=>'Invoice', 'Paid'=>'Paid'));
         }
+
+        $this->loadModel('Stocks');
+        $stocks = $this->Stocks->find('list');
+        $this->set(compact('stocks'));
     }
 
     public function viewpickup($id = null)
