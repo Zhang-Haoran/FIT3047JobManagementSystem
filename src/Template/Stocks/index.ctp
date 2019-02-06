@@ -29,10 +29,10 @@
             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables">
                 <thead>
                     <tr>
-                        <th scope="col"><?= __('name') ?></th>
-                        <th scope="col"><?= __('rent_value') ?></th>
-                        <th scope="col"><?= __('min_accs') ?></th>
-                        <th scope="col"><?= __('accessorie_id') ?></th>
+                        <th scope="col"><?= __('Name') ?></th>
+                        <th scope="col"><?= __('Rent value') ?></th>
+                        <th scope="col"><?= __('Minimum accessory') ?></th>
+                        <th scope="col"><?= __('Accessory') ?></th>
                         <th scope="col" class="actions" style="max-width: 200px"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
