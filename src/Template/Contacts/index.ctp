@@ -32,10 +32,10 @@
             <tr>
                 <th scope="col"><?= __('Fist Name') ?></th>
                 <th scope="col"><?= __('Last Name') ?></th>
+                <th scope="col"><?= __('Role') ?></th>
                 <th scope="col"><?= __('Phone') ?></th>
                 <th scope="col"><?= __('Email') ?></th>
-                <th scope="col"><?= __('Role') ?></th>
-                <th scope="col"><?= __('Action') ?></th>
+                <th scope="col" style="max-width: 200px"><?= __('Action') ?></th>
 
 
             </tr>
@@ -45,13 +45,13 @@
             <tr>
                 <td><?= h($contact->fname) ?></td>
                 <td><?= h($contact->lname) ?></td>
+                <td><?= h($contact->role) ?></td>
                 <td><?= h($contact->phone) ?></td>
                 <td><a href = "mailto:<?= ($contact->email) ?>"><?= ($contact->email) ?></a></td>
-                <td><?= h($contact->role) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $contact->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $contact->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contact->id], ['confirm' => __('Are you sure you want to delete # {0}?', $contact->name)]) ?>
+                    <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('View'), ['action' => 'view', $contact->id], ['class' => 'btn btn-primary', 'style' => 'width:99%']) ?></div>
+                    <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('Edit'), ['action' => 'edit', $contact->id], ['class' => 'btn btn-warning', 'style' => 'width:99%']) ?></div>
+                    <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contact->id], ['class' => 'btn btn-danger', 'style' => 'width:99%;', 'confirm' => __('Are you sure you want to delete # {0}?', $contact->name)]) ?></div>
                 </td>
             </tr>
             <?php endforeach; ?>

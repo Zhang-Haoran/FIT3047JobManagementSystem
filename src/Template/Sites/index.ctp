@@ -32,7 +32,7 @@
                 <th scope="col"><?= __('address') ?></th>
                 <th scope="col"><?= __('suburb') ?></th>
                 <th scope="col"><?= __('postcode') ?></th>
-                <th scope="col"><?= __('Action') ?></th>
+                <th scope="col" style="max-width: 200px"><?= __('Action') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -42,9 +42,9 @@
                 <td><?= h($site->address) ?></td>
                 <td><?= h($site->suburb) ?></td>
                 <td><?= h($site->postcode) ?></td>
-                <td><?= $this->Html->link(__('View'), ['action' => 'view', $site->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $site->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $site->id], ['confirm' => __('Are you sure you want to delete Site: {0}?', $site->name)]) ?>
+                <td><div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('View'), ['action' => 'view', $site->id], ['class' => 'btn btn-primary', 'style' => 'width:99%']) ?></div>
+                    <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('Edit'), ['action' => 'edit', $site->id], ['class' => 'btn btn-warning', 'style' => 'width:99%']) ?></div>
+                    <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $site->id], ['class' => 'btn btn-danger', 'style' => 'width:99%', 'confirm' => __('Are you sure you want to delete Site: {0}?', $site->name)]) ?></div>
                 </td>
 
             </tr>

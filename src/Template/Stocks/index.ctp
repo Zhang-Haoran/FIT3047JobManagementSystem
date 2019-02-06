@@ -33,7 +33,7 @@
                         <th scope="col"><?= __('rent_value') ?></th>
                         <th scope="col"><?= __('min_accs') ?></th>
                         <th scope="col"><?= __('accessorie_id') ?></th>
-                        <th scope="col" class="actions"><?= __('Actions') ?></th>
+                        <th scope="col" class="actions" style="max-width: 200px"><?= __('Actions') ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,9 +44,9 @@
                         <td class="center"><?= $this->Number->format($stock->min_accs) ?></td>
                         <td class="center"><?= $stock->has('accessory') ? $this->Html->link($stock->accessory->name, ['controller' => 'Accessories', 'action' => 'view', $stock->accessory->id]) : '' ?></td>
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['action' => 'view', $stock->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $stock->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $stock->id], ['confirm' => __('Are you sure you want to delete: {0}?', $stock->name)]) ?>
+                            <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('View'), ['action' => 'view', $stock->id], ['class' => 'btn btn-primary', 'style' => 'width:99%']) ?></div>
+                            <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('Edit'), ['action' => 'edit', $stock->id], ['class' => 'btn btn-warning', 'style' => 'width:99%']) ?></div>
+                            <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $stock->id], ['class' => 'btn btn-danger', 'style' => 'width:99%', 'confirm' => __('Are you sure you want to delete: {0}?', $stock->name)]) ?></div>
                         </td>
                     </tr>
                     <?php endforeach; ?>
