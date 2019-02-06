@@ -51,7 +51,7 @@
                 <td class="actions">
                     <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('View'), ['action' => 'view', $contact->id], ['class' => 'btn btn-primary', 'style' => 'width:99%']) ?></div>
                     <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Html->link(__('Edit'), ['action' => 'edit', $contact->id], ['class' => 'btn btn-warning', 'style' => 'width:99%']) ?></div>
-                    <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contact->id], ['class' => 'btn btn-danger', 'style' => 'width:99%;', 'confirm' => __('Are you sure you want to delete # {0}?', $contact->name)]) ?></div>
+                    <div class="col-lg-4" style="padding-left: 0px; padding-right: 0px"><?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $contact->id], ['class' => 'btn btn-danger', 'style' => 'width:99%;', 'confirm' => __('Are you sure you want to delete contact: {0} {1}?', $contact->fname, $contact->lname)]) ?></div>
                 </td>
             </tr>
             <?php endforeach; ?>
